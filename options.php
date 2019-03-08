@@ -7,7 +7,7 @@ if($_SESSION['role'] == 'Admin') {
 	header("location: home-avp.php");
 }
 
-?>	
+?>
 <html>
 <head>
 	<link rel="shortcut icon" href="favicon.png" />
@@ -81,11 +81,13 @@ if($_SESSION['role'] == 'Admin') {
 								<option value="Tooth Drop">Tooth Drop</option>
 								<option value="Ear Drop">Ear Drop</option>
 								<option value="Medicated spray">Medicated spray</option>
-							</select>
+							</select><br>
+								<input type="number" min="1" max="100" class="form-control" name="thresholdQty" placeholder="Quantity" required><br>
 						</div>
 						<div id="supDiv" class="hidden">
 							<br>
 							<input type="text" class="form-control" name="supplyName" placeholder="Supply name" required><br>
+							<input type="number" min="1" max="100" class="form-control" name="thresholdQty" placeholder="Quantity" required><br>
 						</div>
 
 					</div>
@@ -173,11 +175,13 @@ if($_SESSION['role'] == 'Admin') {
 								<option value="Tooth Drop">Tooth Drop</option>
 								<option value="Ear Drop">Ear Drop</option>
 								<option value="Medicated spray">Medicated spray</option>
-							</select>
+							</select><br>
+								<input type="number" min="1" max="100" class="form-control" name="thresholdQty" placeholder="Quantity" required><br>
 						</div>
 						<div id="supDiv" class="hidden">
 							<br>
 							<input type="text" class="form-control" name="supplyName" placeholder="Supply name" required><br>
+							<input type="number" min="1" max="100" class="form-control" name="thresholdQty" placeholder="Quantity" required><br>
 						</div>
 
 					</div>
