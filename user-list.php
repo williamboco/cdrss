@@ -30,7 +30,7 @@ if($_SESSION['role'] != 'Admin') {
 			<div class="col-lg-12">
 				<h3 class="col-lg-6 col-sm-6">Users</h3>
 				<div class="col-lg-6 col-sm-6">
-					<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i>  Add User</button>
+					<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i> Add User</button>
 				</div>
 			</div>
 			<br>
@@ -133,7 +133,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/user-list.js"></script>
-
+	<!-- <script src="js/user-list.js"></script> -->
+	<script type="text/javascript" src="js/users.js"></script>
 </body>
 </html>
