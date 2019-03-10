@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../includes/dbcon.php');
-include('../includes/password.php');
+//include('../includes/password.php');
 
 $userName = mysqli_real_escape_string($con, $_POST['email']);
 $password = mysqli_real_escape_string($con, $_POST['password']);
