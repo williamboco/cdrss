@@ -5,7 +5,7 @@
 
 
 	while($res = mysqli_fetch_array($result)) {
-		$ref = $res['visitID'];
+		$ref = $res['ID'];
 		$id = $res['patientID'];
 
 		//echo "<td style=\"display: none;\">".$res['remarks']."</td>";

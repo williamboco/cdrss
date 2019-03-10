@@ -10,7 +10,7 @@ $time = $_POST["visitDate"];
 
 $message = array();
 
-	$query = "INSERT INTO `visit` (`visitID`, `patientID`, `visitDate`, `remarks`, `isDeleted`, `createdBy`, `modifiedBy`, `dateCreated`, `dateModified`) VALUES (NULL, '$id', '$time', '$remarks', '0', '$user', '$user', NOW(), NOW())";
+	$query = "INSERT INTO `visit` (`ID`, `patientID`, `visitDate`, `remarks`, `isDeleted`, `createdBy`, `modifiedBy`, `dateCreated`, `dateModified`) VALUES (NULL, '$id', '$time', '$remarks', '0', '$user', '$user', NOW(), NOW())";
 
 	if(mysqli_query($con, $query)) {
 		array_push($message, "success");
