@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../includes/dbcon.php');
-//include('../includes/password.php');
+include('../includes/password.php');
 
 $userName = mysqli_real_escape_string($con, $_POST['email']);
 $password = mysqli_real_escape_string($con, $_POST['password']);
@@ -16,7 +16,7 @@ if(mysqli_num_rows($query) > 0 /*&& verify($password, $row['password'])*/) {
 	$_SESSION['firstName']=$row['firstName'];
 	$_SESSION['role']=$row['role'];
 
-	array_push($message, 'Success');
+	array_push($message, 'success');
 	array_push($message, $row['role']);
 
 }else {
