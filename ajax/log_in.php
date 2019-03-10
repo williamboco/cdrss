@@ -12,11 +12,11 @@ $row= mysqli_fetch_array($query);
 
 $message = array();
 if(mysqli_num_rows($query) > 0 /*&& verify($password, $row['password'])*/) {
-	$_SESSION['userID']=$row['ID'];
+	$_SESSION['userID']=$row['userID'];
 	$_SESSION['firstName']=$row['firstName'];
 	$_SESSION['role']=$row['role'];
 
-	array_push($message, 'success');
+	array_push($message, 'Success');
 	array_push($message, $row['role']);
 
 }else {
