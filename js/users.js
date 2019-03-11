@@ -8,10 +8,11 @@ $(document).ready(function() {
 		} ],
 		"columns": [
 			{title: "#", width: "5%", className: "dt-center"},
-			{title: "User Position"},
+			{title: "User ID"},
 			{title: "Name"},
-			{title: "Last Name"},
 			{title: "Email"},
+			{title: "Role"},
+			{title: "Status"},
 			{title: "Action", width: "15%" , orderable: false}
 		],
 		"order": [[ 2, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
