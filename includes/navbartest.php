@@ -15,7 +15,7 @@
       <ul class="nav navbar-nav">
         <li><a href="home.php">Home</a></li>
         <li><a href="patient-list.php">Patient Profiles</a></li>
-        <li><a href="options.php">Data Management</a></li>
+        <li><a href="data-management.php">Data Management</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>

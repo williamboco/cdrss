@@ -13,8 +13,10 @@
       </div>
     <div class="collapse navbar-collapse" id="navigationbar">
       <ul class="nav navbar-nav">
-        <li><a href="home-avp.php">Home</a></li>
-        <li><a href="user-list.php">User Profiles</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="patient-list.php">Patient Profiles</a></li>
+        <li><a href="options.php">Data Management</a></li>
+        <li><a href="logs.php">Logs</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -26,6 +28,8 @@
           </a>
           <ul class="dropdown-menu">
               <li><a href="account-avp.php"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
+              <li class="divider"></li>
+              <li><a href="user-list.php"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Manage Users</a></li>
               <li class="divider"></li>
               <li><a href="includes/logout.php"><i class="fa fa-sign-out"></i> &nbsp; Log Out</a></li>
           </ul>

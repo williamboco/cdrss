@@ -10,7 +10,7 @@ if($_SESSION['role'] != 'Admin') {
 ?>
 <html>
 <head>
-	<title>User List - Admin</title>
+	<title>Manage Users - Admin</title>
 	<link rel="shortcut icon" href="favicon.png" />
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -26,16 +26,15 @@ if($_SESSION['role'] != 'Admin') {
 		include("includes/navbar-avp.php");
 	?>
 	<div class="row">
-		<div class="container card" style="margin-top: 20px;">
+		<div class="container card" style="margin-top: 30px;">
 			<div class="col-lg-12">
-				<h3 class="col-lg-6 col-sm-6">Users</h3>
-				<div class="col-lg-6 col-sm-6">
-					<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i> Add User</button>
+				<h3 class="col-lg-6 col-sm-6">Manage Users</h3>
+				<div class="col-lg-6 col-sm-6" style="margin-top: 15px;">
+					<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i>  Add User</button>
 				</div>
 			</div>
-			<br>
-			<br>
-			<br>
+		</div>
+		<div class="container card" style="margin-top: 10px;">
 			<div class="table-responsive">
 				<table id="userTable" class="display" cellspacing="0" width="100%">
 				</table>
@@ -43,14 +42,20 @@ if($_SESSION['role'] != 'Admin') {
 		</div>
 	</div>
 	<!-- Add Modal -->
-	<div class="modal fade" id="addModal" role="dialog">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-body">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-				<form id="addForm" action="ajax/userCreate.php" method="post" >
-					<h4>Add User</h4><br>
+<div class="row">
+	<div class="modal fade" id="addModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content addUser row">
+			<div class="modal-header col-sm-12">
+				<form id="addForm" action="ajax/userCreate.php" method="post">
+					<h4 class="modal-title" style="display: inline;">Add New User Account</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+			</div>
+				<div class="modal-body col-sm-12">
+				<div class="addUser card row">
 					<div class="form-group">
 						<label for ="avpID">User ID</label>
 						<input type="text" class="form-control hidden" name="avpID" value="<?php echo $_SESSION['userID'];?>">
@@ -89,24 +94,48 @@ if($_SESSION['role'] != 'Admin') {
 		</div>
 	  </div>
 	</div>
-
+</div>
 	<!-- View Modal -->
-	<div class="modal fade" id="viewModal" role="dialog">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-body">
+	<div class="row">
+		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+				<div class="modal-content viewProfile row">
+				  <div class="modal-header col-sm-12">
+					<h4 class="modal-title" style="display: inline;">Edit User Status</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+		  <div class="modal-body col-sm-12">
+				<div class="viewProfile card row">
+					<p style="font-size: 16px;"><b>User Id</b><br/><span id="userID"></span></p>
+					<p style="font-size: 16px;"><b>Role</b><br/><span id="role"></span></p>
+					<p style="font-size: 16px;"><b>Email</b><br/><span id="email"></span><p>
+					<p style="font-size: 16px;"><b>Name</b><br/><span id="name" style="color:#014FB3;"></span></p>
+					<p style="font-size: 16px;"><b>Gender</b><br/><span id="gender"></span></p>
+					<p style="font-size: 16px;"><b>Contact</b><br/><span id="contact"></span></p>
+					<p style="font-size: 16px;"><b>Date Employed</b><br/><span id="dateEmployed"></span></p>
+					<br/><br/>
 
-			<div class="viewProfile">
-				<p>User Id<span id="userID" style="margin-left: 50px;"></span></p>
-				<p>Role<span id="role" style="margin-left: 50px;"></span></p>
-				<p>Email<span id="email" style="margin-left: 50px;"></span></p>
-				<p>Name<span id="name" style="margin-left: 50px;"></span></p>
-				<p>Gender<span id="gender" style="margin-left: 50px;"></span></p>
-				<p>Contact<span id="contact" style="margin-left: 50px;"></span></p>
-				<p>Date Employed<span id="dateEmployed" style="margin-left: 50px;"></span></p>
-
-			</div>
-
+						<div class="card-body col-sm-12">
+							<p style="font-size: 16px;"><b>User Status</b><br/></p>
+							<br/>
+							<form>
+	  						<div class="form-row">
+									<div class="col-sm-6">
+									<div class="custom-control-input custom-radio custom-control-inline">
+									  <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+									  <label class="custom-control-label" for="customRadioInline1">Active</label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="custom-control custom-radio custom-control-inline">
+									  <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+									  <label class="custom-control-label" for="customRadioInline2">Inactive</label>
+									</div>
+								</div>
+						</div>
+					</div>
 			<div class="confirmDelete hidden">
 				<h3>Are you sure you want to delete this user?</h3>
 			</div>
@@ -119,21 +148,23 @@ if($_SESSION['role'] != 'Admin') {
 			</div>
 			<div class="viewProfile">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+				<button type="button" class="btn btn-danger" onclick="confirmDelete()"><i class="glyphicon glyphicon-remove"></i> Delete</button>
+				<button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Update</button>
 			</div>
-
-
 		  </div>
 		</div>
-	  </div>
-	</div>
+	 </div>
+</div>
+</div>
+</div>
+
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<!-- <script src="js/user-list.js"></script> -->
-	<script type="text/javascript" src="js/users.js"></script>
+	<script src="js/user-list.js"></script>
+
 </body>
 </html>
