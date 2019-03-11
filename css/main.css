@@ -293,6 +293,9 @@ span.select2.select2-container.select2-container--default{
   background:rgba(150, 150, 150, 0.6);
 }
 
+.btn-block.datamenu {
+  padding: 50px;
+}
 /* BUTTON REMOVE
 button.remove{
   border-radius:2px;
@@ -312,11 +315,11 @@ button.remove:active{
   background:rgba(150, 150, 150, 0.9);
 }*/
 
-.btn-warning, .btn-warning:active{
+.btn-danger, .btn-danger:active{
   box-shadow:rgb(168, 65, 65) 0px 5px 0px;
   background:#F08080;
 }
-.btn-warning:hover{
+.btn-danger:hover{
   box-shadow:rgba(168, 65, 65, 0.5) 0px 5px 0px;
   background:rgba(240, 128, 128,0.5);
 }
@@ -351,6 +354,10 @@ button.remove:active{
 
 }
 
+.addUser {
+
+}
+
 .brandLogo p{
 	font-size:21px;
 	margin-top:7px;
@@ -377,6 +384,11 @@ button.remove:active{
 
 .content {
   padding-top: 20px !important;
+}
+
+.gray-rectangle {
+  background-color: #4c4c4c;
+  margin: 10px;
 }
 
 .marginbtn{
@@ -539,6 +551,16 @@ hr{
   text-transform: uppercase;
   font-style:bold;
   color:#fff;
+}
+
+.card-body {
+  background:#4c4c4c;
+  font-style:bold;
+  color:#fff;
+  padding-top: 25px;
+  padding-left: 25px;
+  padding-bottom: 30px;
+  width: 100%;
 }
 .modal-body{
   background-color:ghostwhite;

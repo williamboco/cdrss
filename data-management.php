@@ -14,6 +14,7 @@ if($_SESSION['role'] == 'Admin') {
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
 	<meta charset="utf-8">
@@ -25,17 +26,39 @@ if($_SESSION['role'] == 'Admin') {
 	  include("includes/navbartest.php");
 	?>
 	<div class="container">
-		<div class="row" style="margin-top: 50px;">
-			<div class="col-sm-2">
-				<button type="button" class="btn btn-block filter" value="course">Courses</button>
+		<div class="row" style="margin: 150px 100px 0px 100px;">
+			<div class="col-sm-4">
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-graduation-cap"></i> <big>Courses</big></a>
+			</div>
+			<div class="col-sm-4">
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-laptop"></i>  <big>Tracks</big></a>
+			</div>
+			<div class="col-sm-4">
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-building"></i>  <big>Departments</big></a>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 25px 100px 100px 100px;">
+			<div class="col-sm-4">
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-allergies"></i> <big>Allergies</big></a>
+			</div>
+			<div class="col-sm-4">
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-notes-medical"></i> <big>Complaints</big></a>
+			</div>
+			<div class="col-sm-4">
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-pills"></i> <big>Inventory</big></a>
+			</div>
+		</div>
+
+			<!--	<button type="button" class="btn btn-block filter" value="course">Courses</button>
 				<button type="button" class="btn btn-block filter" value="track">Tracks</button>
 				<button type="button" class="btn btn-block filter" value="department">Departments</button>
 				<button type="button" class="btn btn-block filter" value="allergy">Allergies</button>
 				<button type="button" class="btn btn-block filter" value="complaint">Complaints</button>
 				<button type="button" class="btn btn-block filter" value="medicine">Medicines / Supplies</button>
-			</div>
+			</div>-->
 
-			<div class="col-sm-10">
+			<!--<div class="col-sm-10">
 
 					<div style="margin-bottom: 50px;">
 						<button type="button" class="btn btn-danger" onclick="delRecord()" id="deleteBtn"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
@@ -52,9 +75,9 @@ if($_SESSION['role'] == 'Admin') {
 
 		</div>
 
-	</div>
+	</div>-->
 
-	<!-- Add Modal -->
+	<!-- Add Modal
 	<div class="modal fade" id="addModal" role="dialog">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -146,10 +169,10 @@ if($_SESSION['role'] == 'Admin') {
 		  </div>
 		</div>
 	  </div>
-	</div>
+	</div>-->
 
 	<!-- Edit Modal -->
-	<div class="modal fade" id="editModal" role="dialog">
+	<!--<div class="modal fade" id="editModal" role="dialog">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
 		  <div class="modal-body">
@@ -246,7 +269,7 @@ if($_SESSION['role'] == 'Admin') {
 		  </div>
 		</div>
 	  </div>
-	</div>
+	</div>-->
 
 	<div class="row page-footer wow fadeIn" data-wow-delay="0.7s">
 		<footer class="col-lg-12 col-sm-12">

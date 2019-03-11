@@ -35,7 +35,7 @@ if($_SESSION['role'] == 'Admin') {
 				<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#patientModal" onclick="editProfile()">
 				<span> <div class="glyphicon glyphicon-pencil"> </div> Edit Profile </span>
 				</button>
-				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#delete-modal">
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">
 				<span> <div  class="glyphicon glyphicon-remove"> </div> Delete Patient </span>
 				</button>
 				<br><br><br>
