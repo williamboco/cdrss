@@ -10,7 +10,7 @@ $(document).ready(function() {
 			{title: "#", width: "5%", className: "dt-center"},
 			{title: "User Position"},
 			{title: "Name"},
-			{title: "Last Name"},
+			{title: "Last"},
 			{title: "Email"},
 			{title: "Action", width: "15%" , orderable: false}
 		],
