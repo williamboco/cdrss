@@ -10,7 +10,7 @@
 		}
 		return implode($pass); //turn the array into a string
 	}
-	
+
 	//function to generate hash
 	function generateHash($pass) {
 		if(defined("CRYPT_BLOWFISH") && CRYPT_BLOWFISH) {
@@ -18,9 +18,9 @@
 			return crypt($pass, $salt);
 		}
 	}
-	
+
 	//function to verify password
 	function verify($password, $hashedPassword) {
-		return crypt($password, $hashedPassword) == $hashedPassword;
+		return htmlspecialchars_decode($password, $hashedPassword) == $hashedPassword;
 	}
 ?>
