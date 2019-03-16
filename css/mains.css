@@ -293,9 +293,10 @@ span.select2.select2-container.select2-container--default{
   background:rgba(150, 150, 150, 0.6);
 }
 
-.btn-block.datamenu {
-  padding: 50px;
+.btn-block {
+  padding: auto;
 }
+
 /* BUTTON REMOVE
 button.remove{
   border-radius:2px;
