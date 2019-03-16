@@ -10,10 +10,6 @@ $(document).ready(function() {
 			{title: "#", width: "5%", className: "dt-center"},
 			{title: "User ID"},
 			{title: "Name"},
-<<<<<<< HEAD
-			{title: "Last"},
-=======
->>>>>>> 061298a4b7d235ff1592500769c743f883e31a0c
 			{title: "Email"},
 			{title: "Role"},
 			{title: "Status"},
