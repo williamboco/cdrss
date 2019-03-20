@@ -16,6 +16,7 @@ if($_SESSION['role'] != 'Admin') {
 	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
 	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="css/mains.css" rel="stylesheet">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,8 +42,8 @@ if($_SESSION['role'] != 'Admin') {
 			</div>
 		</div>
 	</div>
-	<!-- Add Modal -->
 
+	<!-- Add Modal -->
 <div class="row">
 	<div class="modal fade" id="addModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
@@ -83,74 +84,12 @@ if($_SESSION['role'] != 'Admin') {
 					  <input type="radio" name="gender" value="Female" id="gender2" required>
 					  <label for="gender2">Female</label>
 					</div>
-
 				</form>
+			</div>
 
-		  </div>
 		  <div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-			<button type="submit" class="btn btn-primary pull-right" form="addForm">Submit</button>
-		  </div>
-		</div>
-	  </div>
-	</div>
-</div>
-	<!-- View Modal -->
-	<div class="row">
-		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-				<div class="modal-content viewProfile row">
-				  <div class="modal-header col-sm-12">
-					<h4 class="modal-title" style="display: inline;">Edit User Status</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  <span aria-hidden="true">&times;</span>
-					</button>
-				  </div>
-		  <div class="modal-body col-sm-12">
-				<div class="viewProfile card row">
-					<p style="font-size: 16px;"><b>User Id</b><br/><span id="userID"></span></p>
-					<p style="font-size: 16px;"><b>Role</b><br/><span id="role"></span></p>
-					<p style="font-size: 16px;"><b>Email</b><br/><span id="email"></span><p>
-					<p style="font-size: 16px;"><b>Name</b><br/><span id="name" style="color:#014FB3;"></span></p>
-					<p style="font-size: 16px;"><b>Gender</b><br/><span id="gender"></span></p>
-					<p style="font-size: 16px;"><b>Contact</b><br/><span id="contact"></span></p>
-					<p style="font-size: 16px;"><b>Date Employed</b><br/><span id="dateEmployed"></span></p>
-					<br/><br/>
-
-						<div class="card-body col-sm-12">
-							<p style="font-size: 16px;"><b>User Status</b><br/></p>
-							<br/>
-							<form>
-	  						<div class="form-row">
-									<div class="col-sm-6">
-									<div class="custom-control-input custom-radio custom-control-inline">
-									  <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-									  <label class="custom-control-label" for="customRadioInline1">Active</label>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="custom-control custom-radio custom-control-inline">
-									  <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-									  <label class="custom-control-label" for="customRadioInline2">Inactive</label>
-									</div>
-								</div>
-						</div>
-					</div>
-			<div class="confirmDelete hidden">
-				<h3>Are you sure you want to delete this user?</h3>
-			</div>
-
-		  </div>
-		  <div class="modal-footer">
-			<div class="confirmDelete hidden">
-				<button type="button" class="btn btn-danger" id="deleteBtn" onclick="deleteUser(this.value)">Confirm Delete</button>
-				<button type="button" class="btn btn-primary" onclick="cancelDelete()">Cancel</button>
-			</div>
-			<div class="viewProfile">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-danger" onclick="confirmDelete()"><i class="glyphicon glyphicon-remove"></i> Delete</button>
-				<button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Update</button>
-			</div>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-primary pull-right" form="addForm">Submit</button>
 		  </div>
 		</div>
 	 </div>
@@ -158,6 +97,52 @@ if($_SESSION['role'] != 'Admin') {
 </div>
 </div>
 
+	<!-- View Modal -->
+		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+				<div class="modal-content row">
+				  <div class="modal-header col-sm-12">
+						<h4 class="modal-title" style="display: inline;">Edit User Status</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+				  </div>
+				  <div class="modal-body col-sm-12">
+						<div class="viewProfile card row">
+							<p style="font-size: 16px;"><b>User Id</b><br/><span id="userID"></span></p>
+							<p style="font-size: 16px;"><b>Role</b><br/><span id="role"></span></p>
+							<p style="font-size: 16px;"><b>Email</b><br/><span id="email"></span><p>
+							<p style="font-size: 16px;"><b>Name</b><br/><span id="name" style="color:#014FB3;"></san></p>
+							<p style="font-size: 16px;"><b>Gender</b><br/><span id="gender"></span></p>
+							<p style="font-size: 16px;"><b>Contact</b><br/><span id="contact"></span></p>
+							<p style="font-size: 16px;"><b>Date Employed</b><br/><span id="dateEmployed"></span></p>
+							<br/><br/>
+
+						<div class="card-body col-sm-12">
+							<p style="font-size: 16px;"><i class="fas fa-power-off"></i></i><b> User Status</b><br/></p>
+							<br/>
+				  	<form>
+	  						<div class="form-row">
+									<div class="col-sm-6">
+											 <label><input type="radio" name="statusType" value="1" checked="checked" required> Active</label>
+									</div>
+									<div class="col-sm-6">
+										 <label><input type="radio" name="statusType" value="0" checked="checked" required> Inactive</label>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			  <div class="modal-footer col-sm-12">
+					<div class="viewProfile">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-info" id="deleteBtn" name="submit" onclick="deleteUser(this.value)"> Update</button>
+					</div>
+		  	</div>
+			</form>
+			</div>
+	 </div>
+</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>

@@ -40,7 +40,7 @@ if (isset($_SESSION['userID'])) {
 						<br>
                         <h3 align="center">Login to your account</h3>
                     </header>
-                    
+
                     <div class="widget-body">
 						<div class="alert alert-danger">
 						</div>
