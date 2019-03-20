@@ -55,7 +55,17 @@ $("#addForm").on("submit", function(event) {
 	});
 
 });
-function confirmDelete() {
+
+/*$('input[name="radioButton"]').on("click", confirmDelete() {
+	/*if (e.clientX === 0 && e.clientY === 0) {
+        console.log("keyboard");
+    } else {
+        console.log("mouse");
+    };
+}*/
+
+
+/*function confirmDelete() {
 	$('.confirmDelete').removeClass('hidden');
 	$('.viewProfile').addClass('hidden');
 }
@@ -63,7 +73,7 @@ function confirmDelete() {
 function cancelDelete() {
 	$('.confirmDelete').addClass('hidden');
 	$('.viewProfile').removeClass('hidden');
-}
+}*/
 
 function viewUser(id) {
 	$.ajax({
@@ -94,12 +104,14 @@ function viewUser(id) {
 
 function deleteUser(id) {
 	//alert(id);
+	var status = $("input[type='radio'][name='statusType']:checked").val();
 
 	$.ajax({
         type: "GET",
-        url: "ajax/userDelete.php",
+        url: "../ajax/userDelete.php",
         data: {
-            userID: id
+            userID: id,
+						statusType: status
         },
         cache: false,
         success: function(response) {
