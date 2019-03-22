@@ -14,7 +14,7 @@ if($_SESSION['role'] == 'Admin') {
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/mains.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
