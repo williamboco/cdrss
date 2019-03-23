@@ -15,13 +15,12 @@ else
 if($res['role'] == 'Admin') {
 	$result = mysqli_query($con, "SELECT * FROM `user` WHERE role='Admin' AND isActive='1'");
 
-	if(mysqli_num_rows($result) > 1) {
+	if(mysqli_num_rows($result) > 0) {
 		if(mysqli_query($con, $query)) {
-			echo 'Success.';
+			echo "<h4><b>Status updated successfully.</b></h4>";
 		}else
 			echo "Query failed";
-	}else
-		echo "Cannot delete account";
+	}
 
 }else {
 
