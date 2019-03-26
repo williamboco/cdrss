@@ -4,7 +4,7 @@ include('includes/dbcon.php');
 include('includes/session.php');
 
 if($_SESSION['role'] != 'Admin') {
-	header("location: home.php");
+	header("location: home-avp.php");
 }
 
 ?>
@@ -136,7 +136,7 @@ if($_SESSION['role'] != 'Admin') {
 			  <div class="modal-footer col-sm-12">
 					<div class="viewProfile">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-info" id="deleteBtn" name="submit" onclick="deleteUser(this.value)"> Update</button>
+					<button type="button" class="btn btn-info" id="deleteBtn" name="submit" onclick="deleteUser(this.value)"> Update</button> <!--//update(submit) button-->
 					</div>
 		  	</div>
 			</form>
@@ -149,7 +149,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/users-list.js"></script>
+	<script src="js/user-list.js"></script>
 
 </body>
 </html>
