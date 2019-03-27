@@ -1,6 +1,8 @@
 <?php
 session_start();
-require '../../PHPMailer/PHPMailerAutoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor/autoload.php';
 include('../../includes/dbcon.php');
 include('../../includes/password.php');
 
@@ -10,15 +12,15 @@ $result= mysqli_fetch_array($query);
 
 if(mysqli_num_rows($query) > 0) {
 	$userID = $result['ID'];
-	
+
 	//generate new random characters
 	$requestID = randomPassword();
-	
+
 	$query = "INSERT INTO `password_change_request` (`ID`, `requestID`, `userID`, `requestDate`, `isUsed`) VALUES (NULL, '$requestID', '$userID', NOW(), '0')";
 	if(mysqli_query($con, $query)) {
 		// email message
 		$title = "link";
-		$link = $_SERVER['SERVER_NAME']."/cdrs/pass-new.php?rID=".$requestID;
+		$link = $_SERVER['SERVER_NAME']."/cdrss/pass-new.php?rID=".$requestID;
 		$msg = "We got a request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
 
 		// To send HTML mail, the Content-type header must be set
@@ -29,12 +31,12 @@ if(mysqli_num_rows($query) > 0) {
 		$msg = wordwrap($msg,70);
 
 		// send email
-		require '../../includes/mail.php';
-		
+		require '../PHPmailer/index.php';
+
 	}else {
 		$message = "Password change request query failed";
 	}
-	
+
 }else {
 	$message = "That email does not exist!";
 }

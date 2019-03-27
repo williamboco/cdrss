@@ -11,21 +11,21 @@ $query = mysqli_query($con, "SELECT * FROM user WHERE ID='$userID'");
 $row= mysqli_fetch_array($query);
 
 if(mysqli_num_rows($query) > 0 && verify($password, $row['password'])) {
-	
+
 	//generate hash from input password
-	$hashedPassword= generateHash($newPass);
+	$hashedPassword= passwordEncrypt($newPass);
 	mysqli_query($con, "UPDATE `user` SET `password` = '$hashedPassword', `datePassChanged` = NOW() WHERE `user`.`ID` = '$userID'");
-	
+
 	if(mysqli_affected_rows($con) > 0) {
 		$message = "success";
 	}else {
 		$message = "Not updated";
 	}
-	
+
 }else {
-	
+
 	$message = "Please enter your valid password";
-	
+
 }
 
 echo $message;

@@ -97,26 +97,6 @@ include('includes/session.php');
 		</div>
 	</div>
 
-	<!-- Delete account modal -->
-	<!--<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel20" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header no-border">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title fw-bold mt" id="myModalLabel20">Are you sure you want to delete your account?</h4>
-					<p class="fs-mini text-muted mt-sm">
-						Press "Confirm Delete" if you are sure to delete your account from the system. If not, press "Cancel".
-					</p>
-				</div>
-
-				<div class="modal-footer no-border">
-					<button data-dismiss="modal" class="btn btn-default">Cancel</button>
-					<button data-dismiss="modal" id="create-event" class="btn btn-primary" name="update" onclick="delAccount(this.value)" value="<?php echo $_SESSION['userID'];?>">Confirm Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>-->
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
