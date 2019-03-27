@@ -74,6 +74,8 @@ if($_SESSION['role'] != 'Admin') {
 						<input type="text" class="form-control" name="lastname" placeholder="Lastname" required><br>
 						<label for ="email">Email Address</label>
 						<input type="email" class="form-control" name="email" placeholder="Email" required><br>
+						<label for ="email">Password (Temporary)</label>
+						<input type="password" class="form-control" name="passw" value="temp" required><br>
 						<label for ="dateEmployed">Employment Date</label>
 						<input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
 						<label for ="contact">Contact Number</label>

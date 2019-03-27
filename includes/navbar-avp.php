@@ -13,9 +13,9 @@
       </div>
     <div class="collapse navbar-collapse" id="navigationbar">
       <ul class="nav navbar-nav">
-        <li><a href="home.php">Home</a></li>
-        <li><a href="patient-list.php">Patient Profiles</a></li>
-        <li><a href="options.php">Data Management</a></li>
+        <li><a href="home-avp.php">Home</a></li>
+        <li><a href="patient-list-avp.php">Patient Profiles</a></li>
+        <li><a href="data-management-avp.php">Data Management</a></li>
         <li><a href="logs.php">Logs</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
