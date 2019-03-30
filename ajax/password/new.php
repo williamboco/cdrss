@@ -8,7 +8,7 @@ $password = $_POST['password1'];
 $userID = $_POST['userID'];
 
 //generate hash from input password
-$hashedPassword= passwordEncrypt($password);
+$hashedPassword= generateHash($password);
 
 mysqli_query($con, "UPDATE `user` SET `password` = '$hashedPassword' WHERE `user`.`ID` = '$userID'");
 

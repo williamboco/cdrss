@@ -21,6 +21,6 @@
 
 	//function to verify password
 	function verify($password, $hashedPassword) {
-		return htmlspecialchars_decode($password, $hashedPassword) == $hashedPassword;
+		return (crypt($password, $hashedPassword) == $hashedPassword);
 	}
 ?>

@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Load Composer's autoloader
-require 'vendor/autoload.php';
+require '../../PHPMailer/vendor/autoload.php';
 
 $mail = new PHPmailer(true);
 

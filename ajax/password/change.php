@@ -13,11 +13,11 @@ $row= mysqli_fetch_array($query);
 if(mysqli_num_rows($query) > 0 && verify($password, $row['password'])) {
 
 	//generate hash from input password
-	$hashedPassword= passwordEncrypt($newPass);
+	$hashedPassword = generateHash($newPass);
 	mysqli_query($con, "UPDATE `user` SET `password` = '$hashedPassword', `datePassChanged` = NOW() WHERE `user`.`ID` = '$userID'");
 
 	if(mysqli_affected_rows($con) > 0) {
-		$message = "success";
+		$message = "Success";
 	}else {
 		$message = "Not updated";
 	}
