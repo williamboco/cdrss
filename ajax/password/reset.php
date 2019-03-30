@@ -1,7 +1,5 @@
 <?php
 session_start();
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 require '../../PHPMailer/vendor/autoload.php';
 include('../../includes/dbcon.php');
 include('../../includes/password.php');
@@ -12,7 +10,6 @@ $result= mysqli_fetch_array($query);
 
 if(mysqli_num_rows($query) > 0) {
 	$userID = $result['ID'];
-	$port = ":89";
 
 	//generate new random characters
 	$requestID = randomPassword();
