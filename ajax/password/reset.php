@@ -18,7 +18,7 @@ if(mysqli_num_rows($query) > 0) {
 	if(mysqli_query($con, $query)) {
 		// email message
 		$title = "link";
-		$link = $_SERVER['SERVER_NAME'].":89"."/cdrss/pass-new.php?rID=".$requestID;
+		$link = $_SERVER['SERVER_NAME']."/cdrss/pass-new.php?rID=".$requestID;
 		$msg = "We got a request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
 
 		// To send HTML mail, the Content-type header must be set
