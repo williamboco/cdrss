@@ -32,12 +32,10 @@ if($rownum > 0) {
 
 			array_push($message, 'success');
 			array_push($message, $row['role']);
-		} else {
-			array_push($message, "Invalid username and password combination");
 		}
-	}
+	} array_push($message, "Invalid username and password combination");
 
-}else {
+} else {
 	array_push($message, "Query Failed!");
 }
 
