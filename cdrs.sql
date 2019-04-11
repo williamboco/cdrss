@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2019 at 03:07 PM
+-- Generation Time: Apr 11, 2019 at 03:57 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -32,15 +32,16 @@ CREATE TABLE `allergy` (
   `ID` int(11) NOT NULL,
   `allergyName` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
+  `isDeleted` tinyint(1) NOT NULL DEFAULT '0',
+  `symptoms` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `allergy`
 --
 
-INSERT INTO `allergy` (`ID`, `allergyName`, `description`, `isDeleted`) VALUES
-(1, 'Secret', '', 0);
+INSERT INTO `allergy` (`ID`, `allergyName`, `description`, `isDeleted`, `symptoms`) VALUES
+(1, 'Secret', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -50,15 +51,16 @@ INSERT INTO `allergy` (`ID`, `allergyName`, `description`, `isDeleted`) VALUES
 
 CREATE TABLE `college` (
   `ID` varchar(255) NOT NULL,
-  `courseID` int(11) NOT NULL
+  `courseID` int(11) NOT NULL,
+  `courseName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `college`
 --
 
-INSERT INTO `college` (`ID`, `courseID`) VALUES
-('201603007', 1);
+INSERT INTO `college` (`ID`, `courseID`, `courseName`) VALUES
+('201603007', 1, '0');
 
 -- --------------------------------------------------------
 
@@ -67,19 +69,20 @@ INSERT INTO `college` (`ID`, `courseID`) VALUES
 --
 
 CREATE TABLE `complaint` (
-  `ID` int(11) NOT NULL,
+  `complaintID` int(11) NOT NULL,
   `complaintName` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
+  `isDeleted` tinyint(1) NOT NULL DEFAULT '0',
+  `symptoms` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `complaint`
 --
 
-INSERT INTO `complaint` (`ID`, `complaintName`, `description`, `isDeleted`) VALUES
-(1, 'hotdog', 'tender juicy', 1),
-(2, 'Headache', 'Naiistress ', 0);
+INSERT INTO `complaint` (`complaintID`, `complaintName`, `description`, `isDeleted`, `symptoms`) VALUES
+(1, 'hotdog', 'tender juicy', 1, ''),
+(2, 'Headache', 'Naiistress ', 0, '');
 
 -- --------------------------------------------------------
 
@@ -141,7 +144,8 @@ CREATE TABLE `department` (
 CREATE TABLE `employee` (
   `ID` varchar(255) NOT NULL,
   `departmentID` int(11) NOT NULL,
-  `type` varchar(50) NOT NULL
+  `type` varchar(50) NOT NULL,
+  `employeeType` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -152,6 +156,19 @@ CREATE TABLE `employee` (
 
 CREATE TABLE `guest` (
   `ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `eventID` int(11) NOT NULL,
+  `eventDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `eventType` int(11) NOT NULL,
+  `userID` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -168,17 +185,30 @@ CREATE TABLE `medicine` (
   `isSupply` tinyint(1) NOT NULL,
   `isDeleted` int(11) NOT NULL DEFAULT '0',
   `thresholdQty` int(50) NOT NULL,
-  `criticalQty` int(50) NOT NULL
+  `criticalQty` int(50) NOT NULL,
+  `form` varchar(50) NOT NULL,
+  `dosage` varchar(50) NOT NULL,
+  `dosageQty` int(10) NOT NULL,
+  `currentQty` int(10) NOT NULL,
+  `newQty` int(10) NOT NULL,
+  `updateQty` int(10) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateModified` datetime NOT NULL,
+  `createdBy` varchar(50) NOT NULL,
+  `modifiedBy` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `medicine`
 --
 
-INSERT INTO `medicine` (`ID`, `brandName`, `genericName`, `type`, `isSupply`, `isDeleted`, `thresholdQty`, `criticalQty`) VALUES
-(1, 'Paracetamol', 'Biogesic', 'Tablet', 0, 0, 10, 0),
-(11, 'Antibacterial', 'Doxitar', 'Tablet', 0, 0, 20, 0),
-(13, '', 'Bandage', '', 1, 0, 7, 0);
+INSERT INTO `medicine` (`ID`, `brandName`, `genericName`, `type`, `isSupply`, `isDeleted`, `thresholdQty`, `criticalQty`, `form`, `dosage`, `dosageQty`, `currentQty`, `newQty`, `updateQty`, `dateCreated`, `dateModified`, `createdBy`, `modifiedBy`) VALUES
+(1, 'Paracetamol', 'Biogesic', 'Tablet', 0, 0, 88, 0, '', '', 0, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', ''),
+(11, 'Antibacterial', 'Doxitar', 'Tablet', 0, 0, 88, 0, '', '', 0, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', ''),
+(13, '', 'Bandage', '', 1, 0, 88, 0, '', '', 0, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', ''),
+(28, '', 'Hehehe', '', 1, 0, 93, 0, '', '', 0, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', ''),
+(32, '', 'Band-Aid', '', 1, 0, 0, 0, '', '', 0, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', ''),
+(34, 'Advil', 'Advil', 'Tablet', 0, 0, 0, 0, '', '', 0, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -199,7 +229,75 @@ CREATE TABLE `password_change_request` (
 --
 
 INSERT INTO `password_change_request` (`ID`, `requestID`, `userID`, `requestDate`, `isUsed`) VALUES
-(1, 'TDTy1Am6', '201603006', '2019-01-23 12:11:24', 0);
+(1, 'TDTy1Am6', '201603006', '2019-01-23 12:11:24', 0),
+(2, 'zGhNdKZF', '201603009', '2019-03-21 22:38:07', 0),
+(3, 'j4LWgLSle', '201803007', '2019-03-24 15:33:23', 0),
+(23, 'HLaXksZfW', '201603007', '2019-03-27 20:49:13', 1),
+(24, 'oTQfkXOL', '201603007', '2019-03-27 20:52:10', 0),
+(25, 'SxdP7o90', '201603007', '2019-03-27 20:58:22', 1),
+(26, 'l8bjoUfQ', '201603007', '2019-03-30 23:00:13', 0),
+(27, 'fKpPAx62', '201603007', '2019-03-30 23:01:38', 0),
+(28, 'yEzcQQ6i', '201603007', '2019-03-30 23:03:53', 0),
+(29, '764Y3MgL', '201603007', '2019-03-30 23:07:27', 0),
+(30, 'i1bxFOHF', '19-00004', '2019-03-30 23:17:22', 0),
+(31, 'N71uPX9t', '15-00008', '2019-03-30 23:29:52', 0),
+(32, 'IRR7gPWS', '15-00008', '2019-03-30 23:32:55', 0),
+(33, 'XIHodfJX', '201603007', '0000-00-00 00:00:00', 0),
+(36, 'uupqpdU7', '849846516651', '2019-04-07 20:36:33', 0),
+(37, 'qFHjPmyj', '201603008', '2019-04-07 20:39:43', 0),
+(38, 'Ugq6J9yD', '65486666', '2019-04-07 20:40:59', 0),
+(39, 'dLgiTYHQ', '8789489984', '2019-04-08 07:10:30', 0),
+(40, 'NWeXtHC3', '201603008', '2019-04-08 07:15:04', 0),
+(41, 'jxT6IuGk', '201603009', '2019-04-08 07:15:45', 0),
+(42, 'WAReFtlK', '201603001', '2019-04-08 07:19:35', 0),
+(43, 'AMhucfgC', '201603002', '2019-04-08 07:21:39', 0),
+(44, 'BusIS20X', '201602006', '2019-04-08 07:22:51', 0),
+(45, 'XisepkUm', '201603007', '2019-04-08 14:26:07', 0),
+(46, '3OuGsFNZ', '201603007', '2019-04-08 14:27:07', 0),
+(47, '4kMAFXhG', '201603007', '2019-04-08 14:29:37', 0),
+(48, '78uKpege', '201603007', '2019-04-08 16:17:47', 1),
+(49, 'D0qF08KT', '201603007', '2019-04-08 16:20:05', 0),
+(50, 'kQlxAryn', '201603007', '2019-04-09 17:15:03', 1),
+(51, '3LTN1BWS', '201603007', '2019-04-09 17:18:03', 0),
+(52, 'WJp840np', '201603007', '2019-04-09 17:21:14', 0),
+(53, 'QIPgIsuq', '201603007', '2019-04-09 17:27:07', 1),
+(54, 'B9ATF1pP', '201603007', '2019-04-09 17:34:29', 1),
+(55, '3mJmGZHC', '201603007', '2019-04-09 17:36:31', 1),
+(56, 'rHNaR2RT', '201603007', '2019-04-09 17:45:08', 1),
+(57, 'adXzdD1g', '201603007', '2019-04-09 17:47:44', 1),
+(58, 'NxpZHo9f', '201603007', '2019-04-09 17:56:29', 1),
+(59, 'ecmkW39n', '20136548998', '2019-04-09 17:59:10', 0),
+(60, 'xL8mN11N', '201603007', '2019-04-09 18:01:44', 1),
+(61, 'ofK3JMin', '201603009', '2019-04-09 18:15:43', 0),
+(62, 'wrNjOQbe', '201603009', '2019-04-09 18:17:08', 1),
+(63, '5Rky3c8m', '201603007', '2019-04-09 18:20:58', 1),
+(64, 't1rGR8GO', '201603007', '2019-04-09 18:29:14', 1),
+(65, 'i9r6eNig', '201603007', '2019-04-09 18:46:12', 1),
+(66, 'FuCtG0CD', '201603007', '2019-04-09 18:53:43', 1),
+(67, 'hU9HYDTe', '123456789', '2019-04-09 20:37:46', 0),
+(68, 'GP63XiDs', '201603007', '2019-04-09 20:40:33', 1),
+(69, '2DWNP1n5', '201603007', '2019-04-09 20:48:52', 1),
+(70, 'zuwXXywz', '201603007', '2019-04-09 20:56:37', 1),
+(71, 'yTcutxgH', '123456789', '2019-04-09 20:59:39', 0),
+(72, 'NzX7KXD8', '322165447979', '2019-04-09 21:01:26', 0),
+(73, '2x3ngNTq', '201603009', '2019-04-09 21:07:06', 0),
+(74, '5LQ58EL7', '201603009', '2019-04-09 21:09:31', 0),
+(75, 'l5JWbosi', '201603007', '2019-04-09 21:23:54', 0),
+(76, 'EKpXNLWs', '201603007', '2019-04-09 21:25:31', 0),
+(77, 'hCFXlFMD', '201603007', '2019-04-09 21:26:43', 0),
+(78, '2oMdBCW8', '201603007', '2019-04-09 21:28:57', 0),
+(79, 'cOcfyWRL', '201603007', '2019-04-09 21:30:08', 0),
+(80, 'atGmBxTs', '201603007', '2019-04-09 21:31:44', 0),
+(81, 'rBlJwTdx', '201603007', '2019-04-09 21:34:04', 0),
+(82, 'HS3OKDZy', '201603007', '2019-04-09 21:36:08', 0),
+(83, 'jddE4PIk', '201603007', '2019-04-09 21:36:57', 0),
+(84, '0QpZnA7D', '201603007', '2019-04-09 21:40:24', 0),
+(85, 'KIn1YeAK', '201603007', '2019-04-09 21:41:16', 0),
+(86, 'kiPt2Adi', '201603007', '2019-04-09 21:43:12', 0),
+(87, 'xdAWRXib', '201603007', '2019-04-09 21:44:51', 0),
+(88, 'cGRh7bFd', '201603007', '2019-04-09 21:45:54', 0),
+(89, '5eaNNi3d', '201603007', '2019-04-11 21:49:45', 0),
+(90, 'HrETtdmE', '201603007', '2019-04-11 21:50:59', 1);
 
 -- --------------------------------------------------------
 
@@ -218,15 +316,18 @@ CREATE TABLE `patient` (
   `createdBy` varchar(255) NOT NULL,
   `modifiedBy` varchar(255) NOT NULL,
   `dateCreated` datetime NOT NULL,
-  `dateModified` datetime NOT NULL
+  `dateModified` datetime NOT NULL,
+  `contactNumber` int(25) NOT NULL,
+  `contactPerson` varchar(70) NOT NULL,
+  `contactPersonNumber` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`ID`, `firstName`, `lastName`, `birthDate`, `gender`, `contact`, `isDeleted`, `createdBy`, `modifiedBy`, `dateCreated`, `dateModified`) VALUES
-('201603007', 'William', 'Boco', '1999-01-11', 'Male', '09052834596', 0, '201603007', '201603007', '2019-01-21 11:15:45', '2019-01-21 11:15:45');
+INSERT INTO `patient` (`ID`, `firstName`, `lastName`, `birthDate`, `gender`, `contact`, `isDeleted`, `createdBy`, `modifiedBy`, `dateCreated`, `dateModified`, `contactNumber`, `contactPerson`, `contactPersonNumber`) VALUES
+('201603007', 'William', 'Boco', '1999-01-11', 'Male', '09052834596', 0, '201603007', '201603007', '2019-01-21 11:15:45', '2019-01-21 11:15:45', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -248,7 +349,28 @@ CREATE TABLE `patient_allergy` (
 
 CREATE TABLE `shs` (
   `ID` varchar(255) NOT NULL,
-  `trackID` int(11) NOT NULL
+  `trackID` int(11) NOT NULL,
+  `trackName` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supply`
+--
+
+CREATE TABLE `supply` (
+  `supplyID` int(11) NOT NULL,
+  `supplyName` varchar(50) NOT NULL,
+  `currentQty` int(50) NOT NULL,
+  `newQty` int(50) NOT NULL,
+  `updateQty` int(50) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateModified` datetime NOT NULL,
+  `createdBy` varchar(50) NOT NULL,
+  `modifiedBy` varchar(50) NOT NULL,
+  `thresholdQty` int(50) NOT NULL,
+  `criticalQty` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -278,32 +400,31 @@ INSERT INTO `track` (`ID`, `trackName`, `isDeleted`) VALUES
 
 CREATE TABLE `user` (
   `ID` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `datePassChanged` datetime NOT NULL,
   `role` varchar(50) NOT NULL,
   `dateEmployed` date NOT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT '1',
-  `firstName` varchar(255) NOT NULL,
-  `lastName` varchar(255) NOT NULL,
+  `firstName` varchar(100) NOT NULL,
+  `lastName` varchar(100) NOT NULL,
   `gender` varchar(6) NOT NULL,
-  `contact` varchar(255) NOT NULL
+  `contact` varchar(255) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateModified` datetime NOT NULL,
+  `createdBy` varchar(50) NOT NULL,
+  `modifiedBy` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`ID`, `email`, `password`, `datePassChanged`, `role`, `dateEmployed`, `isActive`, `firstName`, `lastName`, `gender`, `contact`) VALUES
-('18-0005', 'gaudine.pangilinan@iacademy.edu.ph', '$2y$11$86e74563e3b56cdc8e981uvK4Uj20S.VOZ7zlv4CtZJtYisPqiJIS', '0000-00-00 00:00:00', 'Nurse', '1993-12-15', 0, 'Gaudine Ma. Lyn', 'Pangilinan', 'Female', '09985890045'),
-('201603006', 'juan.delacruz@iacademy.edu.ph', 'temp', '0000-00-00 00:00:00', 'Physician', '2020-09-03', 1, 'Juan', 'Dela Cruz', 'Male', '09123456789'),
-('201603007', '201603007@iacademy.edu.ph', 'Pamelamendoza21', '2019-01-20 00:00:00', 'Nurse', '2018-05-01', 1, 'William', 'Boco', 'Male', '09052834596'),
-('201700001', 'angelo.tapia@iacademy.edu.ph', '$2y$11$bdf8a7268c3d38078ea64OGkxRV2cpp0u1EjT8M7QujaNXOah9nRC', '2017-05-29 14:31:40', 'Admin', '2017-05-24', 1, 'AJ', 'Tapia', 'Male', '09209647858'),
-('201700003', 'josephine.bautista@iacademy.edu.ph', '$2y$11$fb5243c05d73ec2c90307uQ0wFVl2LPg8LjrWM0NPA9VVJ0eX0UFy', '0000-00-00 00:00:00', 'Physician', '2017-05-29', 1, 'Josephine', 'Bautista', 'Female', '09178950002'),
-('201700004', 'bernadette.bernabe@iacademy.edu.ph', '$2y$11$0f824b267e753f6dd5bb8OKiTCvrxT2H4iJWuedEKgw0ODP1jvOKS', '2017-09-23 11:38:28', 'Nurse', '2017-05-29', 1, 'Bernadette', 'Bernabe', 'Female', '09200000000'),
-('201700005', 'khristine.oronea@iacademy.edu.ph', 'temp', '0000-00-00 00:00:00', 'Dentist', '2017-05-29', 1, 'Khristine', 'Oronea', 'Female', '09209000000'),
-('201800001', 'gaudine.pangilinan@iacademy.edu.ph', '$2y$11$8215cbce87141e6ff8e2euX72zCP37jCaDvnypFS7aqVRoK2.kjGS', '0000-00-00 00:00:00', 'Nurse', '2018-01-29', 1, 'Gaudine Ma. Lyn', 'Pangilinan', 'Female', '09985890045'),
-('201800002', 'camille.navarro@iacademy.edu.ph', 'temp', '0000-00-00 00:00:00', 'Admin', '2017-08-07', 1, 'Camille', 'Navarro', 'Female', '09175177468');
+INSERT INTO `user` (`ID`, `email`, `password`, `datePassChanged`, `role`, `dateEmployed`, `isActive`, `firstName`, `lastName`, `gender`, `contact`, `dateCreated`, `dateModified`, `createdBy`, `modifiedBy`) VALUES
+('201601045', 'yJ9R/zSi9nshquuYGdmDMxdNgPdExGjYLPNOjIE4+0Q=', 'zuwBtmygSJNyZDzorYP7/g==', '0000-00-00 00:00:00', 'R3F57LtVGns08zxFybyhTA==', '2016-07-14', 1, '8uLjJIxUZfURls/ujYAjuA==', 'Fz7tFuU7RTR4bHltuGrvcw==', 'Female', '123456789', '2019-04-11 21:54:47', '2019-04-11 21:54:47', 'nttljvldo4lvJ/3aXk/tlg==', 'nttljvldo4lvJ/3aXk/tlg=='),
+('201601048', 'uv19Vj9iLs+Npf845EI2rfk2M+A+hpnEf6/FwwMcm6w=', 'zuwBtmygSJNyZDzorYP7/g==', '0000-00-00 00:00:00', 'R3F57LtVGns08zxFybyhTA==', '2016-04-01', 1, '4ExITKp6kadxz/2oqddisQ==', 'TtvN3gr/YWdn/kgaBtLgMA==', 'Female', '123456789', '2019-04-11 21:56:30', '2019-04-11 21:56:30', 'nttljvldo4lvJ/3aXk/tlg==', 'nttljvldo4lvJ/3aXk/tlg=='),
+('201601062', 'RKHmiQmUR8rfQsRNaMkYVVBOkP6APd4haaqME6tWraw=', 'zuwBtmygSJNyZDzorYP7/g==', '0000-00-00 00:00:00', 'R3F57LtVGns08zxFybyhTA==', '2016-07-14', 1, '1OUN5Y5ODxGQHipbESWcgg==', 'Yt6NgTjbm4VLSK8S3Tp6zQ==', 'Female', '123456789', '2019-04-11 21:55:42', '2019-04-11 21:55:42', 'nttljvldo4lvJ/3aXk/tlg==', 'nttljvldo4lvJ/3aXk/tlg=='),
+('201603007', 'yZFiJYAKq5oeC0Iya3rlcSS4UZvN6+wER6zkk96+dkw=', 'r7uZnrc0nD4VJ0f5S6yqAg==', '0000-00-00 00:00:00', 'R3F57LtVGns08zxFybyhTA==', '2017-01-05', 1, 'nttljvldo4lvJ/3aXk/tlg==', 'jPm06KABX+Ob6oGL0rqifA==', 'Male', '6460742', '2019-04-09 18:20:49', '2019-04-09 18:20:49', '1V4M1LsK/+03H/Nol+QP8g==', '1V4M1LsK/+03H/Nol+QP8g==');
 
 -- --------------------------------------------------------
 
@@ -320,15 +441,17 @@ CREATE TABLE `visit` (
   `createdBy` varchar(255) NOT NULL,
   `modifiedBy` varchar(255) NOT NULL,
   `dateCreated` datetime NOT NULL,
-  `dateModified` datetime NOT NULL
+  `dateModified` datetime NOT NULL,
+  `patientFirstName` varchar(50) NOT NULL,
+  `patientLastName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `visit`
 --
 
-INSERT INTO `visit` (`ID`, `patientID`, `visitDate`, `remarks`, `isDeleted`, `createdBy`, `modifiedBy`, `dateCreated`, `dateModified`) VALUES
-(1, '201603007', '2019-01-21 11:16:00', '', 0, '201603007', '201603007', '2019-01-21 11:16:42', '2019-01-21 11:16:42');
+INSERT INTO `visit` (`ID`, `patientID`, `visitDate`, `remarks`, `isDeleted`, `createdBy`, `modifiedBy`, `dateCreated`, `dateModified`, `patientFirstName`, `patientLastName`) VALUES
+(1, '201603007', '2019-01-21 11:16:00', '', 0, '201603007', '201603007', '2019-01-21 11:16:42', '2019-01-21 11:16:42', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -359,15 +482,20 @@ CREATE TABLE `visit_medicine` (
   `ID` int(11) NOT NULL,
   `visitID` int(11) NOT NULL,
   `medicineID` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `complaintID` int(50) NOT NULL,
+  `medicineBrandName` varchar(100) NOT NULL,
+  `form` varchar(50) NOT NULL,
+  `dosage` int(11) NOT NULL,
+  `dispensedDose` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `visit_medicine`
 --
 
-INSERT INTO `visit_medicine` (`ID`, `visitID`, `medicineID`, `quantity`) VALUES
-(1, 1, 1, 1);
+INSERT INTO `visit_medicine` (`ID`, `visitID`, `medicineID`, `quantity`, `complaintID`, `medicineBrandName`, `form`, `dosage`, `dispensedDose`) VALUES
+(1, 1, 1, 1, 0, '', '', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -391,8 +519,8 @@ ALTER TABLE `college`
 -- Indexes for table `complaint`
 --
 ALTER TABLE `complaint`
-  ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `ID` (`ID`);
+  ADD PRIMARY KEY (`complaintID`),
+  ADD UNIQUE KEY `ID` (`complaintID`);
 
 --
 -- Indexes for table `contact_person`
@@ -430,6 +558,13 @@ ALTER TABLE `guest`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`eventID`),
+  ADD KEY `userID` (`userID`);
+
+--
 -- Indexes for table `medicine`
 --
 ALTER TABLE `medicine`
@@ -465,6 +600,13 @@ ALTER TABLE `patient_allergy`
 ALTER TABLE `shs`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `ID` (`ID`);
+
+--
+-- Indexes for table `supply`
+--
+ALTER TABLE `supply`
+  ADD PRIMARY KEY (`supplyID`),
+  ADD KEY `supplyID` (`supplyID`);
 
 --
 -- Indexes for table `track`
@@ -518,7 +660,7 @@ ALTER TABLE `allergy`
 -- AUTO_INCREMENT for table `complaint`
 --
 ALTER TABLE `complaint`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `complaintID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contact_person`
@@ -545,16 +687,22 @@ ALTER TABLE `guest`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `eventID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `password_change_request`
 --
 ALTER TABLE `password_change_request`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `patient_allergy`
