@@ -1,16 +1,16 @@
 $(document).ready(function() {
 	$('.alert').hide();
-	
+
 });
 
 $('form').on('submit', function(event) {
 	$form = $(this);
-	
+
 	event.preventDefault();
 	console.log($form.serialize());
-	
+
 	$('.alert').hide();
-	
+
 	$form.find('button[type="submit"]').button('loading');
 	$.ajax({
 		type: 'POST',
@@ -25,8 +25,7 @@ $('form').on('submit', function(event) {
 			}*/
 			$form.find('button[type="submit"]').button('reset');
 			console.log(response);
-		
+
 		}
 	});
 });
-

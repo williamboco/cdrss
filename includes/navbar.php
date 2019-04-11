@@ -10,7 +10,7 @@
 			<span class="icon-bar"></span>
 		  </button>
 		  <a class="navbar-brand" href="home.php">
-			<div class="brandLogo"> 
+			<div class="brandLogo">
 				<p><b>CDRS</b><p>
 			</div>
 		  </a>
@@ -26,7 +26,7 @@
             <!-- search form! link it to your search server -->
             <ul class="nav navbar-nav navbar-right">
                 <li>
-				<a><?php echo $_SESSION['role'];?>&nbsp;<?php echo $_SESSION['firstName'];?></a>
+				<a><?php echo $_SESSION['role'];?>&nbsp;<?php echo htmlspecialchars($_SESSION['firstName'], ENT_QUOTES, 'utf-8');?></a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

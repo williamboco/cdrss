@@ -3,24 +3,42 @@ session_start();
 include('../includes/dbcon.php');
 include('../includes/password.php');
 
-$userName = mysqli_real_escape_string($con, $_POST['email']);
-$password = mysqli_real_escape_string($con, $_POST['password']);
+$method = 'aes-256-cbc';
+$password1 = '3sc3RLrpd17';
+$key = substr(hash('sha256', $password1, true), 0, 32);
+$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
-//db query
-$query = mysqli_query($con, "SELECT * FROM user WHERE email='$userName' AND isActive='1'");
-$row= mysqli_fetch_array($query);
+$userName = htmlspecialchars($_POST['email']);
+$password = htmlspecialchars($_POST['password']);
+
+$query = $con->prepare("SELECT * FROM user WHERE isActive=?");
+$query->bind_param("i", $isActive);
+$isActive = 1;
+$query->execute();
+$result = $query->get_result();
+$rownum = mysqli_num_rows($result);
 
 $message = array();
-if(mysqli_num_rows($query) > 0 && verify($password, $row['password'])) {
-	$_SESSION['userID']=$row['ID'];
-	$_SESSION['firstName']=$row['firstName'];
-	$_SESSION['role']=$row['role'];
+if($rownum > 0) {
+	while($row = $result->fetch_assoc()) {
+		$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
+		$row['password'] = openssl_decrypt(base64_decode($row['password']), $method, $key, OPENSSL_RAW_DATA, $iv);
+		if ($row['email'] == $userName && $row['password'] == $password) {
+			$row['firstName'] = openssl_decrypt(base64_decode($row['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+			$row['role'] = openssl_decrypt(base64_decode($row['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
+			$_SESSION['userID']=$row['ID'];
+			$_SESSION['firstName']=$row['firstName'];
+			$_SESSION['role']=$row['role'];
 
-	array_push($message, 'success');
-	array_push($message, $row['role']);
+			array_push($message, 'success');
+			array_push($message, $row['role']);
+		} else {
+			array_push($message, "Invalid username and password combination");
+		}
+	}
 
 }else {
-	array_push($message, "Invalid username and password combination");
+	array_push($message, "Query Failed!");
 }
 
 echo (json_encode($message));

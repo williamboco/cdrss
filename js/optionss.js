@@ -30,7 +30,7 @@ $(document).ready(function() {
 			{title: "#", width: "5%", className: "dt-center"},
 			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
 			{title: "", width: "5%", className: "dt-center"},
-			{title: "Name", className: "hover"},
+			{title: "Name", className: "hover"}
 			{title: "Available Qty", width: "5%"},
 			{title: "Status", width: "10%"},
 			{title: "Add/Less", width: "10%"},

@@ -24,7 +24,7 @@
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="glyphicon glyphicon-cog"></i> <?php echo $_SESSION['role'];?>&nbsp;<?php echo $_SESSION['firstName'];?>
+              <i class="glyphicon glyphicon-cog"></i> <?php echo $_SESSION['role'];?>&nbsp;<?php echo htmlspecialchars($_SESSION['firstName'], ENT_QUOTES, 'utf-8');?>
           </a>
           <ul class="dropdown-menu">
               <li><a href="account-avp.php"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>

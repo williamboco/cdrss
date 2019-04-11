@@ -4,40 +4,57 @@ require '../../PHPMailer/vendor/autoload.php';
 include('../../includes/dbcon.php');
 include('../../includes/password.php');
 
-$email = mysqli_real_escape_string($con, $_POST['email']);
-$query = mysqli_query($con, "SELECT * FROM user WHERE  email='$email' AND isActive='1'");
-$result= mysqli_fetch_array($query);
+$method = 'aes-256-cbc';
+$password = '3sc3RLrpd17';
+$key = substr(hash('sha256', $password, true), 0, 32);
+$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
-if(mysqli_num_rows($query) > 0) {
-	$userID = $result['ID'];
+$query = $con->prepare("SELECT * FROM user WHERE isActive=?");
+$query->bind_param("i", $isActive);
+$email = htmlspecialchars($_POST['email']);
+$isActive = 1;
+$query->execute();
+$result = $query->get_result();
+$rownum = mysqli_num_rows($result);
 
-	//generate new random characters
-	$requestID = randomPassword();
+//how to get the ipv4 php
 
-	$query = "INSERT INTO `password_change_request` (`ID`, `requestID`, `userID`, `requestDate`, `isUsed`) VALUES (NULL, '$requestID', '$userID', NOW(), '0')";
-	if(mysqli_query($con, $query)) {
-		// email message
-		$title = "link";
-		$link = $_SERVER['SERVER_NAME']."/cdrss/pass-new.php?rID=".$requestID;
-		$msg = "We got a request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
+if($rownum > 0) {
+	while ($row = $result->fetch_assoc()) {
+		if ($row['isActive'] == $isActive) {
+			$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
+			if ($row['email'] == $email) {
+				$userID = $row['ID'];
+				$requestID = randomPassword();
 
-		// To send HTML mail, the Content-type header must be set
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				$query1 = $con->prepare("INSERT INTO password_change_request (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
+				$query1->bind_param("isii", $isNull, $requestID, $userID, $isUsed);
+				$isNull = NULL;
+				$isUsed = 0;
 
-		// use wordwrap() if lines are longer than 70 characters
-		$msg = wordwrap($msg,70);
+				$query1->execute();
+				// email message
+				$title = "link";
+				$server_name = $_SERVER['SERVER_NAME'];
+				$server_port = $_SERVER['SERVER_PORT'];
+				$link = $server_name.$server_port."/cdrss/pass-new.php?rID=".$requestID;
+				$msg = "We got a request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
 
-		// send email
-		require '../../includes/mail.php';
+				// To send HTML mail, the Content-type header must be set
+				$headers  = 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
-	}else {
-		$message = "Password change request query failed";
+				// use wordwrap() if lines are longer than 70 characters
+				$msg = wordwrap($msg,70);
+
+				// send email
+				require '../../includes/mail.php';
+				} else {
+					$message = "Password change request query failed! Email does not exist!";
+				}
+			}
+		}
 	}
-
-}else {
-	$message = "That email does not exist!";
-}
 
 echo $message;
 ?>
