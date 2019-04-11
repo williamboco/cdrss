@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2019 at 10:36 AM
+-- Generation Time: Apr 11, 2019 at 12:18 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.1.12
 
@@ -36,6 +36,17 @@ CREATE TABLE `allergy` (
   `symptoms` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `allergy`
+--
+
+INSERT INTO `allergy` (`ID`, `allergyName`, `description`, `isDeleted`, `symptoms`) VALUES
+(1, 'Asthma', 'Swelling and inflammation inside the airways of the lungs.', 0, 'swelling and inflammation'),
+(2, 'Dermatitis', 'Pattern of itchy skin rash consisting of tiny pink bumps', 0, 'Skin rash '),
+(3, 'Drug Allergy', 'adverse drug reactions', 0, 'may differ'),
+(4, 'urticaria ', 'Skin rash', 0, 'hives, nettlerash, welts'),
+(5, 'Rhinitis', 'Inflammation of the lining of the nose', 0, 'runny nose itching, sneezing and nasal blockage');
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +73,17 @@ CREATE TABLE `complaint` (
   `symptoms` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `complaint`
+--
+
+INSERT INTO `complaint` (`complaintID`, `complaintName`, `description`, `isDeleted`, `symptoms`) VALUES
+(1, 'stomach ache', 'stabbing pain', 0, 'stabbing pain'),
+(2, 'colds', 'colds', 0, 'runny nose'),
+(3, 'fever', 'fever', 0, 'high temp'),
+(4, 'stomach ache', 'diarrhea', 0, 'loose bowel'),
+(5, 'sprain', 'sprain', 0, 'pain in area of weight bearing limb');
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +108,16 @@ CREATE TABLE `course` (
   `courseName` varchar(255) NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`ID`, `courseName`, `isDeleted`) VALUES
+(1, 'Web Devt', 0),
+(2, 'Software Engr', 0),
+(3, 'MMA', 0),
+(4, 'Finance Mangt', 0);
 
 -- --------------------------------------------------------
 
@@ -161,6 +193,17 @@ CREATE TABLE `medicine` (
   `createdBy` varchar(50) NOT NULL,
   `modifiedBy` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `medicine`
+--
+
+INSERT INTO `medicine` (`ID`, `brandName`, `genericName`, `type`, `isSupply`, `isDeleted`, `thresholdQty`, `criticalQty`, `form`, `dosage`, `dosageQty`, `currentQty`, `newQty`, `updateQty`, `dateCreated`, `dateModified`, `createdBy`, `modifiedBy`) VALUES
+(1, 'Biogesic', 'Paracetamol', 'medicine', 0, 0, 50, 20, 'tablet', 'mg', 500, 100, 0, 0, '2019-04-11 00:00:00', '2019-04-11 00:00:00', 'admin', 'admin'),
+(2, 'Immodium', 'Loperamide', 'medicine', 0, 0, 30, 20, 'capsule', 'mg', 10, 30, 0, 0, '2019-04-11 00:00:00', '2019-04-11 00:00:00', 'admin', 'admin'),
+(3, 'Advil', 'Ibuprofen', 'medicine', 0, 0, 30, 20, 'capsule', 'mg', 500, 30, 0, 0, '2019-04-11 00:00:00', '2019-04-11 00:00:00', 'nurse', 'nurse'),
+(4, 'Buscopan', 'Hyoscine-N-butylbromide', 'medicine', 0, 0, 30, 20, 'tablet', 'mg', 10, 30, 0, 0, '2019-04-11 00:00:00', '2019-04-11 00:00:00', 'nurse', 'nurse'),
+(5, 'Tempra', 'Paracetamol', 'medicine', 0, 0, 30, 20, 'tablet', 'mg', 500, 30, 0, 0, '2019-04-11 00:00:00', '2019-04-11 00:00:00', 'nurse', 'nurse');
 
 -- --------------------------------------------------------
 
@@ -486,13 +529,13 @@ ALTER TABLE `visit_medicine`
 -- AUTO_INCREMENT for table `allergy`
 --
 ALTER TABLE `allergy`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `complaint`
 --
 ALTER TABLE `complaint`
-  MODIFY `complaintID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `complaintID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `contact_person`
@@ -504,7 +547,7 @@ ALTER TABLE `contact_person`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -528,7 +571,7 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `password_change_request`
