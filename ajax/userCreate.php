@@ -1,7 +1,7 @@
 <?php
-// require '../../PHPMailer/vendor/autoload.php';
+require_once __DIR__ . '../../PHPMailer/vendor/autoload.php';
 include('../includes/dbcon.php');
-// include('../includes/password.php');
+include('../includes/password.php');
 session_start();
 
 $method = 'aes-256-cbc';
@@ -52,7 +52,7 @@ $gender = htmlspecialchars($_POST['gender']);
 $contact = htmlspecialchars($_POST['contact']);
 $datePassChanged = "";
 $isActive = 1;
-$password = base64_encode(openssl_encrypt("iacademyCDRS", $method, $key, OPENSSL_RAW_DATA, $iv));;
+$password = base64_encode(openssl_encrypt("iacademyCDRS", $method, $key, OPENSSL_RAW_DATA, $iv));
 
 
 $query1 = $con->prepare("SELECT * FROM user WHERE ID=?");
@@ -70,6 +70,7 @@ if ($rownum > 0) {
 	}
  }	else {
 	 $stmt->execute();
+	 $stmt->close();
 
 	 $query2 = $con->prepare("INSERT INTO password_change_request (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
 	 $query2->bind_param("isii", $isNull, $requestID, $id, $isUsed);
@@ -80,23 +81,25 @@ if ($rownum > 0) {
 
 	 $query2->execute();
 
-	 // // email message
-	 // $title = "link";
-	 // $link = $_SERVER['SERVER_NAME']."/cdrss/pass-new.php?rID=".$requestID;
-	 // $msg = "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
-	 //
-	 // // To send HTML mail, the Content-type header must be set
-	 // $headers  = 'MIME-Version: 1.0' . "\r\n";
-	 // $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	 //
-	 // // use wordwrap() if lines are longer than 70 characters
-	 // $msg = wordwrap($msg,70);
-	 //
-	 // // send email
-	 // require '../../includes/mail.php';
+	 $email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
+
+	 // email message
+	 $title = "link";
+	 $link = $_SERVER['SERVER_NAME']."/cdrss/pass-new.php?rID=".$requestID;
+	 $msg = "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
+
+	 // To send HTML mail, the Content-type header must be set
+	 $headers  = 'MIME-Version: 1.0' . "\r\n";
+	 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+	 // use wordwrap() if lines are longer than 70 characters
+	 $msg = wordwrap($msg,70);
+
+	 // send email
+	 require_once __DIR__ . '../../includes/mail.php';
+	 $query2->close();
 	 }
 
 
-$stmt->close();
 
 ?>
