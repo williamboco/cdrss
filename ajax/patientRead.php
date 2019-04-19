@@ -3,15 +3,26 @@ include('../includes/dbcon.php');
 
 $id = $_GET['patientID'];
 
+$method = 'aes-256-cbc';
+$password = '3sc3RLrpd17';
+$key = substr(hash('sha256', $password, true), 0, 32);
+$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+
 //Patient general information
 $result = mysqli_query($con, "SELECT * FROM `patient` WHERE ID='$id'");
 $pat = mysqli_fetch_array($result);
+$pat['firstName'] = openssl_decrypt(base64_decode($pat['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+$pat['lastName'] = openssl_decrypt(base64_decode($pat['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+$pat['contact'] = openssl_decrypt(base64_decode($pat['contact']), $method, $key, OPENSSL_RAW_DATA, $iv);
+
 
 
 //Contact person information
 $cPerson = array();
 $result = mysqli_query($con, "SELECT contact_person.fullName, contact_person.contact FROM contact_person WHERE patientID='$id'");
 while($p = mysqli_fetch_array($result)) {
+	$p['fullName'] = openssl_decrypt(base64_decode($p['fullName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+	$p['contact'] = openssl_decrypt(base64_decode($p['contact']), $method, $key, OPENSSL_RAW_DATA, $iv);
 	$x = (object) array(
 		"name"   => $p['fullName'],
 		"contact"    => $p['contact']

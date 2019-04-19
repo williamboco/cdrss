@@ -32,7 +32,7 @@ if($rownum > 0) {
 			mysqli_query($con, "UPDATE `user` SET `password` = '$hashedPassword', `datePassChanged` = NOW() WHERE `user`.`ID` = '$userID'");
 
 			if(mysqli_affected_rows($con) > 0) {
-				$message = "Success";
+				$message = "success";
 			}else {
 				$message = "Not updated";
 			}

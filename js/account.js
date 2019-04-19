@@ -44,7 +44,7 @@ $("#passwordForm").on("submit", function(event) {
 
 			if(response == 'success') {
 				alertify.log(response);
-				$form[0].reset();
+			//	$form[0].reset();
 				location.reload();
 			}else {
 				alertify.log(response);

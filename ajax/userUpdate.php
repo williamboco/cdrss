@@ -28,8 +28,8 @@ if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 		mysqli_query($con,$query);
 
 		if(mysqli_affected_rows($con) > 0) {
-			$_SESSION['userID'] = $id;
 			$message = "success";
+			$_SESSION['userID'] = $id;
 		}else {
 			$message = "Not updated.";
 		}
