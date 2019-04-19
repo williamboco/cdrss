@@ -24,18 +24,18 @@ if($rownum > 0) {
 		if ($row['isActive'] == $isActive) {
 			$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 			if ($row['email'] == $email) {
-				$userID = $row['ID'];
-				$requestID = randomPassword();
 
 				$query1 = $con->prepare("INSERT INTO password_change_request (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
 				$query1->bind_param("isii", $isNull, $requestID, $userID, $isUsed);
+				$userID = $row['ID'];
+				$requestID = randomPassword();
 				$isNull = NULL;
 				$isUsed = 0;
 
 				$query1->execute();
 				// email message
 				$title = "link";
-				$link = $_SERVER['SERVER_NAME']."/cdrss/pass-new.php?rID=".$requestID;
+				$link = $_SERVER['SERVER_NAME']."/cdrss/pass-new.php?rID=".$requestID;;
 				$msg = "We got a request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
 
 				// To send HTML mail, the Content-type header must be set
@@ -47,12 +47,10 @@ if($rownum > 0) {
 
 				// send email
 				require '../../includes/mail.php';
-				} else {
-					$message = "Password change request query failed! Email does not exist!";
-				}
+			 }
 			}
 		}
+	} else {
+		echo  "Password Query change failed!";
 	}
-
-echo $message;
 ?>

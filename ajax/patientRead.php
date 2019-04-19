@@ -23,7 +23,7 @@ while($p = mysqli_fetch_array($result)) {
 //Allergy information
 $allerg = array();
 $query = "SELECT allergy.allergyName FROM patient_allergy
-			INNER JOIN allergy ON patient_allergy.allergyID=allergy.ID 
+			INNER JOIN allergy ON patient_allergy.allergyID=allergy.ID
 			WHERE patientID='$id'";
 $result = mysqli_query($con, $query);
 while($all = mysqli_fetch_array($result)) {
@@ -37,25 +37,25 @@ $college = mysqli_query($con, "SELECT course.courseName FROM `college` INNER JOI
 $employee = mysqli_query($con, "SELECT department.departmentName, employee.type FROM `employee` INNER JOIN department ON employee.departmentID=department.ID WHERE employee.ID='$id'");
 
 if(mysqli_num_rows($shs)>0){
-	
+
 	$res = mysqli_fetch_array($shs);
 	$x = (object) array(
 		"type"   => "SHS",
 		"track"    => $res['trackName']
 	);
 	array_push($others, $x);
-	
+
 }elseif(mysqli_num_rows($college)>0) {
-	
+
 	$res = mysqli_fetch_array($college);
 	$x = (object) array(
 		"type"   => "College",
 		"course"    => $res['courseName']
 	);
 	array_push($others, $x);
-	
+
 }elseif(mysqli_num_rows($employee)>0) {
-	
+
 	$res = mysqli_fetch_array($employee);
 	$x = (object) array(
 		"type"   => "Employee",
@@ -63,7 +63,7 @@ if(mysqli_num_rows($shs)>0){
 		"employmentType" => $res['type']
 	);
 	array_push($others, $x);
-	
+
 }
 
 $data = array(

@@ -1,20 +1,20 @@
 $(document).ready(function() {
 	$('#viewBtn').click();
-	
+
 });
 
 $("#profileForm").on("submit", function(event) {
 	var $form = $(this);
 	event.preventDefault();
     console.log($form.serialize());
-	
+
 	$.ajax({
 		type: 'POST',
 		url: $form.attr("action"),
 		data: $form.serialize(),
 		success: function(response) {
 			//console.log(response);
-			
+
 			if(response == 'success') {
 				alertify.log(response);
 				location.reload();
@@ -25,15 +25,15 @@ $("#profileForm").on("submit", function(event) {
 			}
 		}
 	});
-	
+
 });
 
 $("#passwordForm").on("submit", function(event) {
 	var $form = $(this);
 	event.preventDefault();
     console.log($form.serialize());
-	
-	
+
+
 	if(compare($form.find('[name="password1"]').val(), $form.find('[name="password2"]').val())) {
 		$.ajax({
 		type: 'POST',
@@ -41,12 +41,11 @@ $("#passwordForm").on("submit", function(event) {
 		data: $form.serialize(),
 		success: function(response) {
 			//console.log(response);
-			
+
 			if(response == 'success') {
 				alertify.log(response);
+				$form[0].reset();
 				location.reload();
-				//$form[0].reset();
-				//location.reload();
 			}else {
 				alertify.log(response);
 			}
@@ -55,16 +54,16 @@ $("#passwordForm").on("submit", function(event) {
 	}else {
 		alertify.log("Not match");
 	}
-	
-	
+
+
 });
 
 function viewUser(id) {
 	$form = $('form');
 	$('.divs').addClass('hidden');
 	$('.viewProfile').removeClass('hidden');
-	
-	
+
+
 	$.ajax({
         type: "GET",
         url: "ajax/userRead.php",
@@ -75,7 +74,7 @@ function viewUser(id) {
         success: function(data) {
 			var obj = JSON.parse(data);
             //console.log(obj);
-			
+
 			$("#userID").html(obj.ID);
 			$("#role").html(obj.role);
 			$("#email").html(obj.email);
@@ -84,20 +83,20 @@ function viewUser(id) {
 			$("#contact").html(obj.contact);
 			$("#dateEmployed").html(obj.dateEmployed);
 			$("#passChanged").html(obj.datePassChanged);
-			
+
 			$form.find('[name="idNumber"]').val(obj.ID);
 			$form.find('[name="firstname"]').val(obj.firstName);
 			$form.find('[name="lastname"]').val(obj.lastName);
 			$form.find('[name="email"]').val(obj.email);
 			$form.find('[name="dateEmployed"]').val(obj.dateEmployed);
 			$form.find('[name="contact"]').val(obj.contact);
-			
+
 			if(obj.gender == 'Male') {
 				$('#gender1').attr("checked", true);
 			}else {
 				$('#gender2').attr("checked", true);
 			}
-			
+
 		}
 	});
 }
@@ -132,7 +131,7 @@ function delAccount(id) {
             console.log(response);
 			window.location.replace("index.php");
 			//location.reload();
-			
+
 		}
 	});
 }

@@ -178,7 +178,7 @@ if($_SESSION['role'] != 'Admin') {
 											 <label class="col-sm-4 control-label" for="cPerson[]">Contact Person/s</label>
 												 <div class="fieldsGroup col-sm-8" id="pDiv" value="3">
 													<div class="tbContainer" style="display: none !important;margin-bottom: 10px;">
-														<input type="text" class="form-control" placeholder="Full name"><br>
+														<input type="text" class="form-control" name="cPerson" placeholder="Full name"><br>
 														<input type="text" class="form-control" placeholder="Contact number"  name="contactnumber" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
 														<button class="remove">Remove</button>
 													</div>
