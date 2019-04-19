@@ -22,6 +22,7 @@ $isDeleted = 0;
 $allergy = $_POST['allergy'];
 $cPerson = $_POST['cPerson'];
 $contact = htmlspecialchars($_POST['contact']);
+$contact = base64_encode(openssl_encrypt($contact, $method, $key, OPENSSL_RAW_DATA, $iv));
 $user = htmlspecialchars($_SESSION['firstName']);
 $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
 
