@@ -7,6 +7,6 @@ foreach($data as $id){
 	$query = "UPDATE `patient` SET `isDeleted` = '1' WHERE `patient`.`ID` = '$id'";
 	mysqli_query($con, $query);
 }
-echo "Record deleted";
+echo "Record deleted" . "<meta http-equiv='refresh' content='0'>";
 
 ?>

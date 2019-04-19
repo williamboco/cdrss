@@ -12,7 +12,6 @@ $query = $con->prepare("INSERT INTO `patient` (`ID`, `firstName`, `lastName`, `b
 $query->bind_param("ssssssiss", $id, $firstName, $lastName, $birthDate, $gender, $contact, $isDeleted, $user, $user);
 
 $id = htmlspecialchars($_POST['idNumber']);
-$id = base64_encode(openssl_encrypt($id, $method, $key, OPENSSL_RAW_DATA, $iv));
 $firstName = htmlspecialchars($_POST['firstname']);
 $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
 $lastName = htmlspecialchars($_POST['lastname']);
@@ -161,7 +160,5 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 }
 
 //Message
-echo $message;
-
-header('location:../patient-list-avp.php);
+echo $message . "<meta http-equiv='refresh' content='0'>";
 ?>

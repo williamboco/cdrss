@@ -12,7 +12,6 @@ $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0)
 
 $patients = array();
 while($pat = mysqli_fetch_array($result)) {
-	$pat['ID'] = openssl_decrypt(base64_decode($pat['ID']), $method, $key, OPENSSL_RAW_DATA, $iv);
 	$pat['firstName'] = openssl_decrypt(base64_decode($pat['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 	$pat['lastName'] = openssl_decrypt(base64_decode($pat['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
