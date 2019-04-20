@@ -29,25 +29,25 @@ if($_SESSION['role'] == 'Admin') {
 	<div class="container">
 		<div class="row" style="margin: 150px 100px 0px 100px;">
 			<div class="col-sm-4">
-				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-graduation-cap"></i> <big>Courses</big></a>
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu filter" value="course"><i class="fas fa-graduation-cap"></i> <big>Courses</big></a>
 			</div>
 			<div class="col-sm-4">
-				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-laptop"></i>  <big>Tracks</big></a>
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu filter" value="track"><i class="fas fa-laptop"></i>  <big>Tracks</big></a>
 			</div>
 			<div class="col-sm-4">
-				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-building"></i>  <big>Departments</big></a>
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu filter" value="department"><i class="fas fa-building"></i>  <big>Departments</big></a>
 			</div>
 		</div>
 
 		<div class="row" style="margin: 25px 100px 100px 100px;">
 			<div class="col-sm-4">
-				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-allergies"></i> <big>Allergies</big></a>
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu filter" value="allergy"><i class="fas fa-allergies"></i> <big>Allergies</big></a>
 			</div>
 			<div class="col-sm-4">
-				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-notes-medical"></i> <big>Complaints</big></a>
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu filter" value="complaint"><i class="fas fa-notes-medical"></i> <big>Complaints</big></a>
 			</div>
 			<div class="col-sm-4">
-				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu"><i class="fas fa-pills"></i> <big>Inventory</big></a>
+				<a href="options.php" class="btn btn-info btn-lg btn-block datamenu medicine-filter" value="medicine"><i class="fas fa-pills"></i> <big>Inventory</big></a>
 			</div>
 		</div>
 
@@ -61,7 +61,7 @@ if($_SESSION['role'] == 'Admin') {
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/options.js"></script>
+	<script src="js/optionss.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script>

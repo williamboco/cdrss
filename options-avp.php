@@ -3,8 +3,8 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if($_SESSION['role'] == 'Admin') {
-	header("location: options-avp.php");
+if($_SESSION['role'] != 'Admin') {
+	header("location: home.php");
 }
 
 ?>
@@ -23,7 +23,7 @@ if($_SESSION['role'] == 'Admin') {
 </head>
 <body>
 	<?php
-	  include("includes/navbartest.php");
+	  include("includes/navbar-avp.php");
 	?>
 	<div class="container">
 		<div class="row" style="margin-top: 50px;">
