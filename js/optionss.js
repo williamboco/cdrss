@@ -18,7 +18,7 @@ $(document).ready(function() {
 		"order": [[ 3, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );
 
-	var t2 = $('#inventoryTable').DataTable( {
+	var t2 = $('#medicineTable').DataTable( {
 
 		"columnDefs": [ {
 			"searchable": false,
@@ -30,14 +30,15 @@ $(document).ready(function() {
 			{title: "#", width: "5%", className: "dt-center"},
 			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
 			{title: "", width: "5%", className: "dt-center"},
-			{title: "Name", className: "hover"}
-			{title: "Available Qty", width: "5%"},
+			{title: "Name", className: "hover"},
+			{title: "Available Qty", width: "10%"},
 			{title: "Status", width: "10%"},
 			{title: "Add/Less", width: "10%"},
 			{title: "Qty", width: "5%"},
-			{title: "Action", width: "5%"},
-			{title: "Total Qty", width: "10%"}
-		]
+			{title: "Action", width: "10%"}
+		],
+
+		"order": [[ 3, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 
 	} );
 
@@ -54,46 +55,74 @@ $(document).ready(function() {
 		} );
 	} ).draw();
 
+	t2.on( 'order.dt search.dt', function () {
+		t2.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+			cell.innerHTML = i+1;
+		} );
+	} ).draw();
 
 	$('.filter').on('click', function() {
 		var value = this.value;
 
 		$('#deleteBtn').val(value);
 		selectUrl(value);
+		console.log(value);
 
 		$('.table-responsive').show();
-		$('#inventoryBtnGrp').addClass('hidden');
-		$(this).parent().siblings().find('.inventory-responsive').addClass('hidden');
+		$('.medicine-responsive').addClass('hidden');
+		$('#medicineBtnGrp').addClass('hidden');
+
 	});
 
-
-
-	$('.inventory').on('click', function() {
+	$('.medicine-filter').on('click', function() {
 		var value = this.value;
 
 		$('#deleteBtn').val(value);
 		selectUrl(value);
+		console.log(value);
 
 		$('.table-responsive').hide();
-		$(this).parent().siblings().find('#inventoryBtnGrp').removeClass('hidden');
-		$(this).parent().siblings().find('.inventory-responsive').removeClass('hidden');
+		$('.medicine-responsive').removeClass('hidden');
+		$('#medicineBtnGrp').removeClass('hidden');
 	});
-
 
 
 	$('#table tbody').on('click', '.details-control', function () {
 
 		var tr = $(this).closest('tr');
-		var row = t.row( tr );
+		var row = t.row(tr);
 
-		if ( row.child.isShown() ) {
+		if (row.child.isShown()) {
 			row.child.hide();
 			tr.removeClass('shown');
 		}
 		else {
-			row.child( format(row.data()) ).show();
+			row.child(format(row.data())).show();
 			tr.addClass('shown');
 		}
+	} );
+
+	$('#medicineTable tbody').on('click', '.details-control', function () {
+
+		var tr = $(this).closest('tr');
+		var row = t2.row(tr);
+
+		if (row.child.isShown()) {
+			row.child.hide();
+			tr.removeClass('shown');
+		}
+		else {
+			row.child(format(row.data())).show();
+			tr.addClass('shown');
+		}
+	} );
+
+	$('#medicineTable tbody').on('change', '[name="isAdd"]', function() {
+
+		var tr = $(this).closest('#medicineTable tr');
+		tr.find(':checkbox').prop('checked', true).trigger('change');
+		tr.addClass('selected', this.checked);
+
 	} );
 
 	$('#addBtn').on('click', function() {
@@ -105,10 +134,10 @@ $(document).ready(function() {
 
 	});
 
-	$(".addForm").on("submit", function(event) {
+	$('.addForm').on('submit', function(event) {
 		var $addModal = $('#addModal');
 		var table = $('#deleteBtn').val();
-		var $form = $( this );
+		var $form = $(this);
 
 		// Prevent form submission
 		event.preventDefault();
@@ -123,7 +152,6 @@ $(document).ready(function() {
 				$addModal.modal('hide');
 				alertify.log(response);
 				selectUrl(table);
-
 			}
 		});
 
@@ -132,7 +160,7 @@ $(document).ready(function() {
 	$(".editForm").on("submit", function(event) {
 		var $editModal = $('#editModal');
 		var table = $('#deleteBtn').val();
-		var $form = $( this );
+		var $form = $(this);
 
 		// Prevent form submission
 		event.preventDefault();
@@ -147,17 +175,13 @@ $(document).ready(function() {
 				$editModal.modal('hide');
 				alertify.log(response);
 				selectUrl(table);
-
 			}
 		});
-
 	});
-
 
 });
 
-
-$('[name="inventoryType"]').on('change', function() {
+$('[name="isSupply"]').on('change', function() {
 	var $this = $(this);
 
 	$this.parent().siblings('button').removeClass('hidden');
@@ -204,10 +228,10 @@ function selectUrl(value) {
 				headerName = "Complaints";
 				updateTable(url, headerName);
 				break;
-			case "inventory":
+			case "medicine":
 				url = "ajax/table/medicine.php";
 				headerName = "Medicines / Supplies";
-				updateInventoryTable(url, headerName);
+				updateMedicineTable(url, headerName);
 				break;
 			default:
 				alertify.log("Switch case");
@@ -238,7 +262,6 @@ function format (rowData) {
     return div;
 }
 
-
 function updateTable(url, headerName) {
 	var datatable = $('#table').dataTable().api();
 
@@ -248,6 +271,7 @@ function updateTable(url, headerName) {
 		cache: false,
 		success: function(data) {
 			var obj = JSON.parse(data);
+			console.log(obj);
 			datatable.clear();
 			datatable.columns(3).header().to$().text(headerName);
 			datatable.rows.add(obj);
@@ -257,8 +281,8 @@ function updateTable(url, headerName) {
 
 }
 
-function updateInventoryTable(url, headerName) {
-	var datatable = $('#inventoryTable').dataTable().api();
+function updateMedicineTable(url, headerName) {
+	var datatable = $('#medicineTable').dataTable().api();
 
 	$.ajax({
 		type: "GET",
@@ -266,6 +290,7 @@ function updateInventoryTable(url, headerName) {
 		cache: false,
 		success: function(data) {
 			var obj = JSON.parse(data);
+			console.log(obj);
 			datatable.clear();
 			datatable.columns(3).header().to$().text(headerName);
 			datatable.rows.add(obj);
@@ -280,19 +305,18 @@ function editRecord() {
 	var table = $('#deleteBtn').val();
 	var ids = [];
 
-	if (table == 'inventory'){
-		$("#inventoryTable tr").each(function() {
+	$("#table tr").each(function() {
 					if ($(this).hasClass("selected")) {
 							ids.push($(this).find("#ID").attr("value"));
 					}
 			});
-	} else {
-		$("#table tr").each(function() {
+
+	$("#medicineTable tr").each(function() {
 	        if ($(this).hasClass("selected")) {
 	            ids.push($(this).find("#ID").attr("value"));
 	        }
 	    });
-	}
+
 
 	var count = ids.length;
 	if(count >= 1) {
@@ -324,16 +348,20 @@ function editRecord() {
 							$form.find('input[name="id"]').val(value);
 							console.log(obj);
 							break;
-						case 'inventory':
+						case 'medicine':
 
 							if(obj.isSupply == '0') {
-								$form.find('[name="inventoryType"]').val('0').trigger('change');
+								$form.find('[name="isSupply"]').val('0').trigger('change');
 								$form.find('input[name="brandName"]').val(obj.brandName);
 								$form.find('input[name="genericName"]').val(obj.genericName);
-								$form.find('[name="medicineForm"]').val(obj.type).trigger('change');
+								$form.find('[name="medicineType"]').val(obj.type).trigger('change');
+								$form.find('input[name="medicineDosageQty"]').val(obj.dosageQty);
+								$form.find('[name="medicineDosage"]').val(obj.dosage).trigger('change');
 							}else {
-								$form.find('[name="inventoryType"]').val('1').trigger('change');
+								$form.find('[name="isSupply"]').val('1').trigger('change');
 								$form.find('input[name="supplyName"]').val(obj.genericName);
+								$form.find('input[name="supplyDosageQty"]').val(obj.dosageQty);
+								$form.find('[name="supplyDosage"]').val(obj.dosage).trigger('change');
 							}
 
 							$form.find('input[name="id"]').val(value);
@@ -367,14 +395,67 @@ function editRecord() {
 	}
 
 }
+
+function adjustRecord() {
+	var table = $('#deleteBtn').val();
+	var ids = [];
+	var isAdd;
+	var updateQty;
+
+	$("#medicineTable tr").each(function() {
+	        if ($(this).hasClass("selected")) {
+	            ids.push($(this).find("#ID").attr("value"));
+							isAdd = $(this).find('select[name="isAdd"]').val();
+							updateQty = $(this).find('input[name="updateQty"]').val();
+	        }
+	    });
+
+		var count = ids.length;
+		if(count >= 1) {
+			if(count == 1) {
+				if (isAdd != null && updateQty>0){
+					var message = "Do you want to adjust this record?";
+
+					if(getConfirmation(message)) {
+						$.ajax({
+							type: "GET",
+							url: "ajax/table/medicineAdjust.php",
+							data: {id: ids[0], isAdd: isAdd, updateQty: updateQty},
+							cache: false,
+							success: function(response){
+								selectUrl(table);
+								alertify.log(response);
+							}
+						});
+					}
+				} else {
+					alertify.log("Error: Cannot proceed with action");
+				}
+
+		}else {
+			alertify.log("Cannot edit multiple records");
+		}
+	}else {
+		alertify.log("No record selected");
+	}
+
+}
+
 function delRecord() {
 	var table = $('#deleteBtn').val();
 	var ids = [];
+
     $("#table tr").each(function() {
         if ($(this).hasClass("selected")) {
             ids.push($(this).find("#ID").attr("value"));
         }
     });
+
+		$("#medicineTable tr").each(function() {
+						if ($(this).hasClass("selected")) {
+								ids.push($(this).find("#ID").attr("value"));
+						}
+				});
 
 	var count = ids.length;
 	if(count >= 1) {
