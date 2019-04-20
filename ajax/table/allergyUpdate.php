@@ -1,24 +1,32 @@
 <?php
 	include('../../includes/dbcon.php');
 	$id = $_GET['id'];
-	$allergyName = $_GET['allergyName'];
-	$description = $_GET['description'];
+	$allergyName = htmlspecialchars($_GET['allergyName']);
+	$description = htmlspecialchars($_GET['description']);
 
-	
-	$query = "UPDATE `allergy` SET allergyName = '$allergyName', `description` = '$description' WHERE `allergy`.`ID` = '$id'";
-	if ($result=mysqli_query($con,"SELECT * FROM allergy WHERE allergyName='$allergyName'")) {
+	$stmt = $con->prepare("UPDATE `allergy` SET allergyName=?, description=? WHERE ID=?");
+	$stmt->bind_param("ssi", $allergyName, $description, $id);
+
+	$query0 = "SELECT * FROM `allergy` WHERE allergyName='$allergyName'";
+
+	if ($result=mysqli_query($con, $query0)) {
 		$row = mysqli_fetch_array($result);
 		$rowId = $row['ID'];
+
 		if(mysqli_num_rows($result) > 0 && $rowId != $id) {
-			echo "dup";
+			echo "Error: Duplicate Record";
 		} else {
-			if(mysqli_query($con, $query)) {
-				echo "success";
+
+			$stmt->execute();
+			if(mysqli_query($con, $query0)) {
+				echo "Record successfully updated";
 			}else {
-				echo "Error";
+				echo "Error: Record was not updated";
 			}
 		}
 	}else {
-		echo "Query Failed";
+		echo "Error: Query Failed";
 	}
+
+$stmt->close();
 ?>

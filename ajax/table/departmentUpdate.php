@@ -1,23 +1,31 @@
 <?php
 	include('../../includes/dbcon.php');
 	$id = $_GET['id'];
-	$department = $_GET['departmentName'];
+	$department = htmlspecialchars($_GET['departmentName']);
 
-	
-	$query = "UPDATE `department` SET departmentName = '$department' WHERE `department`.`ID` = '$id'";
-	if ($result=mysqli_query($con,"SELECT * FROM department WHERE departmentName='$department'")) {
+	$stmt = $con->prepare("UPDATE `department` SET departmentName=? WHERE ID=?");
+	$stmt->bind_param("si", $department, $id);
+
+	$query0 = "SELECT * FROM `department` WHERE departmentName='$department'";
+
+	if ($result=mysqli_query($con, $query0)) {
 		$row = mysqli_fetch_array($result);
 		$rowId = $row['ID'];
+
 		if(mysqli_num_rows($result) > 0 && $rowId != $id) {
-			echo "dup";
+			echo "Error: Unable to update record";
 		} else {
+
+			$stmt->execute();
 			if(mysqli_query($con, $query)) {
-				echo "success";
+				echo "Record successfully updated";
 			}else {
-				echo "Error";
+				echo "Error: Record was not updated";
 			}
 		}
 	}else {
-		echo "Query Failed";
+		echo "Error: Query Failed";
 	}
+
+$stmt->close();
 ?>

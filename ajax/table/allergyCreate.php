@@ -1,33 +1,49 @@
 <?php
 	include('../../includes/dbcon.php');
-	$allergyName = $_GET['allergyName'];
-	$description = $_GET['description'];
+	$allergyName = htmlspecialchars($_GET['allergyName']);
+	$description = htmlspecialchars($_GET['description']);
 
-	$query = "INSERT INTO `allergy` (`ID`, `allergyName`, `description`, `isDeleted`) VALUES (NULL, '$allergyName', '$description', '0')";
-	
-	if ($result=mysqli_query($con,"SELECT * FROM allergy WHERE allergyName='$allergyName'")) {
+	$stmt = $con->prepare("INSERT INTO `allergy` (ID, allergyName, description, isDeleted) VALUES (?, ?, ?, ?)");
+	$stmt->bind_param("issi", $isNull, $allergyName, $description, $isDeleted);
+
+	$isNull = NULL;
+	$isDeleted = 0;
+
+	$query0 = "SELECT * FROM `allergy` WHERE allergyName='$allergyName'";
+
+	if ($result=mysqli_query($con, $query0)) {
 		if(mysqli_num_rows($result) > 0) {
 			$row = mysqli_fetch_array($result);
 			$isDeleted = $row['isDeleted'];
+
 			if($isDeleted) {
+				$stmt = $con->prepare("UPDATE `allergy` SET isDeleted=? WHERE ID=?");
+				$stmt->bind_param("ii", $isDeleted, $id);
+
+				$isDeleted = 0;
 				$id = $row['ID'];
-				$query = "UPDATE `allergy` SET `isDeleted` = '0' WHERE `allergy`.`ID` = '$id'";
-				if(mysqli_query($con, $query)) {
-					echo "success";
-				}else {
-					echo "Error";
-				}
-			}else {
-				echo "Already existing record!";
+				$stmt->execute();
+
+					if(mysqli_query($con, $query0)) {
+						echo "Record successfully added";
+					}else {
+						echo "Error: Record was not added";
+					}
+			} else {
+				echo "There is already an existing record!";
 			}
 		} else {
-			if(mysqli_query($con, $query)) {
-				echo "success";
+			$stmt->execute();
+
+			if(mysqli_query($con, $query0)) {
+				echo "Record successfully added";
 			}else {
-				echo "Error";
+				echo "Error: Record was not added";
 			}
 		}
 	}else {
-		echo "Query Failed";
+		echo "Error: Query failed";
 	}
+
+$stmt->close();
 ?>

@@ -1,35 +1,50 @@
 <?php
 	include('../../includes/dbcon.php');
-	$courseName = $_GET['courseName'];
+	$courseName = htmlspecialchars($_GET['courseName']);
 
-	$query = "INSERT INTO `course` (`ID`, `courseName`, `isDeleted`) VALUES (NULL, '$courseName', '0')";
+	$stmt = $con->prepare("INSERT INTO `course` (ID, courseName, isDeleted) VALUES (?,?,?)");
+	$stmt->bind_param("isi", $isNull, $courseName, $isDeleted);
 
-	
-	if ($result=mysqli_query($con,"SELECT * FROM course WHERE courseName='$courseName'")) {
+	$isNull = NULL;
+	$isDeleted = 0;
+
+	$query0 = "SELECT * FROM `course` WHERE courseName='$courseName'";
+
+
+	if ($result=mysqli_query($con, $query0)) {
 		if(mysqli_num_rows($result) > 0) {
 			$row = mysqli_fetch_array($result);
 			$isDeleted = $row['isDeleted'];
+
 			if($isDeleted) {
+				$stmt = $con->prepare("UPDATE `course` SET isDeleted=? WHERE ID=?");
+				$stmt->bind_param("ii", $isDeleted, $id);
+
+				$isDeleted = 0;
 				$id = $row['ID'];
-				$query = "UPDATE `course` SET `isDeleted` = '0' WHERE `course`.`ID` = '$id'";
-				if(mysqli_query($con, $query)) {
-					echo "success";
-				}else {
-					echo "Error";
-				}
+				$stmt->execute();
+
+					if(mysqli_query($con, $query0)) {
+						echo "Record successfully added";
+					}else {
+						echo "Error: Record was not added";
+					}
 			}else {
-				echo "Already existing record!";
+				echo "There is already an existing record!";
 			}
-			
+
 		} else {
-			if(mysqli_query($con, $query)) {
-				echo "success";
+			$stmt->execute();
+
+			if(mysqli_query($con, $query0)) {
+				echo "Record successfully added";
 			}else {
-				echo "Error";
+				echo "Error: Record was not added";
 			}
 		}
 	}else {
-		echo "Query Failed";
+		echo "Error: Query Failed";
 	}
-	
+
+$stmt->close();
 ?>

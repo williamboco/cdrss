@@ -1,23 +1,31 @@
 <?php
 	include('../../includes/dbcon.php');
 	$id = $_GET['id'];
-	$track = $_GET['trackName'];
+	$trackName = htmlspecialchars($_GET['trackName']);
 
-	
-	$query = "UPDATE `track` SET trackName = '$track' WHERE `track`.`ID` = '$id'";
-	if ($result=mysqli_query($con,"SELECT * FROM track WHERE trackName='$track'")) {
+	$stmt = $con->prepare("UPDATE `track` SET trackName=? WHERE ID=?");
+	$stmt->bind_param("si", $trackName, $id);
+
+	$query0 = "SELECT * FROM `track` WHERE trackName='$trackName'";
+
+	if ($result=mysqli_query($con, $query0)) {
 		$row = mysqli_fetch_array($result);
 		$rowId = $row['ID'];
+
 		if(mysqli_num_rows($result) > 0 && $rowId != $id) {
-			echo "dup";
+			echo "Error: Duplicate Record";
 		} else {
-			if(mysqli_query($con, $query)) {
-				echo "success";
+
+			$stmt->execute();
+			if(mysqli_query($con, $query0)) {
+				echo "Record successfully updated";
 			}else {
-				echo "Error";
+				echo "Error: Record was not updated";
 			}
 		}
 	}else {
-		echo "Query Failed";
+		echo "Error: Query Failed";
 	}
+
+$stmt->close();
 ?>
