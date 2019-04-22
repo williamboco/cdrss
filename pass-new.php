@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once("includes/dbcon.php");
-	
+
 ?>
 
 <html>
@@ -28,13 +28,13 @@ include_once("includes/dbcon.php");
                     <div class="widget-body">
 						<div class="alert alert-danger">
 						</div>
-					
+
                         <form action="ajax/password/new.php" novalidate>
 							<input class="form-control hidden" name="requestID" type="text" value="<?php echo $_GET['rID'];?>">
 							<input class="form-control hidden" name="userID" type="text">
 
                             <div class="form-group">
-                                <input class="form-control" type="password" name="password2" placeholder="New Password" pattern=".{6,}"   required title="6 characters minimum">
+                                <input class="form-control" type="password" name="password2" placeholder="New Password" pattern=".{8,}"   required title="8 characters minimum">
                             </div>
                             <div class="form-group">
                                 <input class="form-control" type="password" name="password1" placeholder="Confirm New Password" required>
