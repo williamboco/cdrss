@@ -54,7 +54,6 @@ $datePassChanged = "";
 $isActive = 1;
 $password = base64_encode(openssl_encrypt("iacademyCDRS", $method, $key, OPENSSL_RAW_DATA, $iv));
 
-
 $query1 = $con->prepare("SELECT * FROM user WHERE ID=?");
 $query1->bind_param("i", $id);
 $query1->execute();
