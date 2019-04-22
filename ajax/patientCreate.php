@@ -38,39 +38,52 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 
 				if($_POST['studenttype'] == 'college') {
 
-					$courseName = $_POST['course'];
-					$query = "INSERT INTO course (courseName) SELECT * FROM (SELECT '$courseName') AS tmp WHERE NOT EXISTS ( SELECT courseName FROM course WHERE courseName='$courseName' )";
-					mysqli_query($con, $query);
+					$courseName = htmlspecialchars($_POST['course']);
+					$query = $con->prepare("INSERT INTO course (courseName) SELECT * FROM (SELECT '$courseName') AS tmp WHERE NOT EXISTS ( SELECT courseName FROM course WHERE courseName=?)");
+					$query->bind_param("s", $courseName);
+				  $query->execute();
 
 					//get autoIncrement ID from recent query
 					$ref = mysqli_insert_id($con);
 					if($ref==0) {
-						$query = "SELECT ID FROM `course` WHERE courseName='$courseName'";
-						$result = mysqli_query($con, $query);
-						$res = mysqli_fetch_array($result);
+						$query = $con->prepare("SELECT ID FROM `course` WHERE courseName=?");
+						$query->bind_param("s", $courseName);
+						$query->execute();
+						$result = $query->get_result();
+						$res = $result->fetch_assoc();
 						$ref = $res['ID'];
 					}
 
-					if(mysqli_query($con, "INSERT INTO `college` (`ID`, `courseID`) VALUES ('$id', '$ref')"))
+					$query = $con->prepare("INSERT INTO `college` (`ID`, `courseID`) VALUES (?,?)");
+					$query->bind_param("ii", $id, $ref);
+
+					if($query->execute())
 					{
 					//$message .= "\nCollege table: record inserted";
 					}
 
 				}else {
-					$trackName = $_POST['trackname'];
-					$query = "INSERT INTO track (trackName) SELECT * FROM (SELECT '$trackName') AS tmp WHERE NOT EXISTS ( SELECT trackName FROM track WHERE trackName='$trackName' )";
-					mysqli_query($con, $query);
+					$trackName = htmlspecialchars($_POST['trackname']);
+					$query = $con->prepare("INSERT INTO track (trackName) SELECT * FROM (SELECT '$trackName') AS tmp WHERE NOT EXISTS ( SELECT trackName FROM track WHERE trackName=?)");
+					$query->bind_param("s", $trackName);
+				  $query->execute();
 
 					//get autoIncrement ID from recent query
 					$ref = mysqli_insert_id($con);
 					if($ref==0) {
-						$query = "SELECT ID FROM `track` WHERE trackName='$trackName'";
-						$result = mysqli_query($con, $query);
-						$res = mysqli_fetch_array($result);
+
+						$query = $con->prepare("SELECT ID FROM `track` WHERE trackName=?");
+						$query->bind_param("s", $trackName);
+						$query->execute();
+						$result = $query->get_result();
+						$res = $result->fetch_assoc();
 						$ref = $res['ID'];
 					}
 
-					if(mysqli_query($con, "INSERT INTO `shs` (`ID`, `trackID`) VALUES ('$id', '$ref')"))
+					$query = $con->prepare("INSERT INTO `shs` (`ID`, `trackID`) VALUES ('$id', '$ref')");
+					$query->bind_param("ii", $id, $ref);
+
+					if($query->execute())
 					{
 					//$message .= "\nSHS table: record inserted";
 					}
@@ -79,22 +92,28 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 				}
 
 			}elseif($_POST['ptype'] == 'employee') {
-				$departmentName = $_POST['depart'];
-				$employeeType = $_POST['employeeType'];
+				$departmentName = htmlspecialchars($_POST['depart']);
+				$employeeType = htmlspecialchars($_POST['employeeType']);
 
-				$query = "INSERT INTO department (departmentName) SELECT * FROM (SELECT '$departmentName') AS tmp WHERE NOT EXISTS ( SELECT departmentName FROM department WHERE departmentName='$departmentName' )";
-				mysqli_query($con, $query);
+				$query = $con->prepare("INSERT INTO department (departmentName) SELECT * FROM (SELECT '$departmentName') AS tmp WHERE NOT EXISTS ( SELECT departmentName FROM department WHERE departmentName=?)");
+				$query->bind_param("s", $departmentName);
+				$query->execute();
 
 				//get autoIncrement ID from recent query
 				$ref = mysqli_insert_id($con);
 				if($ref==0) {
-					$query = "SELECT ID FROM `department` WHERE departmentName='$departmentName'";
-					$result = mysqli_query($con, $query);
-					$res = mysqli_fetch_array($result);
+					$query = $con->prepare("SELECT ID FROM `department` WHERE departmentName=?");
+					$query->bind_param("s", $departmentName);
+					$query->execute();
+					$result = $query->get_result();
+					$res = $result->fetch_assoc();
 					$ref = $res['ID'];
 				}
 
-				if(mysqli_query($con, "INSERT INTO `employee` (`ID`, `departmentID`, `type`) VALUES ('$id', '$ref', '$employeeType')"))
+				$query = $con->prepare("INSERT INTO `employee` (`ID`, `departmentID`, `type`) VALUES ('$id', '$ref', '$employeeType')");
+				$query->bind_param("iis", $id, $ref, $employeeType);
+
+				if($query->execute())
 				{
 				//$message .= "\nEmployee table: record inserted";
 				}
@@ -106,8 +125,9 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 			foreach($allergy as $i => $item) {
 
 				if($item!='') {
-					$query = "INSERT INTO allergy (allergyName) SELECT * FROM (SELECT '$item') AS tmp WHERE NOT EXISTS ( SELECT allergyName FROM allergy WHERE allergyName='$item' )";
-					mysqli_query($con, $query);
+					$query = $con->prepare("INSERT INTO allergy (allergyName) SELECT * FROM (SELECT '$item') AS tmp WHERE NOT EXISTS ( SELECT allergyName FROM allergy WHERE allergyName=?)");
+					$query->bind_param("s", $item);
+					$query->execute();
 
 					//get autoIncrement ID from recent query
 					$ref = mysqli_insert_id($con);
@@ -120,7 +140,11 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 						$ref = $res['ID'];
 					}
 
-					if(mysqli_query($con, "INSERT INTO `patient_allergy` (`ID`, `patientID`, `allergyID`) VALUES (NULL, '$id', '$ref')"))
+					$query = $con->prepare("INSERT INTO `patient_allergy` (`ID`, `patientID`, `allergyID`) VALUES (?,?,?)");
+					$query->bind_param("iii", $isNull, $id, $ref);
+					$isNull = NULL;
+
+					if($query->execute())
 					{
 					$message .= "\nPatient_allergy table: record inserted";
 					}
@@ -138,13 +162,17 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 
 				//if person name is not blank
 				if($cPerson[$i]!='') {
+
+					$result = $con->prepare("INSERT INTO `contact_person` (`ID`, `patientID`, `fullName`, `contact`) VALUES (?,?,?,?)");
+					$result->bind_param("iiss", $isNull, $id, $pName, $pContact);
+
 					$pName = htmlspecialchars($cPerson[$i]);
 					$pName = base64_encode(openssl_encrypt($pName, $method, $key, OPENSSL_RAW_DATA, $iv));
 					$pContact = htmlspecialchars( $cPerson[$i+1]);
 					$pContact = base64_encode(openssl_encrypt($pContact, $method, $key, OPENSSL_RAW_DATA, $iv));
+					$isNull = NULL;
 
-					$result = mysqli_query($con, "INSERT INTO `contact_person` (`ID`, `patientID`, `fullName`, `contact`) VALUES (NULL, '$id', '$pName', '$pContact')");
-					if($result) {
+					if($result->execute()) {
 						$message .= "\ncontact person inserted";
 					}
 				}
@@ -161,5 +189,5 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 }
 
 //Message
-echo $message . "<meta http-equiv='refresh' content='0'>";
+echo $message;
 ?>
