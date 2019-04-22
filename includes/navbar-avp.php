@@ -15,7 +15,7 @@
       <ul class="nav navbar-nav">
         <li><a href="home-avp.php">Home</a></li>
         <li><a href="patient-list-avp.php">Patient Profiles</a></li>
-        <li><a href="data-management-avp.php">Data Management</a></li>
+        <li><a href="options-avp.php">Data Management</a></li>
         <li><a href="logs.php">Logs</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -31,7 +31,7 @@
               <li class="divider"></li>
               <li><a href="user-list.php"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Manage Users</a></li>
               <li class="divider"></li>
-              <li><a href="includes/logout.php"><i class="fa fa-sign-out"></i> &nbsp; Log Out</a></li>
+              <li><a href="includes/logout.php"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</a></li>
           </ul>
         </li>
       </ul>
