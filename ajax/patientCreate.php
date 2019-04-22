@@ -110,7 +110,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 					$ref = $res['ID'];
 				}
 
-				$query = $con->prepare("INSERT INTO `employee` (`ID`, `departmentID`, `type`) VALUES ('$id', '$ref', '$employeeType')");
+				$query = $con->prepare("INSERT INTO `employee` (`ID`, `departmentID`, `type`) VALUES (?,?,?)");
 				$query->bind_param("iis", $id, $ref, $employeeType);
 
 				if($query->execute())
