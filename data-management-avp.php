@@ -61,7 +61,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/optionss.js"></script>
+	<script src="js/options.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script>
