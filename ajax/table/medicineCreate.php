@@ -4,8 +4,8 @@
 
 	if($isSupply == '0') {
 
-		$stmt = $con->prepare("INSERT INTO `medicine` (ID, brandName, genericName, type, isSupply, isDeleted, dosage, dosageQty, currentQty, thresholdQty, criticalQty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("isssiisiiii", $isNull, $brandName, $genericName, $medicineType, $isSupply, $isDeleted, $dosage, $dosageQty, $currentQty, $thresholdQty, $criticalQty);
+		$stmt = $con->prepare("INSERT INTO `medicine` (ID, brandName, genericName, type, status, isSupply, isDeleted, dosage, dosageQty, currentQty, thresholdQty, criticalQty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("isssiiisiiii", $isNull, $brandName, $genericName, $medicineType, $mStatus, $isSupply, $isDeleted, $dosage, $dosageQty, $currentQty, $thresholdQty, $criticalQty);
 
 		$isNull = NULL;
 		$brandName = htmlspecialchars($_GET['brandName']);
@@ -18,12 +18,24 @@
 		$thresholdQty = htmlspecialchars($_GET['medicineThresholdQty']);
 		$criticalQty = htmlspecialchars($_GET['medicineCriticalQty']);
 
+			if ($currentQty > 0){
+				if ($currentQty > $thresholdQty){
+					$mStatus = 3;
+				} else if ($currentQty > $criticalQty){
+					$mStatus = 2;
+				}	else {
+					$mStatus = 1;
+				}
+			} else {
+				$mStatus = 0;
+			}
+
 		$query0 = "SELECT * FROM `medicine` WHERE brandName='$brandName' AND genericName='$genericName'";
 
 	}else {
 
-		$stmt = $con->prepare("INSERT INTO `medicine` (ID, brandName, genericName, type, isSupply, isDeleted, dosage, dosageQty, currentQty, thresholdQty, criticalQty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("isssiisiiii", $isNull, $brandName, $genericName, $supplyType, $isSupply, $isDeleted, $dosage, $dosageQty, $currentQty, $thresholdQty, $criticalQty);
+		$stmt = $con->prepare("INSERT INTO `medicine` (ID, brandName, genericName, type, status, isSupply, isDeleted, dosage, dosageQty, currentQty, thresholdQty, criticalQty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("isssiiisiiii", $isNull, $brandName, $genericName, $supplyType, $mStatus, $isSupply, $isDeleted, $dosage, $dosageQty, $currentQty, $thresholdQty, $criticalQty);
 
 		$isNull = NULL;
 		$brandName = '';
@@ -35,6 +47,18 @@
 		$currentQty = htmlspecialchars($_GET['supplyCurrentQty']);
 		$thresholdQty = htmlspecialchars($_GET['supplyThresholdQty']);
 		$criticalQty = htmlspecialchars($_GET['supplyCriticalQty']);
+
+			if ($currentQty > 0){
+				if ($currentQty > $thresholdQty){
+					$mStatus = 3;
+				} else if ($currentQty > $criticalQty){
+					$mStatus = 2;
+				}	else {
+					$mStatus = 1;
+				}
+			} else {
+				$mStatus = 0;
+			}
 
 		$query0 = "SELECT * FROM `medicine` WHERE genericName='$genericName'";
 	}
