@@ -1,5 +1,8 @@
 <?php
 include('../../includes/dbcon.php');
+include('../../includes/password.php');
+
+session_start();
 
 $method = 'aes-256-cbc';
 $password1 = '3sc3RLrpd17';
@@ -28,8 +31,16 @@ if($rownum > 0) {
 
 		if ($row['password'] == $password) {
 			//generate hash from input password
+		//	echo "Password updated";
 			$hashedPassword = base64_encode(openssl_encrypt($newPass, $method, $key, OPENSSL_RAW_DATA, $iv));
 			mysqli_query($con, "UPDATE `user` SET `password` = '$hashedPassword', `datePassChanged` = NOW() WHERE `user`.`ID` = '$userID'");
+
+			$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+			 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+			 $eventID = NULL;
+			 $userID = $_SESSION['userID'];
+			 $eventName = "Changed password";
+			 $stmt->execute();
 
 			if(mysqli_affected_rows($con) > 0) {
 				$message = "success";

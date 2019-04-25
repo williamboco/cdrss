@@ -27,8 +27,15 @@ if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 		$query = "UPDATE `user` SET `ID` = '$id', `email` = '$email', `dateEmployed` = '$employed', `firstName` = '$firstName', `lastName` = '$lastName', `gender` = '$gender', `contact` = '$contact' WHERE `user`.`ID` = '$userID'";
 		mysqli_query($con,$query);
 
+		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+		 $eventID = NULL;
+		 $userID = $_SESSION['userID'];
+		 $eventName = "Updated Profile";
+		 $stmt->execute();
+
 		if(mysqli_affected_rows($con) > 0) {
-			$message = "success";
+			$message = "Profile updated";
 			$_SESSION['userID'] = $id;
 		}else {
 			$message = "Not updated.";

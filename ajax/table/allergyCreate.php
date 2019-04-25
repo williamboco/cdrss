@@ -1,5 +1,8 @@
 <?php
 	include('../../includes/dbcon.php');
+
+	session_start();
+
 	$allergyName = htmlspecialchars($_GET['allergyName']);
 	$description = htmlspecialchars($_GET['description']);
 
@@ -45,5 +48,12 @@
 		echo "Error: Query failed";
 	}
 
-$stmt->close();
+	 $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+	 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+	 $eventID = NULL;
+	 $userID = $_SESSION['userID'];
+	 $eventName = "Created Allergy";
+	 $stmt->execute();
+
+	 $stmt->close();
 ?>

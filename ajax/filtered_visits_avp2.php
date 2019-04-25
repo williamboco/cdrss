@@ -23,28 +23,17 @@ while($patient = mysqli_fetch_array($result)) {
 			$complaint = rtrim($complaint,", ");
 
 			$medicine = "";
-			$resMed = mysqli_query($con, "SELECT * FROM visit_medicine JOIN medicine ON visit_medicine.medicineID=medicine.ID WHERE visitID=$visID");
+			$resMed = mysqli_query($con, "SELECT medicine.brandName, medicine.genericName, visit_medicine.quantity FROM visit_medicine JOIN medicine ON visit_medicine.medicineID=medicine.ID WHERE visitID=$visID");
 			while($medInf = mysqli_fetch_array($resMed)) {
+				$n = $medInf['brandName'] ?: $medInf['genericName'];
 				$q = $medInf['quantity'];
-				$type = $medInf['type'];
-				$q = intval($q);
-				$name = $medInf['brandName'] ?: $medInf['genericName'];
-
-
-				if($type == 'Capsule'  || $type == 'Tablet') {
-					if($q > 1)
-						$unit = 'pcs.';
-					else
-						$unit = 'pc.';
-				}else {
-					if($q > 1)
-						$unit = 'uses';
-					else
-						$unit = 'use';
-				}
-
-				$medicine .= $name." (".$q.$unit."), ";
-
+				$unit = "";
+				if($q <= 1) {
+					$unit = "pc.";
+				}else
+					$unit = "pcs.";
+				
+				$medicine .= $n." (".$q.$unit."), ";
 			}
 			$medicine = rtrim($medicine,", ");
 
@@ -53,13 +42,10 @@ while($patient = mysqli_fetch_array($result)) {
 
 			$x = (object) array(
 				0 => '',
-				1 => '<input type="checkbox" name="check" onclick="selectOne(this)"/>',
-				2 => $patient['ID'],
-				3 => $patient['firstName']." ".$patient['lastName'],
-				4 => $complaint,
-				5 => $medicine,
-				6 => $vis['visitDate'],
-				7 => '<button id="ID" onclick="viewVisit(this.value)" class="btn btn-info" value="'.$visID.'"><i class="glyphicon glyphicon-eye-open"></i>  Details</button>'
+				1 => $complaint,
+				2 => $medicine,
+				3 => $vis['visitDate'],
+				4 => '<button id="ID" onclick="viewVisit(this.value)" class="btn btn-info" value="'.$visID.'"><i class="glyphicon glyphicon-eye-open"></i>  Details</button>'
 			);
 			array_push($visits, $x);
 	}

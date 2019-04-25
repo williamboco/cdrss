@@ -1,5 +1,7 @@
 <?php
 	include('../../includes/dbcon.php');
+
+	session_start();
 	$isSupply = $_GET['isSupply'];
 
 	if($isSupply == '0') {
@@ -95,5 +97,12 @@
 		echo "Error: Query failed";
 	}
 
-$stmt->close();
+	$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+	$stmt->bind_param("isi", $eventID, $eventName, $userID);
+	$eventID = NULL;
+	$userID = $_SESSION['userID'];
+	$eventName = "Created Medicine";
+	$stmt->execute();
+
+	$stmt->close();
 ?>

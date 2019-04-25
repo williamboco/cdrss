@@ -11,11 +11,13 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 $users = array();
+
 while($row = $result->fetch_assoc()) {
 	$row['firstName'] = openssl_decrypt(base64_decode($row['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 	$row['lastName'] = openssl_decrypt(base64_decode(  $row['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 	$row['role'] = openssl_decrypt(base64_decode($row['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
 	$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
+
 
 	if($row['isActive'] == 1) {
 		$status = "Active";
@@ -34,10 +36,8 @@ while($row = $result->fetch_assoc()) {
 	);
 	array_push($users, $x);
 }
-
 $data = array(
   "data" => $users
   );
 echo json_encode($data);
-
 ?>
