@@ -2,6 +2,7 @@
 	include('../../includes/dbcon.php');
 
 	session_start();
+
 	$allergyName = htmlspecialchars($_GET['allergyName']);
 	$description = htmlspecialchars($_GET['description']);
 
