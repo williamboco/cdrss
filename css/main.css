@@ -286,7 +286,8 @@ span.select2.select2-container.select2-container--default{
 
 }
 .btn-success, .btn-success:active{
-
+  box-shadow:rgba(62, 146, 62, 1) 0px 5px 0px;
+  background:rgba(92, 184, 92, 1);
 }
 .btn-secondary, .btn-secondary:active{
   box-shadow:grey 0px 5px 0px;

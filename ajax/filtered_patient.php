@@ -21,7 +21,7 @@ while($pat = mysqli_fetch_array($result)) {
 			2 => $pat['ID'],
 			3 => $pat['firstName'],
 			4 => $pat['lastName'],
-			5 => "<a href=\"profile.php?id=".$pat['ID']."\"><button type='button' class='btn btn-info'><i class='glyphicon glyphicon-eye-open'></i>  Profile</button></a>"
+			5 => "<a href=\"profile-avp.php?id=".$pat['ID']."\"><button type='button' class='btn btn-info'><i class='glyphicon glyphicon-eye-open'></i>  Profile</button></a>"
 		);
 	array_push($patients, $x);
 
