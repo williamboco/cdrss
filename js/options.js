@@ -86,7 +86,6 @@ $(document).ready(function() {
 		$('#medicineBtnGrp').removeClass('hidden');
 	});
 
-
 	$('#table tbody').on('click', '.details-control', function () {
 
 		var tr = $(this).closest('tr');
@@ -120,17 +119,23 @@ $(document).ready(function() {
 	$('#medicineTable tbody').on('change', '[name="isAdd"]', function() {
 
 		var tr = $(this).closest('#medicineTable tr');
+
 		tr.find(':checkbox').prop('checked', true).trigger('change');
 		tr.addClass('selected', this.checked);
 
 	} );
 
-	$('#addBtn').on('click', function() {
+	$('#addBtn').on('click', function(event) {
 		var $addModal = $('#addModal');
 		var table = $('#deleteBtn').val();
 
-		$addModal.find('form').hide();
-		$addModal.find('#add-' + table).show();
+		if (table == ''){
+			event.stopPropagation();
+			alertify.log("No record selected");
+		} else {
+			$addModal.find('form').hide();
+			$addModal.find('#add-' + table).show();
+		}
 
 	});
 
@@ -179,6 +184,40 @@ $(document).ready(function() {
 		});
 	});
 
+});
+
+$('.filters').on('click', function() {
+	var datatable = $('#medicineTable').dataTable().api();
+	var status = this.value;
+	console.log(status);
+
+	switch (status){
+		case "critical":
+			status = 1;
+			break;
+		case "threshold":
+			status = 2;
+			break;
+		case "optimum":
+			status = 3;
+			break;
+		default:
+			break;
+	}
+
+	$.ajax({
+		type: "GET",
+		url: "ajax/filtered_medicine.php",
+		data: {data: status},
+		cache: false,
+		success: function(data) {
+			console.log(data);
+			var obj = JSON.parse(data);
+			datatable.clear();
+			datatable.rows.add(obj);
+			datatable.draw();
+		}
+	});
 });
 
 $('[name="isSupply"]').on('change', function() {
@@ -256,6 +295,7 @@ function format (rowData) {
 			//var obj = JSON.parse(data);
 			//obj = obj[0];
 			div.html(content).removeClass( 'loading' );
+			console.log(div);
         }
     } );
 
@@ -401,12 +441,14 @@ function adjustRecord() {
 	var ids = [];
 	var isAdd;
 	var updateQty;
+	var tr;
 
 	$("#medicineTable tr").each(function() {
 	        if ($(this).hasClass("selected")) {
 	            ids.push($(this).find("#ID").attr("value"));
-							isAdd = $(this).find('select[name="isAdd"]').val();
-							updateQty = $(this).find('input[name="updateQty"]').val();
+							isAdd = $(this).find('[name="isAdd"]').val();
+							updateQty = $(this).find('[name="updateQty"]').val();
+							tr = $(this).find('[name="currentQty"]');
 	        }
 	    });
 
@@ -423,11 +465,19 @@ function adjustRecord() {
 							data: {id: ids[0], isAdd: isAdd, updateQty: updateQty},
 							cache: false,
 							success: function(response){
-								selectUrl(table);
 								alertify.log(response);
+								selectUrl(table);
 							}
 						});
 					}
+
+					$(tr).css('color', 'blue');
+					$(tr).css('font-weight', 'bold');
+					setTimeout(function() {
+						$(tr).css('color', '');
+						$(tr).css('font-weight', '');
+					}, 3000);
+
 				} else {
 					alertify.log("Error: Cannot proceed with action");
 				}
@@ -438,7 +488,6 @@ function adjustRecord() {
 	}else {
 		alertify.log("No record selected");
 	}
-
 }
 
 function delRecord() {

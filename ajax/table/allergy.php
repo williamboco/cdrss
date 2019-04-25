@@ -8,7 +8,7 @@
 		$x = (object) array(
 			0 => $res['ID'],
 			1 => '<input type="checkbox" name="check" onclick="selectOne(this)" id="ID" value="'.$res['ID'].'"/>',
-			2 => '<button class="btn details-control"><i class="fa fa-sort-desc" aria-hidden="true"></i></button>',
+			2 => '<button class="btn details-control"><i class="fas fa-sort-down" aria-hidden="true"></i></button>',
 			3 => $res['allergyName']
 		);
 		array_push($allergy, $x);
