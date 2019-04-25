@@ -1,5 +1,7 @@
 <?php
 	include('../../includes/dbcon.php');
+
+	session_start();
 	$id = $_GET['id'];
 	$trackName = htmlspecialchars($_GET['trackName']);
 
@@ -27,5 +29,12 @@
 		echo "Error: Query Failed";
 	}
 
-$stmt->close();
+	$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+	$stmt->bind_param("isi", $eventID, $eventName, $userID);
+	$eventID = NULL;
+	$userID = $_SESSION['userID'];
+	$eventName = "Updated Track";
+	$stmt->execute();
+
+	$stmt->close();
 ?>

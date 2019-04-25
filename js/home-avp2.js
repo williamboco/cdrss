@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	setDateRange();
 	var t = $('#visitTable').DataTable( {
 		"ajax": "ajax/filtered_visits_avp.php?" + $('#filter').serialize() ,
 		"columnDefs": [ {
@@ -8,12 +9,15 @@ $(document).ready(function() {
 		} ],
 		"columns": [
 			{title: "#", width: "5%", className: "dt-center"},
+			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
+			{title: "ID"},
+			{title: "Name", className: "hover"},
 			{title: "Complaint"},
-			{title: "Medicine Requested"},
+			{title: "Medicine / Supply Requested"},
 			{title: "Visit Date/Time"},
 			{title: "Action", width: "15%" , orderable: false}
 		],
-		"order": [[ 2, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+		"order": [[ 1, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );
 
 	t.on( 'order.dt search.dt', function () {

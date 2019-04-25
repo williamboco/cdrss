@@ -32,8 +32,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 	} else {
 		//echo "Doesn't exist";
 		if($query->execute()) {
-			$message = "Success\n";
-
+			$message = "Patient Profile created\n";
 			if($_POST['ptype'] == 'student') {
 
 				if($_POST['studenttype'] == 'college') {
@@ -179,7 +178,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 
 				++$i;
 			}
-
+			
 		} else {
 			$message = "Error";
 		}
@@ -188,6 +187,12 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 	$message = "Query Failed.";
 }
 
+ $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+ $stmt->bind_param("isi", $eventID, $eventName, $userID);
+ $eventID = NULL;
+ $userID = $_SESSION['userID'];
+ $eventName = "Created patient profile";
+ $stmt->execute();
 //Message
 echo $message;
 ?>

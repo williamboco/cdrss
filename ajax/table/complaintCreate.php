@@ -1,5 +1,7 @@
 <?php
 	include('../../includes/dbcon.php');
+
+	session_start();
 	$complaintName = htmlspecialchars($_GET['complaintName']);
 	$description = htmlspecialchars($_GET['description']);
 
@@ -45,5 +47,12 @@
 		echo "Error: Query Failed";
 	}
 
-$stmt->close();
+	 $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+	 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+	 $eventID = NULL;
+	 $userID = $_SESSION['userID'];
+	 $eventName = "Created complaint";
+	 $stmt->execute();
+
+	 $stmt->close();
 ?>

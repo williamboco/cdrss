@@ -58,7 +58,7 @@ include('includes/session.php');
 
 						<div class="editProfile hidden divs">
 							<form id="profileForm" action="ajax/userUpdate.php" method="post" class="col-md-8" >
-								<h4>User Profile</h4><br>
+								<h4>Edit Profile</h4><br>
 								<div class="form-group">
 									<input type="text" class="form-control hidden" name="userID" value="<?php echo $_SESSION['userID'];?>">
 									<input type="text" class="form-control" name="idNumber" placeholder="User ID" required><br>

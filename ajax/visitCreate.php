@@ -1,5 +1,7 @@
 <?php
 include('../includes/dbcon.php');
+
+session_start();
 $user = $_POST['userID'];
 $id = $_POST['idNumber'];
 //http://stackoverflow.com/questions/24570744/remove-extra-spaces-but-not-space-between-two-words
@@ -15,6 +17,12 @@ $message = array();
 	if(mysqli_query($con, $query)) {
 		array_push($message, "success");
 
+		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+		 $eventID = NULL;
+		 $userID = $_SESSION['userID'];
+		 $eventName = "Created patient visit";
+		 $stmt->execute();
 		//get autoIncrement ID from recent query
 		$vId = mysqli_insert_id($con);
 		array_push($message, "visit id: ".$vId);

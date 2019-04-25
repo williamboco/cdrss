@@ -1,6 +1,7 @@
 $(document).ready(function() {
+	setDateRange();
 	var t = $('#visitTable').DataTable( {
-		"ajax": "ajax/filtered_visits_avp.php?" + $('#filter').serialize() ,
+		"ajax": "ajax/filtered_visits_avp1.php?" + $('#filter').serialize() ,
 		"columnDefs": [ {
 			"searchable": false,
 			"orderable": false,
@@ -8,8 +9,11 @@ $(document).ready(function() {
 		} ],
 		"columns": [
 			{title: "#", width: "5%", className: "dt-center"},
+			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
+			{title: "ID"},
+			{title: "Name", className: "hover"},
 			{title: "Complaint"},
-			{title: "Medicine Requested"},
+			{title: "Medicine / Supply Requested"},
 			{title: "Visit Date/Time"},
 			{title: "Action", width: "15%" , orderable: false}
 		],
@@ -22,75 +26,23 @@ $(document).ready(function() {
 		} );
 	} ).draw();
 
-	setDateRange();
+
+
+
+	$('#date1').on('change', function() {
+		//alert("Changed");
+		var $date1 = $("#date1");
+		var $date2 = $("#date2");
+
+		$date2.attr("min", $date1.val());
+	});
 
 	$('.filters').on('change', function() {
-		/*var $form = $('#filter');
-		console.log($form.serialize());
-
-
-		var datatable = $('#visitTable').dataTable().api();
-		$.ajax({
-			type: "GET",
-			url: $form.attr('action'),
-			data: $form.serialize(),
-			cache: false,
-			success: function(data) {
-				var obj = JSON.parse(data);
-				obj = obj.data;
-				console.log(obj);
-				datatable.clear();
-				datatable.rows.add(obj);
-				datatable.draw();
-			}
-		});*/
 		refresh();
-		visitDate();
-
+		visitDate()
 	});
 	visitDate();
-
-});
-
-
-function viewVisit(id) {
-	 $.ajax({
-        type: "GET",
-        url: "ajax/visitRead.php",
-        data: {
-            visitID: id
-        },
-        cache: false,
-        success: function(data) {
-			var obj = JSON.parse(data);
-            console.log(obj);
-
-			$(".visitId").html(obj.Visit.ID);
-
-			$("#complaint").empty();
-            $.each(obj.Complaint, function(index, value) {
-                $("#complaint").append('<li class="h4">' + value + '</li>');
-
-            });
-
-            $("#medicine").empty();
-            $.each(obj.Medicine, function(i) {
-                $("#medicine").append('<li class="h4">' + obj.Medicine[i].quantity + "pcs.  " + obj.Medicine[i].name + '</li>');
-
-            });
-
-            $("#remarks").html(obj.Visit.remarks);
-            $("#createdBy").html(obj.createdBy);
-            $("#dateCreated").html(obj.Visit.dateCreated);
-            $("#modifiedBy").html(obj.modifiedBy);
-            $("#dateModified").html(obj.Visit.dateModified);
-		}
-	 });
-
-	 $('#viewModal').modal('show');
-
-}
-
+} );
 
 $(function(){
 	$('.widget').widgster();
@@ -135,7 +87,7 @@ function proceedReport() {
 	$form = $('#filter');
 	console.log($form.serialize());
 
-	window.location="report-avp.php?" + $form.serialize();
+	window.location="report.php?" + $form.serialize();
 
 }
 
@@ -184,7 +136,7 @@ function refresh() {
 			cache: false,
 			success: function(data) {
 				var obj = JSON.parse(data);
-				console.log(obj);
+				//console.log(obj);
 
 				chart2.dataProvider = obj;
 				chart2.validateData();

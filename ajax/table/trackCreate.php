@@ -1,5 +1,7 @@
 <?php
 	include('../../includes/dbcon.php');
+
+	session_start();
 	$trackName = htmlspecialchars($_GET['trackName']);
 
 	$stmt = $con->prepare("INSERT INTO `track` (ID, trackName, isDeleted) VALUES (?,?,?)");
@@ -45,5 +47,12 @@
 		echo "Error: Query Failed";
 	}
 
-$stmt->close();
+	$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+	$stmt->bind_param("isi", $eventID, $eventName, $userID);
+	$eventID = NULL;
+	$userID = $_SESSION['userID'];
+	$eventName = "Created Track";
+	$stmt->execute();
+
+	$stmt->close();
 ?>
