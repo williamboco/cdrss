@@ -13,11 +13,7 @@ if($_SESSION['role'] != 'Admin') {
 	<link rel="shortcut icon" href="favicon.png" />
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
-<<<<<<< HEAD
-	<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
-=======
 	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
->>>>>>> 12013738317c245b7ca0551beb3e8cd85a44119e
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
 	<meta charset="utf-8">
@@ -47,22 +43,11 @@ if($_SESSION['role'] != 'Admin') {
 						<button type="button" class="btn btn-info" onclick="editRecord()" id="editBtn"><i class="glyphicon glyphicon-pencil"></i>  Update</button>
 						<button type="button" class="btn btn-primary" id="addBtn" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i>  Add</button>
 					</div>
-					<div class="btn-group btn-group-justified hidden" id="medicineBtnGrp" data-toggle="buttons">
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-lg btn-success" name="optimumBtn" value="0">
-								Optimum Stock Level
-							</button>
-						</div>
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-lg btn-light" name="thresholdBtn" value="1">
-								Threshold Stock Level
-							</button>
-						</div>
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-lg btn-danger" name="criticalBtn" value="2">
-								Critical Stock Level
-							</button>
-						</div>
+					<div class="btn-group btn-group-justified hidden" role="group" id="medicineBtnGrp">
+						<div class="btn-group"><button type="button" class="btn btn-lg btn-info medicine-filter" value="medicine">All</button></div>
+						<div class="btn-group"><button type="button" class="btn btn-lg btn-success filters" value="optimum">Optimum Stock Level</button></div>
+						<div class="btn-group"><button type="button" class="btn btn-lg btn-secondary filters" value="threshold">Threshold Stock Level</button></div>
+						<div class="btn-group"><button type="button" class="btn btn-lg btn-danger filters" value="critical">Critical Stock Level</button></div>
 					</div>
 					<div class="card">
 						<div class="table-responsive">
