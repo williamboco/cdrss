@@ -13,7 +13,7 @@ if($_SESSION['role'] != 'Admin') {
 	<link rel="shortcut icon" href="favicon.png" />
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
 	<meta charset="utf-8">
@@ -46,7 +46,7 @@ if($_SESSION['role'] != 'Admin') {
 					<div class="btn-group btn-group-justified hidden" role="group" id="medicineBtnGrp">
 						<div class="btn-group"><button type="button" class="btn btn-lg btn-info medicine-filter" value="medicine">All</button></div>
 						<div class="btn-group"><button type="button" class="btn btn-lg btn-success filters" value="optimum">Optimum Stock Level</button></div>
-						<div class="btn-group"><button type="button" class="btn btn-lg btn-secondary filters" value="threshold">Threshold Stock Level</button></div>
+						<div class="btn-group"><button type="button" class="btn btn-lg btn-warning filters" value="threshold">Threshold Stock Level</button></div>
 						<div class="btn-group"><button type="button" class="btn btn-lg btn-danger filters" value="critical">Critical Stock Level</button></div>
 					</div>
 					<div class="card">
@@ -326,7 +326,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/optionss.js"></script>
+	<script src="js/options.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script>
