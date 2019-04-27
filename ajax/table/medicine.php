@@ -36,7 +36,7 @@
 			4 => $res['currentQty'],
 			5 => '<p style="font-weight:bold" class="' .$mStatusClass. '">' .$mStatus. '</p>',
 			6 => '<select name="isAdd" required><option disabled selected>Add/Less</option><option value="1">Add</option><option value="0">Less</option></select>',
-			7 => '<input type="number" name="updateQty" min="1" max="500" required/>',
+			7 => '<input name="updateQty" maxlength="3" size="2" min="1" max="500" type="number" required/>',
 			8 => '<button type="button" class="btn btn-info" onclick="adjustRecord()" id="adjustBtn"><i class="glyphicon glyphicon-resize-vertical"></i> Adjust</button>'
 		);
 		array_push($medicine, $x);
