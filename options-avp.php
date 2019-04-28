@@ -39,6 +39,7 @@ if($_SESSION['role'] != 'Admin') {
 			<div class="col-sm-10">
 
 					<div style="margin-bottom: 30px;">
+<<<<<<< HEAD
 						<div style="margin-bottom: 20px;">
 							<button type="button" class="btn btn-danger" onclick="delRecord()" id="deleteBtn"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
 							<button type="button" class="btn btn-info" onclick="editRecord()" id="editBtn"><i class="glyphicon glyphicon-pencil"></i>  Update</button>
@@ -50,6 +51,17 @@ if($_SESSION['role'] != 'Admin') {
 							<div class="btn-group"><button type="button" class="btn btn-lg btn-warning filters" value="threshold">Threshold Stock Level</button></div>
 							<div class="btn-group"><button type="button" class="btn btn-lg btn-danger filters" value="critical">Critical Stock Level</button></div>
 						</div>
+=======
+						<button type="button" class="btn btn-danger" onclick="delRecord()" id="deleteBtn"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
+						<button type="button" class="btn btn-info" onclick="editRecord()" id="editBtn"><i class="glyphicon glyphicon-pencil"></i>  Update</button>
+						<button type="button" class="btn btn-primary" id="addBtn" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i>  Add</button>
+					</div>
+					<div class="btn-group btn-group-justified hidden" role="group" id="medicineBtnGrp">
+						<div class="btn-group"><button type="button" class="btn btn-lg btn-info medicine-filter" value="medicine">All</button></div>
+						<div class="btn-group"><button type="button" class="btn btn-lg btn-success filters" value="optimum">Optimum Stock Level</button></div>
+						<div class="btn-group"><button type="button" class="btn btn-lg btn-warning filters" value="threshold">Threshold Stock Level</button></div>
+						<div class="btn-group"><button type="button" class="btn btn-lg btn-danger filters" value="critical">Critical Stock Level</button></div>
+>>>>>>> 1f8366bc03c2d847f6138683a79f2fa756a384ca
 					</div>
 					<div class="card">
 						<div class="table-responsive">

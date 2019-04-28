@@ -6,7 +6,7 @@ $password = '3sc3RLrpd17';
 $key = substr(hash('sha256', $password, true), 0, 32);
 $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
-$stmt = $con->prepare("SELECT * FROM user");
+$stmt = $con->prepare("SELECT * FROM `user`");
 $stmt->execute();
 $result = $stmt->get_result();
 

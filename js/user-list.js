@@ -39,7 +39,7 @@ $("#addForm").on("submit", function(event) {
 			console.log(response);
 
 			$('#addModal').modal('hide');
-				alertify.log("Success");
+				alertify.log(response);
 				$form[0].reset();
 				refreshUTable();
 			/*if(response == 'success') {

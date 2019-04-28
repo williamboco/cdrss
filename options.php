@@ -47,7 +47,7 @@ if($_SESSION['role'] == 'Admin') {
 						<div class="btn-group btn-group-justified hidden" role="group" id="medicineBtnGrp">
 							<div class="btn-group"><button type="button" class="btn btn-lg btn-info medicine-filter" value="medicine">All</button></div>
 							<div class="btn-group"><button type="button" class="btn btn-lg btn-success filters" value="optimum">Optimum Stock Level</button></div>
-							<div class="btn-group"><button type="button" class="btn btn-lg btn-secondary filters" value="threshold">Threshold Stock Level</button></div>
+							<div class="btn-group"><button type="button" class="btn btn-lg btn-warning filters" value="threshold">Threshold Stock Level</button></div>
 							<div class="btn-group"><button type="button" class="btn btn-lg btn-danger filters" value="critical">Critical Stock Level</button></div>
 						</div>
 					</div>
