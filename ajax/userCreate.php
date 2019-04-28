@@ -64,8 +64,8 @@ if ($rownum > 0) {
 
 	while ($row = $result->fetch_assoc()) {
 		if ($row['ID'] == $id || $row['email'] == $email) {
-			//echo "User ID or Email already exists!";
-			echo "User Added";
+			echo "User ID or Email already exists!";
+		//	echo "User Added";
 
 		}
 	}
