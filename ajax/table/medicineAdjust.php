@@ -74,7 +74,7 @@
 		echo "Error:" . mysqli_error($con);
 	}
 
-	$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
+	$stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
 	$stmt->bind_param("isi", $eventID, $eventName, $userID);
 
 	$eventID = NULL;

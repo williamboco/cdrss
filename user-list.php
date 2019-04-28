@@ -98,8 +98,8 @@ if($_SESSION['role'] != 'Admin') {
 </div>
 
 	<!-- View Modal -->
-		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
+<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
 				<div class="modal-content row">
 				  <div class="modal-header col-sm-12">
 						<h4 class="modal-title" style="display: inline;">Edit User Status</h4>
@@ -117,29 +117,29 @@ if($_SESSION['role'] != 'Admin') {
 							<p style="font-size: 16px;"><b>Contact</b><br/><span id="contact"></span></p>
 							<p style="font-size: 16px;"><b>Date Employed</b><br/><span id="dateEmployed"></span></p>
 							<br/><br/>
-
-						<div class="card-body col-sm-12">
-							<p style="font-size: 16px;"><i class="fas fa-power-off"></i></i><b> User Status</b><br/></p>
-							<br/>
-				  	<form>
-	  						<div class="form-row">
-									<div class="col-sm-6">
-											 <label><input type="radio" name="statusType" value="1" checked="checked" required> Active</label>
-									</div>
-									<div class="col-sm-6">
-										 <label><input type="radio" name="statusType" value="0" checked="checked" required> Inactive</label>
-									</div>
-							</div>
 						</div>
-					</div>
-				</div>
-			  <div class="modal-footer col-sm-12">
-					<div class="viewProfile">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-info" id="deleteBtn" name="submit" onclick="deleteUser(this.value)"> Update</button> <!--//update(submit) button-->
-					</div>
-		  	</div>
-			</form>
+
+						<form>
+							<div class="card-body col-sm-12">
+								<p style="font-size: 16px;"><i class="fas fa-power-off"></i></i><b> User Status</b><br/></p>
+								<br/>
+		  						<div class="form-row">
+										<div class="col-sm-6">
+												 <label><input type="radio" name="statusType" value="1" checked="checked" required> Active</label>
+										</div>
+										<div class="col-sm-6">
+											 <label><input type="radio" name="statusType" value="0" checked="checked" required> Inactive</label>
+										</div>
+								</div>
+							</div>
+						  <div class="modal-footer col-sm-12">
+								<div class="viewProfile">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-info" id="deleteBtn" name="submit" onclick="deleteUser(this.value)"> Update</button> <!--//update(submit) button-->
+								</div>
+					  	</div>
+						</form>
+				  </div>
 			</div>
 	 </div>
 </div>
@@ -149,7 +149,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/users-list.js"></script>
+	<script src="js/user-list.js"></script>
 
 </body>
 </html>
