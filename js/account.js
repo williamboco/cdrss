@@ -18,8 +18,8 @@ $("#profileForm").on("submit", function(event) {
 			if(response == 'success') {
 				alertify.log(response);
 				location.reload();
-				/*$form[0].reset();
-				location.reload();*/
+				$form[0].reset();
+				location.reload();
 			}else {
 				alertify.log(response);
 			}
@@ -44,8 +44,9 @@ $("#passwordForm").on("submit", function(event) {
 
 			if(response == 'success') {
 				alertify.log(response);
-			//	$form[0].reset();
 				location.reload();
+				//$form[0].reset();
+				//location.reload();
 			}else {
 				alertify.log(response);
 			}

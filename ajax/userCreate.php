@@ -76,7 +76,6 @@ if ($rownum > 0) {
 	}
  } else {
 	 $stmt->execute();
-	 $stmt->close();
 
 	 $query2 = $con->prepare("INSERT INTO password_change_request (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
 	 $query2->bind_param("isii", $isNull, $requestID, $id, $isUsed);
@@ -103,7 +102,6 @@ if ($rownum > 0) {
 
 	 // send email
 	 require_once __DIR__ . '../../includes/mail.php';
-	 $query2->close();
 	 }
 
 

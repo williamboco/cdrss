@@ -1,5 +1,10 @@
 <?php
 include('../includes/dbcon.php');
+$method = 'aes-256-cbc';
+$password = '3sc3RLrpd17';
+$key = substr(hash('sha256', $password, true), 0, 32);
+$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+
 $visitID = $_GET['visitID'];
 
 $result = mysqli_query($con, "SELECT * FROM `visit` WHERE ID='$visitID'");
@@ -18,6 +23,8 @@ $modifier = mysqli_fetch_array($result);
 
 $result = mysqli_query($con, "SELECT * FROM `patient` WHERE ID='$patientID'");
 $pat = mysqli_fetch_array($result);
+$pat['firstName'] = openssl_decrypt(base64_decode($pat['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+$pat['lastName'] = openssl_decrypt(base64_decode($pat['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 
 $complaint = array();
@@ -31,7 +38,7 @@ $result = mysqli_query($con, "SELECT medicine.ID, medicine.brandName, medicine.g
 while($med = mysqli_fetch_array($result)) {
 	$qtty = $med['quantity'];
 	$type = $med['type'];
-	
+
 	if($type == 'Capsule'  || $type == 'Tablet') {
 		if($qtty > 1)
 			$unit = 'pcs.';
@@ -43,7 +50,7 @@ while($med = mysqli_fetch_array($result)) {
 		else
 			$unit = 'use';
 	}
-	
+
 	$x = (object) array(
 		"id" => $med['ID'],
 		"name"   => $med['brandName'] ?: $med['genericName'],
@@ -52,6 +59,12 @@ while($med = mysqli_fetch_array($result)) {
 	);
 	array_push($medicine, $x);
 }
+
+$creator['role'] = openssl_decrypt(base64_decode($creator['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
+$creator['firstName'] = openssl_decrypt(base64_decode($creator['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+
+$modifier['role'] = openssl_decrypt(base64_decode($modifier['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
+$modifier['firstName'] = openssl_decrypt(base64_decode($modifier['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 $data = array(
 	'Visit' => $vis,

@@ -24,8 +24,9 @@ if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 	if(mysqli_num_rows($result) > 0 && $userID != $id) {
 		$message = "User with that ID number already exists.";
 	} else {
-		$query = "UPDATE `user` SET `ID` = '$id', `email` = '$email', `dateEmployed` = '$employed', `firstName` = '$firstName', `lastName` = '$lastName', `gender` = '$gender', `contact` = '$contact' WHERE `user`.`ID` = '$userID'";
-		mysqli_query($con,$query);
+		$query = $con->prepare("UPDATE `user` SET `ID` = ?, `email` = ?, `dateEmployed` = ?, `firstName` = ?, `lastName` = ?, `gender` = ?, `contact` = ? WHERE `user`.`ID` = ?");
+		$query->bind_param("ssssssis", $id, $email, $employed, $firstName, $lastName, $gender, $contact, $userID);
+		$query->execute();
 
 		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
 		 $stmt->bind_param("isi", $eventID, $eventName, $userID);

@@ -3,3 +3,9 @@
         "phpmailer/phpmailer": "^6.0"
     }
 }
+
+{
+    "require": {
+        "peppeocchi/php-cron-scheduler": "2.*"
+    }
+}

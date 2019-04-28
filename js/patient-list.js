@@ -65,6 +65,7 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 		if(result=='success') {
 			alertify.log("Patient record inserted");
 			$('.filters').trigger('change');
+			window.location.reload(true);
 		}else {
 			alertify.log(result);
 		}
