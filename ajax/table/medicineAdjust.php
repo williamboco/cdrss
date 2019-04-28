@@ -22,6 +22,9 @@
 		if ($updateQty >= 1 && $updateQty <= 500) {
 			$newQty = $currentQty + $updateQty;
 			$quantityLevel = $newQty;
+		} else {
+			echo "Error: Quantity must be between 1 and 500";
+			die();
 		}
 
 		if ($quantityLevel > 0){
@@ -32,8 +35,6 @@
 			}	else {
 				$mStatus = 1;
 			}
-		} else {
-			$mStatus = 0;
 		}
 
 	}else {
@@ -57,10 +58,8 @@
 			}	else {
 				$mStatus = 1;
 			}
-		} else {
-			$mStatus = 0;
 		}
-	}
+			}
 
 	if ($result = mysqli_query($con, $query0)) {
 		$row = mysqli_fetch_array($result);
@@ -68,19 +67,16 @@
 		if (mysqli_num_rows($result)>0 && $rowId != $id) {
 			echo "Error: Unable to adjust record";
 		} else {
-			if ($updateQty < 1 || $updateQty > 500) {
-				echo "Error: Quantity must be between 1 and 500" . "<br>";
-			} else {
-				$stmt->execute();
-				echo "Record successfully adjusted";
-			}
+			$stmt->execute();
+			echo "Record successfully adjusted";
 		}
 	}else {
 		echo "Error:" . mysqli_error($con);
 	}
 
-	$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+	$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
 	$stmt->bind_param("isi", $eventID, $eventName, $userID);
+
 	$eventID = NULL;
 	$userID = $_SESSION['userID'];
 	$eventName = "Stock adjusted";
