@@ -60,6 +60,12 @@ while($med = mysqli_fetch_array($result)) {
 	array_push($medicine, $x);
 }
 
+$creator['role'] = openssl_decrypt(base64_decode($creator['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
+$creator['firstName'] = openssl_decrypt(base64_decode($creator['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+
+$modifier['role'] = openssl_decrypt(base64_decode($modifier['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
+$modifier['firstName'] = openssl_decrypt(base64_decode($modifier['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+
 $data = array(
 	'Visit' => $vis,
 	'Patient' => $pat,
