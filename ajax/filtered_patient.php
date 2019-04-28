@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../includes/dbcon.php');
 $patientType = $_GET['patientType'];
 
@@ -9,6 +10,11 @@ $password = '3sc3RLrpd17';
 $key = substr(hash('sha256', $password, true), 0, 32);
 $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
+if ($_SESSION['role'] == 'Admin'){
+	$url = "profile-avp.php";
+} else {
+	$url = "profile.php";
+}
 
 $patients = array();
 while($pat = mysqli_fetch_array($result)) {
@@ -21,7 +27,7 @@ while($pat = mysqli_fetch_array($result)) {
 			2 => $pat['ID'],
 			3 => $pat['firstName'],
 			4 => $pat['lastName'],
-			5 => "<a href=\"profile.php?id=".$pat['ID']."\"><button type='button' class='btn btn-info'><i class='glyphicon glyphicon-eye-open'></i>  Profile</button></a>"
+			5 => "<a href=".$url."?id=".$pat['ID']."><button type='button' class='btn btn-info'><i class='glyphicon glyphicon-eye-open'></i>  Profile</button></a>"
 		);
 	array_push($patients, $x);
 
