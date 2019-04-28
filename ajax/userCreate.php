@@ -66,16 +66,7 @@ if ($rownum > 0) {
 		if ($row['ID'] == $id || $row['email'] == $email) {
 			//echo "User ID or Email already exists!";
 			echo "User Added";
-<<<<<<< HEAD
 
-=======
-			 $stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
-			 $stmt->bind_param("isi", $eventID, $eventName, $userID);
-			 $eventID = NULL;
-			 $userID = $_SESSION['userID'];
-			 $eventName = $_SESSION['row'] . "created a new <b>user</b>.";
-			 $stmt->execute();
->>>>>>> 1f8366bc03c2d847f6138683a79f2fa756a384ca
 		}
 	}
  } else {
