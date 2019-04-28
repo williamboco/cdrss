@@ -54,7 +54,7 @@ $datePassChanged = "";
 $isActive = 1;
 $password = base64_encode(openssl_encrypt("iacademyCDRS", $method, $key, OPENSSL_RAW_DATA, $iv));
 
-$query1 = $con->prepare("SELECT * FROM user WHERE ID=?");
+$query1 = $con->prepare("SELECT * FROM `user` WHERE ID=?");
 $query1->bind_param("i", $id);
 $query1->execute();
 $result = $query1->get_result();
@@ -66,13 +66,22 @@ if ($rownum > 0) {
 		if ($row['ID'] == $id || $row['email'] == $email) {
 			//echo "User ID or Email already exists!";
 			echo "User Added";
+<<<<<<< HEAD
 
+=======
+			 $stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
+			 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+			 $eventID = NULL;
+			 $userID = $_SESSION['userID'];
+			 $eventName = $_SESSION['row'] . "created a new <b>user</b>.";
+			 $stmt->execute();
+>>>>>>> 1f8366bc03c2d847f6138683a79f2fa756a384ca
 		}
 	}
  } else {
 	 $stmt->execute();
 
-	 $query2 = $con->prepare("INSERT INTO password_change_request (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
+	 $query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
 	 $query2->bind_param("isii", $isNull, $requestID, $id, $isUsed);
 	 $isNull = NULL;
 	 $requestID = randomPassword();

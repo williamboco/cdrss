@@ -131,7 +131,7 @@ $(document).ready(function() {
 
 		if (table == ''){
 			event.stopPropagation();
-			alertify.log("No record selected");
+			alertify.alert("No record selected");
 		} else {
 			$addModal.find('form').hide();
 			$addModal.find('#add-' + table).show();
@@ -155,7 +155,7 @@ $(document).ready(function() {
 			success: function(response) {
 				$form[0].reset();
 				$addModal.modal('hide');
-				alertify.log(response);
+				alertify.alert(response);
 				selectUrl(table);
 			}
 		});
@@ -178,7 +178,7 @@ $(document).ready(function() {
 			success: function(response) {
 				$form[0].reset();
 				$editModal.modal('hide');
-				alertify.log(response);
+				alertify.alert(response);
 				selectUrl(table);
 			}
 		});
@@ -273,7 +273,7 @@ function selectUrl(value) {
 				updateMedicineTable(url, headerName);
 				break;
 			default:
-				alertify.log("Switch case");
+				alertify.alert("Switch case");
 		}
 
 	}
@@ -428,10 +428,10 @@ function editRecord() {
 			});
 
 		}else {
-			alertify.log("Cannot edit multiple records");
+			alertify.alert("Cannot edit multiple records");
 		}
 	}else {
-		alertify.log("No record selected");
+		alertify.alert("No record selected");
 	}
 
 }
@@ -465,7 +465,7 @@ function adjustRecord() {
 							data: {id: ids[0], isAdd: isAdd, updateQty: updateQty},
 							cache: false,
 							success: function(response){
-								alertify.log(response);
+								alertify.alert(response);
 								selectUrl(table);
 							}
 						});
@@ -479,14 +479,14 @@ function adjustRecord() {
 					}, 3000);
 
 				} else {
-					alertify.log("Error: Cannot proceed with action");
+					alertify.alert("Error: Cannot proceed with action");
 				}
 
 		}else {
-			alertify.log("Cannot edit multiple records");
+			alertify.alert("Cannot edit multiple records");
 		}
 	}else {
-		alertify.log("No record selected");
+		alertify.alert("No record selected");
 	}
 }
 
@@ -526,7 +526,7 @@ function delRecord() {
 			});
 		}
 	}else {
-		alertify.log("No record selected");
+		alertify.alert("No record selected");
 	}
 
 

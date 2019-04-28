@@ -61,6 +61,9 @@ if($_SESSION['role'] != 'Admin') {
 						<div class="btn-group"><button type="button" class="btn btn-lg btn-success filters" value="optimum">Optimum Stock Level</button></div>
 						<div class="btn-group"><button type="button" class="btn btn-lg btn-warning filters" value="threshold">Threshold Stock Level</button></div>
 						<div class="btn-group"><button type="button" class="btn btn-lg btn-danger filters" value="critical">Critical Stock Level</button></div>
+<<<<<<< HEAD
+>>>>>>> 1f8366bc03c2d847f6138683a79f2fa756a384ca
+=======
 >>>>>>> 1f8366bc03c2d847f6138683a79f2fa756a384ca
 					</div>
 					<div class="card">

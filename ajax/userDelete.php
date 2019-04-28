@@ -23,6 +23,7 @@ if($statusType == 1){
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//$obj->logEvent("Changed status");
 		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
 		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
@@ -30,6 +31,11 @@ if($statusType == 1){
 		 $userID = $_SESSION['userID'];
 		 $eventName = "Updated status of user.";
 		 $stmt->execute();
+=======
+if($result = mysqli_query($con, $query)) {
+	$row = mysqli_fetch_array($result);
+	$isActive = $row['isActive'];
+>>>>>>> 1f8366bc03c2d847f6138683a79f2fa756a384ca
 =======
 if($result = mysqli_query($con, $query)) {
 	$row = mysqli_fetch_array($result);
