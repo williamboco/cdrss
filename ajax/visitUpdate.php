@@ -61,7 +61,7 @@ for ($i=0; $i< $len; $i++) {
 	 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 	 $eventID = NULL;
 	 $userID = $_SESSION['userID'];
-	 $eventName = "Updated patient visit";
+	 $eventName = "Updated patient visit record.";
 	 $stmt->execute();
 }
 

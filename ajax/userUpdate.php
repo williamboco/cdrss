@@ -32,7 +32,7 @@ if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 		 $eventID = NULL;
 		 $userID = $_SESSION['userID'];
-		 $eventName = "Updated Profile";
+		 $eventName = "Updated user profile.";
 		 $stmt->execute();
 
 		if(mysqli_affected_rows($con) > 0) {

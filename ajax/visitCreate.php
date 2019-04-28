@@ -21,7 +21,7 @@ $message = array();
 		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 		 $eventID = NULL;
 		 $userID = $_SESSION['userID'];
-		 $eventName = "Created patient visit";
+		 $eventName = "Created new patient visit record.";
 		 $stmt->execute();
 		//get autoIncrement ID from recent query
 		$vId = mysqli_insert_id($con);

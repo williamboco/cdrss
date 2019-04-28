@@ -178,7 +178,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 
 				++$i;
 			}
-			
+
 		} else {
 			$message = "Error";
 		}
@@ -191,7 +191,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
  $stmt->bind_param("isi", $eventID, $eventName, $userID);
  $eventID = NULL;
  $userID = $_SESSION['userID'];
- $eventName = "Created patient profile";
+ $eventName = "Created new patient profile.";
  $stmt->execute();
 //Message
 echo $message;

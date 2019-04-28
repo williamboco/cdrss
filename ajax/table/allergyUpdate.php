@@ -34,7 +34,7 @@
 	 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 	 $eventID = NULL;
 	 $userID = $_SESSION['userID'];
-	 $eventName = "Updated Allergy";
+	 $eventName = "Updated allergy";
 	 $stmt->execute();
 
 	 $stmt->close();

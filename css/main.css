@@ -289,6 +289,12 @@ span.select2.select2-container.select2-container--default{
   box-shadow:rgba(62, 146, 62, 1) 0px 5px 0px;
   background:rgba(92, 184, 92, 1);
 }
+
+.btn-warning, .btn-warning:active{
+  box-shadow:rgba(229, 203, 48, 1) 0px 5px 0px;
+  background:rgba(255, 226, 54, 1);
+}
+
 .btn-secondary, .btn-secondary:active{
   box-shadow:grey 0px 5px 0px;
   background:rgba(150, 150, 150, 0.6);

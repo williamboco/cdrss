@@ -157,7 +157,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID=$id")) {
 			 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 			 $eventID = NULL;
 			 $userID = $_SESSION['userID'];
-			 $eventName = "Updated patient profile";
+			 $eventName = "Updated patient profile.";
 			 $stmt->execute();
 
 		}else {

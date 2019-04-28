@@ -13,7 +13,7 @@
 		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 		 $eventID = NULL;
 		 $userID = $_SESSION['userID'];
-		 $eventName = "Deleted patient visit";
+		 $eventName = "Deleted patient visit record.";
 		 $stmt->execute();
   }
   echo "Record deleted";

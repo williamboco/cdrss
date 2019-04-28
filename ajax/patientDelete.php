@@ -13,7 +13,7 @@ foreach($data as $id){
 	 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 	 $eventID = NULL;
 	 $userID = $_SESSION['userID'];
-	 $eventName = "Deleted patient profile";
+	 $eventName = "Deleted patient profile.";
 	 $stmt->execute();
 }
 echo "Record deleted" . "<meta http-equiv='refresh' content='0'>";

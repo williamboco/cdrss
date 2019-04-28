@@ -4,7 +4,7 @@ include('includes/dbcon.php');
 include('includes/session.php');
 
 if($_SESSION['role'] != 'Admin') {
-	header("location: home.php");
+	header("location: options.php");
 }
 
 ?>
@@ -13,11 +13,7 @@ if($_SESSION['role'] != 'Admin') {
 	<link rel="shortcut icon" href="favicon.png" />
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
-<<<<<<< HEAD
 	<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
-=======
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
->>>>>>> 12013738317c245b7ca0551beb3e8cd85a44119e
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
 	<meta charset="utf-8">
@@ -32,45 +28,36 @@ if($_SESSION['role'] != 'Admin') {
 	<div class="container">
 		<div class="row" style="margin-top: 50px;">
 			<div class="col-sm-2">
-				<button type="button" class="btn btn-block filter" value="course">Courses</button>
-				<button type="button" class="btn btn-block filter" value="track">Tracks</button>
-				<button type="button" class="btn btn-block filter" value="department">Departments</button>
-				<button type="button" class="btn btn-block filter" value="allergy">Allergies</button>
-				<button type="button" class="btn btn-block filter" value="complaint">Complaints</button>
-				<button type="button" class="btn btn-block medicine-filter" value="medicine">Inventory</button>
+				<button type="button" class="btn btn-md btn-block filter" value="course">Courses</button>
+				<button type="button" class="btn btn-md btn-block filter" value="track">Tracks</button>
+				<button type="button" class="btn btn-md btn-block filter" value="department">Departments</button>
+				<button type="button" class="btn btn-md btn-block filter" value="allergy">Allergies</button>
+				<button type="button" class="btn btn-md btn-block filter" value="complaint">Complaints</button>
+				<button type="button" class="btn btn-md btn-block medicine-filter" value="medicine">Inventory</button>
 			</div>
 
 			<div class="col-sm-10">
 
 					<div style="margin-bottom: 30px;">
-						<button type="button" class="btn btn-danger" onclick="delRecord()" id="deleteBtn"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
-						<button type="button" class="btn btn-info" onclick="editRecord()" id="editBtn"><i class="glyphicon glyphicon-pencil"></i>  Update</button>
-						<button type="button" class="btn btn-primary" id="addBtn" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i>  Add</button>
-					</div>
-					<div class="btn-group btn-group-justified hidden" id="medicineBtnGrp" data-toggle="buttons">
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-lg btn-success" name="optimumBtn" value="0">
-								Optimum Stock Level
-							</button>
+						<div style="margin-bottom: 20px;">
+							<button type="button" class="btn btn-danger" onclick="delRecord()" id="deleteBtn"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
+							<button type="button" class="btn btn-info" onclick="editRecord()" id="editBtn"><i class="glyphicon glyphicon-pencil"></i>  Update</button>
+							<button type="button" class="btn btn-primary" id="addBtn" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i>  Add</button>
 						</div>
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-lg btn-light" name="thresholdBtn" value="1">
-								Threshold Stock Level
-							</button>
-						</div>
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-lg btn-danger" name="criticalBtn" value="2">
-								Critical Stock Level
-							</button>
+						<div class="btn-group btn-group-justified hidden" role="group" id="medicineBtnGrp">
+							<div class="btn-group"><button type="button" class="btn btn-lg btn-info medicine-filter" value="medicine">All</button></div>
+							<div class="btn-group"><button type="button" class="btn btn-lg btn-success filters" value="optimum">Optimum Stock Level</button></div>
+							<div class="btn-group"><button type="button" class="btn btn-lg btn-warning filters" value="threshold">Threshold Stock Level</button></div>
+							<div class="btn-group"><button type="button" class="btn btn-lg btn-danger filters" value="critical">Critical Stock Level</button></div>
 						</div>
 					</div>
 					<div class="card">
 						<div class="table-responsive">
-							<table id="table" class="display" cellspacing="0" width="100%">
+							<table id="table" class="display hover" cellspacing="0" width="100%">
 							</table>
 						</div>
 						<div class="medicine-responsive hidden">
-							<table id="medicineTable" class="display" cellspacing="0" width="100%">
+							<table id="medicineTable" class="display hover" cellspacing="0" width="100%">
 							</table>
 						</div>
 					</div>
@@ -341,7 +328,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/optionss.js"></script>
+	<script src="js/options.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script>

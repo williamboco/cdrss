@@ -42,7 +42,7 @@ if($rownum > 0) {
        $stmt->bind_param("isi", $eventID, $eventName, $userID);
        $eventID = NULL;
        $userID = $_SESSION['userID'];
-       $eventName = "Login";
+       $eventName = "Successfully logged in.";
        $stmt->execute();
 
       //call the event method thru an object of AuditClass

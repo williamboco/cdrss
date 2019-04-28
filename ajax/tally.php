@@ -1,5 +1,7 @@
 <?php
 include('../includes/dbcon.php');
+
+session_start();
 $patientType = $_GET['patientType'];
 $months = $_GET['months'];
 $years = $_GET['years'];
@@ -13,7 +15,7 @@ $gTotal = 0;
 $pTotal = array();
 $vTotal = array();
 foreach($months as $m) {
-	
+
 	$c = array();
 	//array_push($c, $m);
 	$query = "SELECT visit_complaint.visitID, complaint.complaintName, patient.ID FROM patient LEFT JOIn ".$join."=visit.patientID JOIN visit_complaint on visit.ID=visit_complaint.visitID JOIN complaint ON complaint.ID=visit_complaint.complaintID WHERE MONTH(visit.visitDate) = ".$m." AND YEAR(visit.visitDate) = ".$years[$i]." AND visit.isDeleted='0' AND patient.isDeleted='0'";
@@ -27,8 +29,8 @@ foreach($months as $m) {
 
 	}
 
-	
-	
+
+
 	$obj = array_count_values($cN);
 	$x = (object) $obj;
 	array_push($compTotal, $x);
@@ -61,6 +63,13 @@ $data = array(
   "pTotal" => $pTotal,
   "vTotal" => $vTotal
 );
+
+$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+$stmt->bind_param("isi", $eventID, $eventName, $userID);
+$eventID = NULL;
+$userID = $_SESSION['userID'];
+$eventName = "Generated tally report.";
+$stmt->execute();
 
 echo json_encode($data);
 

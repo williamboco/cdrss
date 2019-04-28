@@ -34,7 +34,7 @@ if(mysqli_num_rows($query) > 0) {
 			 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 			 $eventID = NULL;
 			 $userID = $_SESSION['userID'];
-			 $eventName = "Changed password";
+			 $eventName = "Changed password.";
 			 $stmt->execute();
 
 			if(mysqli_affected_rows($con) > 0) {

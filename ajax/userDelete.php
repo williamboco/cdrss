@@ -24,7 +24,7 @@ else
 		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 		 $eventID = NULL;
 		 $userID = $_SESSION['userID'];
-		 $eventName = "Changed status";
+		 $eventName = "Updated status of user.";
 		 $stmt->execute();
 
 if($res['role'] == 'Admin') {

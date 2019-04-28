@@ -51,7 +51,7 @@
 	$stmt->bind_param("isi", $eventID, $eventName, $userID);
 	$eventID = NULL;
 	$userID = $_SESSION['userID'];
-	$eventName = "Created Track";
+	$eventName = "Created track.";
 	$stmt->execute();
 
 	$stmt->close();
