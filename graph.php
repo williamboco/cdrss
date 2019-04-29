@@ -11,6 +11,7 @@ include('includes/session.php');
 	<link rel="shortcut icon" href="favicon.png" />
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/graph.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">

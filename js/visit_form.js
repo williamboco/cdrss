@@ -8,62 +8,61 @@ $(document).ready(function() {
         var ctr = $this.parent().children().find('.select2-hidden-accessible').size();
 
         if (ctr != limit) {
-			var flag = false;
-            var $lastTbContainer = $this.closest('.fieldsGroup').children('.tbContainer:last');
-			var $firstTbContainer = $this.closest('.fieldsGroup').children('.tbContainer:first');
-			var $tempVals = new Array();
-			$this.closest('.fieldsGroup').find('.select2-hidden-accessible').each(function(){
-				if(this.value == '') {
-					flag = true;
-					return;
-				}else
-					$tempVals.push(this.value);
+    			var flag = false;
+          var $lastTbContainer = $this.closest('.fieldsGroup').children('.tbContainer:last');
+    			var $firstTbContainer = $this.closest('.fieldsGroup').children('.tbContainer:first');
+    			var $tempVals = new Array();
 
-			});
-			/*if(flag) {
-				alertify.log("Please enter value to current input form");
-				return;
-			}*/
+    			$this.closest('.fieldsGroup').find('.select2-hidden-accessible').each(function(){
+    				if(this.value == '') {
+    					flag = true;
+    					return;
+    				}else
+    					$tempVals.push(this.value);
+    			});
+    			/*if(flag) {
+    				alertify.alert("Please enter value to current input form");
+    				return;
+    			}*/
 
-			var $clone = $firstTbContainer.clone();
+			    var $clone = $firstTbContainer.clone();
 
-			if (ctr < 1) {
-				$clone.find('button').addClass('hidden');
-				$clone.append('<button type="button" class="btn btn-info" onclick="clearMedInput(this)"><i class="glyphicon glyphicon-repeat"</button>');
-			}
+    			if (ctr < 1) {
+    				$clone.find('button').addClass('hidden');
+    				$clone.append('<button type="button" class="btn btn-info" onclick="clearMedInput(this)"><i class="glyphicon glyphicon-repeat"</button>');
+    			}
 
-			$clone.css("display", "");
-			$clone.find('select').css("width", "60%");
-			$clone.find('.formInpt').each(function() {
-				$(this).attr("disabled", false);
-			});
+    			$clone.css("display", "");
+    			$clone.find('select').css("width", "60%");
+    			$clone.find('.formInpt').each(function() {
+    				$(this).attr("disabled", false);
+    			});
 
-			if($clone.find('select').hasClass('selComp')) {
-				$clone.find('select').select2({
-					tags: true
-				});
-			}else
-				$clone.find('select').select2();
+    			if($clone.find('select').hasClass('selComp')) {
+    				$clone.find('select').select2({
+    					tags: true
+    				});
+    			}else
+    				$clone.find('select').select2();
 
-			$tempVals.forEach(function(v) {
-				$clone.find('select').find('option').each(function() {
-					if(this.value == v) {
-						$(this).attr("disabled", true);
-					}
-				});
-			});
+    			$tempVals.forEach(function(v) {
+    				$clone.find('select').find('option').each(function() {
+    					if(this.value == v) {
+    						$(this).attr("disabled", true);
+    					}
+    				});
+    			});
 
-			$lastTbContainer.after($clone);
+			    $lastTbContainer.after($clone);
 
         }else {
-			alertify.log("Max reached");
-		}
+			    alertify.alert("Max reached");
+		    }
     });
 
-    $('.fieldsGroup').on('click', 'button.remove', function() {
-        $(this).closest('.tbContainer').remove();
-    });
-
+        $('.fieldsGroup').on('click', 'button.remove', function() {
+            $(this).closest('.tbContainer').remove();
+        });
 });
 
 $('.form').on('change keyup', function() {
@@ -73,6 +72,7 @@ $('.form').on('change keyup', function() {
   $(this).val(sanitized);
   alert();
 });
+
 $('.quantity').on('change', function() {
 	alert();
 });
@@ -119,14 +119,14 @@ function viewVisit(id) {
             var obj = JSON.parse(data);
             console.log(obj);
             $(".fullName").html(obj.Patient.firstName + " " + obj.Patient.lastName);
-			 $(".visitId").html(obj.Visit.ID);
-             $(".visitDate").html(moment(obj.Visit.visitDate).format('LLLL'));
+			      $(".visitId").html(obj.Visit.ID);
+            $(".visitDate").html(moment(obj.Visit.visitDate).format('LLLL'));
 
             $("#complaint").empty();
             $.each(obj.Complaint, function(index, value) {
                 $("#complaint").append('<li class="h4">' + value + '</li>');
 
-				$form.find(".complaintDiv").children('a').click();
+				    $form.find(".complaintDiv").children('a').click();
             });
 
             $("#medicine").empty();
@@ -220,7 +220,7 @@ function delpatientVisit() {
         cache: false,
         success: function(response) {
 
-            alertify.log(response);
+            alertify.alert(response);
             refresh();
 
         }
@@ -237,7 +237,7 @@ function delrecordCheck() {
     });
 
     if (data.length === 0) {
-        alertify.log("No record selected.");
+        alertify.alert("No record selected.");
         return;
     } else {
         $('#delete-visit').modal('show');
@@ -254,7 +254,7 @@ function delvisitCheck() {
     });
 
     if (data.length === 0) {
-        alertify.log("No record selected.");
+        alertify.alert("No record selected.");
         return;
     } else {
         $('#delete-visit').modal('show');
@@ -461,11 +461,11 @@ $("#addVisitForm").on("submit", function(event) {
 
 			if(response[0]=='success') {
 				console.log(response);
-				alertify.log('Patient visit created');
+				alertify.alert('Patient visit created');
 				$("#addVisitModal").modal('hide');
 				refresh();
 			}else {
-				alertify.log(response);
+				alertify.alert(response);
 			}
 
 		}
@@ -491,13 +491,13 @@ $("#editVisitForm").on("submit", function(event) {
 
 			if(response[0]=='success') {
 				console.log(response);
-				alertify.log('Patient visit update');
+				alertify.alert('Patient visit update');
 				editFormHide();
 				$('.select2-hidden-accessible').parent(".tbContainer").remove();
 				viewVisit(response[1]);
 				refresh();
 			}else {
-				alertify.log(response);
+				alertify.alert(response);
 			}
 		}
 	});

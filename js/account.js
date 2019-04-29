@@ -16,12 +16,12 @@ $("#profileForm").on("submit", function(event) {
 			//console.log(response);
 
 			if(response == 'success') {
-				alertify.log(response);
+				alertify.alert(response);
 				location.reload();
 				$form[0].reset();
 				location.reload();
 			}else {
-				alertify.log(response);
+				alertify.alert(response);
 			}
 		}
 	});
@@ -43,17 +43,17 @@ $("#passwordForm").on("submit", function(event) {
 			//console.log(response);
 
 			if(response == 'success') {
-				alertify.log(response);
+				alertify.alert(response);
 				location.reload();
 				//$form[0].reset();
 				//location.reload();
 			}else {
-				alertify.log(response);
+				alertify.alert(response);
 			}
 		}
 	});
 	}else {
-		alertify.log("Not match");
+		alertify.alert("Not match");
 	}
 
 

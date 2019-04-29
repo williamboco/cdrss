@@ -2,7 +2,7 @@
 include('../includes/dbcon.php');
 $mStatus = $_GET['data'];
 
-$query = "SELECT * FROM `medicine` WHERE status='$mStatus'";
+$query = "SELECT * FROM `medicine` WHERE status='$mStatus' AND isDeleted=0";
 $result = mysqli_query($con, $query);
 
 $medicine = array();

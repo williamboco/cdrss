@@ -19,10 +19,10 @@
 		$stmt->bind_param("iiii", $mStatus, $newQty, $updateQty, $id);
 
 		$updateQty = htmlspecialchars($_GET['updateQty']);
-		if ($updateQty >= 1 && $updateQty <= 500) {
+		if ($updateQty >= 1 && $updateQty <= 2000) {
 			$newQty = $currentQty + $updateQty;
 		} else {
-			echo "Error: Quantity must be between 1 and 500";
+			echo "Error: Quantity must be between 1 and 2000";
 			die();
 		}
 
@@ -38,7 +38,7 @@
 
 	}else {
 		$stmt = $con->prepare("UPDATE `medicine` SET  status=?, currentQty=?, updateQty=? WHERE ID=?");
-		$stmt->bind_param("iiiii", $mStatus, $newQty, $updateQty, $id);
+		$stmt->bind_param("iiii", $mStatus, $newQty, $updateQty, $id);
 
 		$updateQty = htmlspecialchars($_GET['updateQty']);
 		if ($updateQty <= $currentQty){

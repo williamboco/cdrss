@@ -2,19 +2,22 @@
 include('../includes/dbcon.php');
 
 session_start();
-$user = $_POST['userID'];
-$id = $_POST['idNumber'];
+$user = htmlspecialchars($_POST['userID']);
+$id = htmlspecialchars($_POST['idNumber']);
+
 //http://stackoverflow.com/questions/24570744/remove-extra-spaces-but-not-space-between-two-words
 $remarks = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $_POST["remarks"])));
+
 $comp = $_POST["complaint"];
 $med = $_POST["med"];
 $time = $_POST["visitDate"];
 
 $message = array();
 
-	$query = "INSERT INTO `visit` (`ID`, `patientID`, `visitDate`, `remarks`, `isDeleted`, `createdBy`, `modifiedBy`, `dateCreated`, `dateModified`) VALUES (NULL, '$id', '$time', '$remarks', '0', '$user', '$user', NOW(), NOW())";
+	$query = "INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (NULL, '$id', '$time', '$remarks', '0', '$user', '$user', NOW(), NOW())";
 
 	if(mysqli_query($con, $query)) {
+<<<<<<< HEAD
 		array_push($message, "success");
 
 		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
@@ -23,13 +26,17 @@ $message = array();
 		 $userID = $_SESSION['userID'];
 		 $eventName = "Created new patient visit record.";
 		 $stmt->execute();
+=======
+		array_push($message, "Patient visit record successfully created.");
+
+>>>>>>> 7cae0f7d9730f206d44a3ca89051fae1fe14cbb9
 		//get autoIncrement ID from recent query
 		$vId = mysqli_insert_id($con);
-		array_push($message, "visit id: ".$vId);
+		array_push($message, "Visit id: ".$vId);
 
 
 		foreach($comp as $i => $item) {
-			$query = "INSERT INTO complaint (complaintName) SELECT * FROM (SELECT '$item') AS tmp WHERE NOT EXISTS ( SELECT complaintName FROM complaint WHERE complaintName='$item' )";
+			$query = "INSERT INTO `complaint` (complaintName) SELECT * FROM (SELECT '$item') AS tmp WHERE NOT EXISTS ( SELECT complaintName FROM `complaint` WHERE complaintName='$item' )";
 			mysqli_query($con, $query);
 
 			//get autoIncrement ID from recent query
@@ -42,7 +49,7 @@ $message = array();
 				$cId = $row['ID'];
 			}
 
-			$query = "INSERT INTO `visit_complaint` (`ID`, `visitID`, `complaintID`) VALUES (NULL, '$vId', '$cId')";
+			$query = "INSERT INTO `visit_complaint` (ID, visitID, complaintID) VALUES (NULL, '$vId', '$cId')";
 			if(mysqli_query($con, $query)) {
 				array_push($message, "complaint".$cId.":".$item);
 			}
@@ -57,7 +64,7 @@ $message = array();
 				$mId = $med[$i];
 				$mQty = $med[$i+1];
 
-				if(mysqli_query($con, "INSERT INTO `visit_medicine` (`ID`, `visitID`, `medicineID`, `quantity`) VALUES (NULL, '$vId', '$mId', '$mQty')"))
+				if(mysqli_query($con, "INSERT INTO `visit_medicine` (ID, visitID, medicineID, quantity) VALUES (NULL, '$vId', '$mId', '$mQty')"))
 				{
 					array_push($message, "medicine".$mId.":(".$mQty.")");
 				}
@@ -67,6 +74,13 @@ $message = array();
 		}
 
 		array_push($message, "remarks: ".$remarks);
+
+		$stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
+		$stmt->bind_param("isi", $eventID, $eventName, $userID);
+		$eventID = NULL;
+		$userID = $_SESSION['userID'];
+		$eventName = "Created patient visit";
+		$stmt->execute();
 
 	}else {
 		array_push($message, "error");

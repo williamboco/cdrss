@@ -39,17 +39,17 @@ $("#addForm").on("submit", function(event) {
 			console.log(response);
 
 			$('#addModal').modal('hide');
-				alertify.log(response);
+				alertify.alert(response);
 				$form[0].reset();
 				refreshUTable();
 			/*if(response == 'success') {
 				$('#addModal').modal('hide');
-				alertify.log(response);
+				alertify.alert(response);
 				$form[0].reset();
 				refreshUTable();
 
 			}else {
-				alertify.log(response);
+				alertify.alert(response);
 			}*/
 		}
 	});
