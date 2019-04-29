@@ -17,8 +17,19 @@ $message = array();
 	$query = "INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (NULL, '$id', '$time', '$remarks', '0', '$user', '$user', NOW(), NOW())";
 
 	if(mysqli_query($con, $query)) {
+<<<<<<< HEAD
+		array_push($message, "success");
+
+		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+		 $eventID = NULL;
+		 $userID = $_SESSION['userID'];
+		 $eventName = "Created new patient visit record.";
+		 $stmt->execute();
+=======
 		array_push($message, "Patient visit record successfully created.");
 
+>>>>>>> 7cae0f7d9730f206d44a3ca89051fae1fe14cbb9
 		//get autoIncrement ID from recent query
 		$vId = mysqli_insert_id($con);
 		array_push($message, "Visit id: ".$vId);

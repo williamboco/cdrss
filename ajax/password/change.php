@@ -11,17 +11,21 @@ $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0)
 
 $password = htmlspecialchars($_POST['oldPass']);
 $newPass = htmlspecialchars($_POST['password1']);
-$userID = $_POST['userID'];
-
 
 //db query
-$query = mysqli_query($con, "SELECT * FROM user WHERE ID='$userID'");
-$row = mysqli_fetch_array($query);
+$query = $con->prepare("SELECT * FROM user WHERE ID=?");
+$query->bind_param("i", $userID);
+
+$userID = $_POST['userID'];
+
+$query->execute();
+$result = $query->get_result();
+$rownum = mysqli_num_rows($result);
 
 
+if($rownum > 0) {
 
-if(mysqli_num_rows($query) > 0) {
-
+	while ($row = $result->fetch_assoc()) {
 		$row['password'] = openssl_decrypt(base64_decode($row['password']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 		if ($row['password'] == $password) {
@@ -34,18 +38,22 @@ if(mysqli_num_rows($query) > 0) {
 			 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 			 $eventID = NULL;
 			 $userID = $_SESSION['userID'];
-			 $eventName = "Changed password";
+			 $eventName = "Changed password.";
 			 $stmt->execute();
 
 			if(mysqli_affected_rows($con) > 0) {
-				$message "success";
+				$message = "success";
 			}else {
 				$message = "Not updated";
 			}
 
+		}
+
 	}
 
-	$message = "Not Updated!";
+	 $message = "Not Updated!";
+
+
 
 }else {
 

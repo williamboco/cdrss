@@ -22,9 +22,13 @@ if($statusType == 1){
 }
 
 
-if($result = mysqli_query($con, $query)) {
-	$row = mysqli_fetch_array($result);
-	$isActive = $row['isActive'];
+		//$obj->logEvent("Changed status");
+		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+		 $eventID = NULL;
+		 $userID = $_SESSION['userID'];
+		 $eventName = "Updated status of user.";
+		 $stmt->execute();
 
 	if ($isActive == $status){
 		echo "<h4><b>Error: Status is already updated</b></h4>";
@@ -46,7 +50,7 @@ if($result = mysqli_query($con, $query)) {
 
 		 $eventID = NULL;
 		 $userID = $_SESSION['userID'];
-		 $eventName = "Changed status";
+		 $eventName = "Updated status of user.";
 		 $stmt->execute();
 
 ?>

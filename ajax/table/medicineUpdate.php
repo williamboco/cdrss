@@ -49,7 +49,7 @@
 	$stmt->bind_param("isi", $eventID, $eventName, $userID);
 	$eventID = NULL;
 	$userID = $_SESSION['userID'];
-	$eventName = "Updated Medicine";
+	$eventName = "Updated medicine.";
 	$stmt->execute();
 
 	$stmt->close();

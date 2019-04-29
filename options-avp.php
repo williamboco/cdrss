@@ -4,7 +4,7 @@ include('includes/dbcon.php');
 include('includes/session.php');
 
 if($_SESSION['role'] != 'Admin') {
-	header("location: home.php");
+	header("location: options.php");
 }
 
 ?>
@@ -29,12 +29,12 @@ if($_SESSION['role'] != 'Admin') {
 	<div class="container">
 		<div class="row" style="margin-top: 50px;">
 			<div class="col-sm-2">
-				<button type="button" class="btn btn-block filter" value="course">Courses</button>
-				<button type="button" class="btn btn-block filter" value="track">Tracks</button>
-				<button type="button" class="btn btn-block filter" value="department">Departments</button>
-				<button type="button" class="btn btn-block filter" value="allergy">Allergies</button>
-				<button type="button" class="btn btn-block filter" value="complaint">Complaints</button>
-				<button type="button" class="btn btn-block medicine-filter" value="medicine">Inventory</button>
+				<button type="button" class="btn btn-md btn-block filter" value="course">Courses</button>
+				<button type="button" class="btn btn-md btn-block filter" value="track">Tracks</button>
+				<button type="button" class="btn btn-md btn-block filter" value="department">Departments</button>
+				<button type="button" class="btn btn-md btn-block filter" value="allergy">Allergies</button>
+				<button type="button" class="btn btn-md btn-block filter" value="complaint">Complaints</button>
+				<button type="button" class="btn btn-md btn-block medicine-filter" value="medicine">Inventory</button>
 			</div>
 
 			<div class="col-sm-10">
@@ -52,11 +52,11 @@ if($_SESSION['role'] != 'Admin') {
 					</div>
 					<div class="card">
 						<div class="table-responsive">
-							<table id="table" class="display" cellspacing="0" width="100%">
+							<table id="table" class="display hover" cellspacing="0" width="100%">
 							</table>
 						</div>
 						<div class="medicine-responsive hidden">
-							<table id="medicineTable" class="display" cellspacing="0" width="100%">
+							<table id="medicineTable" class="display hover" cellspacing="0" width="100%">
 							</table>
 						</div>
 					</div>

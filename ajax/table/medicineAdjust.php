@@ -77,7 +77,7 @@
 
 	$eventID = NULL;
 	$userID = $_SESSION['userID'];
-	$eventName = "Stock adjusted";
+	$eventName = "Stock of medicine adjusted.";
 	$stmt->execute();
 
 	$stmt->close();
