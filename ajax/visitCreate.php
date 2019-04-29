@@ -4,10 +4,12 @@ include('../includes/dbcon.php');
 session_start();
 $user = htmlspecialchars($_POST['userID']);
 $id = htmlspecialchars($_POST['idNumber']);
+
 //http://stackoverflow.com/questions/24570744/remove-extra-spaces-but-not-space-between-two-words
 $remarks = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $_POST["remarks"])));
+
 $comp = $_POST["complaint"];
-$med = htmlspecialchars($_POST["med"]);
+$med = $_POST["med"];
 $time = $_POST["visitDate"];
 
 $message = array();
@@ -51,7 +53,7 @@ $message = array();
 				$mId = $med[$i];
 				$mQty = $med[$i+1];
 
-				if(mysqli_query($con, "INSERT INTO `visit_medicine` (`ID`, `visitID`, `medicineID`, `quantity`) VALUES (NULL, '$vId', '$mId', '$mQty')"))
+				if(mysqli_query($con, "INSERT INTO `visit_medicine` (ID, visitID, medicineID, quantity) VALUES (NULL, '$vId', '$mId', '$mQty')"))
 				{
 					array_push($message, "medicine".$mId.":(".$mQty.")");
 				}

@@ -16,6 +16,7 @@ if($_SESSION['role'] != 'Admin') {
     <link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
 	  <link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
 	  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 		<link href="css/animate.css" rel="stylesheet">
 		<meta charset="utf-8">

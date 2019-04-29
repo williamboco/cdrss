@@ -469,14 +469,15 @@ function adjustRecord() {
 								selectUrl(table);
 							}
 						});
-					}
 
-					$(tr).css('color', 'blue');
-					$(tr).css('font-weight', 'bold');
-					setTimeout(function() {
-						$(tr).css('color', '');
-						$(tr).css('font-weight', '');
-					}, 3000);
+						$(tr).css('color', 'blue');
+						$(tr).css('font-weight', 'bold');
+						setTimeout(function() {
+							$(tr).css('color', '');
+							$(tr).css('font-weight', '');
+						}, 3000);
+
+					}				
 
 				} else {
 					alertify.alert("Error: Cannot proceed with action");
