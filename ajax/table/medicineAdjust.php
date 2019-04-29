@@ -15,22 +15,21 @@
 	}
 
 	if($isAdd == 1) {
-		$stmt = $con->prepare("UPDATE `medicine` SET  status=?, currentQty=?, updateQty=?, newQty=? WHERE ID=?");
-		$stmt->bind_param("iiiii", $mStatus, $quantityLevel, $updateQty, $newQty, $id);
+		$stmt = $con->prepare("UPDATE `medicine` SET  status=?, currentQty=?, updateQty=? WHERE ID=?");
+		$stmt->bind_param("iiiii", $mStatus, $newQty, $updateQty, $id);
 
 		$updateQty = htmlspecialchars($_GET['updateQty']);
 		if ($updateQty >= 1 && $updateQty <= 500) {
 			$newQty = $currentQty + $updateQty;
-			$quantityLevel = $newQty;
 		} else {
 			echo "Error: Quantity must be between 1 and 500";
 			die();
 		}
 
-		if ($quantityLevel > 0){
-			if ($quantityLevel > $thresholdQty){
+		if ($newQty > 0){
+			if ($newQty > $thresholdQty){
 				$mStatus = 3;
-			} else if ($quantityLevel > $criticalQty){
+			} else if ($newQty > $criticalQty){
 				$mStatus = 2;
 			}	else {
 				$mStatus = 1;
@@ -38,22 +37,21 @@
 		}
 
 	}else {
-		$stmt = $con->prepare("UPDATE `medicine` SET  status=?, currentQty=?, updateQty=?, newQty=? WHERE ID=?");
-		$stmt->bind_param("iiiii", $mStatus, $quantityLevel, $updateQty, $newQty, $id);
+		$stmt = $con->prepare("UPDATE `medicine` SET  status=?, currentQty=?, updateQty=? WHERE ID=?");
+		$stmt->bind_param("iiiii", $mStatus, $newQty, $updateQty, $id);
 
 		$updateQty = htmlspecialchars($_GET['updateQty']);
 		if ($updateQty <= $currentQty){
 			$newQty = $currentQty - $updateQty;
-			$quantityLevel = $newQty;
 		} else{
 			echo "Error: Cannot proceed with adjustment \r\n";
 			die();
 		}
 
-		if ($quantityLevel > 0){
-			if ($quantityLevel > $thresholdQty){
+		if ($newQty > 0){
+			if ($newQty > $thresholdQty){
 				$mStatus = 3;
-			} else if ($quantityLevel > $criticalQty){
+			} else if ($newQty > $criticalQty){
 				$mStatus = 2;
 			}	else {
 				$mStatus = 1;
