@@ -477,7 +477,7 @@ function adjustRecord() {
 							$(tr).css('font-weight', '');
 						}, 3000);
 
-					}				
+					}
 
 				} else {
 					alertify.alert("Error: Cannot proceed with action");

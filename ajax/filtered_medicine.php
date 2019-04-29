@@ -14,7 +14,7 @@ while($res = mysqli_fetch_array($result)) {
 		include('filter_medicine.php');
 
 		$x = (object) array(
-		0 => $res['ID'],
+		0 => '',
 		1 => '<input type="checkbox" name="check" onclick="selectOne(this)" id="ID" value="'.$res['ID'].'" required/>',
 		2 => '<button class="btn details-control"><i class="fas fa-sort-down" aria-hidden="true"></i></button>',
 		3 => $mName,
