@@ -131,7 +131,7 @@ $(document).ready(function() {
 
 		if (table == ''){
 			event.stopPropagation();
-			// alertify.alert("No record selected");
+			alertify.alert("No record selected");
 		} else {
 			$addModal.find('form').hide();
 			$addModal.find('#add-' + table).show();
