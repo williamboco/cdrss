@@ -1,7 +1,7 @@
 <?php
 include('../includes/dbcon.php');
 
-session_start();
+
 $patientType = $_GET['patientType'];
 $months = $_GET['months'];
 $years = $_GET['years'];
@@ -64,12 +64,7 @@ $data = array(
   "vTotal" => $vTotal
 );
 
-$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
-$stmt->bind_param("isi", $eventID, $eventName, $userID);
-$eventID = NULL;
-$userID = $_SESSION['userID'];
-$eventName = "Generated tally report.";
-$stmt->execute();
+
 
 echo json_encode($data);
 
