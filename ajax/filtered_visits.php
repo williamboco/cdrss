@@ -4,6 +4,11 @@ $patientType = $_GET['patientType'];
 $date1 = $_GET['date1'];
 $date2 = date('Y-m-d H:i:s', strtotime($_GET['date2'] . ' +1 day'));	//http://stackoverflow.com/questions/1394791/adding-one-day-to-a-date
 
+$method = 'aes-256-cbc';
+$password = '3sc3RLrpd17';
+$key = substr(hash('sha256', $password, true), 0, 32);
+$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+
 
 include('filter_patients.php');
 
@@ -30,7 +35,7 @@ while($patient = mysqli_fetch_array($result)) {
 				$q = intval($q);
 				$name = $medInf['brandName'] ?: $medInf['genericName'];
 
-				
+
 				if($type == 'Capsule'  || $type == 'Tablet') {
 					if($q > 1)
 						$unit = 'pcs.';
@@ -42,7 +47,7 @@ while($patient = mysqli_fetch_array($result)) {
 					else
 						$unit = 'use';
 				}
-				
+
 				$medicine .= $name." (".$q.$unit."), ";
 
 			}
@@ -50,6 +55,9 @@ while($patient = mysqli_fetch_array($result)) {
 
 			//$date = date_create($vis['visitDate']);
 			//$date = date_format($date, 'd/m/y');
+
+			$patient['firstName'] = openssl_decrypt(base64_decode($patient['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+			$patient['lastName'] = openssl_decrypt(base64_decode($patient['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 			$x = (object) array(
 				0 => '',
