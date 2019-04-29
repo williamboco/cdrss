@@ -16,7 +16,7 @@
 
 	if($isAdd == 1) {
 		$stmt = $con->prepare("UPDATE `medicine` SET  status=?, currentQty=?, updateQty=? WHERE ID=?");
-		$stmt->bind_param("iiiii", $mStatus, $newQty, $updateQty, $id);
+		$stmt->bind_param("iiii", $mStatus, $newQty, $updateQty, $id);
 
 		$updateQty = htmlspecialchars($_GET['updateQty']);
 		if ($updateQty >= 1 && $updateQty <= 500) {
@@ -38,7 +38,7 @@
 
 	}else {
 		$stmt = $con->prepare("UPDATE `medicine` SET  status=?, currentQty=?, updateQty=? WHERE ID=?");
-		$stmt->bind_param("iiiii", $mStatus, $newQty, $updateQty, $id);
+		$stmt->bind_param("iiii", $mStatus, $newQty, $updateQty, $id);
 
 		$updateQty = htmlspecialchars($_GET['updateQty']);
 		if ($updateQty <= $currentQty){

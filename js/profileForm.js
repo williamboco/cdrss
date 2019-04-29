@@ -4,7 +4,7 @@
 // Add patient modal on hide event
 $("#patientModal").on("hidden.bs.modal", function () {
 	var $modal = $(this);
-	
+
 	$modal.find('form')[0].reset();
 	$modal.find('.dInput').parent().remove();	//clear dynamic controls
 	$modal.find("#profileInfoDiv").addClass("hidden");
@@ -14,10 +14,10 @@ $("#patientModal").on("hidden.bs.modal", function () {
 // Add patient modal on shown event
 $("#patientModal").on("shown.bs.modal", function () {
 	var $modal = $(this);
-	
+
 	$modal.find('a.addInputAll').click();	//trigger allergy[] add control
 	$modal.find('a.addInputCP').click();	//trigger cPerson[] add control
-	
+
 });
 
 //toggle patient type radio button
@@ -25,7 +25,7 @@ $("input[name='ptype']:radio").change(function () {
 	var $infoDiv = $("#profileInfoDiv");
 	var $studDiv = $(".studDiv");
 	var $empDiv = $(".empDiv");
-	
+
 	$infoDiv.removeClass("hidden").hide().fadeIn("slow");
 	$("button[form]").removeClass("hidden");
 	if(this.value =='student') {
@@ -46,7 +46,7 @@ $("input[name='ptype']:radio").change(function () {
 $('select[name=studenttype]').change(function() {
 	var $courseDiv = $('#courseDiv');
 	var $trackDiv = $('#trackDiv');
-		
+
 	if(this.value == 'college') {
 		$trackDiv.hide();
 		$trackDiv.find('select').attr('disabled', true);
@@ -181,7 +181,7 @@ $.ajax({
                 var inputBirthdate = $("#addForm input[name=birthdate]");
                 inputBirthdate.attr("min", mindate);
                 inputBirthdate.attr("max", maxdate);
-               
+
             })();
             var inputBirthdate = $("#addForm input[name=birthdate]");
             inputBirthdate.on("change", function() {
@@ -201,18 +201,18 @@ function viewProfile() {
         success: function(obj){
 			var obj = JSON.parse(obj);
 			console.log(obj);
-			
+
 			$profile = $("#profileDiv");
 			$profile.find("#idNumber").append("<p class='h4'>" + obj.Patient.ID + "</p>");
 			$profile.find("#fullName").append("<p class='h4'>" + obj.Patient.firstName + " " + obj.Patient.lastName + "</p>");
 			$profile.find("#birthDate").append("<p class='h4'>" + obj.Patient.birthDate + "</p>");
 			$profile.find("#gender").append("<p class='h4'>" + obj.Patient.gender + "</p>");
 			$profile.find("#contact").append("<p class='h4'>" + obj.Patient.contact + "</p>");
-			
+
 			obj.ContactPerson.forEach(function(item) {
 				$profile.find("#cPerson").append("<p class='h4'>" + item.name + "-" + item.contact + "</p>");
 			});
-			
+
 			var allergy = '';
 			obj.Allergy.forEach(function(item) {
 				allergy += item + " ,";
@@ -230,7 +230,7 @@ function viewProfile() {
 					$profile.find("#otherInfo").append('<p class="small">Department</p><p class="h4">' + item.department + '</p>');
 					$profile.find("#otherInfo").append('<p class="small">Employment Type</p><p class="h4">' + item.employmentType + '</p>');
 				}
-				
+
 			});
 		}
 	 });
@@ -238,7 +238,7 @@ function viewProfile() {
  function editProfile() {
 	 var id = getParameterByName("id");
 	 var $form = $('#patientEditForm');
-	 
+
 	 $.ajax({
         type: "GET",
         url: "ajax/patientRead.php",
@@ -267,14 +267,14 @@ function viewProfile() {
 			$form.find('input[name="lastname"]').val(obj.Patient.lastName);
 			$form.find('input[name="contactnumber"]').val(obj.Patient.contact);
 			$form.find('input[name="birthdate"]').val(obj.Patient.birthDate);
-			
+
 			if(obj.Patient.gender == "Male") {
 				$('#gender1').attr("checked", true);
 			} else {
 				$('#gender2').attr("checked", true);
 			}
-			
-			
+
+
 			obj.Allergy.forEach(function(val, i) {
 				if(i>0) {
 				  $("#selAll").parent().siblings('a').click();
@@ -286,8 +286,8 @@ function viewProfile() {
 					sel.select2().val(obj.Allergy[i]).trigger('change');
 				});
 			}, 1000);
-			
-			
+
+
 			var cperson = new Array();
 			obj.ContactPerson.forEach(function(val, i) {
 				if(i>0) {
@@ -302,22 +302,22 @@ function viewProfile() {
 					input.val(cperson[i]);
 				});
 			}, 1000);
-			
-			
+
+
 		}
 	 });
  }
-  
+
   function delrecordCheck() {
 		var data = [];
 		$("#patientTable tr").each(function() {
-			if ($(this).hasClass("selected")) {	
+			if ($(this).hasClass("selected")) {
 			data.push($(this).find("#ID").attr("value"));
 			}
 		});
 		console.log(data);
 		if(data.length === 0){
-			alertify.log("No record selected.");
+			alertify.alert("No record selected.");
 			return;
 		}else {
 			$('#delete-patient').modal('show');
@@ -326,19 +326,19 @@ function viewProfile() {
 	function delpatient() {
 		var data = [];
 		$("#patientTable tr").each(function() {
-			if ($(this).hasClass("selected")) {	
+			if ($(this).hasClass("selected")) {
 			data.push($(this).find("#ID").attr("value"));
 			}
 		});
 		$.ajax({
 		type: "GET",
 		url: "ajax/patientDelete.php",
-		data: {data : data}, 
+		data: {data : data},
 		cache: false,
 
 		success: function(response){
 			//alert(response);
-			alertify.log(response);
+			alertify.alert(response);
 			dropdownFilter();
 		}
 	});
@@ -351,7 +351,7 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 	// Prevent form submission
 	event.preventDefault();
 	//console.log( $form.serialize() );
-  
+
 	// Use Ajax to submit form data
 	$.ajax({
 		type: 'POST',
@@ -361,15 +361,15 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 			// ... Process the result ...
 			var response = JSON.parse(response);
 			console.log(response);
-			
+
 			if(response[0]=='success') {
 				//alert("Patient record updated");
 				//window.location.href = 'http://localhost/cdrs/profile.php?id=' + response[1];
 				location.reload();
 			}else {
-				alertify.log (response);
+				alertify.alert (response);
 			}
-		
+
 		}
 	});
 });
@@ -382,13 +382,13 @@ function delpatientProfile() {
 		data: {data: data},
 		cache: false,
 		success: function(response){
-		alertify.log (response);
+		alertify.alert (response);
 			window.location.href="patient-list.php";
 		}
 	});
 
 }
-  
+
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;

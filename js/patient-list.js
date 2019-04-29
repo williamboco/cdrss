@@ -63,11 +63,11 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 
 		$("#patientModal").modal('hide');
 		if(result=='success') {
-			alertify.log("Patient record inserted");
+			alertify.alert("Patient record inserted");
 			$('.filters').trigger('change');
 			window.location.reload(true);
 		}else {
-			alertify.log(result);
+			alertify.alert(result);
 		}
 
 		}
