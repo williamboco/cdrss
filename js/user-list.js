@@ -112,7 +112,6 @@ function deleteUser(id) {
         data: {
             userID: id,
 						statusType: status
-
         },
         cache: false,
         success: function(response) {
