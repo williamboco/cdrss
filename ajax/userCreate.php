@@ -85,7 +85,7 @@ if ($rownum > 0) {
 
 	 // email message
 	 $title = "link";
-	 $link = $_SERVER['SERVER_NAME']."/cdrss/pass-new.php?rID=".$requestID;
+	 $link = $_SERVER['SERVER_NAME']."/cdrs/pass-new.php?rID=".$requestID;
 	 $msg = "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
 
 	 // To send HTML mail, the Content-type header must be set

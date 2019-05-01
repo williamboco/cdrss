@@ -1,1 +1,1 @@
-ErrorDocument 404 http://localhost:89/cdrss/error.php
+ErrorDocument 404 http://localhost:89/cdrs/error.php
