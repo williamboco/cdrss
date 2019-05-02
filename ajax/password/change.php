@@ -48,7 +48,7 @@ if($rownum > 0) {
 			}
 		}
 	}
-
+	
 }else {
 	$message = "Please enter a valid password.";
 }

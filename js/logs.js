@@ -3,17 +3,17 @@ $(document).ready(function() {
 		"ajax": "ajax/filtered_logs.php?",
 		"columnDefs": [ {
 			"searchable": false,
-			"orderable": true,
+			"orderable": false,
 			"targets": 0
 		} ],
 		"columns": [
 			{title: "Event", width: "5%"},
 			{title: "Date / Time"},
+			{title: "Action"},
 			{title: "Name"},
-			{title: "Role"},
-			{title: "Action",  width: "35%" , orderable: false},
+			{title: "Role",  width: "20%" , orderable: false},
 		],
-		"order": [[ 3, 'desc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+		"order": [[ 0, 'desc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );
 
 	t.on( 'order.dt search.dt', function () {
