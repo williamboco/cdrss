@@ -1,4 +1,4 @@
-$(document).ready(function() {
+ $(document).ready(function() {
 	var t = $('#table').DataTable( {
 
 		"columnDefs": [ {
@@ -189,21 +189,6 @@ $(document).ready(function() {
 $('.filters').on('click', function() {
 	var datatable = $('#medicineTable').dataTable().api();
 	var status = this.value;
-	console.log(status);
-
-	switch (status){
-		case "critical":
-			status = 1;
-			break;
-		case "threshold":
-			status = 2;
-			break;
-		case "optimum":
-			status = 3;
-			break;
-		default:
-			break;
-	}
 
 	$.ajax({
 		type: "GET",
@@ -218,6 +203,7 @@ $('.filters').on('click', function() {
 			datatable.draw();
 		}
 	});
+
 });
 
 $('[name="isSupply"]').on('change', function() {
