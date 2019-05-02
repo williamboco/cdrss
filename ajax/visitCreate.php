@@ -17,12 +17,7 @@ $message = array();
 	$query = "INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (NULL, $id, $time, $remarks, 0, $user, $user, NOW(), NOW())";
 
 	if(mysqli_query($con, $query)) {
-<<<<<<< HEAD
 		array_push($message, "Patient visit record successfully created.");
-=======
-
-		array_push($message, "success");
->>>>>>> c5e7208ed5719c780e5500e150c5465bffa9e65a
 
 		//get autoIncrement ID from recent query
 		$vId = mysqli_insert_id($con);
