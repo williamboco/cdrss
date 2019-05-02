@@ -3,7 +3,7 @@ $(document).ready(function() {
 		"ajax": "ajax/filtered_logs.php?",
 		"columnDefs": [ {
 			"searchable": false,
-			"ordering": false,
+			"orderable": true,
 			"targets": 0
 		} ],
 		"columns": [
@@ -13,15 +13,14 @@ $(document).ready(function() {
 			{title: "Role"},
 			{title: "Action",  width: "35%" , orderable: false},
 		],
-		"order": [[ 0, 'desc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+		"order": [[ 3, 'desc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );
 
 	t.on( 'order.dt search.dt', function () {
 		t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
 			cell.innerHTML = i+1;
 		} );
-	} )datatable.columns.adjust().draw(false);
-
+	} ).draw();
 
 });
 
