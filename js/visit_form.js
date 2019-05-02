@@ -125,8 +125,7 @@ function viewVisit(id) {
             $("#complaint").empty();
             $.each(obj.Complaint, function(index, value) {
                 $("#complaint").append('<li class="h4">' + value + '</li>');
-
-				    $form.find(".complaintDiv").children('a').click();
+				        $form.find(".complaintDiv").children('a').click();
             });
 
             $("#medicine").empty();
@@ -137,7 +136,7 @@ function viewVisit(id) {
 
       			var a = obj.Visit.visitDate;
       			var str = [a.slice(0, 10), "T", a.slice(10)].join('');
-      			str = str.replace(/\s/g, '');
+      			    str = str.replace(/\s/g, '');
       			var datetime = str.substring(0, str.length - 3);
 
       			$form.find('[name="visitDate"]').val(datetime);

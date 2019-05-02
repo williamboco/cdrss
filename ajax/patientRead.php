@@ -19,33 +19,30 @@ $pat['contact'] = openssl_decrypt(base64_decode($pat['contact']), $method, $key,
 
 //Contact person information
 $cPerson = array();
-$result = mysqli_query($con, "SELECT contact_person.fullName, contact_person.contact FROM contact_person WHERE patientID='$id'");
-while($p = mysqli_fetch_array($result)) {
-	$p['fullName'] = openssl_decrypt(base64_decode($p['fullName']), $method, $key, OPENSSL_RAW_DATA, $iv);
-	$p['contact'] = openssl_decrypt(base64_decode($p['contact']), $method, $key, OPENSSL_RAW_DATA, $iv);
-	$x = (object) array(
-		"name"   => $p['fullName'],
-		"contact"    => $p['contact']
-	);
-	array_push($cPerson, $x);
-}
+	$result = mysqli_query($con, "SELECT contact_person.fullName, contact_person.contact FROM `contact_person` WHERE patientID='$id'");
+	while($p = mysqli_fetch_array($result)) {
+		$p['fullName'] = openssl_decrypt(base64_decode($p['fullName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+		$p['contact'] = openssl_decrypt(base64_decode($p['contact']), $method, $key, OPENSSL_RAW_DATA, $iv);
+		$x = (object) array(
+			"name"   => $p['fullName'],
+			"contact"    => $p['contact']
+		);
+		array_push($cPerson, $x);
+	}
 
 
 //Allergy information
 $allerg = array();
-$query = "SELECT allergy.allergyName FROM patient_allergy
-			INNER JOIN allergy ON patient_allergy.allergyID=allergy.ID
-			WHERE patientID='$id'";
-$result = mysqli_query($con, $query);
-while($all = mysqli_fetch_array($result)) {
-	array_push($allerg, $all['allergyName']);
-}
+	$result = mysqli_query($con, "SELECT allergy.allergyName FROM `patient_allergy`	INNER JOIN `allergy` ON patient_allergy.allergyID=allergy.ID WHERE patientID='$id'");
+	while($all = mysqli_fetch_array($result)) {
+		array_push($allerg, $all['allergyName']);
+	}
 
 //Other information
 $others = array();
-$shs = mysqli_query($con, "SELECT track.trackName FROM `shs` INNER JOIN track ON shs.trackID=track.ID WHERE shs.ID='$id'");
-$college = mysqli_query($con, "SELECT course.courseName FROM `college` INNER JOIN course ON college.courseID=course.ID WHERE college.ID='$id'");
-$employee = mysqli_query($con, "SELECT department.departmentName, employee.type FROM `employee` INNER JOIN department ON employee.departmentID=department.ID WHERE employee.ID='$id'");
+$shs = mysqli_query($con, "SELECT track.trackName FROM `shs` INNER JOIN `track` ON shs.trackID=track.ID WHERE shs.ID='$id'");
+$college = mysqli_query($con, "SELECT course.courseName FROM `college` INNER JOIN `course` ON college.courseID=course.ID WHERE college.ID='$id'");
+$employee = mysqli_query($con, "SELECT department.departmentName, employee.type FROM `employee` INNER JOIN `department` ON employee.departmentID=department.ID WHERE employee.ID='$id'");
 
 if(mysqli_num_rows($shs)>0){
 

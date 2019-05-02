@@ -4,7 +4,6 @@ include('../includes/dbcon.php');
 session_start();
 $user = htmlspecialchars($_POST['userID']);
 $id = htmlspecialchars($_POST['idNumber']);
-
 //http://stackoverflow.com/questions/24570744/remove-extra-spaces-but-not-space-between-two-words
 $remarks = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $_POST["remarks"])));
 
@@ -12,12 +11,10 @@ $comp = $_POST["complaint"];
 $med = $_POST["med"];
 $time = $_POST["visitDate"];
 
-$message = array();
-
+	$message = array();
 	$query = "INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (NULL, $id, $time, $remarks, 0, $user, $user, NOW(), NOW())";
 
 	if(mysqli_query($con, $query)) {
-
 		array_push($message, "success");
 
 		//get autoIncrement ID from recent query
@@ -46,7 +43,7 @@ $message = array();
 		}
 
 		$len = count($med);
-		for ($i=0; $i< $len; $i++) {
+		for ($i=0; $i<$len; $i++) {
 
 			//if medicine name is not blank
 			if($med[$i]!='') {
@@ -58,8 +55,6 @@ $message = array();
 					array_push($message, "medicine".$mId.":(".$mQty.")");
 				}
 			}
-
-			++$i;
 		}
 
 		array_push($message, "remarks: ".$remarks);

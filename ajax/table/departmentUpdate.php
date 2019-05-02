@@ -19,7 +19,7 @@
 		} else {
 
 			$stmt->execute();
-			if(mysqli_query($con, $query)) {
+			if(mysqli_query($con, $query0)) {
 				echo "Record successfully updated";
 			}else {
 				echo "Error: Record was not updated";

@@ -9,8 +9,6 @@ $password = '3sc3RLrpd17';
 $key = substr(hash('sha256', $password, true), 0, 32);
 $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
-
-
 include('filter_patients.php');
 
 $visits = array();
@@ -18,24 +16,26 @@ while($patient = mysqli_fetch_array($result)) {
 	$patientID = $patient['ID'];
 	$query = "SELECT * FROM `visit` WHERE patientID = '$patientID' AND visitDate BETWEEN '$date1' AND '$date2' AND isDeleted=0";
 	$visResult = mysqli_query($con, $query);
+
 	while($vis = mysqli_fetch_array($visResult)) {
-		$visID = $vis['ID'];
+			$visID = $vis['ID'];
 
 			$complaint = "";
-			$resComp = mysqli_query($con, "SELECT complaint.complaintName FROM visit_complaint JOIN complaint ON visit_complaint.complaintID=complaint.ID WHERE visitID=$visID");
-			while($compInf = mysqli_fetch_array($resComp)) {
+			$compResult = mysqli_query($con, "SELECT complaint.complaintName FROM `visit_complaint` JOIN `complaint` ON visit_complaint.complaintID=complaint.ID WHERE visitID=$visID");
+
+			while($compInf = mysqli_fetch_array($compResult)) {
 				$complaint .= $compInf['complaintName'].", ";
 			}
+
 			$complaint = rtrim($complaint,", ");
 
 			$medicine = "";
-			$resMed = mysqli_query($con, "SELECT * FROM visit_medicine JOIN medicine ON visit_medicine.medicineID=medicine.ID WHERE visitID=$visID");
-			while($medInf = mysqli_fetch_array($resMed)) {
+			$medResult = mysqli_query($con, "SELECT * FROM `visit_medicine` JOIN `medicine` ON visit_medicine.medicineID=medicine.ID WHERE visitID=$visID");
+			while($medInf = mysqli_fetch_array($medResult)) {
 				$q = $medInf['quantity'];
 				$type = $medInf['type'];
 				$q = intval($q);
 				$name = $medInf['brandName'] ?: $medInf['genericName'];
-
 
 				if($type == 'Capsule'  || $type == 'Tablet') {
 					if($q > 1)
