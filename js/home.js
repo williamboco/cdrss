@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	setDateRange();	
-	
+	setDateRange();
+
 	var t = $('#visitTable').DataTable( {
 		"ajax": "ajax/filtered_visits.php?" + $('#filter').serialize() ,
 		"columnDefs": [ {
@@ -20,24 +20,21 @@ $(document).ready(function() {
 		],
 		"order": [[ 2, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );
-	
+
 	t.on( 'order.dt search.dt', function () {
 		t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
 			cell.innerHTML = i+1;
 		} );
 	} ).draw();
-	
-	
-	
-	
+
 	$('#date1').on('change', function() {
 		//alert("Changed");
 		var $date1 = $("#date1");
 		var $date2 = $("#date2");
-		
+
 		$date2.attr("min", $date1.val());
 	});
-	
+
 	$('.filters').on('change', function() {
 		refresh();
 		visitDate()
@@ -69,9 +66,9 @@ $('#filter').find('[name="patientType"]').on('change', function() {
 			break;
 		default:
 	}
-	
+
 	$('#filterName').html(text);
-	
+
 });
 
 $(".graphBtn").on('click', function() {
@@ -81,22 +78,22 @@ $(".graphBtn").on('click', function() {
 	$('#graph').toggleClass('hidden');
 	$('#table').toggleClass('hidden');
 	refresh();
-	
+
 });
 
 function proceedReport() {
 	$form = $('#filter');
 	console.log($form.serialize());
-	
+
 	window.location="report.php?" + $form.serialize();
-	
+
 }
 
 function refresh() {
 	var $form = $('#filter');
 		console.log($form.serialize());
-		
-		
+
+
 		var datatable = $('#visitTable').dataTable().api();
 		$.ajax({
 			type: "GET",
@@ -111,7 +108,7 @@ function refresh() {
 				datatable.draw();
 			}
 		});
-		
+
 		//Medicine Graph
 		$.ajax({
 			type: "GET",
@@ -121,14 +118,14 @@ function refresh() {
 			success: function(data) {
 				var obj = JSON.parse(data);
 				console.log(obj);
-				
+
 				chart.dataProvider = obj;
 				chart.validateData();
 
 			}
 		});
-		
-		
+
+
 		//Compaint Graph
 		$.ajax({
 			type: "GET",
@@ -138,7 +135,7 @@ function refresh() {
 			success: function(data) {
 				var obj = JSON.parse(data);
 				//console.log(obj);
-				
+
 				chart2.dataProvider = obj;
 				chart2.validateData();
 
