@@ -13,7 +13,7 @@ $(document).ready(function() {
 			{title: "Role"},
 			{title: "Action",  width: "35%" , orderable: false},
 		],
-		"order": [[ 1, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+		"order": [[ 3, 'desc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );
 
 	t.on( 'order.dt search.dt', function () {

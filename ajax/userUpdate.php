@@ -22,7 +22,7 @@ $userID = htmlspecialchars($_POST['userID']);
 
 if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 	if(mysqli_num_rows($result) > 0 && $userID != $id) {
-		$message = "User with that ID number already exists.";
+		echo "User with that ID number already exists.";
 	} else {
 		$query = $con->prepare("UPDATE `user` SET `ID` = ?, `email` = ?, `dateEmployed` = ?, `firstName` = ?, `lastName` = ?, `gender` = ?, `contact` = ? WHERE `user`.`ID` = ?");
 		$query->bind_param("ssssssis", $id, $email, $employed, $firstName, $lastName, $gender, $contact, $userID);
@@ -36,15 +36,16 @@ if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 		 $stmt->execute();
 
 		if(mysqli_affected_rows($con) > 0) {
-			$message = "Profile updated";
+			$message = "Profile is successfully updated.";
 			$_SESSION['userID'] = $id;
 		}else {
-			$message = "Not updated.";
+				$message = "Profile is not updated.";
 		}
 
 	}
 }else {
-	$message = "Query Failed.";
+
+		$message = "Query Failed.";
 }
 echo $message;
 ?>

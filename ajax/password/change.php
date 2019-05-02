@@ -41,25 +41,16 @@ if($rownum > 0) {
 			 $eventName = "Changed password.";
 			 $stmt->execute();
 
-			if(mysqli_affected_rows($con) > 0) {
-				$message = "success";
+			 if(mysqli_affected_rows($con) > 0) {
+	 			$message = "Password is successfully updated.";
 			}else {
-				$message = "Not updated";
+				$message = "Password is not updated.";
 			}
-
 		}
-
 	}
 
-	 $message = "Not Updated!";
-
-
-
 }else {
-
-	$message = "Please enter your valid password";
-
+	$message = "Please enter a valid password.";
 }
-
 echo $message;
 ?>

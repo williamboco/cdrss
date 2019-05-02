@@ -56,7 +56,7 @@ $(document).ready(function() {
 			    $lastTbContainer.after($clone);
 
         }else {
-			    alertify.alert("Max reached");
+			     ("Max reached");
 		    }
     });
 
@@ -125,67 +125,59 @@ function viewVisit(id) {
             $("#complaint").empty();
             $.each(obj.Complaint, function(index, value) {
                 $("#complaint").append('<li class="h4">' + value + '</li>');
-
-				    $form.find(".complaintDiv").children('a').click();
+				        $form.find(".complaintDiv").children('a').click();
             });
 
             $("#medicine").empty();
             $.each(obj.Medicine, function(i) {
-
-                $("#medicine").append('<li class="h4">' + obj.Medicine[i].quantity + " " + obj.Medicine[i].unit + " " + obj.Medicine[i].name + '</li>');
-
-				$form.find(".medicineDiv").children('a').click();
+              $("#medicine").append('<li class="h4">' + obj.Medicine[i].quantity + " " + obj.Medicine[i].unit + " " + obj.Medicine[i].name + '</li>');
+  				    $form.find(".medicineDiv").children('a').click();
             });
 
+      			var a = obj.Visit.visitDate;
+      			var str = [a.slice(0, 10), "T", a.slice(10)].join('');
+      			    str = str.replace(/\s/g, '');
+      			var datetime = str.substring(0, str.length - 3);
 
-			var a = obj.Visit.visitDate;
-			var str = [a.slice(0, 10), "T", a.slice(10)].join('');
-			str = str.replace(/\s/g, '');
-			var datetime = str.substring(0, str.length - 3);
+      			$form.find('[name="visitDate"]').val(datetime);
 
-			$form.find('[name="visitDate"]').val(datetime);
+      			$("#remarks").html(obj.Visit.remarks);
+                  $("#createdBy").html(obj.createdBy);
+                  $("#dateCreated").html(obj.Visit.dateCreated);
 
-			$("#remarks").html(obj.Visit.remarks);
-            $("#createdBy").html(obj.createdBy);
-            $("#dateCreated").html(obj.Visit.dateCreated);
-
-			if(obj.Visit.dateCreated != obj.Visit.dateModified) {
-				$("#modifiedBy").html(obj.modifiedBy);
-				$("#dateModified").html(obj.Visit.dateModified);
-				$("#modifyDiv").show();
-			}else
-				$("#modifyDiv").hide();
-
-
+      			if(obj.Visit.dateCreated != obj.Visit.dateModified) {
+      				$("#modifiedBy").html(obj.modifiedBy);
+      				$("#dateModified").html(obj.Visit.dateModified);
+      				$("#modifyDiv").show();
+      			}else
+      				$("#modifyDiv").hide();
 
             setTimeout(function() {
                 $form.find(".complaintDiv").find('.select2-hidden-accessible').each(function(i) {
                     var sel = $(this);
                     sel.select2().val(obj.Complaint[i]).trigger('change');
-					sel.select2({tags:true});
+      		          sel.select2({tags:true});
                 });
             }, 100);
 
-			setTimeout(function() {
+      			setTimeout(function() {
                 $form.find(".medicineDiv").find('.select2-hidden-accessible').each(function(i) {
-                    var sel = $(this);
-					sel.select2().val(obj.Medicine[i].id).trigger('change');
-					sel.select2({tags:true});
-
+                  var sel = $(this);
+            			sel.select2().val(obj.Medicine[i].id).trigger('change');
+            			sel.select2({tags:true});
                 });
                 $form.find(".medicineDiv").find('input[name="med[]"]').each(function(i) {
                     var input = $(this);
-					if(this.hasAttribute('disabled')) {
+            			if(this.hasAttribute('disabled')) {
 
-					}else{
-						input.val(obj.Medicine[i-1].quantity);
-					}
+            			}else{
+            				input.val(obj.Medicine[i-1].quantity);
+            			}
                 });
 
             }, 100);
 
-			document.getElementById('remarksEdit').value = obj.Visit.remarks;
-
+      			document.getElementById('remarksEdit').value = obj.Visit.remarks;
         }
     });
     $('#btnEdit').attr("value", id);
@@ -264,11 +256,13 @@ function delvisitCheck() {
 $('#addVisitModal').on('show.bs.modal', function() {
 	complaintOptions();
 	medicineOptions();
-    var $form = $('#addVisitForm');
+
+  var $form = $('#addVisitForm');
 	$form.find('.addInput').click();
-    $form.find('[name="visitDate"]').val(currentDateTime());
+  $form.find('[name="visitDate"]').val(currentDateTime());
 
 });
+
 $('#addVisitModal').on('hidden.bs.modal', function() {
 	var $form = $('#addVisitForm');
 	$form.find('.select2-hidden-accessible').parent(".tbContainer").remove();
@@ -276,9 +270,10 @@ $('#addVisitModal').on('hidden.bs.modal', function() {
 	$form.find('select[name="idNumber"]').val(null).trigger("change");
 
 });
+
 $('#viewModal').on('hidden.bs.modal', function() {
 
-    $('.select2-hidden-accessible').parent(".tbContainer").remove();
+  $('.select2-hidden-accessible').parent(".tbContainer").remove();
 	document.getElementById("editVisitForm").reset();
 	$('#viewModal .view').removeClass('hidden');
 	$('#viewModal .edit').addClass('hidden');
@@ -287,9 +282,7 @@ $('#viewModal').on('hidden.bs.modal', function() {
 });
 
 
-/*
- * Select option configs
- */
+/*Select option configs*/
 
 // Quick search styles
 function formatRepo(repo) {
@@ -447,8 +440,7 @@ function medicineOptions() {
 $("#addVisitForm").on("submit", function(event) {
 	var $form = $(this);
 	event.preventDefault();
-    console.log($form.serialize());
-
+  console.log($form.serialize());
 	console.log("Send to visitCreate.php");
 
 	$.ajax({
@@ -458,10 +450,10 @@ $("#addVisitForm").on("submit", function(event) {
 		success: function(response) {
 			// ... Process the result ...
 			var response = JSON.parse(response);
-
+      console.log(response);
 			if(response[0]=='success') {
 				console.log(response);
-				alertify.alert('Patient visit created');
+				alertify.alert('Patient visit record successfully created');
 				$("#addVisitModal").modal('hide');
 				refresh();
 			}else {
@@ -476,8 +468,7 @@ $("#addVisitForm").on("submit", function(event) {
 $("#editVisitForm").on("submit", function(event) {
 	var $form = $(this);
 	event.preventDefault();
-    console.log($form.serialize());
-
+  console.log($form.serialize());
 	console.log("Send to visitUpdate.php");
 
 	// Use Ajax to submit form data
@@ -491,7 +482,7 @@ $("#editVisitForm").on("submit", function(event) {
 
 			if(response[0]=='success') {
 				console.log(response);
-				alertify.alert('Patient visit update');
+				alertify.alert('Patient visit record successfully updated');
 				editFormHide();
 				$('.select2-hidden-accessible').parent(".tbContainer").remove();
 				viewVisit(response[1]);

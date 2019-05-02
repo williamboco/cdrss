@@ -12,14 +12,14 @@
 		echo "<td>".$res['dateCreated']."</td>";
 
 		echo "<td>";
-			$result2 = mysqli_query($con, "SELECT * FROM `visit_complaint` WHERE visitID='$ref'");
+			$result2 = mysqli_query($con, "SELECT * FROM `visit_complaint` WHERE visitID=$ref");
 			while($comp = mysqli_fetch_array($result2)) {
 				echo "<small>".$comp['complaintName']."</small><br>";
 			}
 		echo "</td>";
 
 		echo "<td>";
-			$result3 = mysqli_query($con, "SELECT * FROM `visit_medicine` WHERE visitID='$ref'");
+			$result3 = mysqli_query($con, "SELECT * FROM `visit_medicine` WHERE visitID=$ref");
 			while($med = mysqli_fetch_array($result3)) {
 				echo "<small>".$med['quantity']." ".$med['medicineName']."</small><br>";
 			}
