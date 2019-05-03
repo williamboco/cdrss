@@ -24,9 +24,9 @@ while($row = mysqli_fetch_array($result)) {
 	$x = (object) array(
 		0 => $row['eventID'],
 		1 => $row['eventDate'],
-		2 => $row['firstName'].' '.$row['lastName'],
-		3 => $row['role'],
-		4 => $row['eventName']
+		2 => $row['eventName'],
+		3 => $row['firstName'].' '.$row['lastName'],
+		4 => $row['role']
 	);
 	array_push($users, $x);
 }

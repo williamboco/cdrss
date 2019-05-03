@@ -9,7 +9,6 @@ $password = '3sc3RLrpd17';
 $key = substr(hash('sha256', $password, true), 0, 32);
 $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
-
 include('filter_patients.php');
 
 $visits = array();
