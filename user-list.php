@@ -17,6 +17,7 @@ if($_SESSION['role'] != 'Admin') {
 	<link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
 	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
