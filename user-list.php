@@ -78,7 +78,7 @@ if($_SESSION['role'] != 'Admin') {
 						<label for ="dateEmployed">Employment Date</label>
 						<input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
 						<label for ="contact">Contact Number</label>
-						<input type="text" class="form-control" name="contact" placeholder="Contact Number" required><br>
+						<input type="number" class="form-control" name="contact" placeholder="Contact Number" required><br>
 						<label>Gender</label><br>
 						<input type="radio" name="gender" value="Male" id="gender1" required>
 					  <label for="gender1" style="margin-right: 50px;">Male</label>
