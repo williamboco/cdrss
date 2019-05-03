@@ -4,6 +4,10 @@ include('../includes/dbcon.php');
 include('../includes/password.php');
 session_start();
 
+
+$allowed = [
+	'iacademy.edu.ph'
+];
 $method = 'aes-256-cbc';
 $password = '3sc3RLrpd17';
 
@@ -41,7 +45,7 @@ $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RA
 $lastName = htmlspecialchars($_POST['lastname']);
 $lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
 $email = htmlspecialchars($_POST['email']);
-$email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
+$email = isset($email) ? trim($email) : null;
 $createdBy = htmlspecialchars($_SESSION['firstName']);
 $createdBy = base64_encode(openssl_encrypt($createdBy, $method, $key, OPENSSL_RAW_DATA, $iv));
 $modifiedBy =  htmlspecialchars($_SESSION['firstName']);
@@ -63,47 +67,65 @@ $rownum = mysqli_num_rows($result);
 if ($rownum > 0) {
 
 	while ($row = $result->fetch_assoc()) {
-		if ($row['ID'] == $id || $row['email'] == $email) {
-			echo "User ID or Email already exists!";
-		//	echo "User Added";
+		$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
+		if ($row['ID'] == $id) {
+			echo "User ID already exists!";
+		}
+
+		if ($row['email'] == $email) {
+			echo "Email Address already exists!";
 		}
 	}
  } else {
-	 $stmt->execute();
 
-	 $query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
-	 $query2->bind_param("isii", $isNull, $requestID, $id, $isUsed);
-	 $isNull = NULL;
-	 $requestID = randomPassword();
-	 $id = htmlspecialchars($_POST['idNumber']);
-	 $isUsed = 0;
+	   if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			 $parts = explode('@', $email);
+			 $domain = array_pop($parts);
 
-	 $query2->execute();
+			 if (! in_array($domain, $allowed)) {
+				 echo "Domain should end in iacademy.edu.ph";
+			 } else {
+				 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-	 $email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
+				 $stmt->execute();
 
-	 // email message
-	 $title = "link";
-	 $link = $_SERVER['SERVER_NAME']."/cdrs/pass-new.php?rID=".$requestID;
-	 $msg = "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
+				 $query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
+				 $query2->bind_param("isii", $isNull, $requestID, $id, $isUsed);
+				 $isNull = NULL;
+				 $requestID = randomPassword();
+				 $id = htmlspecialchars($_POST['idNumber']);
+				 $isUsed = 0;
 
-	 // To send HTML mail, the Content-type header must be set
-	 $headers  = 'MIME-Version: 1.0' . "\r\n";
-	 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				 $query2->execute();
 
-	 // use wordwrap() if lines are longer than 70 characters
-	 $msg = wordwrap($msg,70);
+				 $email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
 
-	 // send email
-	 require_once __DIR__ . '../../includes/mail.php';
+				 // email message
+				 $title = "link";
+				 $link = $_SERVER['SERVER_NAME']."/cdrs/pass-new.php?rID=".$requestID;
+				 $msg = "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
 
-	  $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
-		$stmt->bind_param("isi", $eventID, $eventName, $userID);
-		$eventID = NULL;
-		$userID = $_SESSION['userID'];
-		$eventName = "Created a new user.";
-		$stmt->execute();
+				 // To send HTML mail, the Content-type header must be set
+				 $headers  = 'MIME-Version: 1.0' . "\r\n";
+				 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+				 // use wordwrap() if lines are longer than 70 characters
+				 $msg = wordwrap($msg,70);
+
+				 // send email
+				 require_once __DIR__ . '../../includes/mail.php';
+
+				  $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+					$stmt->bind_param("isi", $eventID, $eventName, $userID);
+					$eventID = NULL;
+					$userID = $_SESSION['userID'];
+					$eventName = "Created a new user.";
+					$stmt->execute();
+			 }
+		 }
+
+
 	 }
 
 

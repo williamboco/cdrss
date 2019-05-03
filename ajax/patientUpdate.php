@@ -2,19 +2,31 @@
 include("../includes/dbcon.php");
 
 session_start();
-$origID = $_POST['origID'];
-$user = $_POST['userID'];
-$id = $_POST['idNumber'];
-$firstName = $_POST['firstname'];
-$lastName = $_POST['lastname'];
-$birthDate = $_POST['birthdate'];
-$gender = $_POST['gender'];
+
+$method = 'aes-256-cbc';
+$password = '3sc3RLrpd17';
+$key = substr(hash('sha256', $password, true), 0, 32);
+$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+
+$origID = htmlspecialchars($_POST['origID']);
+$user = htmlspecialchars($_POST['userID']);
+$id = htmlspecialchars($_POST['idNumber']);
+$firstName = htmlspecialchars($_POST['firstname']);
+$firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
+$lastName = htmlspecialchars( $_POST['lastname']);
+$lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
+$birthDate = htmlspecialchars($_POST['birthdate']);
+$gender = htmlspecialchars($_POST['gender']);
 $allergy = $_POST['allergy'];
 $cPerson = $_POST['cPerson'];
-$contact = $_POST['contactnumber'];
+$contact = htmlspecialchars($_POST['contactnumber']);
+$contact = base64_encode(openssl_encrypt($contact, $method, $key, OPENSSL_RAW_DATA, $iv));
 
 
-$query = "UPDATE `patient` SET `ID` = '$id', `firstName` = '$firstName', `lastName` = '$lastName', `birthDate` = '$birthDate', `gender` = '$gender', `contact` = '$contact', `modifiedBy` = '$user', `dateModified` = '2017-05-01 22:17:05' WHERE `patient`.`ID` = '$origID'";
+
+$query = $con->prepare("UPDATE `patient` SET `ID` = ?, `firstName` = ?, `lastName` = ?, `birthDate` = ?, `gender` = ?, `contact` = ?, `modifiedBy` = ?, `dateModified` = NOW() WHERE `patient`.`ID` = ?");
+$query->bind_param("ssssssis", $id, $firstName, $lastName, $birthDate, $gender, $contact, $user, $origID);
+
 
 $message = array();
 
@@ -24,7 +36,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID=$id")) {
 	} else {
 
 		//execute update query
-		if(mysqli_query($con, $query)) {
+		if($query->execute()) {
 			array_push($message, "success");
 			array_push($message, $id);
 
@@ -141,19 +153,27 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID=$id")) {
 
 				//if person name is not blank
 				if($cPerson[$i]!='') {
-					$pName = $cPerson[$i] ;
-					$pContact = $cPerson[$i+1];
+					$pName = htmlspecialchars($cPerson[$i]);
+					$pContact = htmlspecialchars($cPerson[$i+1]);
 
-					$result = mysqli_query($con, "INSERT INTO `contact_person` (`ID`, `patientID`, `fullName`, `contact`) VALUES (NULL, '$id', '$pName', '$pContact')");
-					if($result) {
-						//$message .= "\ncontact person inserted";
+					$result = $con->prepare("INSERT INTO `contact_person` (`ID`, `patientID`, `fullName`, `contact`) VALUES (?,?,?,?)");
+					$result->bind_param("iiss", $isNull, $id, $pName, $pContact);
+
+					$pName = htmlspecialchars($cPerson[$i]);
+					$pName = base64_encode(openssl_encrypt($pName, $method, $key, OPENSSL_RAW_DATA, $iv));
+					$pContact = htmlspecialchars( $cPerson[$i+1]);
+					$pContact = base64_encode(openssl_encrypt($pContact, $method, $key, OPENSSL_RAW_DATA, $iv));
+					$isNull = NULL;
+
+					if($result->execute()) {
+						$message .= "\ncontact person inserted";
 					}
 				}
 
 				++$i;
 			}
 
-			$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+			$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
 			 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 			 $eventID = NULL;
 			 $userID = $_SESSION['userID'];
