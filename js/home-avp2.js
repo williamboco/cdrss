@@ -67,21 +67,19 @@ function viewVisit(id) {
 	 $.ajax({
         type: "GET",
         url: "ajax/visitRead.php",
-        data: {
-            visitID: id
-        },
+        data: {visitID: id},
         cache: false,
         success: function(data) {
-			var obj = JSON.parse(data);
-            console.log(obj);
+					var obj = JSON.parse(data);
+          console.log(obj);
 
-			$(".visitId").html(obj.Visit.ID);
+						$(".visitId").html(obj.Visit.ID);
 
-			$("#complaint").empty();
-            $.each(obj.Complaint, function(index, value) {
-                $("#complaint").append('<li class="h4">' + value + '</li>');
+						$("#complaint").empty();
+			            $.each(obj.Complaint, function(index, value) {
+			                $("#complaint").append('<li class="h4">' + value + '</li>');
 
-            });
+			            });
 
             $("#medicine").empty();
             $.each(obj.Medicine, function(i) {

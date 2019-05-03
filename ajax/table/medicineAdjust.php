@@ -57,7 +57,7 @@
 				$mStatus = 1;
 			}
 		}
-			}
+}
 
 	if ($result = mysqli_query($con, $query0)) {
 		$row = mysqli_fetch_array($result);

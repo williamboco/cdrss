@@ -67,7 +67,7 @@ include('includes/session.php');
 									<input type="text" class="form-control" name="lastname" placeholder="Lastname" required><br>
 									<input type="email" class="form-control" name="email" placeholder="Email" required><br>
 									<input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
-									<input type="text" minlength="1" maxlength="11" pattern="[0-9]{0-9}[0-9]{0-9}" class="form-control" name="contact" placeholder="Contact Number" required><br>
+									<input type="number" minlength="1" maxlength="11" pattern="[0-9]{0-9}[0-9]{0-9}" class="form-control" name="contact" placeholder="Contact Number" required><br>
 									<label>Gender</label><br>
 									<input type="radio" name="gender" value="Male" id="gender1" required>
 									<label for="gender1" style="margin-right: 50px;">Male</label>

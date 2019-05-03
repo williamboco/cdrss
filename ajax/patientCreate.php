@@ -32,7 +32,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 	} else {
 		//echo "Doesn't exist";
 		if($query->execute()) {
-			$message = "Patient Profile created\n";
+			$message = "Patient profile successfully created\n";
 			if($_POST['ptype'] == 'student') {
 
 				if($_POST['studenttype'] == 'college') {
