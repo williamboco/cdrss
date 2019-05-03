@@ -11,7 +11,7 @@ $(document).ready(function() {
 			{title: "Date / Time"},
 			{title: "Action"},
 			{title: "Name"},
-			{title: "Role",  width: "20%" , orderable: false},
+			{title: "Role",  width: "5%" , orderable: false},
 		],
 		"order": [[ 0, 'desc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );

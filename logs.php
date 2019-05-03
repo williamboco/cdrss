@@ -156,7 +156,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/logss.js"></script>
+	<script src="js/logs.js"></script>
 
 </body>
 </html>

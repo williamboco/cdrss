@@ -84,7 +84,7 @@ if ($rownum > 0) {
 			 $domain = array_pop($parts);
 
 			 if (! in_array($domain, $allowed)) {
-				 echo "Please use your iACADEMY email.";
+				 echo "Domain should end in iacademy.edu.ph";
 			 } else {
 				 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 
@@ -113,16 +113,15 @@ if ($rownum > 0) {
 				 // use wordwrap() if lines are longer than 70 characters
 				 $msg = wordwrap($msg,70);
 
-				 $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
-				 $stmt->bind_param("isi", $eventID, $eventName, $userID);
-				 $eventID = NULL;
-				 $userID = $_SESSION['userID'];
-				 $eventName = "Created a new user.";
-				 $stmt->execute();
-
 				 // send email
 				 require_once __DIR__ . '../../includes/mail.php';
 
+				  $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+					$stmt->bind_param("isi", $eventID, $eventName, $userID);
+					$eventID = NULL;
+					$userID = $_SESSION['userID'];
+					$eventName = "Created a new user.";
+					$stmt->execute();
 			 }
 		 }
 
