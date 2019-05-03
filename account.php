@@ -32,11 +32,11 @@ include('includes/session.php');
 					</div>
 
 					<div class="col-lg-12 card-content">
-						<h2 class="col-lg-12" align="center">My Account</h2>
+						<h2 class="col-lg-12" align="center">My Account</h2><br>
 						<div class="btnmyaccnt">
-							<button type="button" class="btn btn-primary col-lg-5 col-md-5 col-sm-12 marginbtn" onclick="viewUser(this.value)" value="<?php echo $_SESSION['userID'];?>" id="viewBtn"><i class="glyphicon glyphicon-eye-open"></i>  View Profile</button>
-							<button type="button" class="btn btn-primary col-lg-6 col-md-6 col-sm-12 marginbtn" onclick="editUser()"><i class="glyphicon glyphicon-pencil"></i>  Edit Profile</button>
-							<button type="button" class="btn btn-info col-lg-6 col-md-6 col-sm-12 marginbtn" onclick="changePassword()"><i class="glyphicon glyphicon-wrench"></i>  Change Password</button>
+							<button type="button" class="btn btn-block btn-primary col-lg-5 col-md-5 col-sm-12 marginbtn" onclick="viewUser(this.value)" value="<?php echo $_SESSION['userID'];?>" id="viewBtn"><i class="glyphicon glyphicon-eye-open"></i>  View Profile</button>
+							<button type="button" class="btn btn-block btn-primary col-lg-6 col-md-6 col-sm-12 marginbtn" onclick="editUser()"><i class="glyphicon glyphicon-pencil"></i>  Edit Profile</button>
+							<button type="button" class="btn btn-block btn-info col-lg-6 col-md-6 col-sm-12 marginbtn" onclick="changePassword()"><i class="glyphicon glyphicon-wrench"></i>  Change Password</button>
 						</div>
 					</div>
 			</div>
@@ -83,11 +83,15 @@ include('includes/session.php');
 							<form id="passwordForm" autocomplete="off"  action="ajax/password/change.php" method="post" class="col-md-8" >
 								<h4>Password</h4><br>
 								<div class="form-group">
-									<p>Last Password Change:<span id="passChanged" ></span></p>
+									<p>Last Password Change: <span id="passChanged" ></span></p><br>
 									<input type="text" class="form-control hidden" name="userID" value="<?php echo $_SESSION['userID'];?>">
-									<input type="password" autocomplete="off"  class="form-control" name="oldPass" placeholder="Current Password" required><br>
-									<input type="password" autocomplete="off"  class="form-control" name="password1" placeholder="New Password" required><br>
-									<input type="password" autocomplete="off"  class="form-control" name="password2" placeholder="Repeat New Password" required><br>
+
+									<h5>Current Password</h5>
+									<input type="password" autocomplete="off" class="form-control" name="oldPass" placeholder="Current Password" required>
+									<h5>New Password</h5>
+									<input type="password" autocomplete="off" class="form-control" name="password1" placeholder="New Password" required>
+									<h5>Repeat New Password</h5>
+									<input type="password" autocomplete="off" class="form-control" name="password2" placeholder="Repeat New Password" required>
 								</div>
 
 								<button type="submit" class="btn btn-primary pull-right marginbtn">Submit</button>

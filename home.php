@@ -145,14 +145,14 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="addVisitForm">
 					<input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden" required>
 
-
 					<div id="searchDiv" class="row">
 						<label for="patientID"><i class="glyphicon glyphicon-user"></i>  Select Patient</label>
 						<div>
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
 						</div>
-					</div><br>
+					</div>
+					<br>
 
 					<div class="allergy row">
 					</div>
@@ -161,7 +161,6 @@ if($_SESSION['role'] == 'Admin') {
 						<input type="datetime-local" name="visitDate" class="visitDate" required>
 					</div>
 					<br><br>
-
 
 					<div class="fieldsGroup complaintDiv row" value="10">
 						<label for="complaint[]">Complaint/s</label>
@@ -174,8 +173,9 @@ if($_SESSION['role'] == 'Admin') {
 						<a href="#" class="addInput"><i class="glyphicon glyphicon-plus"></i>	 Add</a>
 					</div>
 					<br>
+
 					<div class="fieldsGroup medicineDiv row" value="10">
-						<label for="med[]">Medicine requested</label>
+						<label for="med[]">Medicine / Supply Requested</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled required>
 							<option></option>
@@ -184,7 +184,6 @@ if($_SESSION['role'] == 'Admin') {
 							<button class="remove">Remove</button>
 						</div>
 						<a href="#" class="addInput"><i class="glyphicon glyphicon-plus"></i> Add</a>
-
 					</div><br>
 
 					<div class="form-group row">
@@ -227,24 +226,22 @@ if($_SESSION['role'] == 'Admin') {
 							  <div class="contentheight view col-sm-6">
 									<b><p>Complaint</p></b>
 									<ul id="complaint"></ul>
-									<b><p>Medicine Requested</p></b>
+									<b><p>Medicine/Supply Requested</p></b>
 									<ul id="medicine"></ul>
 								</div>
 							</div>
 
-
-								<div class="view col-sm-12">
-									<p>Remarks</p>
-									<p id="remarks" class="h4" style="margin-left: 30px;"></p>
-									<br>
-									<p align="right">Created by <b><span id="createdBy"></span></b> on <span id="dateCreated"></span></p>
-									<div id="modifyDiv">
-										<p align="right">Modified by <b><span id="modifiedBy"></span></b>		 on <span id="dateModified"></span></p>
-									</div>
-
-									<br>
-									<hr style="width:100%; margin:0px;">
+							<div class="view col-sm-12">
+								<p>Remarks</p>
+								<p id="remarks" class="h4" style="margin-left: 30px;"></p>
+								<br>
+								<p align="right">Created by <b><span id="createdBy"></span></b> on <span id="dateCreated"></span></p>
+								<div id="modifyDiv">
+									<p align="right">Modified by <b><span id="modifiedBy"></span></b>		 on <span id="dateModified"></span></p>
 								</div>
+								<br>
+								<hr style="width:100%; margin:0px;">
+							</div>
 						</div>
 
 						<form id="editVisitForm" class="edit hidden" style="width:80%; margin: 0 auto;">
@@ -258,17 +255,17 @@ if($_SESSION['role'] == 'Admin') {
 								<label for="complaint[]">Complaint/s</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Complaint" class="selComp formInpt" name="complaint[]" disabled required>
-									<option></option>
+										<option></option>
 									</select>
 									<button class="remove">Remove</button>
 								</div>
 								<a href="#" class="addInput">+ Add</a>
 							</div><br>
 							<div class="fieldsGroup medicineDiv" value="10">
-								<label for="med[]">Medicine requested</label>
+								<label for="med[]">Medicine / Supply Requested</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled>
-									<option></option>
+										<option></option>
 									</select>
 									<input type="number" min="1" class="quantity formInpt" name="med[]" placeholder="Qty." style="width: 100px;" disabled>
 									<button class="remove">Remove</button>

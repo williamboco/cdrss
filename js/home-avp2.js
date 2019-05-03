@@ -26,7 +26,13 @@ $(document).ready(function() {
 		} );
 	} ).draw();
 
-	setDateRange();
+	$('#date1').on('change', function() {
+		//alert("Changed");
+		var $date1 = $("#date1");
+		var $date2 = $("#date2");
+
+		$date2.attr("min", $date1.val());
+	});
 
 	$('.filters').on('change', function() {
 		/*var $form = $('#filter');

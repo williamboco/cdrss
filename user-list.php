@@ -80,7 +80,7 @@ if($_SESSION['role'] != 'Admin') {
 						<label for ="contact">Contact Number</label>
 						<input type="number" class="form-control" name="contact" placeholder="Contact Number" required><br>
 						<label>Gender</label><br>
-						<input type="radio" name="gender" value="Male" id="gender1" required>
+						<input type="radio" name="gender" value="Male" id="gender1" checked required>
 					  <label for="gender1" style="margin-right: 50px;">Male</label>
 					  <input type="radio" name="gender" value="Female" id="gender2" required>
 					  <label for="gender2">Female</label>

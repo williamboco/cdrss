@@ -76,6 +76,6 @@ $data = array(
 	'modifiedBy' => $modifier['role']." ".$modifier['firstName']
 );
 
-echo (json_encode($data));
+echo json_encode($data);
 
 ?>

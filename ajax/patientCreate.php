@@ -38,7 +38,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 				if($_POST['studenttype'] == 'college') {
 
 					$courseName = htmlspecialchars($_POST['course']);
-					$query = $con->prepare("INSERT INTO course (courseName) SELECT * FROM (SELECT '$courseName') AS tmp WHERE NOT EXISTS ( SELECT courseName FROM course WHERE courseName=?)");
+					$query = $con->prepare("INSERT INTO `course` (courseName) SELECT * FROM (SELECT '$courseName') AS tmp WHERE NOT EXISTS ( SELECT courseName FROM `course` WHERE courseName=?)");
 					$query->bind_param("s", $courseName);
 				  $query->execute();
 
@@ -53,17 +53,17 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 						$ref = $res['ID'];
 					}
 
-					$query = $con->prepare("INSERT INTO `college` (`ID`, `courseID`) VALUES (?,?)");
+					$query = $con->prepare("INSERT INTO `college` (ID, courseID) VALUES (?,?)");
 					$query->bind_param("ii", $id, $ref);
 
 					if($query->execute())
 					{
-					//$message .= "\nCollege table: record inserted";
+					//$message .= "\nCollege table: Record inserted";
 					}
 
 				}else {
 					$trackName = htmlspecialchars($_POST['trackname']);
-					$query = $con->prepare("INSERT INTO track (trackName) SELECT * FROM (SELECT '$trackName') AS tmp WHERE NOT EXISTS ( SELECT trackName FROM track WHERE trackName=?)");
+					$query = $con->prepare("INSERT INTO `track` (trackName) SELECT * FROM (SELECT '$trackName') AS tmp WHERE NOT EXISTS ( SELECT trackName FROM `track` WHERE trackName=?)");
 					$query->bind_param("s", $trackName);
 				  $query->execute();
 
@@ -79,12 +79,12 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 						$ref = $res['ID'];
 					}
 
-					$query = $con->prepare("INSERT INTO `shs` (`ID`, `trackID`) VALUES ('$id', '$ref')");
+					$query = $con->prepare("INSERT INTO `shs` (ID, trackID) VALUES (?,?)");
 					$query->bind_param("ii", $id, $ref);
 
 					if($query->execute())
 					{
-					//$message .= "\nSHS table: record inserted";
+						// $message .= "\nSHS table: Record inserted";
 					}
 
 
@@ -94,7 +94,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 				$departmentName = htmlspecialchars($_POST['depart']);
 				$employeeType = htmlspecialchars($_POST['employeeType']);
 
-				$query = $con->prepare("INSERT INTO department (departmentName) SELECT * FROM (SELECT '$departmentName') AS tmp WHERE NOT EXISTS ( SELECT departmentName FROM department WHERE departmentName=?)");
+				$query = $con->prepare("INSERT INTO `department` (departmentName) SELECT * FROM (SELECT '$departmentName') AS tmp WHERE NOT EXISTS ( SELECT departmentName FROM `department` WHERE departmentName=?)");
 				$query->bind_param("s", $departmentName);
 				$query->execute();
 
@@ -109,7 +109,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 					$ref = $res['ID'];
 				}
 
-				$query = $con->prepare("INSERT INTO `employee` (`ID`, `departmentID`, `type`) VALUES (?,?,?)");
+				$query = $con->prepare("INSERT INTO `employee` (ID, departmentID, type) VALUES (?,?,?)");
 				$query->bind_param("iis", $id, $ref, $employeeType);
 
 				if($query->execute())
@@ -124,7 +124,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 			foreach($allergy as $i => $item) {
 
 				if($item!='') {
-					$query = $con->prepare("INSERT INTO allergy (allergyName) SELECT * FROM (SELECT '$item') AS tmp WHERE NOT EXISTS ( SELECT allergyName FROM allergy WHERE allergyName=?)");
+					$query = $con->prepare("INSERT INTO `allergy` (allergyName) SELECT * FROM (SELECT '$item') AS tmp WHERE NOT EXISTS ( SELECT allergyName FROM `allergy` WHERE allergyName=?)");
 					$query->bind_param("s", $item);
 					$query->execute();
 
@@ -172,7 +172,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 					$isNull = NULL;
 
 					if($result->execute()) {
-						$message .= "\ncontact person inserted";
+						$message .= "\nContact person inserted";
 					}
 				}
 
@@ -187,7 +187,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 	$message = "Query Failed.";
 }
 
- $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+ $stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
  $stmt->bind_param("isi", $eventID, $eventName, $userID);
  $eventID = NULL;
  $userID = $_SESSION['userID'];

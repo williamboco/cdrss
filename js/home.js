@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	setDateRange();
-
 	var t = $('#visitTable').DataTable( {
 		"ajax": "ajax/filtered_visits.php?" + $('#filter').serialize() ,
 		"columnDefs": [ {

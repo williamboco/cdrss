@@ -32,11 +32,11 @@ include('includes/session.php');
 					</div>
 
 					<div class="col-lg-12 card-content">
-						<h2 class="col-lg-12" align="center">My Account</h2>
+						<h2 class="col-lg-12" align="center">My Account</h2><br>
 						<div class="btnmyaccnt">
-							<button type="button" class="btn btn-primary col-lg-5 col-md-5 col-sm-12 marginbtn" onclick="viewUser(this.value)" value="<?php echo $_SESSION['userID'];?>" id="viewBtn"><i class="glyphicon glyphicon-eye-open"></i>  View Profile</button>
-							<button type="button" class="btn btn-primary col-lg-6 col-md-6 col-sm-12 marginbtn" onclick="editUser()"><i class="glyphicon glyphicon-pencil"></i>  Edit Profile</button>
-							<button type="button" class="btn btn-info col-lg-6 col-md-6 col-sm-12 marginbtn" onclick="changePassword()"><i class="glyphicon glyphicon-wrench"></i>  Change Password</button>
+							<button type="button" class="btn btn-block btn-primary col-lg-5 col-md-5 col-sm-12 marginbtn" onclick="viewUser(this.value)" value="<?php echo $_SESSION['userID'];?>" id="viewBtn"><i class="glyphicon glyphicon-eye-open"></i>  View Profile</button>
+							<button type="button" class="btn btn-block btn-primary col-lg-6 col-md-6 col-sm-12 marginbtn" onclick="editUser()"><i class="glyphicon glyphicon-pencil"></i>  Edit Profile</button>
+							<button type="button" class="btn btn-block btn-info col-lg-6 col-md-6 col-sm-12 marginbtn" onclick="changePassword()"><i class="glyphicon glyphicon-wrench"></i>  Change Password</button>
 						</div>
 					</div>
 			</div>

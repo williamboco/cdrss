@@ -325,21 +325,17 @@ $("#patientID").on('change', function() {
            var obj = JSON.parse(data);
            console.log(obj);
 
-			if(obj.Allergy.length > 0) {
-				var allergy = '';
+    			if(obj.Allergy.length > 0) {
+    				var allergy = '';
 
-				obj.Allergy.forEach(function(item) {
-				allergy += item + " ,";
-				});
-				allergy = allergy.slice(0, -1);
-
-				$form.find(".allergy").html('<p class="small">Allergy</p><p class="h4">' + allergy + "</p>");
-			}else {
-				$form.find(".allergy").html('<p class="small">Allergy</p><p class="h4">None</p>');
-			}
-
-
-
+    				obj.Allergy.forEach(function(item) {
+    				allergy += item + " ,";
+    				});
+    				allergy = allergy.slice(0, -1);
+    				$form.find(".allergy").html('<p class="small">Allergy</p><p class="h4">' + allergy + "</p>");
+    			}else {
+    				$form.find(".allergy").html('<p class="small">Allergy</p><p class="h4">None</p>');
+    			}
         }
     });
 });
@@ -450,7 +446,7 @@ $("#addVisitForm").on("submit", function(event) {
 		success: function(response) {
 			// ... Process the result ...
 			var response = JSON.parse(response);
-      console.log(response);
+
 			if(response[0]=='success') {
 				console.log(response);
 				alertify.alert('Patient visit record successfully created');

@@ -8,8 +8,8 @@
 		} ],
 
 		"columns": [
-			{title: "#", width: "5%", className: "dt-center"},
-			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
+      {title: "#", width: "5%", className: "dt-center"},
+      {title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
 			{title: "", width: "5%", className: "dt-center"},
 			{title: "Name", className: "hover"}
 
@@ -27,8 +27,8 @@
 		} ],
 
 		"columns": [
-			{title: "#", width: "5%", className: "dt-center"},
-			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
+      {title: "#", width: "5%", className: "dt-center"},
+      {title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
 			{title: "", width: "5%", className: "dt-center"},
 			{title: "Name", className: "hover"},
 			{title: "Available Qty", width: "10%"},

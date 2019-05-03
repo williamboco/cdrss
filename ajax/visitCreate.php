@@ -12,9 +12,9 @@ $med = $_POST["med"];
 $time = $_POST["visitDate"];
 
 	$message = array();
-	$query = "INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (NULL, $id, $time, $remarks, 0, $user, $user, NOW(), NOW())";
+	$query0 = "INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (NULL, $id, $time, $remarks, 0, $user, $user, NOW(), NOW())";
 
-	if(mysqli_query($con, $query)) {
+	if(mysqli_query($con, $query0)) {
 		array_push($message, "success");
 
 		//get autoIncrement ID from recent query
@@ -23,21 +23,21 @@ $time = $_POST["visitDate"];
 
 
 		foreach($comp as $i => $item) {
-			$query = "INSERT INTO `complaint` (complaintName) SELECT * FROM (SELECT $item) AS tmp WHERE NOT EXISTS ( SELECT complaintName FROM `complaint` WHERE complaintName=$item )";
-			mysqli_query($con, $query);
+			$query1 = "INSERT INTO `complaint` (complaintName) SELECT * FROM (SELECT $item) AS tmp WHERE NOT EXISTS ( SELECT complaintName FROM `complaint` WHERE complaintName=$item )";
+			mysqli_query($con, $query1);
 
 			//get autoIncrement ID from recent query
 			$cId = mysqli_insert_id($con);
 
 			if($cId==0) {
-				$query = "SELECT ID FROM `complaint` WHERE complaintName=$item";
-				$result = mysqli_query($con, $query);
+				$query2 = "SELECT ID FROM `complaint` WHERE complaintName=$item";
+				$result = mysqli_query($con, $query2);
 				$row = mysqli_fetch_array($result);
 				$cId = $row['ID'];
 			}
 
-			$query = "INSERT INTO `visit_complaint` (ID, visitID, complaintID) VALUES (NULL, $vId, $cId)";
-			if(mysqli_query($con, $query)) {
+			$query3 = "INSERT INTO `visit_complaint` (ID, visitID, complaintID) VALUES (NULL, $vId, $cId)";
+			if(mysqli_query($con, $query3)) {
 				array_push($message, "complaint".$cId.":".$item);
 			}
 		}
@@ -68,8 +68,9 @@ $time = $_POST["visitDate"];
 
 	}else {
 		array_push($message, "error");
+		array_push($message,mysqli_error($con));
 	}
 
-echo (json_encode($message));
+echo json_encode($message);
 
 ?>

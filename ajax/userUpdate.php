@@ -24,24 +24,22 @@ if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 	if(mysqli_num_rows($result) > 0 && $userID != $id) {
 		echo "User with that ID number already exists.";
 	} else {
-		$query = $con->prepare("UPDATE `user` SET `ID` = ?, `email` = ?, `dateEmployed` = ?, `firstName` = ?, `lastName` = ?, `gender` = ?, `contact` = ? WHERE `user`.`ID` = ?");
-		$query->bind_param("ssssssis", $id, $email, $employed, $firstName, $lastName, $gender, $contact, $userID);
-		$query->execute();
-
-		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
-		 $stmt->bind_param("isi", $eventID, $eventName, $userID);
-		 $eventID = NULL;
-		 $userID = $_SESSION['userID'];
-		 $eventName = "Updated user profile.";
+		 $stmt = $con->prepare("UPDATE `user` SET `ID` = ?, `email` = ?, `dateEmployed` = ?, `firstName` = ?, `lastName` = ?, `gender` = ?, `contact` = ? WHERE `user`.`ID` = ?");
+		 $stmt->bind_param("ssssssis", $id, $email, $employed, $firstName, $lastName, $gender, $contact, $userID);
 		 $stmt->execute();
 
-		if(mysqli_affected_rows($con) > 0) {
-			$message = "Profile is successfully updated.";
-			$_SESSION['userID'] = $id;
-		}else {
-				$message = "Profile is not updated.";
-		}
+		 if(mysqli_affected_rows($con) > 0) {
+		 	$message = "Profile is successfully updated.";
+		 }else {
+			$message = "Profile is not updated.";
+		 }
 
+		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
+		$stmt->bind_param("isi", $eventID, $eventName, $userID);
+		$eventID = NULL;
+		$userID = $_SESSION['userID'];
+		$eventName = "Updated user profile.";
+		$stmt->execute();
 	}
 }else {
 

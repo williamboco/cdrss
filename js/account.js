@@ -31,8 +31,7 @@ $("#profileForm").on("submit", function(event) {
 $("#passwordForm").on("submit", function(event) {
 	var $form = $(this);
 	event.preventDefault();
-    console.log($form.serialize());
-
+  console.log($form.serialize());
 
 	if(compare($form.find('[name="password1"]').val(), $form.find('[name="password2"]').val())) {
 		$.ajax({
@@ -49,6 +48,8 @@ $("#passwordForm").on("submit", function(event) {
 				location.reload();
 			}else {
 				alertify.alert(response);
+				$form[0].reset();
+				location.reload();
 			}
 		}
 	});
