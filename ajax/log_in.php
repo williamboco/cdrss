@@ -44,9 +44,6 @@ if($rownum > 0) {
        $userID = $_SESSION['userID'];
        $eventName = "Successfully logged in.";
        $stmt->execute();
-
-      //call the event method thru an object of AuditClass
-      //$obj->logEvent("login");
 		}
 	}
 	array_push($message, "Invalid username and password combination");

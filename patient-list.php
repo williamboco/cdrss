@@ -11,6 +11,7 @@ if($_SESSION['role'] == 'Admin') {
 
 <html>
    <head>
+		<title>Patient List</title>
     <link rel="shortcut icon" href="favicon.png" />
 	  <link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">

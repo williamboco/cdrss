@@ -48,7 +48,9 @@ if($rownum > 0) {
 				// send email
 				require '../../includes/mail.php';
 			 }
-			}
+		 } else {
+			 echo "Invalid username! Please try again!";
+		 }
 		}
 	} else {
 		echo  "Password Query change failed!";
