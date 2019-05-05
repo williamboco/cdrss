@@ -199,40 +199,40 @@ function viewProfile() {
         data: {patientID: id},
         cache: false,
         success: function(obj){
-			var obj = JSON.parse(obj);
-			console.log(obj);
+					var obj = JSON.parse(obj);
+					console.log(obj);
 
-			$profile = $("#profileDiv");
-			$profile.find("#idNumber").append("<p class='h4'>" + obj.Patient.ID + "</p>");
-			$profile.find("#fullName").append("<p class='h4'>" + obj.Patient.firstName + " " + obj.Patient.lastName + "</p>");
-			$profile.find("#birthDate").append("<p class='h4'>" + obj.Patient.birthDate + "</p>");
-			$profile.find("#gender").append("<p class='h4'>" + obj.Patient.gender + "</p>");
-			$profile.find("#contact").append("<p class='h4'>" + obj.Patient.contact + "</p>");
+					$profile = $("#profileDiv");
+					$profile.find("#idNumber").append("<p class='h4'>" + obj.Patient.ID + "</p>");
+					$profile.find("#fullName").append("<p class='h4'>" + obj.Patient.firstName + " " + obj.Patient.lastName + "</p>");
+					$profile.find("#birthDate").append("<p class='h4'>" + obj.Patient.birthDate + "</p>");
+					$profile.find("#gender").append("<p class='h4'>" + obj.Patient.gender + "</p>");
+					$profile.find("#contact").append("<p class='h4'>" + obj.Patient.contact + "</p>");
 
-			obj.ContactPerson.forEach(function(item) {
-				$profile.find("#cPerson").append("<p class='h4'>" + item.name + "-" + item.contact + "</p>");
-			});
+					obj.ContactPerson.forEach(function(item) {
+						$profile.find("#cPerson").append("<p class='h4'>" + item.name + "-" + item.contact + "</p>");
+					});
 
-			var allergy = '';
-			obj.Allergy.forEach(function(item) {
-				allergy += item + " ,";
-			});
-			allergy = allergy.slice(0, -1);
-			//alert(allergy);
-			$profile.find("#allergy").append("<span class='h4'>" + allergy + "</span>");
+					var allergy = '';
+					obj.Allergy.forEach(function(item) {
+						allergy += item + " ,";
+					});
+					allergy = allergy.slice(0, -1);
+					//alert(allergy);
+					$profile.find("#allergy").append("<span class='h4'>" + allergy + "</span>");
 
-			obj.Others.forEach(function(item) {
-				if(item.type=="SHS") {
-					$profile.find("#otherInfo").append('<p class="small">Academic Track</p><p class="h4">' + item.track + '</p>');
-				}else if(item.type=="College") {
-					$profile.find("#otherInfo").append('<p class="small">Course</p><p class="h4">' + item.course + '</p>');
-				}else {
-					$profile.find("#otherInfo").append('<p class="small">Department</p><p class="h4">' + item.department + '</p>');
-					$profile.find("#otherInfo").append('<p class="small">Employment Type</p><p class="h4">' + item.employmentType + '</p>');
+					obj.Others.forEach(function(item) {
+						if(item.type=="SHS") {
+							$profile.find("#otherInfo").append('<p class="small">Academic Track</p><p class="h4">' + item.track + '</p>');
+						}else if(item.type=="College") {
+							$profile.find("#otherInfo").append('<p class="small">Course</p><p class="h4">' + item.course + '</p>');
+						}else {
+							$profile.find("#otherInfo").append('<p class="small">Department</p><p class="h4">' + item.department + '</p>');
+							$profile.find("#otherInfo").append('<p class="small">Employment Type</p><p class="h4">' + item.employmentType + '</p>');
+						}
+
+					});
 				}
-
-			});
-		}
 	 });
 }
  function editProfile() {
@@ -323,6 +323,7 @@ function viewProfile() {
 			$('#delete-patient').modal('show');
 		}
 	}
+
 	function delpatient() {
 		var data = [];
 		$("#patientTable tr").each(function() {

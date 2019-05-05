@@ -16,6 +16,13 @@ $(document).ready(function() {
 	"order": [[ 2, 'asc' ]]
 	} );
 
+	$('.checkAll').on('click', function () {
+
+		$(this).closest('table').find('tbody :checkbox')
+		.prop('checked', this.checked)
+		.closest('tr').toggleClass('selected', this.checked);
+	});
+
 	t.on( 'order.dt search.dt', function () {
 		t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
 			cell.innerHTML = i+1;
@@ -50,6 +57,7 @@ $('.filters').on('change', function() {
 
 $( "#patientAddForm" ).on( "submit", function( event ) {
 	var $form = $(this);
+	var $patientModal = $("#patientModal");
 
 	event.preventDefault();
 	//console.log($form.serialize());
@@ -60,16 +68,11 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 		url: $form.attr('action'),
 		data: $form.serialize(),
 		success: function(result) {
-
-		$("#patientModal").modal('hide');
-		if(result=='success') {
-			alertify.alert("Patient record inserted");
+			$form[0].reset();
+			$patientModal.modal('hide');
 			$('.filters').trigger('change');
-			window.location.reload(true);
-		}else {
 			alertify.alert(result);
-		}
-
+			window.location.reload(true);
 		}
 	});
 });
