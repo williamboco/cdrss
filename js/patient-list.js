@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var t = $('#patientTable').DataTable( {
-		 "columnDefs": [ {
+		"columnDefs": [ {
 		"searchable": false,
 		"orderable": false,
 		"targets": 0
@@ -15,6 +15,13 @@ $(document).ready(function() {
 	],
 	"order": [[ 2, 'asc' ]]
 	} );
+
+	$('.checkAll').on('click', function () {
+
+		$(this).closest('table').find('tbody :checkbox')
+		.prop('checked', this.checked)
+		.closest('tr').toggleClass('selected', this.checked);
+	});
 
 	t.on( 'order.dt search.dt', function () {
 		t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
@@ -60,16 +67,10 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 		url: $form.attr('action'),
 		data: $form.serialize(),
 		success: function(result) {
-
-		$("#patientModal").modal('hide');
-		if(result=='success') {
-			alertify.alert("Patient record inserted");
-			$('.filters').trigger('change');
-			window.location.reload(true);
-		}else {
-			alertify.alert(result);
-		}
-
-		}
+				alertify.alert(result);
+				$("#patientModal").modal('hide');
+				$('.filters').trigger('change');
+				$form[0].reset();
+			}
 	});
 });

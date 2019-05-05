@@ -9,7 +9,7 @@ foreach($data as $id){
 	$query = "UPDATE `patient` SET `isDeleted` = '1' WHERE `patient`.`ID` = '$id'";
 	mysqli_query($con, $query);
 
-	$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+	$stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
 	 $stmt->bind_param("isi", $eventID, $eventName, $userID);
 	 $eventID = NULL;
 	 $userID = $_SESSION['userID'];

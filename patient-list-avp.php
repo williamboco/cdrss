@@ -75,7 +75,7 @@ if($_SESSION['role'] != 'Admin') {
 				  <h4 class="modal-title" id="myModalLabel">Create New Patient Profile</h4>
                </div>
                <div class="modal-body">
-                  <form class="form-horizontal" id="patientAddForm" action="ajax/patientCreate.php">
+                  <form class="form-horizontal" id="patientAddForm" action="ajax/patientCreate.php" method="post">
                    <div class="form-group">
                       <label class="col-sm-4 control-label">Patient type</label>
                       <div class="col-sm-8">
@@ -113,7 +113,7 @@ if($_SESSION['role'] != 'Admin') {
                      <div class="form-group">
                         <label class="col-sm-4 control-label">Contact Number</label>
                         <div class="col-sm-8">
-                           <input type="number" min="0" class="form-control" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
+                           <input type="number" min="0" class="form-control" name="contactnumber" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
                         </div>
                      </div>
 
@@ -243,8 +243,8 @@ if($_SESSION['role'] != 'Admin') {
 	  <script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	  <script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
     <script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
+		<script src="js/patient-list.js"></script>
     <script src="js/profileForm.js"></script>
-    <script src="js/patient-list.js"></script>
     <script src="js/dynamic_input.js"></script>
     <script src="js/checkbox.js"></script>
 		<script src="js/wow.min.js"></script>

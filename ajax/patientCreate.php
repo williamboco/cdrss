@@ -180,11 +180,11 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 			}
 
 		} else {
-			$message = "Error";
+			$message = "Error: Patient profile not created";
 		}
 	}
 } else {
-	$message = "Query Failed.";
+	$message = "Error: Query Failed.";
 }
 
  $stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");

@@ -103,14 +103,20 @@ if($_SESSION['role'] == 'Admin') {
 								<option value="Medicated spray">Medicated spray</option>
 							</select><br>
 							<label>UNIT OF MEASURE *</label>
-								<input type="number" class="form-control" name="medicineDosageQty" placeholder="Dosage Amount" min="1" max="2000" size="10">
-							<select class="form-control" name="medicineDosage" required>
-								<option disabled selected>Please choose...</option>
-								<option value="g">g</option>
-								<option value="mg">mg</option>
-								<option value="l">l</option>
-								<option value="ml">ml</option>
-							</select><br>
+								<div class="row">
+									<div class="col-md-4">
+										<input type="number" class="form-control" name="medicineDosageQty" placeholder="Dosage Amount" min="1" max="2000" size="10">
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="medicineDosage" required>
+											<option disabled selected>Please choose...</option>
+											<option value="g">g</option>
+											<option value="mg">mg</option>
+											<option value="l">l</option>
+											<option value="ml">ml</option>
+										</select><br>
+									</div>
+								</div>
 							<label>INITIAL STOCK QUANTITY *</label>
 								<input type="number" class="form-control" name="medicineCurrentQty" placeholder="Initial Stock Quantity" min="1" max="2000" size="10"><br>
 							<label>THRESHOLD QUANTITY *</label>
@@ -123,19 +129,25 @@ if($_SESSION['role'] == 'Admin') {
 							<label>SUPPLY NAME *</label>
 								<input type="text" class="form-control" name="supplyName" placeholder="Supply name" required><br>
 							<label>UNIT OF MEASURE *</label>
-								<input type="number" class="form-control" name="supplyDosageQty" placeholder="Dosage Amount" min="1" size="10">
-							<select class="form-control" name="supplyDosage" required>
-								<option disabled selected>Please choose...</option>
-								<option value="box">Box</option>
-								<option value="piece">Piece</option>
-								<option value="bottle">Bottle</option>
-							</select><br>
+								<div class="row">
+									<div class="col-md-4">
+										<input type="number" class="form-control" name="supplyDosageQty" placeholder="Dosage Amount" min="1" size="10">
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="supplyDosage" required>
+											<option disabled selected>Please choose...</option>
+											<option value="box">Box</option>
+											<option value="piece">Piece</option>
+											<option value="bottle">Bottle</option>
+										</select><br>
+									</div>
+								</div>
 							<label>INITIAL STOCK QUANTITY *</label>
-								<input type="number" class="form-control" name="supplyCurrentQty" placeholder="Initial Stock Quantity" min="1" max="2000" size="10"><br>
+								<input type="number" class="form-control" name="supplyCurrentQty" placeholder="Initial Stock Quantity" min="1" max="2000" size="10" required><br>
 							<label>THRESHOLD QUANTITY *</label>
-								<input type="number" class="form-control" name="supplyThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" size="10"><br>
+								<input type="number" class="form-control" name="supplyThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" size="10" required><br>
 							<label>CRITICAL QUANTITY *</label>
-								<input type="number" class="form-control" name="supplyCriticalQty" placeholder="Critical Quantity" min="1" max="2000" size="10"><br>
+								<input type="number" class="form-control" name="supplyCriticalQty" placeholder="Critical Quantity" min="1" max="2000" size="10" required><br>
 						</div>
 					</div>
 					<button type="submit" class="btn btn-primary pull-right hidden">Submit</button>
@@ -144,9 +156,10 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="add-complaint" class="addForm" action="ajax/table/complaintCreate.php">
 					<h4>Add Complaint</h4><br>
 					<div class="form-group">
-						<label>DETAILS *</label>
-						<input type="text" class="form-control" name="complaintName" placeholder="Complaint name" required><br>
-						<textarea class="form-control" name="description" rows="3" placeholder="Symptoms"></textarea>
+						<label>COMPLAINT NAME *</label>
+							<input type="text" class="form-control" name="complaintName" placeholder="Complaint name" required><br>
+						<label>SYMPTOMS</label>
+							<textarea class="form-control" name="description" rows="3" placeholder="Symptoms"></textarea>
 
 					</div>
 					<button type="submit" class="btn btn-primary pull-right">Submit</button>
@@ -155,9 +168,10 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="add-allergy" class="addForm" action="ajax/table/allergyCreate.php">
 					<h4>Add Allergy</h4><br>
 					<div class="form-group">
-						<label>DETAILS *</label>
-						<input type="text" class="form-control" name="allergyName" placeholder="Allergy name" required><br>
-						<textarea class="form-control" name="description" rows="3" placeholder="Symptoms"></textarea><br>
+						<label>ALLERGY NAME *</label>
+							<input type="text" class="form-control" name="allergyName" placeholder="Allergy name" required><br>
+						<label>SYMPTOMS</label>
+							<textarea class="form-control" name="description" rows="3" placeholder="Symptoms"></textarea><br>
 					</div>
 					<button type="submit" class="btn btn-primary pull-right">Submit</button>
 				</form>
@@ -165,8 +179,8 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="add-course" class="addForm" action="ajax/table/courseCreate.php">
 					<h4>Add Course</h4><br>
 					<div class="form-group">
-						<label>DETAILS *</label>
-						<textarea class="form-control" name="courseName" rows="3" placeholder="Course name" required></textarea><br>
+						<label>COURSE NAME *</label>
+							<textarea class="form-control" name="courseName" rows="3" placeholder="Course name" required></textarea><br>
 					</div>
 					<button type="submit" class="btn btn-primary pull-right">Submit</button>
 				</form>
@@ -174,8 +188,8 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="add-track" class="addForm" action="ajax/table/trackCreate.php">
 					<h4>Add Track</h4><br>
 					<div class="form-group">
-						<label>DETAILS *</label>
-						<textarea class="form-control" name="trackName" rows="3" placeholder="Track name" required></textarea><br>
+						<label>TRACK NAME *</label>
+							<textarea class="form-control" name="trackName" rows="3" placeholder="Track name" required></textarea><br>
 					</div>
 					<button type="submit" class="btn btn-primary pull-right">Submit</button>
 				</form>
@@ -183,7 +197,7 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="add-department" class="addForm" action="ajax/table/departmentCreate.php">
 					<h4>Add Department</h4><br>
 					<div class="form-group">
-						<label>DETAILS *</label>
+						<label>DEPARTMENT NAME *</label>
 						<textarea class="form-control" name="departmentName" rows="3" placeholder="Department name" required></textarea><br>
 					</div>
 					<button type="submit" class="btn btn-primary pull-right">Submit</button>
@@ -213,42 +227,54 @@ if($_SESSION['role'] == 'Admin') {
 						<div id="medDiv" class="hidden">
 							<br>
 							<label>BRAND NAME *</label>
-							<input type="text" class="form-control" name="brandName" placeholder="Brand name" required><br>
+								<input type="text" class="form-control" name="brandName" placeholder="Brand name" required><br>
 							<label>GENERIC NAME *</label>
-							<input type="text" class="form-control" name="genericName" placeholder="Generic name"><br>
+								<input type="text" class="form-control" name="genericName" placeholder="Generic name"><br>
 							<label>MEDICINE TYPE *</label>
-							<select class="form-control" name="medicineType" required>
-								<option disabled selected>Please choose..</option>
-								<option value="Tablet">Tablet</option>
-								<option value="Capsule">Capsule</option>
-								<option value="Ointment">Ointment</option>
-								<option value="Eye Drop">Eye Drop</option>
-								<option value="Tooth Drop">Tooth Drop</option>
-								<option value="Ear Drop">Ear Drop</option>
-								<option value="Medicated spray">Medicated spray</option>
-							</select><br>
+								<select class="form-control" name="medicineType" required>
+									<option disabled selected>Please choose..</option>
+									<option value="Tablet">Tablet</option>
+									<option value="Capsule">Capsule</option>
+									<option value="Ointment">Ointment</option>
+									<option value="Eye Drop">Eye Drop</option>
+									<option value="Tooth Drop">Tooth Drop</option>
+									<option value="Ear Drop">Ear Drop</option>
+									<option value="Medicated spray">Medicated spray</option>
+								</select><br>
 							<label>UNIT OF MEASURE *</label>
-								<input type="number" class="form-control" name="medicineDosageQty" placeholder="Dosage Amount" min="1" size="10">
-							<select class="form-control" name="medicineDosage" required>
-								<option disabled selected>Please choose...</option>
-								<option value="g">g</option>
-								<option value="mg">mg</option>
-								<option value="l">l</option>
-								<option value="ml">ml</option>
-							</select><br>
-						</div>
+								<div class="row">
+									<div class="col-md-4">
+										<input type="number" class="form-control" name="medicineDosageQty" placeholder="Dosage Amount" min="1" size="10">
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="medicineDosage" required>
+											<option disabled selected>Please choose...</option>
+											<option value="g">g</option>
+											<option value="mg">mg</option>
+											<option value="l">l</option>
+											<option value="ml">ml</option>
+										</select><br>
+									</div>
+								</div>
+							</div>
 						<div id="supDiv" class="hidden">
 							<br>
 							<label>SUPPLY NAME *</label>
 								<input type="text" class="form-control" name="supplyName" placeholder="Supply name" required><br>
 							<label>UNIT OF MEASURE *</label>
-								<input type="number" class="form-control" name="supplyDosageQty" placeholder="Dosage Amount" min="1" size="10">
-							<select class="form-control" name="supplyDosage" required>
-								<option disabled selected>Please choose...</option>
-								<option value="box">Box</option>
-								<option value="piece">Piece</option>
-								<option value="bottle">Bottle</option>
-							</select><br>
+								<div class="row">
+									<div class="col-md-4">
+										<input type="number" class="form-control" name="supplyDosageQty" placeholder="Dosage Amount" min="1" size="10">
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="supplyDosage" required>
+											<option disabled selected>Please choose...</option>
+											<option value="box">Box</option>
+											<option value="piece">Piece</option>
+											<option value="bottle">Bottle</option>
+										</select><br>
+									</div>
+								</div>
 						</div>
 					</div>
 					<input type="number" name="id" class="hidden">
@@ -258,9 +284,10 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="edit-complaint" class="editForm" action="ajax/table/complaintUpdate.php">
 					<h4>Update Complaint</h4><br>
 					<div class="form-group">
-						<br><label>DETAILS *</label><br>
-						<input type="text" class="form-control" name="complaintName" placeholder="Complaint name" required><br>
-						<textarea class="form-control" name="description" rows="3" placeholder="Symptoms"></textarea><br>
+						<label>COMPLAINT NAME *</label>
+							<input type="text" class="form-control" name="complaintName" placeholder="Complaint name" required><br>
+						<label>SYMPTOMS</label>
+							<textarea class="form-control" name="description" rows="3" placeholder="Symptoms"></textarea><br>
 					</div>
 					<br>
 					<input type="number" name="id" class="hidden">
@@ -270,9 +297,10 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="edit-allergy" class="editForm" action="ajax/table/allergyUpdate.php">
 					<h4>Update Allergy</h4><br>
 					<div class="form-group">
-						<br><label>DETAILS *</label><br>
-						<input type="text" class="form-control" name="allergyName" placeholder="Allergy name" required><br>
-						<textarea class="form-control" name="description" rows="3" placeholder="Symptoms"></textarea><br>
+						<label>ALLERGY NAME *</label>
+							<input type="text" class="form-control" name="allergyName" placeholder="Allergy name" required><br>
+						<label>SYMPTOMS</label>
+							<textarea class="form-control" name="description" rows="3" placeholder="Symptoms"></textarea><br>
 					</div>
 					<br>
 					<input type="number" name="id" class="hidden">
@@ -282,8 +310,8 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="edit-course" class="editForm" action="ajax/table/courseUpdate.php">
 					<h4>Update Course</h4><br>
 					<div class="form-group">
-						<br><label>DETAILS *</label><br>
-						<textarea class="form-control" name="courseName" rows="3" placeholder="Course name" required></textarea><br>
+						<label>COURSE NAME *</label>
+							<textarea class="form-control" name="courseName" rows="3" placeholder="Course name" required></textarea><br>
 					</div>
 					<br>
 					<input type="number" name="id" class="hidden">
@@ -293,8 +321,8 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="edit-track" class="editForm" action="ajax/table/trackUpdate.php">
 					<h4>Update Track</h4><br>
 					<div class="form-group">
-						<br><label>DETAILS *</label><br>
-						<textarea class="form-control" name="trackName" rows="3" placeholder="Track name" required></textarea><br>
+						<label>TRACK NAME *</label>
+							<textarea class="form-control" name="trackName" rows="3" placeholder="Track name" required></textarea><br>
 					</div>
 					<br>
 					<input type="number" name="id" class="hidden">
@@ -304,8 +332,8 @@ if($_SESSION['role'] == 'Admin') {
 				<form id="edit-department" class="editForm" action="ajax/table/departmentUpdate.php">
 					<h4>Update Department</h4><br>
 					<div class="form-group">
-						<br><label>DETAILS *</label><br>
-						<textarea class="form-control" name="departmentName" rows="3" placeholder="Department name" required></textarea><br>
+						<label>DEPARTMENT NAME *</label>
+							<textarea class="form-control" name="departmentName" rows="3" placeholder="Department name" required></textarea><br>
 					</div>
 					<br>
 					<input type="number" name="id" class="hidden">
