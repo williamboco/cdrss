@@ -25,18 +25,24 @@ if($rownum > 0) {
 			$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 			if ($row['email'] == $email) {
 
-				$query1 = $con->prepare("INSERT INTO password_change_request (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
-				$query1->bind_param("isii", $isNull, $requestID, $userID, $isUsed);
-				$userID = $row['ID'];
-				$requestID = randomPassword();
-				$isNull = NULL;
-				$isUsed = 0;
-
-				$query1->execute();
+				// $query2 = $con->prepare("INSERT INTO password_change_request (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
+				// $query2->bind_param("isii", $isNull, $requestID, $userID, $isUsed);
+				// $userID = $row['ID'];
+				// $requestID = randomPassword();
+				// $isNull = NULL;
+				// $isUsed = 0;
+				//
+				// $query2->execute();
 				// email message
-				$title = "link";
-				$link = $_SERVER['SERVER_NAME']."/cdrs/pass-new.php?rID=".$requestID;
-				$msg = "We got a request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
+				//$title = "link";
+				//$link = //$_SERVER['SERVER_NAME'].$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
+				$msg = "Your temporary password is iacademyCDRS. You may now log in to your account using your temporary password.";// We got a request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
+
+				$hashedPassword = base64_encode(openssl_encrypt("iacademyCDRS", $method, $key, OPENSSL_RAW_DATA, $iv));
+
+				$query1 = $con->prepare("UPDATE user SET password=?");
+				$query1->bind_param("s", $hashedPassword);
+				$query1->execute();
 
 				// To send HTML mail, the Content-type header must be set
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -47,8 +53,11 @@ if($rownum > 0) {
 
 				// send email
 				require '../../includes/mail.php';
-			} $message = "Invalid Email Address. Please try again.";
-		 } else {
+			//	$message = "Your temporary password is iacademyCDRS. You may change your password after logging in";
+			} else {
+				 $message = "Invalid Email Address. Please try again.";
+			}
+		 	} else {
 			 $message = "Email Address is not active. Please try again!";
 		 }
 	 }
