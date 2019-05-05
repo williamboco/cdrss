@@ -131,11 +131,11 @@ if($_SESSION['role'] == 'Admin') {
 								<option value="bottle">Bottle</option>
 							</select><br>
 							<label>INITIAL STOCK QUANTITY *</label>
-								<input type="number" class="form-control" name="supplyCurrentQty" placeholder="Initial Stock Quantity" min="1" max="2000" size="10"><br>
+								<input type="number" class="form-control" name="supplyCurrentQty" placeholder="Initial Stock Quantity" min="1" max="2000" size="10" required><br>
 							<label>THRESHOLD QUANTITY *</label>
-								<input type="number" class="form-control" name="supplyThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" size="10"><br>
+								<input type="number" class="form-control" name="supplyThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" size="10" required><br>
 							<label>CRITICAL QUANTITY *</label>
-								<input type="number" class="form-control" name="supplyCriticalQty" placeholder="Critical Quantity" min="1" max="2000" size="10"><br>
+								<input type="number" class="form-control" name="supplyCriticalQty" placeholder="Critical Quantity" min="1" max="2000" size="10" required><br>
 						</div>
 					</div>
 					<button type="submit" class="btn btn-primary pull-right hidden">Submit</button>
