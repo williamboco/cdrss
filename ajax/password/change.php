@@ -25,30 +25,34 @@ $rownum = mysqli_num_rows($result);
 
 if($rownum > 0) {
 
-	while ($row = $result->fetch_assoc()) {
-		$row['password'] = openssl_decrypt(base64_decode($row['password']), $method, $key, OPENSSL_RAW_DATA, $iv);
+	if (strlen($newPass) < 8) {
+		echo "8 characters is the minum for password. Please try again.";
+	} else {
+		while ($row = $result->fetch_assoc()) {
+			$row['password'] = openssl_decrypt(base64_decode($row['password']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
-		if ($row['password'] == $password) {
-			//generate hash from input password
-		//	echo "Password updated";
-			$hashedPassword = base64_encode(openssl_encrypt($newPass, $method, $key, OPENSSL_RAW_DATA, $iv));
-			mysqli_query($con, "UPDATE `user` SET `password` = '$hashedPassword', `datePassChanged` = NOW() WHERE `user`.`ID` = '$userID'");
+			if ($row['password'] == $password) {
+				//generate hash from input password
+			//	echo "Password updated";
+				$hashedPassword = base64_encode(openssl_encrypt($newPass, $method, $key, OPENSSL_RAW_DATA, $iv));
+				mysqli_query($con, "UPDATE `user` SET `password` = '$hashedPassword', `datePassChanged` = NOW() WHERE `user`.`ID` = '$userID'");
 
-			$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
-			 $stmt->bind_param("isi", $eventID, $eventName, $userID);
-			 $eventID = NULL;
-			 $userID = $_SESSION['userID'];
-			 $eventName = "Changed password.";
-			 $stmt->execute();
+				$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+				 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+				 $eventID = NULL;
+				 $userID = $_SESSION['userID'];
+				 $eventName = "Changed password.";
+				 $stmt->execute();
 
-			 if(mysqli_affected_rows($con) > 0) {
-	 			$message = "Password is successfully updated.";
-			}else {
-				$message = "Password is not updated.";
+				 if(mysqli_affected_rows($con) > 0) {
+		 			$message = "Password is successfully updated.";
+				}else {
+					$message = "Password is not updated.";
+				}
 			}
 		}
 	}
-	
+
 }else {
 	$message = "Please enter a valid password.";
 }

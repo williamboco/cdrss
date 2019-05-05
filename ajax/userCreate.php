@@ -102,9 +102,9 @@ if ($rownum > 0) {
 				 $email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 				 // email message
-				 $title = "link";
-				 $link = $_SERVER['SERVER_NAME']."/cdrs/pass-new.php?rID=".$requestID;
-				 $msg = "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
+			   // $title = "link";
+				 //$link = $_SERVER['SERVER_NAME']."/cdrs/pass-new.php?rID=".$requestID;
+				 $msg = "The new iACADEMY account password is iacademyCDRS. You may now login to your account using the new password";// "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
 
 				 // To send HTML mail, the Content-type header must be set
 				 $headers  = 'MIME-Version: 1.0' . "\r\n";
