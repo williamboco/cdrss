@@ -21,7 +21,7 @@ $gender = htmlspecialchars($_POST['gender']);
 $isDeleted = 0;
 $allergy = $_POST['allergy'];
 $cPerson = $_POST['cPerson'];
-$contact = htmlspecialchars($_POST['contactnumber']);
+$contact = htmlspecialchars($_POST['contact']);
 $contact = base64_encode(openssl_encrypt($contact, $method, $key, OPENSSL_RAW_DATA, $iv));
 $user = htmlspecialchars($_SESSION['firstName']);
 $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
@@ -180,11 +180,11 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 			}
 
 		} else {
-			$message = "Error";
+			$message = "Error: Patient profile not created";
 		}
 	}
 } else {
-	$message = "Query Failed.";
+	$message = "Error: Query Failed.";
 }
 
  $stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");

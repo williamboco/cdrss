@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var t = $('#patientTable').DataTable( {
-		 "columnDefs": [ {
+		"columnDefs": [ {
 		"searchable": false,
 		"orderable": false,
 		"targets": 0
@@ -57,7 +57,6 @@ $('.filters').on('change', function() {
 
 $( "#patientAddForm" ).on( "submit", function( event ) {
 	var $form = $(this);
-	var $patientModal = $("#patientModal");
 
 	event.preventDefault();
 	//console.log($form.serialize());
@@ -68,13 +67,10 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 		url: $form.attr('action'),
 		data: $form.serialize(),
 		success: function(result) {
-			$form[0].reset();
-			$patientModal.modal('hide');
-			$('.filters').trigger('change');
-			window.location.reload();
-		}else {
-			alertify.alert(result);
-			window.location.reload(true);
-		}
+				alertify.alert(result);
+				$("#patientModal").modal('hide');
+				$('.filters').trigger('change');
+				$form[0].reset();
+			}
 	});
 });
