@@ -47,12 +47,14 @@ if($rownum > 0) {
 
 				// send email
 				require '../../includes/mail.php';
-			 }
+			} $message = "Invalid Email Address. Please try again.";
 		 } else {
-			 echo "Invalid username! Please try again!";
+			 $message = "Email Address is not active. Please try again!";
 		 }
-		}
+	 }
 	} else {
-		echo  "Password Query change failed!";
+		$message = "Password Query change failed!";
 	}
+
+echo $message;
 ?>
