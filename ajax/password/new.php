@@ -12,37 +12,45 @@ $requestID = $_POST['requestID'];
 $password = htmlspecialchars($_POST['password1']);
 $userID = $_POST['userID'];
 
-//generate hash from input password
-$hashedPassword = base64_encode(openssl_encrypt($password, $method, $key, OPENSSL_RAW_DATA, $iv));
+if (strlen($password) < 8) {
+	$message = "8 characters is the mininum for password. Please try again.";
+} else {
 
-mysqli_query($con, "UPDATE `user` SET `password` = '$hashedPassword' WHERE `user`.`ID` = '$userID'");
+	//generate hash from input password
+	$hashedPassword = base64_encode(openssl_encrypt($password, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-if(mysqli_affected_rows($con) > 0) {
-
-	//update the request as used
-	mysqli_query($con, "UPDATE `password_change_request` SET `isUsed` = '1' WHERE `password_change_request`.`requestID` = '$requestID'");
+	mysqli_query($con, "UPDATE `user` SET `password` = '$hashedPassword' WHERE `user`.`ID` = '$userID'");
 
 	if(mysqli_affected_rows($con) > 0) {
-		//get user info
-		$query = mysqli_query($con, "SELECT user.firstName, user.role FROM user WHERE ID='$userID'");
-		$user = mysqli_fetch_array($query);
 
-		$user['role'] = openssl_decrypt(base64_decode($user['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
-		$user['firstName'] = openssl_decrypt(base64_decode($user['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+		//update the request as used
+		mysqli_query($con, "UPDATE `password_change_request` SET `isUsed` = '1' WHERE `password_change_request`.`requestID` = '$requestID'");
 
-		$_SESSION['userID']=$userID;
-		$_SESSION['firstName']=$user['firstName'];
-		$_SESSION['role']=$user['role'];
+		if(mysqli_affected_rows($con) > 0) {
+			//get user info
+			$query = mysqli_query($con, "SELECT user.firstName, user.role FROM user WHERE ID='$userID'");
+			$user = mysqli_fetch_array($query);
 
-		$message = "success";
+			$user['role'] = openssl_decrypt(base64_decode($user['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
+			$user['firstName'] = openssl_decrypt(base64_decode($user['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+
+			$_SESSION['userID']=$userID;
+			$_SESSION['firstName']=$user['firstName'];
+			$_SESSION['role']=$user['role'];
+
+			$message = "success";
+		}else {
+			$message = "Error";
+		}
+
+
 	}else {
-		$message = "Error";
+		$message = "Password change failed";
 	}
 
-
-}else {
-	$message = "Password change failed";
 }
+
+
 
 echo $message;
 ?>
