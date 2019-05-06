@@ -333,13 +333,13 @@ if($_SESSION['role'] == 'Admin') {
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/widgster.js"></script>
 	<script src="vendor/moment.min.js"></script>
+	<script src="vendor/moment.js"></script>
 	<script src="js/visit_form.js"></script>
-	<script src="js/home-avp2.js"></script>
+	<script src="js/home.js"></script>
 	<script src="js/date.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/graph.js"></script>
 	<script src="js/wow.min.js"></script>
-	<script src="vendor/moment.js"></script>
   <script>
   new WOW().init();
   </script>

@@ -6,36 +6,38 @@ $user = $_POST['userID'];
 $id = $_POST['idNumber'];
 //http://stackoverflow.com/questions/24570744/remove-extra-spaces-but-not-space-between-two-words
 $remarks = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $_POST["remarks"])));
-
 $comp = $_POST["complaint"];
 $med = $_POST["med"];
 $time = $_POST["visitDate"];
 
-	$query0 = "INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (NULL, $id, $time, $remarks, 0, $user, $user, NOW(), NOW())";
+$message = array();
 
-	if(mysqli_query($con, $query0)) {
-		$message = "success";
+	$query = "INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (NULL, $id, $time, $remarks, 0, $user, $user, NOW(), NOW())";
+
+	if(mysqli_query($con, $query)) {
+		array_push($message, "success");
 
 		//get autoIncrement ID from recent query
 		$vId = mysqli_insert_id($con);
+		// array_push($message, "visit id: ".$vId);
 
 		foreach($comp as $i => $item) {
-			$query1 = "INSERT INTO `complaint` (complaintName) SELECT * FROM (SELECT $item) AS tmp WHERE NOT EXISTS ( SELECT complaintName FROM `complaint` WHERE complaintName=$item )";
-			mysqli_query($con, $query1);
+			$query = "INSERT INTO `complaint` (complaintName) SELECT * FROM (SELECT $item) AS tmp WHERE NOT EXISTS ( SELECT complaintName FROM `complaint` WHERE complaintName=$item )";
+			mysqli_query($con, $query);
 
 			//get autoIncrement ID from recent query
 			$cId = mysqli_insert_id($con);
 
 			if($cId==0) {
-				$query2 = "SELECT ID FROM `complaint` WHERE complaintName=$item";
-				$result = mysqli_query($con, $query2);
+				$query = "SELECT ID FROM `complaint` WHERE complaintName=$item";
+				$result = mysqli_query($con, $query);
 				$row = mysqli_fetch_array($result);
 				$cId = $row['ID'];
 			}
 
-			$query3 = "INSERT INTO `visit_complaint` (ID, visitID, complaintID) VALUES (NULL, $vId, $cId)";
-			if(mysqli_query($con, $query3)) {
-				// $message = "Complaint".$cId.":".$item;
+			$query = "INSERT INTO `visit_complaint` (ID, visitID, complaintID) VALUES (NULL, $vId, $cId)";
+			if(mysqli_query($con, $query)) {
+				// array_push($message, "complaint".$cId.":".$item);
 			}
 		}
 
@@ -49,8 +51,10 @@ $time = $_POST["visitDate"];
 
 				if(mysqli_query($con, "INSERT INTO `visit_medicine` (ID, visitID, complaintID, medicineID, quantity) VALUES (NULL, $vId, $cId, $mId, $mQty)"))	{
 
-					$query0 = "SELECT * FROM `medicine` WHERE ID='$mId'";
-					if($result = mysqli_query($con, $query0)){
+					array_push($message, "medicine".$mId.":(".$mQty.")");
+
+					$query = "SELECT * FROM `medicine` WHERE ID='$mId'";
+					if($result = mysqli_query($con, $query)){
 						$row = mysqli_fetch_array($result);
 						$currentQty = $row['currentQty'];
 						$thresholdQty = $row['thresholdQty'];
@@ -61,8 +65,9 @@ $time = $_POST["visitDate"];
 
 						if ($mQty <= $currentQty){
 							$newQty = $currentQty - $mQty;
+							$stmt->execute();
 						} else{
-							$message = "Error: Insufficient stock of medicine/supply \r\n";
+							array_push($message, "Error: Insufficient stock of medicine/supply \r\n");
 							die();
 						}
 
@@ -76,8 +81,11 @@ $time = $_POST["visitDate"];
 						}
 					}
 
+
 				}
+				++$i;
 			}
+			array_push($message, "remarks: ".$remarks);
 		}
 
 		$stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
@@ -88,9 +96,9 @@ $time = $_POST["visitDate"];
 		$stmt->execute();
 
 	}else {
-		$message = "Error: Patient visit not created";
+		array_push($message, "Error: Patient profile not created");
 	}
 
-echo json_encode($message);
+echo (json_encode($message));
 
 ?>
