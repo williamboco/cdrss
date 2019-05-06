@@ -11,17 +11,21 @@ $comp = $_POST["complaint"];
 $med = $_POST["med"];
 $time = $_POST["visitDate"];
 
-	$query0 = "INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (NULL, $id, $time, $remarks, 0, $user, $user, NOW(), NOW())";
+	$query0 = $con->prepare("INSERT INTO visit (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
+	$query0->bind_param("isssiss", $isNull, $id, $time, $remarks, $isDeleted, $user, $user);
 
-	if(mysqli_query($con, $query0)) {
+	$isNull = NULL;
+	$isDeleted = 0;
+
+	if($query0->execute()) {
 		$message = "success";
 
 		//get autoIncrement ID from recent query
 		$vId = mysqli_insert_id($con);
 
 		foreach($comp as $i => $item) {
-			$query1 = "INSERT INTO `complaint` (complaintName) SELECT * FROM (SELECT $item) AS tmp WHERE NOT EXISTS ( SELECT complaintName FROM `complaint` WHERE complaintName=$item )";
-			mysqli_query($con, $query1);
+			$query1 = $con->prepare("INSERT INTO `complaint` (complaintName) SELECT * FROM (SELECT $item) AS tmp WHERE NOT EXISTS ( SELECT complaintName FROM `complaint` WHERE complaintName=$item)");
+			$query1->execute();
 
 			//get autoIncrement ID from recent query
 			$cId = mysqli_insert_id($con);
@@ -33,8 +37,9 @@ $time = $_POST["visitDate"];
 				$cId = $row['ID'];
 			}
 
-			$query3 = "INSERT INTO `visit_complaint` (ID, visitID, complaintID) VALUES (NULL, $vId, $cId)";
-			if(mysqli_query($con, $query3)) {
+			$query3 = $con->prepare("INSERT INTO visit_complaint (ID, visitID, complaintID) VALUES (NULL, $vId, $cId)");
+			$query3->bind_param("iii", $isNull, $vId, $cId);
+			if($query3->execute()) {
 				// $message = "Complaint".$cId.":".$item;
 			}
 		}
@@ -47,7 +52,11 @@ $time = $_POST["visitDate"];
 				$mId = $med[$i];
 				$mQty = $med[$i+1];
 
-				if(mysqli_query($con, "INSERT INTO `visit_medicine` (ID, visitID, complaintID, medicineID, quantity) VALUES (NULL, $vId, $cId, $mId, $mQty)"))	{
+				$query4 = $con->prepare("INSERT INTO `visit_medicine` (ID, visitID, medicineID, quantity, complaintID) VALUES (NULL, $vId, $cId, $mId, $mQty)");
+				$query4->bind_param("iiiii", $isNull, $vId, $mId, $mQty, $cId);
+				$isNull = 0;
+
+				if($query4->execute())	{
 
 					$query0 = "SELECT * FROM `medicine` WHERE ID='$mId'";
 					if($result = mysqli_query($con, $query0)){
@@ -75,6 +84,7 @@ $time = $_POST["visitDate"];
 								$mStatus = 1;
 						}
 					}
+				 		$stmt->execute();
 
 				}
 			}
