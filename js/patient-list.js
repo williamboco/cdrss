@@ -59,8 +59,6 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 	var $form = $(this);
 
 	event.preventDefault();
-	//console.log($form.serialize());
-
 	// Use Ajax to submit form data
 	$.ajax({
 		type: 'POST',

@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	setDateRange();
+
 	var t = $('#visitTable').DataTable( {
 		"ajax": "ajax/filtered_visits.php?" + $('#filter').serialize() ,
 		"columnDefs": [ {
@@ -25,6 +26,9 @@ $(document).ready(function() {
 			cell.innerHTML = i+1;
 		} );
 	} ).draw();
+
+
+
 
 	$('#date1').on('change', function() {
 		//alert("Changed");
