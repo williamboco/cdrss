@@ -11,16 +11,10 @@ $id = $_GET['patientID'];
 //Patient general information
 $result = mysqli_query($con, "SELECT * FROM `patient` WHERE ID='$id'");
 $pat = mysqli_fetch_array($result);
-<<<<<<< HEAD
 // $pat['firstName'] = openssl_decrypt(base64_decode($pat['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 // $pat['lastName'] = openssl_decrypt(base64_decode($pat['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 // $pat['contact'] = openssl_decrypt(base64_decode($pat['contact']), $method, $key, OPENSSL_RAW_DATA, $iv);
-=======
->>>>>>> cc3862f8555afa5347310ec099ca867f976cde1f
 
-// $pat['firstName'] = openssl_decrypt(base64_decode($pat['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
-// $pat['lastName'] = openssl_decrypt(base64_decode($pat['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
-// $pat['contact'] = openssl_decrypt(base64_decode($pat['contact']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 
 //Contact person information
