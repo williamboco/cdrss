@@ -1,17 +1,13 @@
 <?php
 	include('../includes/dbcon.php');
-	$method = 'aes-256-cbc';
-	$password = '3sc3RLrpd17';
-	$key = substr(hash('sha256', $password, true), 0, 32);
-	$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
-	
-	$q = openssl_decrypt(base64_decode($_GET['q']), $method, $key, OPENSSL_RAW_DATA, $iv);
-	$q .= '%';
+	// $method = 'aes-256-cbc';
+	// $password = '3sc3RLrpd17';
+	// $key = substr(hash('sha256', $password, true), 0, 32);
+	// $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
-	$method = 'aes-256-cbc';
-	$password = '3sc3RLrpd17';
-	$key = substr(hash('sha256', $password, true), 0, 32);
-	$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+	//$q = openssl_decrypt(base64_decode($_GET['q']), $method, $key, OPENSSL_RAW_DATA, $iv);
+	$q = $_GET['q'];
+	$q .= '%';
 
 
 	$query = "SELECT * FROM `patient` WHERE ID LIKE '$q' OR firstName LIKE '$q' OR lastName LIKE '$q'";
@@ -21,9 +17,9 @@
 	$inf = array();
 	while($p = mysqli_fetch_array($result)) {
 
-		$p['firstName'] = openssl_decrypt(base64_decode($p['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
-		$p['lastName'] = openssl_decrypt(base64_decode($p['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
-		$p['contact'] = openssl_decrypt(base64_decode($p['contact']), $method, $key, OPENSSL_RAW_DATA, $iv);
+		// $p['firstName'] = openssl_decrypt(base64_decode($p['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+		// $p['lastName'] = openssl_decrypt(base64_decode($p['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+		// $p['contact'] = openssl_decrypt(base64_decode($p['contact']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 		//get type
 		$id = $p['ID'];

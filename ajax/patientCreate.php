@@ -2,10 +2,10 @@
 include("../includes/dbcon.php");
 session_start();
 
-$method = 'aes-256-cbc';
-$password = '3sc3RLrpd17';
-$key = substr(hash('sha256', $password, true), 0, 32);
-$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+// $method = 'aes-256-cbc';
+// $password = '3sc3RLrpd17';
+// $key = substr(hash('sha256', $password, true), 0, 32);
+// $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
 
 $query = $con->prepare("INSERT INTO `patient` (`ID`, `firstName`, `lastName`, `birthDate`, `gender`, `contact`, `isDeleted`, `createdBy`, `modifiedBy`, `dateCreated`, `dateModified`) VALUES (?,?,?,?,?,?,?,?,?,NOW(),NOW())");
@@ -13,18 +13,18 @@ $query->bind_param("ssssssiss", $id, $firstName, $lastName, $birthDate, $gender,
 
 $id = htmlspecialchars($_POST['idNumber']);
 $firstName = htmlspecialchars($_POST['firstname']);
-$firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
+// $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
 $lastName = htmlspecialchars($_POST['lastname']);
-$lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
+// $lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
 $birthDate = htmlspecialchars($_POST['birthdate']);
 $gender = htmlspecialchars($_POST['gender']);
 $isDeleted = 0;
 $allergy = $_POST['allergy'];
 $cPerson = $_POST['cPerson'];
 $contact = htmlspecialchars($_POST['contactnumber']);
-$contact = base64_encode(openssl_encrypt($contact, $method, $key, OPENSSL_RAW_DATA, $iv));
+// $contact = base64_encode(openssl_encrypt($contact, $method, $key, OPENSSL_RAW_DATA, $iv));
 $user = htmlspecialchars($_SESSION['firstName']);
-$user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
+// $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
 
 if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 	if(mysqli_num_rows($result) > 0) {
@@ -166,9 +166,9 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 					$result->bind_param("iiss", $isNull, $id, $pName, $pContact);
 
 					$pName = htmlspecialchars($cPerson[$i]);
-					$pName = base64_encode(openssl_encrypt($pName, $method, $key, OPENSSL_RAW_DATA, $iv));
+					// $pName = base64_encode(openssl_encrypt($pName, $method, $key, OPENSSL_RAW_DATA, $iv));
 					$pContact = htmlspecialchars( $cPerson[$i+1]);
-					$pContact = base64_encode(openssl_encrypt($pContact, $method, $key, OPENSSL_RAW_DATA, $iv));
+					// $pContact = base64_encode(openssl_encrypt($pContact, $method, $key, OPENSSL_RAW_DATA, $iv));
 					$isNull = NULL;
 
 					if($result->execute()) {
