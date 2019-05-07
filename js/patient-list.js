@@ -67,9 +67,11 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 		success: function(result) {
 			$("#patientModal").modal('hide');
 			$form[0].reset();
+			$('.filters').trigger('change');
+
 				if(result=='success') {
 					alertify.alert(result);
-					$('.filters').trigger('change');
+					window.location.reload(true);
 				}else {
 					alertify.alert(result);
 				}

@@ -113,7 +113,7 @@ if($_SESSION['role'] != 'Admin') {
                      <div class="form-group">
                         <label class="col-sm-4 control-label">Contact Number</label>
                         <div class="col-sm-8">
-                           <input type="number" min="0" class="form-control" name="contactnumber" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
+                           <input type="number" min="0" class="form-control" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
                         </div>
                      </div>
 
@@ -180,15 +180,15 @@ if($_SESSION['role'] != 'Admin') {
 											 <label class="col-sm-4 control-label" for="cPerson[]">Contact Person/s</label>
 												 <div class="fieldsGroup col-sm-8" id="pDiv" value="3">
 													<div class="tbContainer" style="display: none !important;margin-bottom: 10px;">
-														<input type="text" class="form-control" name="cPerson" placeholder="Full name"><br>
-														<input type="number" min="0" class="form-control" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
+														<input type="text" class="form-control" placeholder="Full name"><br>
+														<input type="number" min="0" class="form-control" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
 														<button class="remove">Remove</button>
 													</div>
 													<a href="#" class="addInputCP" value="cPerson[]">+ Add</a>
 													</div>
 											</div>
 	                    <div class="form-group">
-												<label class="col-sm-4 control-label">Allergy/s</label>
+												<label class="col-sm-4 control-label" for="allergy[]">Allergy/s</label>
 												<div class="fieldsGroup col-sm-8" id="allergyDiv" value="6">
 													<div class="tbContainer" style="display: none !important;margin-bottom: 10px;">
 														<select class="form-control" data-placeholder="Medicine, Food, Etc." id="selAll">

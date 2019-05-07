@@ -7,7 +7,6 @@ session_start();
 // $key = substr(hash('sha256', $password, true), 0, 32);
 // $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
-
 $query = $con->prepare("INSERT INTO `patient` (`ID`, `firstName`, `lastName`, `birthDate`, `gender`, `contact`, `isDeleted`, `createdBy`, `modifiedBy`, `dateCreated`, `dateModified`) VALUES (?,?,?,?,?,?,?,?,?,NOW(),NOW())");
 $query->bind_param("ssssssiss", $id, $firstName, $lastName, $birthDate, $gender, $contact, $isDeleted, $user, $user);
 
@@ -17,11 +16,11 @@ $firstName = htmlspecialchars($_POST['firstname']);
 $lastName = htmlspecialchars($_POST['lastname']);
 // $lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
 $birthDate = htmlspecialchars($_POST['birthdate']);
+$contact = htmlspecialchars($_POST['contact']);
 $gender = htmlspecialchars($_POST['gender']);
 $isDeleted = 0;
-$allergy = $_POST['allergy'];
 $cPerson = $_POST['cPerson'];
-$contact = htmlspecialchars($_POST['contactnumber']);
+$allergy = $_POST['allergy'];
 // $contact = base64_encode(openssl_encrypt($contact, $method, $key, OPENSSL_RAW_DATA, $iv));
 $user = htmlspecialchars($_SESSION['firstName']);
 // $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
@@ -114,7 +113,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 
 				if($query->execute())
 				{
-				//$message .= "\nEmployee table: record inserted";
+				//$message .= "\nEmployee table: Record inserted";
 				}
 
 			}
@@ -145,7 +144,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 
 					if($query->execute())
 					{
-					$message .= "\nPatient_allergy table: record inserted";
+						// $message .= "\nPatient_allergy table: Record inserted";
 					}
 				}
 
@@ -162,8 +161,8 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 				//if person name is not blank
 				if($cPerson[$i]!='') {
 
-					$result = $con->prepare("INSERT INTO `contact_person` (`ID`, `patientID`, `fullName`, `contact`) VALUES (?,?,?,?)");
-					$result->bind_param("iiss", $isNull, $id, $pName, $pContact);
+					$result = $con->prepare("INSERT INTO `contact_person` (ID, patientID, fullName, contact) VALUES (?,?,?,?)");
+					$result->bind_param("iisi", $isNull, $id, $pName, $pContact);
 
 					$pName = htmlspecialchars($cPerson[$i]);
 					// $pName = base64_encode(openssl_encrypt($pName, $method, $key, OPENSSL_RAW_DATA, $iv));
@@ -172,7 +171,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 					$isNull = NULL;
 
 					if($result->execute()) {
-						$message .= "\nContact person inserted";
+						// $message .= "\nContact_person table: Record inserted";
 					}
 				}
 
@@ -184,7 +183,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 		}
 	}
 } else {
-	$message = "Error: Query Failed.";
+	$message = "Error: Query Failed";
 }
 
  $stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
