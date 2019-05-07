@@ -8,7 +8,6 @@ $method = 'aes-256-cbc';
 $password = '3sc3RLrpd17';
 $key = substr(hash('sha256', $password, true), 0, 32);
 $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
-$userEmail = array();
 // Load Composer's autoloader
 require_once __DIR__ . '../../PHPMailer/vendor/autoload.php';
 
@@ -38,7 +37,6 @@ try {
    while ($row = $result->fetch_assoc()) {
       $row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
-      if ($row['isActive'] == $isActive) {
 
         $mail->addAddress($row['email']);     // Add a recipient
         //$mail->AddCC("201601045@iacademy.edu.ph");
@@ -56,7 +54,6 @@ try {
         $mail->send();
         $mail->clearAddresses();
 
-      }
     }
 
     echo 'Message has been sent';
