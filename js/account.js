@@ -43,18 +43,20 @@ $("#passwordForm").on("submit", function(event) {
 
 			if(response == 'success') {
 				alertify.alert(response);
+				//setTimeout(location.reload.bind(location), 10000);
+			 // $form[0].reset();
 				location.reload();
-				$form[0].reset();
-				location.reload();
+			//	setTimeout(location.reload.bind(location), 10000);
 			}else {
 				alertify.alert(response);
-				$form[0].reset();
-				location.reload();
+			//	setTimeout(location.reload.bind(location), 10000);
+			  $form[0].reset();
+				//setTimeout(location.reload.bind(location), 10000);
 			}
 		}
 	});
 	}else {
-		alertify.alert("Not match");
+		alertify.alert("Password does not match.");
 	}
 
 
