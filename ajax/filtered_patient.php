@@ -5,10 +5,10 @@ $patientType = $_GET['patientType'];
 
 include('filter_patients.php');
 
-$method = 'aes-256-cbc';
-$password = '3sc3RLrpd17';
-$key = substr(hash('sha256', $password, true), 0, 32);
-$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+// $method = 'aes-256-cbc';
+// $password = '3sc3RLrpd17';
+// $key = substr(hash('sha256', $password, true), 0, 32);
+// $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
 if ($_SESSION['role'] == 'Admin'){
 	$url = "profile-avp.php";
@@ -18,8 +18,8 @@ if ($_SESSION['role'] == 'Admin'){
 
 $patients = array();
 while($pat = mysqli_fetch_array($result)) {
-	$pat['firstName'] = openssl_decrypt(base64_decode($pat['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
-	$pat['lastName'] = openssl_decrypt(base64_decode($pat['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+	// $pat['firstName'] = openssl_decrypt(base64_decode($pat['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+	// $pat['lastName'] = openssl_decrypt(base64_decode($pat['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 	$x = (object) array(
 			0 => '',

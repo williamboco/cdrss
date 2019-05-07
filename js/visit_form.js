@@ -447,14 +447,15 @@ $("#addVisitForm").on("submit", function(event) {
 			// ... Process the result ...
 			var response = JSON.parse(response);
 
-			if(response[0]=='success') {
-				console.log(response);
-				alertify.alert('Patient visit record successfully created');
-				$("#addVisitModal").modal('hide');
-				refresh();
-			}else {
-				alertify.alert(response);
-			}
+        if(response[0]=='success'){
+          console.log(response);
+          alertify.alert('Patient visit record successfully created');
+          $("#addVisitModal").modal('hide');
+          refresh();
+        } else{
+          alertify.alert(response);
+        }
+
 
 		}
 	});

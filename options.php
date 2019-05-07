@@ -105,7 +105,7 @@ if($_SESSION['role'] == 'Admin') {
 							<label>UNIT OF MEASURE *</label>
 								<div class="row">
 									<div class="col-md-4">
-										<input type="number" class="form-control" name="medicineDosageQty" placeholder="Dosage Amount" min="1" max="2000" size="10">
+										<input type="number" class="form-control" name="medicineDosageQty" placeholder="Dosage Amount" min="1" max="2000" required>
 									</div>
 									<div class="col-md-8">
 										<select class="form-control" name="medicineDosage" required>
@@ -118,11 +118,11 @@ if($_SESSION['role'] == 'Admin') {
 									</div>
 								</div>
 							<label>INITIAL STOCK QUANTITY *</label>
-								<input type="number" class="form-control" name="medicineCurrentQty" placeholder="Initial Stock Quantity" min="1" max="2000" size="10"><br>
+								<input type="number" class="form-control" name="medicineCurrentQty" placeholder="Initial Stock Quantity" min="1" max="2000" required><br>
 							<label>THRESHOLD QUANTITY *</label>
-								<input type="number" class="form-control" name="medicineThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" size="10"><br>
+								<input type="number" class="form-control" name="medicineThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" required><br>
 							<label>CRITICAL QUANTITY *</label>
-								<input type="number" class="form-control" name="medicineCriticalQty" placeholder="Critical Quantity" min="1" max="2000" size="10"><br>
+								<input type="number" class="form-control" name="medicineCriticalQty" placeholder="Critical Quantity" min="1" max="2000" required><br>
 						</div>
 						<div id="supDiv" class="hidden">
 							<br>
@@ -131,7 +131,7 @@ if($_SESSION['role'] == 'Admin') {
 							<label>UNIT OF MEASURE *</label>
 								<div class="row">
 									<div class="col-md-4">
-										<input type="number" class="form-control" name="supplyDosageQty" placeholder="Dosage Amount" min="1" size="10">
+										<input type="number" class="form-control" name="supplyDosageQty" placeholder="Dosage Amount" min="1" required>
 									</div>
 									<div class="col-md-8">
 										<select class="form-control" name="supplyDosage" required>
@@ -143,11 +143,11 @@ if($_SESSION['role'] == 'Admin') {
 									</div>
 								</div>
 							<label>INITIAL STOCK QUANTITY *</label>
-								<input type="number" class="form-control" name="supplyCurrentQty" placeholder="Initial Stock Quantity" min="1" max="2000" size="10" required><br>
+								<input type="number" class="form-control" name="supplyCurrentQty" placeholder="Initial Stock Quantity" min="1" max="2000" required><br>
 							<label>THRESHOLD QUANTITY *</label>
-								<input type="number" class="form-control" name="supplyThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" size="10" required><br>
+								<input type="number" class="form-control" name="supplyThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" required><br>
 							<label>CRITICAL QUANTITY *</label>
-								<input type="number" class="form-control" name="supplyCriticalQty" placeholder="Critical Quantity" min="1" max="2000" size="10" required><br>
+								<input type="number" class="form-control" name="supplyCriticalQty" placeholder="Critical Quantity" min="1" max="2000" required><br>
 						</div>
 					</div>
 					<button type="submit" class="btn btn-primary pull-right hidden">Submit</button>
@@ -244,7 +244,7 @@ if($_SESSION['role'] == 'Admin') {
 							<label>UNIT OF MEASURE *</label>
 								<div class="row">
 									<div class="col-md-4">
-										<input type="number" class="form-control" name="medicineDosageQty" placeholder="Dosage Amount" min="1" size="10">
+										<input type="number" class="form-control" name="medicineDosageQty" placeholder="Dosage Amount" min="1" required>
 									</div>
 									<div class="col-md-8">
 										<select class="form-control" name="medicineDosage" required>
@@ -264,7 +264,7 @@ if($_SESSION['role'] == 'Admin') {
 							<label>UNIT OF MEASURE *</label>
 								<div class="row">
 									<div class="col-md-4">
-										<input type="number" class="form-control" name="supplyDosageQty" placeholder="Dosage Amount" min="1" size="10">
+										<input type="number" class="form-control" name="supplyDosageQty" placeholder="Dosage Amount" min="1" required>
 									</div>
 									<div class="col-md-8">
 										<select class="form-control" name="supplyDosage" required>

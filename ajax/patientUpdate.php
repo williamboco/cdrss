@@ -12,15 +12,15 @@ $origID = htmlspecialchars($_POST['origID']);
 $user = htmlspecialchars($_POST['userID']);
 $id = htmlspecialchars($_POST['idNumber']);
 $firstName = htmlspecialchars($_POST['firstname']);
-$firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
+// $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
 $lastName = htmlspecialchars( $_POST['lastname']);
-$lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
+// $lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
 $birthDate = htmlspecialchars($_POST['birthdate']);
 $gender = htmlspecialchars($_POST['gender']);
 $allergy = $_POST['allergy'];
 $cPerson = $_POST['cPerson'];
 $contact = htmlspecialchars($_POST['contactnumber']);
-$contact = base64_encode(openssl_encrypt($contact, $method, $key, OPENSSL_RAW_DATA, $iv));
+// $contact = base64_encode(openssl_encrypt($contact, $method, $key, OPENSSL_RAW_DATA, $iv));
 
 
 
@@ -159,10 +159,10 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID=$id")) {
 					$result = $con->prepare("INSERT INTO `contact_person` (`ID`, `patientID`, `fullName`, `contact`) VALUES (?,?,?,?)");
 					$result->bind_param("iiss", $isNull, $id, $pName, $pContact);
 
-					$pName = htmlspecialchars($cPerson[$i]);
-					$pName = base64_encode(openssl_encrypt($pName, $method, $key, OPENSSL_RAW_DATA, $iv));
-					$pContact = htmlspecialchars( $cPerson[$i+1]);
-					$pContact = base64_encode(openssl_encrypt($pContact, $method, $key, OPENSSL_RAW_DATA, $iv));
+					// $pName = htmlspecialchars($cPerson[$i]);
+					// $pName = base64_encode(openssl_encrypt($pName, $method, $key, OPENSSL_RAW_DATA, $iv));
+					// $pContact = htmlspecialchars( $cPerson[$i+1]);
+					// $pContact = base64_encode(openssl_encrypt($pContact, $method, $key, OPENSSL_RAW_DATA, $iv));
 					$isNull = NULL;
 
 					if($result->execute()) {

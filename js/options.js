@@ -32,7 +32,7 @@
 			{title: "", width: "5%", className: "dt-center"},
 			{title: "Name", className: "hover"},
 			{title: "Available Qty", width: "10%"},
-			{title: "Status", width: "10%"},
+			{title: "Status", width: "15%"},
 			{title: "Add/Less", width: "10%"},
 			{title: "Qty", width: "5%"},
 			{title: "Action", width: "10%"}
@@ -71,7 +71,6 @@
 		$('.table-responsive').show();
 		$('.medicine-responsive').addClass('hidden');
 		$('#medicineBtnGrp').addClass('hidden');
-
 	});
 
 	$('.medicine-filter').on('click', function() {
@@ -85,6 +84,25 @@
 		$('.medicine-responsive').removeClass('hidden');
 		$('#medicineBtnGrp').removeClass('hidden');
 	});
+
+  $('.filters').on('click', function() {
+  	var datatable = $('#medicineTable').dataTable().api();
+  	var status = this.value;
+
+  	$.ajax({
+  		type: "GET",
+  		url: "ajax/filtered_medicine.php",
+  		data: {data: status},
+  		cache: false,
+  		success: function(data) {
+  			// console.log(data);
+  			var obj = JSON.parse(data);
+  			datatable.clear();
+  			format(datatable.rows.add(obj));
+  			datatable.draw();
+  		}
+  	});
+  });
 
 	$('#table tbody').on('click', '.details-control', function () {
 
@@ -182,26 +200,6 @@
 				selectUrl(table);
 			}
 		});
-	});
-
-});
-
-$('.filters').on('click', function() {
-	var datatable = $('#medicineTable').dataTable().api();
-	var status = this.value;
-
-	$.ajax({
-		type: "GET",
-		url: "ajax/filtered_medicine.php",
-		data: {data: status},
-		cache: false,
-		success: function(data) {
-			console.log(data);
-			var obj = JSON.parse(data);
-			datatable.clear();
-			datatable.rows.add(obj);
-			datatable.draw();
-		}
 	});
 
 });

@@ -59,18 +59,20 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 	var $form = $(this);
 
 	event.preventDefault();
-	//console.log($form.serialize());
-
 	// Use Ajax to submit form data
 	$.ajax({
 		type: 'POST',
 		url: $form.attr('action'),
 		data: $form.serialize(),
 		success: function(result) {
-				alertify.alert(result);
-				$("#patientModal").modal('hide');
-				$('.filters').trigger('change');
-				$form[0].reset();
+			$("#patientModal").modal('hide');
+			$form[0].reset();
+				if(result=='success') {
+					alertify.alert(result);
+					$('.filters').trigger('change');
+				}else {
+					alertify.alert(result);
+				}
 			}
 	});
 });
