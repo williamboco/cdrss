@@ -20,7 +20,7 @@ if($rownum > 0) {
 	while ($row = $result->fetch_assoc()) {
 		if ($row['isActive'] == $isActive) {
 
-        //$email = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
+    		//$email = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 				// email message
 
 				$query1  = $con->prepare("SELECT brandName, genericName, isSupply from medicine WHERE status=? OR status=?");
