@@ -20,6 +20,7 @@ $rownum = mysqli_num_rows($result);
 //how to get the ipv4 php
 
 if($rownum > 0) {
+	$message = " Invalid Email Address! Please try again.";
 	while ($row = $result->fetch_assoc()) {
 		if ($row['isActive'] == $isActive) {
 			$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
@@ -53,13 +54,12 @@ if($rownum > 0) {
 
 				// send email
 				require '../../includes/mail.php';
-			//	$message = "Your temporary password is iacademyCDRS. You may change your password after logging in";
-			} else {
-				 $message = "Invalid Email Address. Please try again.";
-			}
-		 	} else {
-			 $message = "Email Address is not active. Please try again!";
-		 }
+		 	} //else {
+		// 	$message = "Invalid email address! Please try again.";
+		// }
+	} else {
+		$message = "Email is not active! Please try again.";
+	}
 	 }
 	} else {
 		$message = "Password Query change failed!";
