@@ -85,7 +85,7 @@ if ($rownum > 0) {
 
 			 if (! in_array($domain, $allowed)) {
 				 echo "Domain should end in iacademy.edu.ph";
-			 } else if ($contact < 0) {
+			 } else if ($contact <= 0) {
 				echo "Contact number must be greater than 0";
 			} else {
 				$email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
