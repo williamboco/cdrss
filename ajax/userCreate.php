@@ -85,47 +85,48 @@ if ($rownum > 0) {
 
 			 if (! in_array($domain, $allowed)) {
 				 echo "Domain should end in iacademy.edu.ph";
-			 } else {
-				 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
+			 } else if ($contact < 0) {
+				echo "Contact number must be greater than 0";
+			} else {
+				$email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 
+				$stmt->execute();
+
+				$query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
+				$query2->bind_param("issi", $isNull, $requestID, $id, $isUsed);
+				$isNull = NULL;
+				$requestID = randomPassword();
+				$id = htmlspecialchars($_POST['idNumber']);
+				$isUsed = 0;
+
+				$query2->execute();
+
+				$email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
+
+				// email message
+				$title = "link";
+				$link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
+				$msg = "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
+
+				// To send HTML mail, the Content-type header must be set
+				$headers  = 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+				// use wordwrap() if lines are longer than 70 characters
+				$msg = wordwrap($msg,70);
+
+				echo "Successfully created a user" . "<br>";
+				// send email
+				require_once __DIR__ . '../../includes/mail.php';
+
+				 $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+				 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+				 $eventID = NULL;
+				 $userID = $_SESSION['userID'];
+				 $eventName = "Created a new user.";
 				 $stmt->execute();
-
-				 $query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
-				 $query2->bind_param("issi", $isNull, $requestID, $id, $isUsed);
-				 $isNull = NULL;
-				 $requestID = randomPassword();
-				 $id = htmlspecialchars($_POST['idNumber']);
-				 $isUsed = 0;
-
-				 $query2->execute();
-
-				 $email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
-
-				 // email message
-			   $title = "link";
-				 $link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
-				 $msg = "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
-
-				 // To send HTML mail, the Content-type header must be set
-				 $headers  = 'MIME-Version: 1.0' . "\r\n";
-				 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-				 // use wordwrap() if lines are longer than 70 characters
-				 $msg = wordwrap($msg,70);
-
-				 // send email
-				 require_once __DIR__ . '../../includes/mail.php';
-
-				  $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
-					$stmt->bind_param("isi", $eventID, $eventName, $userID);
-					$eventID = NULL;
-					$userID = $_SESSION['userID'];
-					$eventName = "Created a new user.";
-					$stmt->execute();
-			 }
+			}
 		 }
-
-
 	 }
 
 
