@@ -61,7 +61,7 @@ if($_SESSION['role'] != 'Admin') {
 					<div class="form-group">
 						<label for ="avpID">User ID</label>
 						<input type="text" class="form-control hidden" name="avpID" value="<?php echo $_SESSION['userID'];?>">
-						<input type="text" class="form-control" name="idNumber" placeholder="User ID" minlength="6" required><br>
+						<input type="number" class="form-control" name="idNumber" placeholder="User ID" minlength="6" required><br>
 						<select class="form-control" name="role" required>
 						  <option value="" disabled selected>User role</option>
 						  <option value="Admin">Admin</option>
@@ -78,7 +78,7 @@ if($_SESSION['role'] != 'Admin') {
 						<label for ="dateEmployed">Employment Date</label>
 						<input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
 						<label for ="contact">Contact Number</label>
-						<input type="number" class="form-control" name="contact" placeholder="Contact Number" required><br>
+						<input type="number" class="form-control" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters"placeholder="Contact Number" required><br>
 						<label>Gender</label><br>
 						<input type="radio" name="gender" value="Male" id="gender1" checked required>
 					  <label for="gender1" style="margin-right: 50px;">Male</label>
