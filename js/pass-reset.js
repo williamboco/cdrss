@@ -16,7 +16,7 @@ $('form').on('submit', function(event) {
 		type: 'POST',
 		url: $form.attr('action'),
 		data: $form.serialize(),
-		dataType: 'html',
+		dataType: "html",
 		success: function(response) {
 			// $('.alert-success').show();
 			if(response == 'success') {
