@@ -23,7 +23,7 @@ if($_SESSION['role'] == 'Admin') {
 </head>
 <body>
 	<?php
-	  include("includes/navbar-test.php");
+	  include("includes/navbar.php");
 	?>
 
 	<div class="container" style="padding-bottom: 20px !important;">
