@@ -41,19 +41,15 @@ $id = htmlspecialchars($_POST['idNumber']);
 $role = htmlspecialchars($_POST['role']);
 $role = base64_encode(openssl_encrypt($role, $method, $key, OPENSSL_RAW_DATA, $iv));
 $firstName = htmlspecialchars($_POST['firstname']);
-$firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
+
 $lastName = htmlspecialchars($_POST['lastname']);
-$lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
+
 $email = htmlspecialchars($_POST['email']);
-$email = isset($email) ? trim($email) : null;
-$createdBy = htmlspecialchars($_SESSION['firstName']);
-$createdBy = base64_encode(openssl_encrypt($createdBy, $method, $key, OPENSSL_RAW_DATA, $iv));
-$modifiedBy =  htmlspecialchars($_SESSION['firstName']);
-$modifiedBy = base64_encode(openssl_encrypt($modifiedBy, $method, $key, OPENSSL_RAW_DATA, $iv));
+
+$contact = htmlspecialchars($_POST['contact']);
 
 $employed = htmlspecialchars($_POST['dateEmployed']);
 $gender = htmlspecialchars($_POST['gender']);
-$contact = htmlspecialchars($_POST['contact']);
 $datePassChanged = "";
 $isActive = 1;
 $password = base64_encode(openssl_encrypt("iacademyCDRS", $method, $key, OPENSSL_RAW_DATA, $iv));
@@ -67,57 +63,65 @@ $rownum = mysqli_num_rows($result);
 if ($rownum > 0) {
 
 	while ($row = $result->fetch_assoc()) {
-		$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
-
-		if ($row['ID'] == $id) {
-			echo "User ID already exists!";
+	$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
+		if ($row['ID'] == $id || $row['email'] == $email) {
+			echo "User ID or Email address already exists." . "<br>";
 		}
 
-		if ($row['email'] == $email) {
-			echo "Email Address already exists!";
-		}
 	}
- } else {
-
-	   if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+} else {
+		$email = isset($email) ? trim($email) : null;
+	  if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			 $parts = explode('@', $email);
 			 $domain = array_pop($parts);
 
 			 if (! in_array($domain, $allowed)) {
-				 echo "Domain should end in iacademy.edu.ph";
-			 } else if ($contact <= 0) {
-				echo "Contact number must be greater than 0";
+				 echo "The email must end in iacademy.edu.ph";
+			 } else if (ctype_space($firstName) || ctype_space($lastName) || ctype_space($email)) {
+						echo "Whitespaces are not allowed. Please enter a valid input";
+				} else if ($rownum > 0) {
+						while ($row = $result->fetch_assoc()) {
+
+						}
 			} else {
-				$email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
+				 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-				$stmt->execute();
+				 $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
+				 $lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
+				 $createdBy = htmlspecialchars($_SESSION['firstName']);
+				 $createdBy = base64_encode(openssl_encrypt($createdBy, $method, $key, OPENSSL_RAW_DATA, $iv));
+				 $modifiedBy =  htmlspecialchars($_SESSION['firstName']);
+				 $modifiedBy = base64_encode(openssl_encrypt($modifiedBy, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-				$query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
-				$query2->bind_param("issi", $isNull, $requestID, $id, $isUsed);
-				$isNull = NULL;
-				$requestID = randomPassword();
-				$id = htmlspecialchars($_POST['idNumber']);
-				$isUsed = 0;
 
-				$query2->execute();
+				 $stmt->execute();
 
-				$email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
+				 $query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
+				 $query2->bind_param("issi", $isNull, $requestID, $id, $isUsed);
+				 $isNull = NULL;
+				 $requestID = randomPassword();
+				 $id = htmlspecialchars($_POST['idNumber']);
+				 $isUsed = 0;
 
-				// email message
-				$title = "link";
-				$link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
-				$msg = "An account has been created for you. To complete setting up your account, \nplease click this <a href='".$link."'>".$title."</a> to set your own password.";
+				 $query2->execute();
 
-				// To send HTML mail, the Content-type header must be set
-				$headers  = 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				 $email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
 
-				// use wordwrap() if lines are longer than 70 characters
-				$msg = wordwrap($msg,70);
+				 // email message
+				 $title = "link";
+				 $link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
+				 $msg = "An account has been created for you. To complete setting up your account, \nplease click this <a href='".$link."'>".$title."</a> to set your own password.";
 
-				echo "Successfully created a user" . "<br>";
-				// send email
-				require_once __DIR__ . '../../includes/mail.php';
+				 // To send HTML mail, the Content-type header must be set
+				 $headers  = 'MIME-Version: 1.0' . "\r\n";
+				 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+				 // use wordwrap() if lines are longer than 70 characters
+				 $msg = wordwrap($msg,70);
+
+				 echo "Successfully created a user" . "<br>";
+				 // send email
+				 require_once __DIR__ . '../../includes/mail.php';
 
 				 $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
 				 $stmt->bind_param("isi", $eventID, $eventName, $userID);
