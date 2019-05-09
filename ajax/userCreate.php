@@ -92,37 +92,21 @@ if ($rownum > 0) {
 
 				$stmt->execute();
 
-<<<<<<< HEAD
-				 $query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
-				 $query2->bind_param("isii", $isNull, $requestID, $id, $isUsed);
-				 $isNull = NULL;
-				 $requestID = randomPassword();
-				 $id = htmlspecialchars($_POST['idNumber']);
-				 $isUsed = 0;
-=======
 				$query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
 				$query2->bind_param("issi", $isNull, $requestID, $id, $isUsed);
 				$isNull = NULL;
 				$requestID = randomPassword();
 				$id = htmlspecialchars($_POST['idNumber']);
 				$isUsed = 0;
->>>>>>> 1c439f4a2729105e3da953d9fa59fedab0ac0bc4
 
 				$query2->execute();
 
 				$email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
 
-<<<<<<< HEAD
-				 // email message
-			   // $title = "link";
-				 //$link = $_SERVER['SERVER_NAME']."/cdrs/pass-new.php?rID=".$requestID;
-				 $msg = "The new iACADEMY account password is iacademyCDRS. You may now login to your account using the new password";// "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
-=======
 				// email message
 				$title = "link";
 				$link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
-				$msg = "New iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
->>>>>>> 1c439f4a2729105e3da953d9fa59fedab0ac0bc4
+				$msg = "An account has been created for you. To complete setting up your account, \nplease click this <a href='".$link."'>".$title."</a> to set your own password.";
 
 				// To send HTML mail, the Content-type header must be set
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
