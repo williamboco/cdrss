@@ -1,10 +1,10 @@
 <?php
 include('../includes/dbcon.php');
 
-$method = 'aes-256-cbc';
-$password = '3sc3RLrpd17';
-$key = substr(hash('sha256', $password, true), 0, 32);
-$iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+// $method = 'aes-256-cbc';
+// $password = '3sc3RLrpd17';
+// $key = substr(hash('sha256', $password, true), 0, 32);
+// $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
 $visitID = $_GET['visitID'];
 
@@ -61,11 +61,11 @@ $medicine = array();
 		array_push($medicine, $x);
 	}
 
-$creator['role'] = openssl_decrypt(base64_decode($creator['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
-$creator['firstName'] = openssl_decrypt(base64_decode($creator['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
-
-$modifier['role'] = openssl_decrypt(base64_decode($modifier['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
-$modifier['firstName'] = openssl_decrypt(base64_decode($modifier['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+// $creator['role'] = openssl_decrypt(base64_decode($creator['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
+// $creator['firstName'] = openssl_decrypt(base64_decode($creator['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
+//
+// $modifier['role'] = openssl_decrypt(base64_decode($modifier['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
+// $modifier['firstName'] = openssl_decrypt(base64_decode($modifier['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 $data = array(
 	'Visit' => $vis,
