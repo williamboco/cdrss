@@ -9,9 +9,7 @@ $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0)
 
 $id = htmlspecialchars($_POST['idNumber']);
 $firstName = htmlspecialchars($_POST['firstname']);
-$firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
 $lastName = htmlspecialchars($_POST['lastname']);
-$lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
 $email = htmlspecialchars($_POST['email']);
 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 $employed = htmlspecialchars($_POST['dateEmployed']);
@@ -24,22 +22,28 @@ if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 	if(mysqli_num_rows($result) > 0 && $userID != $id) {
 		echo "User with that ID number already exists.";
 	} else {
-		 $stmt = $con->prepare("UPDATE `user` SET `ID` = ?, `email` = ?, `dateEmployed` = ?, `firstName` = ?, `lastName` = ?, `gender` = ?, `contact` = ? WHERE `user`.`ID` = ?");
-		 $stmt->bind_param("ssssssis", $id, $email, $employed, $firstName, $lastName, $gender, $contact, $userID);
-		 $stmt->execute();
+			if (ctype_space($firstName) || ctype_space($lastName)) {
+				$message = "Whitespaces are not not allowed. Please enter a valid input";
+			} else {
+				$firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
+				$lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
+				$stmt = $con->prepare("UPDATE `user` SET `ID` = ?, `email` = ?, `dateEmployed` = ?, `firstName` = ?, `lastName` = ?, `gender` = ?, `contact` = ? WHERE `user`.`ID` = ?");
+				$stmt->bind_param("ssssssis", $id, $email, $employed, $firstName, $lastName, $gender, $contact, $userID);
+				$stmt->execute();
 
-		 if(mysqli_affected_rows($con) > 0) {
-		 	$message = "Profile is successfully updated.";
-		 }else {
-			$message = "Profile is not updated.";
-		 }
+				if(mysqli_affected_rows($con) > 0) {
+				 $message = "Profile is successfully updated.";
+				}else {
+				 $message = "Profile is not updated.";
+				}
 
-		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
-		$stmt->bind_param("isi", $eventID, $eventName, $userID);
-		$eventID = NULL;
-		$userID = $_SESSION['userID'];
-		$eventName = "Updated user profile.";
-		$stmt->execute();
+			 	$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
+			 	$stmt->bind_param("isi", $eventID, $eventName, $userID);
+			 	$eventID = NULL;
+			 	$userID = $_SESSION['userID'];
+			 	$eventName = "Updated user profile.";
+			 	$stmt->execute();
+			}
 	}
 }else {
 
