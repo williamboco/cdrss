@@ -36,7 +36,7 @@ if($rownum > 0) {
 				$query2->execute();
 				// email message
 				$title = "link";
-				$link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
+				$link = "http://".$_SERVER['SERVER_NAME'].":80/cdrss/pass-new.php?rID=".$requestID;
 				$msg = "We got a request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
 
 				// $hashedPassword = base64_encode(openssl_encrypt("iacademyCDRS", $method, $key, OPENSSL_RAW_DATA, $iv));
