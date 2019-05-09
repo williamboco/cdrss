@@ -79,11 +79,7 @@ if ($rownum > 0) {
 				 echo "The email must end in iacademy.edu.ph";
 			 } else if (ctype_space($firstName) || ctype_space($lastName) || ctype_space($email)) {
 						echo "Whitespaces are not allowed. Please enter a valid input";
-				} else if ($rownum > 0) {
-						while ($row = $result->fetch_assoc()) {
-
-						}
-			} else {
+				} else {
 				 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 
 				 $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
