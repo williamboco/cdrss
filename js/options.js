@@ -171,10 +171,14 @@
 			url: $form.attr('action'),
 			data: $form.serialize(),
 			success: function(response) {
-				$form[0].reset();
-				$addModal.modal('hide');
-				alertify.alert(response);
-				selectUrl(table);
+        $form[0].reset();
+        $addModal.modal('hide');
+        if (response.includes("success")){
+          alertify.alert(response);
+          selectUrl(table);
+        } else{
+          alertify.alert(response);
+        }
 			}
 		});
 
@@ -194,10 +198,14 @@
 			url: $form.attr('action'),
 			data: $form.serialize(),
 			success: function(response) {
-				$form[0].reset();
-				$editModal.modal('hide');
-				alertify.alert(response);
-				selectUrl(table);
+        $form[0].reset();
+        $editModal.modal('hide');
+        if (response.includes("success")){
+          alertify.alert(response);
+          selectUrl(table);
+        } else{
+          alertify.alert(response);
+        }
 			}
 		});
 	});
@@ -210,8 +218,7 @@ $('[name="isSupply"]').on('change', function() {
 	$this.parent().siblings('button').removeClass('hidden');
 	$this.siblings().addClass('hidden');
 	$this.siblings().find('.form-control').attr('disabled', true);
-	if($this.val() == '0') {
-		$this.siblings('#medDiv').removeClass('hidden');
+	if($this.val() == '0') {		$this.siblings('#medDiv').removeClass('hidden');
 		$this.siblings('#medDiv').find('.form-control').attr('disabled', false);
 
 	}else {

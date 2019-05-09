@@ -29,13 +29,13 @@ $result = mysqli_query($con, "SELECT * FROM `patient` WHERE ID='$patientID'");
 
 
 $complaint = array();
-	$result = mysqli_query($con, "SELECT complaint.complaintName FROM `visit_complaint` JOIN `complaint` ON visit_complaint.complaintID=complaint.ID WHERE visitID=$visitID");
+	$result = mysqli_query($con, "SELECT complaint.complaintName FROM `visit_complaint` JOIN `complaint` ON visit_complaint.complaintID=complaint.ID WHERE visitID='$visitID'");
 	while($comp = mysqli_fetch_array($result)) {
 		array_push($complaint, $comp['complaintName']);
 	}
 
 $medicine = array();
-	$result = mysqli_query($con, "SELECT medicine.ID, medicine.brandName, medicine.genericName, medicine.type, visit_medicine.quantity FROM `visit_medicine` JOIN `medicine` ON visit_medicine.medicineID=medicine.ID WHERE visitID=$visitID");
+	$result = mysqli_query($con, "SELECT medicine.ID, medicine.brandName, medicine.genericName, medicine.type, visit_medicine.quantity FROM `visit_medicine` JOIN `medicine` ON visit_medicine.medicineID=medicine.ID WHERE visitID='$visitID'");
 	while($med = mysqli_fetch_array($result)) {
 		$qtty = $med['quantity'];
 		$type = $med['type'];
@@ -55,7 +55,7 @@ $medicine = array();
 		$x = (object) array(
 			"id" => $med['ID'],
 			"name"   => $med['brandName'] ?: $med['genericName'],
-			"quantity"    => $qtty,
+			"quantity" => $qtty,
 			"unit" => $unit
 		);
 		array_push($medicine, $x);

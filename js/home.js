@@ -10,15 +10,15 @@ $(document).ready(function() {
 		} ],
 		"columns": [
 			{title: "#", width: "5%", className: "dt-center"},
-			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
+			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%", orderable: false, className: "dt-center"},
 			{title: "ID"},
 			{title: "Name", className: "hover"},
 			{title: "Complaint"},
 			{title: "Medicine / Supply Requested"},
 			{title: "Visit Date/Time"},
-			{title: "Action", width: "15%" , orderable: false}
+			{title: "Action", width: "15%", orderable: false}
 		],
-		"order": [[ 2, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+		"order": [[ 0, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );
 
 	t.on( 'order.dt search.dt', function () {
@@ -26,9 +26,6 @@ $(document).ready(function() {
 			cell.innerHTML = i+1;
 		} );
 	} ).draw();
-
-
-
 
 	$('#date1').on('change', function() {
 		//alert("Changed");
@@ -96,7 +93,6 @@ function refresh() {
 	var $form = $('#filter');
 		console.log($form.serialize());
 
-
 		var datatable = $('#visitTable').dataTable().api();
 		$.ajax({
 			type: "GET",
@@ -128,8 +124,7 @@ function refresh() {
 			}
 		});
 
-
-		//Compaint Graph
+		//Complaint Graph
 		$.ajax({
 			type: "GET",
 			url: "ajax/graph_complaint.php",

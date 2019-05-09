@@ -188,7 +188,7 @@ if($_SESSION['role'] == 'Admin') {
 													</div>
 											</div>
 	                    <div class="form-group">
-												<label class="col-sm-4 control-label">Allergy/s</label>
+												<label class="col-sm-4 control-label" for="allergy[]">Allergy/s</label>
 												<div class="fieldsGroup col-sm-8" id="allergyDiv" value="6">
 													<div class="tbContainer" style="display: none !important;margin-bottom: 10px;">
 														<select class="form-control" data-placeholder="Medicine, Food, Etc." id="selAll">

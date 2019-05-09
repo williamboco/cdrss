@@ -73,7 +73,7 @@
 			$isBrandName = $row['brandName'];
 
 			if ($isBrandName == $brandName) {
-				$stmt = $con->htmlspecialchars(prepare("UPDATE `medicine` SET currentQty=?, newQty=? WHERE ID=?"));
+				$stmt = $con->prepare("UPDATE `medicine` SET currentQty=?, newQty=? WHERE ID=?");
 				$stmt->bind_param("iii", $quantityLevel, $newQty, $id);
 
 				$newQty = $row['currentQty'] + $currentQty;

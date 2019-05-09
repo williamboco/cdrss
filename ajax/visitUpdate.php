@@ -2,70 +2,93 @@
 include('../includes/dbcon.php');
 
 session_start();
-$vId = $_POST['visitID'];
 $user = $_POST['userID'];
-$remarks = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $_POST["remarks"])));
+$vId = $_POST['visitID'];
 $comp = $_POST["complaint"];
 $med = $_POST["med"];
+$remarks = htmlspecialchars(trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $_POST["remarks"]))));
+$isNull = NULL;
 
-$message = array();
+$query = $con->prepare("UPDATE `visit` SET remarks=?, modifiedBy=?, dateModified=NOW() WHERE `visit`.`ID`=?");
+$query->bind_param("ssi", $remarks, $user, $vId);
 
-$query = "UPDATE `visit` SET `remarks`=$remarks, `modifiedBy`=$user, `dateModified`=NOW() WHERE `visit`.`ID`=$vId";
-$result = mysqli_query($con, $query);
+if ($query->execute()){
+	$message = "Patient visit record successfully updated";
 
-array_push($message, "success");
-array_push($message, $vId);
+	//delete records from visit_complaint & visit_medicine tables
+	$query = $con->prepare("DELETE FROM `visit_complaint` WHERE visitID=?");
+	$query->bind_param("i", $vId);
+	$query->execute();
 
-//delete records from visit_complaint & visit_medicine tables
-mysqli_query($con, "DELETE FROM `visit_complaint` WHERE visitID='$vId'");
-mysqli_query($con, "DELETE FROM `visit_medicine` WHERE visitID='$vId'");
+	$query = $con->prepare("DELETE FROM `visit_medicine` WHERE visitID=?");
+	$query->bind_param("i", $vId);
+	$query->execute();
 
-foreach($comp as $i => $item) {
-	$query = "INSERT INTO `complaint` (complaintName) SELECT * FROM (SELECT $item) AS tmp WHERE NOT EXISTS (SELECT complaintName FROM `complaint` WHERE complaintName=$item)";
-	mysqli_query($con, $query);
 
-	//get autoIncrement ID from recent query
-	$cId = mysqli_insert_id($con);
+	foreach($comp as $i => $item) {
+		if ($item!=''){
+			$query = $con->prepare("INSERT INTO `complaint` (complaintName) SELECT * FROM (SELECT '$item') AS tmp WHERE NOT EXISTS (SELECT complaintName FROM `complaint` WHERE complaintName=?)");
+			$query->bind_param("s", $item);
+			$query->execute();
 
-	if($cId==0) {
-		$query = "SELECT ID FROM `complaint` WHERE complaintName=$item";
-		$result = mysqli_query($con, $query);
-		$row = mysqli_fetch_array($result);
-		$cId = $row['ID'];
-	}
+			//get autoIncrement ID from recent query
+			$cId = mysqli_insert_id($con);
 
-	$query = "INSERT INTO `visit_complaint` (ID, visitID, complaintID) VALUES (NULL, $vId, $cId)";
-	if(mysqli_query($con, $query)) {
-		array_push($message, "complaint".$cId.":".$item);
-	}
+			if($cId==0) {
+				$query = $con->prepare("SELECT ID FROM `complaint` WHERE complaintName=?");
+				$query->bind_param("s", $item);
+				$query->execute();
+				$result = $query->get_result();
+				$row = $result->fetch_assoc();
+				$cId = $row['ID'];
+			}
 
-}
+			$query = $con->prepare("INSERT INTO `visit_complaint` (ID, visitID, complaintID) VALUES (?,?,?)");
+			$query->bind_param("iii", $isNull, $vId, $cId);
 
-$len = count($med);
-for ($i=0; $i< $len; $i++) {
-
-	//if medicine name is not blank
-	if($med[$i]!='') {
-		$mId = $med[$i];
-		$mQty = $med[$i+1];
-
-		if(mysqli_query($con, "INSERT INTO `visit_medicine` (ID, visitID, medicineID, quantity) VALUES (NULL, $vId, $mId, $mQty)"))
-		{
-			array_push($message, "medicine".$mId.":(".$mQty.")");
+			if($query->execute()) {
+				// array_push($message, "Complaint".$cId.":".$item);
+			}
 		}
+
 	}
 
-	++$i;
+	$len = count($med);
+	for ($i=0; $i< $len; $i++) {
 
-	 $stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
-	 $stmt->bind_param("isi", $eventID, $eventName, $userID);
-	 $eventID = NULL;
-	 $userID = $_SESSION['userID'];
-	 $eventName = "Updated patient visit record.";
-	 $stmt->execute();
+		//if medicine name is not blank
+		if($med[$i]!='') {
+			$query = $con->prepare("INSERT INTO `visit_medicine` (ID, visitID, medicineID, quantity, complaintID) VALUES (?,?,?,?,?)");
+			$query->bind_param("iiiii", $isNull, $vId, $mId, $mQty, $cId);
+
+			$mId = $med[$i];
+			$mQty = $med[$i+1];
+
+			if($query->execute())
+			{
+				// array_push($message, "Medicine".$mId.":(".$mQty."));
+			}
+		}
+
+		++$i;
+	}
+
+	$stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
+	$stmt->bind_param("isi", $eventID, $eventName, $userID);
+	$eventID = NULL;
+	$userID = $_SESSION['userID'];
+	$eventName = "Updated patient visit record.";
+	$stmt->execute();
+
+} else{
+		$message = "Error: Patient visit record not created";
 }
 
+$data = array(
+	'Message' => $message,
+	'vId' => $vId
+);
 
-echo (json_encode($message));
+echo json_encode($data);
 
 ?>

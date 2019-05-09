@@ -63,6 +63,8 @@ $(document).ready(function() {
         $('.fieldsGroup').on('click', 'button.remove', function() {
             $(this).closest('.tbContainer').remove();
         });
+
+
 });
 
 $('.form').on('change keyup', function() {
@@ -87,7 +89,6 @@ $(".visitDate").on('change', function() {
 	}
 
 });
-
 
 /*$('#addVisitForm').find('[name="visitDate"]').on('change', function() {
 
@@ -123,16 +124,16 @@ function viewVisit(id) {
             $(".visitDate").html(moment(obj.Visit.visitDate).format('LLLL'));
 
             $("#complaint").empty();
-            $.each(obj.Complaint, function(index, value) {
-                $("#complaint").append('<li class="h4">' + value + '</li>');
-				        $form.find(".complaintDiv").children('a').click();
-            });
+              $.each(obj.Complaint, function(index, value) {
+                  $("#complaint").append('<li class="h4">' + value + '</li>');
+  				        $form.find(".complaintDiv").children('a').click();
+              });
 
             $("#medicine").empty();
-            $.each(obj.Medicine, function(i) {
-              $("#medicine").append('<li class="h4">' + obj.Medicine[i].quantity + " " + obj.Medicine[i].unit + " " + obj.Medicine[i].name + '</li>');
-  				    $form.find(".medicineDiv").children('a').click();
-            });
+              $.each(obj.Medicine, function(i) {
+                $("#medicine").append('<li class="h4">' + obj.Medicine[i].quantity + " " + obj.Medicine[i].unit + " " + obj.Medicine[i].name + '</li>');
+    				    $form.find(".medicineDiv").children('a').click();
+              });
 
       			var a = obj.Visit.visitDate;
       			var str = [a.slice(0, 10), "T", a.slice(10)].join('');
@@ -142,8 +143,8 @@ function viewVisit(id) {
       			$form.find('[name="visitDate"]').val(datetime);
 
       			$("#remarks").html(obj.Visit.remarks);
-                  $("#createdBy").html(obj.createdBy);
-                  $("#dateCreated").html(obj.Visit.dateCreated);
+              $("#createdBy").html(obj.createdBy);
+              $("#dateCreated").html(obj.Visit.dateCreated);
 
       			if(obj.Visit.dateCreated != obj.Visit.dateModified) {
       				$("#modifiedBy").html(obj.modifiedBy);
@@ -375,6 +376,27 @@ $("#patientID").select2({
     templateSelection: formatRepoSelection
 });
 
+$('.guestVisitForm').on('click', function(event){
+  event.preventDefault();
+  $('.allergy').hide();
+  $('#searchDiv').hide();
+  $('#searchDiv').each('.form-control').attr('disabled', true);
+
+  $('.guestVisitForm').hide();
+  $('#guestDiv').removeClass('hidden');
+  $('#guestDiv').each('.form-control').attr('disabled', false);
+});
+
+$('.patientVisitForm').on('click', function(event){
+  event.preventDefault();
+  $('.allergy').show();
+  $('#searchDiv').show();
+  $('#searchDiv').each('.form-control').attr('disabled', false);
+
+  $('.guestVisitForm').show();
+  $('#guestDiv').addClass('hidden');
+  $('#guestDiv').each('.form-control').attr('disabled', true);
+});
 
 // Complaint select options
 function complaintOptions() {
@@ -445,13 +467,12 @@ $("#addVisitForm").on("submit", function(event) {
 		data: $form.serialize(),
 		success: function(response) {
 			// ... Process the result ...
-			var response = JSON.parse(response);
-
-        if(response[0]=='success'){
+      $("#addVisitModal").modal('hide');
+      $form[0].reset();
+      refresh();
+        if(response=='success'){
           console.log(response);
-          alertify.alert('Patient visit record successfully created');
-          $("#addVisitModal").modal('hide');
-          refresh();
+          alertify.alert(response);
         } else{
           alertify.alert(response);
         }
@@ -473,20 +494,21 @@ $("#editVisitForm").on("submit", function(event) {
 		type: 'POST',
 		url: "ajax/visitUpdate.php",
 		data: $form.serialize(),
-		success: function(response) {
+		success: function(data) {
 			// ... Process the result ...
-			var response = JSON.parse(response);
+      // console.log(data);
+			var obj = JSON.parse(data);
 
-			if(response[0]=='success') {
-				console.log(response);
-				alertify.alert('Patient visit record successfully updated');
-				editFormHide();
-				$('.select2-hidden-accessible').parent(".tbContainer").remove();
-				viewVisit(response[1]);
-				refresh();
-			}else {
-				alertify.alert(response);
-			}
+  			if(obj.Message.includes("success")) {
+          alertify.alert(obj.Message);
+          editFormHide();
+          $('.select2-hidden-accessible').parent(".tbContainer").remove();
+          viewVisit(obj.vId);
+          refresh();
+  			}else {
+  				alertify.alert(obj.Message);
+          refresh();
+  			}
 		}
 	});
 });

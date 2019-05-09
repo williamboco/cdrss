@@ -20,14 +20,14 @@ while($patient = mysqli_fetch_array($result)) {
 		$visID = $vis['ID'];
 
 			$complaint = "";
-			$resComp = mysqli_query($con, "SELECT complaint.complaintName FROM visit_complaint JOIN complaint ON visit_complaint.complaintID=complaint.ID WHERE visitID=$visID");
+			$resComp = mysqli_query($con, "SELECT complaint.complaintName FROM `visit_complaint` JOIN `complaint` ON visit_complaint.complaintID=complaint.ID WHERE visitID=$visID");
 			while($compInf = mysqli_fetch_array($resComp)) {
 				$complaint .= $compInf['complaintName'].", ";
 			}
 			$complaint = rtrim($complaint,", ");
 
 			$medicine = "";
-			$resMed = mysqli_query($con, "SELECT * FROM visit_medicine JOIN medicine ON visit_medicine.medicineID=medicine.ID WHERE visitID=$visID");
+			$resMed = mysqli_query($con, "SELECT * FROM `visit_medicine` JOIN `medicine` ON visit_medicine.medicineID=medicine.ID WHERE visitID=$visID");
 			while($medInf = mysqli_fetch_array($resMed)) {
 				$q = $medInf['quantity'];
 				$type = $medInf['type'];

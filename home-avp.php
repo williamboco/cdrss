@@ -14,7 +14,7 @@ if($_SESSION['role'] != 'Admin') {
 	<title>Home</title>
 	<link rel="shortcut icon" href="favicon.png" />
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
 	<link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
 	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
@@ -151,11 +151,51 @@ if($_SESSION['role'] != 'Admin') {
 						<div>
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
-						</div>
-					</div><br>
+						</div><br>
+					</div>
+
+					<button class="guestVisitForm btn-link"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
 
 					<div class="allergy row">
 					</div>
+
+					<!-- Guest Patient Info-->
+					<div id="guestDiv" class="row form-horizontal hidden">
+							<div class="form-group">
+								<label class="col-sm-4"><i class="glyphicon glyphicon-user"></i> Guest Details</label>
+								<div class="col-sm-8 float-right">
+									Not a guest? <button class="patientVisitForm btn-link"><i class="fas fa-angle-left float-left"></i> Go back to Patient Visit Form</button>
+								</div>
+							</div>
+							<div class="form-group">
+								 <label class="col-sm-4 control-label">First Name</label>
+								 <div class="col-sm-8">
+										<input type="text" class="form-control" name="firstname" placeholder="First name" required>
+								 </div>
+							</div>
+							<div class="form-group">
+								 <label class="col-sm-4 control-label">Last Name</label>
+								 <div class="col-sm-8">
+										<input type="text" class="form-control" name="lastname" placeholder="Last name" required>
+								 </div>
+							</div>
+							<div class="form-group">
+								 <label class="col-sm-4 control-label">Contact Number</label>
+								 <div class="col-sm-8">
+										<input type="number" min="0" class="form-control" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
+								 </div>
+							</div>
+							<div class="form-group">
+								 <label class="col-sm-4 control-label">Gender</label>
+								 <div class="col-sm-8">
+										<div class="radio">
+											 <label for="gender1"><input type="radio" name="gender" value="Male" id="gender1" checked required>Male </label>
+											 <label for="gender2"><input type="radio" name="gender" value="Female" id="gender2" required>Female </label>
+										</div>
+								 </div>
+							</div>
+					</div><br>
+
 					<div class="row">
 						<label for="visitDate" class="col-lg-12 pull-left" style="margin-left:-15px;"><i class="glyphicon glyphicon-calendar"></i>  Set Visit Date</label>
 						<input type="datetime-local" name="visitDate" class="visitDate" required>
@@ -170,7 +210,7 @@ if($_SESSION['role'] != 'Admin') {
 							</select>
 							<button class="remove btn btn-warning	"><i class="glyphicon glyphicon-remove"></i></button>
 						</div>
-						<a href="#" class="addInput"><i class="glyphicon glyphicon-plus"></i>	 Add</a>
+						<a href="#" class="addInput" value="complaint[]"><i class="glyphicon glyphicon-plus"></i>	 Add</a>
 					</div>
 					<br>
 
@@ -183,7 +223,7 @@ if($_SESSION['role'] != 'Admin') {
 							<input type="number" min="1" class="quantity formInpt" name="med[]" placeholder="Qty." style="width: 100px;" disabled required>
 							<button class="remove">Remove</button>
 						</div>
-						<a href="#" class="addInput"><i class="glyphicon glyphicon-plus"></i> Add</a>
+						<a href="#" class="addInput" value="med[]"><i class="glyphicon glyphicon-plus"></i> Add</a>
 					</div><br>
 
 					<div class="form-group row">
@@ -258,7 +298,7 @@ if($_SESSION['role'] != 'Admin') {
 									</select>
 									<button class="remove">Remove</button>
 								</div>
-								<a href="#" class="addInput">+ Add</a>
+								<a href="#" class="addInput" value="complaint[]">+ Add</a>
 							</div><br>
 							<div class="fieldsGroup medicineDiv" value="10">
 								<label for="med[]">Medicine / Supply Requested</label>
@@ -269,8 +309,7 @@ if($_SESSION['role'] != 'Admin') {
 									<input type="number" min="1" class="quantity formInpt" name="med[]" placeholder="Qty." style="width: 100px;" disabled>
 									<button class="remove">Remove</button>
 								</div>
-								<a href="#" class="addInput">+ Add</a>
-
+								<a href="#" class="addInput" value="med[]">+ Add</a>
 							</div><br>
 
 							<div class="form-group">
