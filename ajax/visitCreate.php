@@ -3,7 +3,6 @@ include('../includes/dbcon.php');
 
 session_start();
 $user = $_POST['userID'];
-$id = $_POST['idNumber'];
 $comp = $_POST['complaint'];
 $med = $_POST['med'];
 $time = $_POST['visitDate'];
@@ -11,7 +10,7 @@ $time = $_POST['visitDate'];
 $remarks = htmlspecialchars(trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $_POST['remarks']))));
 
 //Create a guest patient profile
-if ($id==''){
+if ($_POST['idNumber']==''){
 
 	$query = $con->prepare("INSERT INTO `guest` (ID) VALUES (?)");
 	$query->bind_param("i", $id);
@@ -28,6 +27,8 @@ if ($id==''){
 		$isDeleted = 0;
 		$query->execute();
 	}
+} else{
+	$id = $_POST['idNumber'];
 }
 
 	$query = $con->prepare("INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
