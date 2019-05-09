@@ -130,7 +130,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 					if($ref>0) {
 
 					}else {
-						$query = $con->prepare("SELECT ID FROM `allergy` WHERE allergyName='$item'");
+						$query = $con->prepare("SELECT ID FROM `allergy` WHERE allergyName=?");
 						$query->bind_param("s", $item);
 						$query->execute();
 						$result = $query->get_result();
@@ -187,7 +187,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 	$userID = $_SESSION['userID'];
 	$eventName = "Created new patient profile.";
 	$stmt->execute();
-	
+
 } else {
 	$message = "Error: Query Failed";
 }
