@@ -32,7 +32,7 @@ if($rownum > 0) {
 				$rownum1 = mysqli_num_rows($result1);
 
 				if ($rownum1 > 0) {
-					$msg = array("These are the medicines that are in Threshold and Critical Level: ");
+					$msg = array("These are the medicines that are in Threshold and Critical Level");
 					while ($row1 = $result1->fetch_assoc()) {
 
 						if ($row1['isSupply'] == "1") {

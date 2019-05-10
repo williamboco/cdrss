@@ -39,14 +39,14 @@ try {
 
 
         $mail->addAddress($row['email']);     // Add a recipient
-        //$mail->AddCC("201601045@iacademy.edu.ph");
+        $mail->AddCC("201601045@iacademy.edu.ph");
 
         $mail->setFrom('cdrsiac@gmail.com', 'iACADEMY CDRS');    // Add Set Email
 
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Threshold and Critical Level';
-        $mail->Body = (json_encode($msg));
+        $mail->Body = (implode(" - ", $msg));
 
 
 
