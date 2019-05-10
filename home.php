@@ -371,8 +371,7 @@ if($_SESSION['role'] == 'Admin') {
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/widgster.js"></script>
-	<script src="vendor/moment.min.js"></script>
-	<script src="vendor/moment.js"></script>
+	<script src="vendor/moment.min.js"></script>	
 	<script src="js/visit_form.js"></script>
 	<script src="js/home.js"></script>
 	<script src="js/date.js"></script>

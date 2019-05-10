@@ -49,7 +49,7 @@ if($_SESSION['role'] != 'Admin') {
   </div>
 
 	<div class="container">
-		<form class="form-inline card col-lg-12 col-sm-12 wow fadeIn" id="filter" action="ajax/filtered_visits_avp.php">
+		<form class="form-inline card col-lg-12 col-sm-12 wow fadeIn" id="filter" action="ajax/filtered_visits.php">
 			<div class="form-group">
 			<label for="filter" class="col-2 col-form-label"><i class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></i> Filter&nbsp;</label><br>
 			<select class="form-control filters" name="patientType">
@@ -75,7 +75,7 @@ if($_SESSION['role'] != 'Admin') {
 				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   Show Table</button>
 				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  Generate Report</b></button>
 			</div>
-
+			<input type="text" class="form-control hidden" name="role" value="<?php echo $_SESSION['role'];?>">
 		</form>
 	</div>
 

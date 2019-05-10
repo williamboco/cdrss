@@ -9,26 +9,32 @@ $time = $_POST['visitDate'];
 //http://stackoverflow.com/questions/24570744/remove-extra-spaces-but-not-space-between-two-words
 $remarks = htmlspecialchars(trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $_POST['remarks']))));
 
-//Create a guest patient profile
-if ($_POST['idNumber']==''){
-
+if (isset($_POST['idNumber'])){
+	$id = $_POST['idNumber'];
+} else{
+	//Create a guest patient profile
 	$query = $con->prepare("INSERT INTO `guest` (ID) VALUES (?)");
-	$query->bind_param("i", $id);
-	$id = NULL;
+	$query->bind_param("i", $isNull);
+	$isNull = NULL;
 
 	if ($query->execute()){
-		$query = $con->prepare("INSERT INTO `patient` (ID, firstName, lastName, gender, contact, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())");
-		$query->bind_param("sssssiss", $id, $firstName, $lastName, $gender, $contact, $isDeleted, $user, $user);
+			//get autoIncrement ID from recent query
+			$id = mysqli_insert_id($con);
 
-		$firstName = htmlspecialchars($_POST['firstname']);
-		$lastName = htmlspecialchars($_POST['lastname']);
-		$gender = $_POST['gender'];
-		$contact = htmlspecialchars($_POST['contact']);
-		$isDeleted = 0;
-		$query->execute();
-	}
-} else{
-	$id = $_POST['idNumber'];
+			$query = $con->prepare("INSERT INTO `patient` (ID, firstName, lastName, gender, contact, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())");
+			$query->bind_param("sssssiss", $id, $firstName, $lastName, $gender, $contact, $isDeleted, $user, $user);
+
+			$firstName = htmlspecialchars($_POST['firstname']);
+			$lastName = htmlspecialchars($_POST['lastname']);
+			$gender = $_POST['gender'];
+			$contact = htmlspecialchars($_POST['contact']);
+			$isDeleted = 0;
+
+			if ($query->execute()){
+				$message = "Guest profile successfully added";
+			}
+
+		}
 }
 
 	$query = $con->prepare("INSERT INTO `visit` (ID, patientID, visitDate, remarks, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
