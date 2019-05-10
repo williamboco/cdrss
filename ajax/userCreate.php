@@ -45,7 +45,6 @@ $firstName = htmlspecialchars($_POST['firstname']);
 $lastName = htmlspecialchars($_POST['lastname']);
 
 $email = htmlspecialchars($_POST['email']);
-$email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 $email = isset($email) ? trim($email) : null;
 $contact = htmlspecialchars($_POST['contact']);
 
@@ -55,7 +54,7 @@ $datePassChanged = "";
 $isActive = 1;
 $password = base64_encode(openssl_encrypt("iacademyCDRS", $method, $key, OPENSSL_RAW_DATA, $iv));
 
-$query1 = $con->prepare("SELECT * FROM user WHERE ID=? AND email=?");
+$query1 = $con->prepare("SELECT * FROM user WHERE ID=?");
 $query1->bind_param("i", $id);
 $query1->execute();
 $result = $query1->get_result();
@@ -68,7 +67,6 @@ if ($rownum > 0) {
 			echo "User ID already exists." . "<br>";
 		}
 
-		 $row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 		if ($row['email'] == $email) {
 			echo "Email Address already exists. ";
 		}
@@ -85,7 +83,7 @@ if ($rownum > 0) {
 						echo "Whitespaces are not allowed. Please enter a valid input";
 				} else {
 
-				 // $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
+				 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 				 $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
 				 $lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
 				 $createdBy = htmlspecialchars($_SESSION['firstName']);
