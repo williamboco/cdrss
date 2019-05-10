@@ -89,7 +89,7 @@ if($_SESSION['role'] == 'Admin') {
                      <div class="form-group">
                         <label class="col-sm-4 control-label">ID Number</label>
                         <div class="col-sm-8">
-                           <input type="text" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
+                           <input type="number" min="1" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
                         </div>
                      </div>
                      <div class="form-group">
@@ -113,7 +113,7 @@ if($_SESSION['role'] == 'Admin') {
                      <div class="form-group">
                         <label class="col-sm-4 control-label">Contact Number</label>
                         <div class="col-sm-8">
-                           <input type="number" min="0" class="form-control" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
+                           <input type="number" min="1" class="form-control" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
                         </div>
                      </div>
 
@@ -181,7 +181,7 @@ if($_SESSION['role'] == 'Admin') {
 												 <div class="fieldsGroup col-sm-8" id="pDiv" value="3">
 													<div class="tbContainer" style="display: none !important;margin-bottom: 10px;">
 														<input type="text" class="form-control" placeholder="Full name"><br>
-														<input type="number" min="0" class="form-control" placeholder="Contact number" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
+														<input type="number" min="1" class="form-control" placeholder="Contact number" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
 														<button class="remove">Remove</button>
 													</div>
 													<a href="#" class="addInputCP" value="cPerson[]">+ Add</a>
