@@ -25,8 +25,8 @@ $allergy = $_POST['allergy'];
 $user = htmlspecialchars($_SESSION['userID']);
 // $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-if (ctype_space($firstName) || ctype_space($lastName) || ctype_space($cPerson)) {
-	$message = "Error: Whitespaces are not allowed. Please enter valid input";
+if (!ctype_alpha($firstName) || !ctype_alpha($lastName) || !ctype_alpha($cPerson)) {
+	$message = "Error: Input must only contain letters.";
 } else {
 	if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 		if(mysqli_num_rows($result) > 0) {

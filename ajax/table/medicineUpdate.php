@@ -13,7 +13,7 @@
 		$genericName = htmlspecialchars($_GET['supplyName']);
 	}
 
-	if (ctype_space($brandName) || ctype_space($genericName)) {
+	if (!ctype_alpha($brandName) || !ctype_alpha($genericName)) {
 		echo "Error: Whitespaces are not allowed. Please enter valid input";
 	} else {
 		if($isSupply == '0') {
