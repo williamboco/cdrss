@@ -25,6 +25,7 @@ include_once("includes/dbcon.php");
                 <section class="widget widget-login animated fadeInUp">
                     <header>
                         <h3>New Password</h3><br>
+                        <p>Please enter your new password below.</p>
                     </header>
                     <div class="widget-body">
 						<div class="alert alert-danger">

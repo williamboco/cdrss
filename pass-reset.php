@@ -41,7 +41,7 @@
                             <div class="clearfix">
                                 <div class="btn-toolbar">
 									<button type="submit" class="btn btn-primary btn-md" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Please wait">Reset Password</button>
-									<a class="mr-n-lg" href="index.php">Return to log-in</a>
+									<button class="btn btn-link pull-right"><a href="index.php">Return to log-in</a></button>
                                 </div>
                             </div>
                         </form>

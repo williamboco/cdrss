@@ -18,9 +18,9 @@ $('form').on('submit', function(event) {
 		data: $form.serialize(),
 		dataType: "html",
 		success: function(response) {
-			// $('.alert-success').show();
-			if(response == 'success') {
-				$('.alert-success').show();
+		//	$('.alert-success').show();
+			if(response.includes('success')) {
+				$('.alert-success').html(response).show();
 			}else {
 				$('.alert-danger').html(response).show();
 			}

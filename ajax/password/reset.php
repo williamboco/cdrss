@@ -18,14 +18,14 @@ $result = $query->get_result();
 $rownum = mysqli_num_rows($result);
 
 //how to get the ipv4 php
-
 if($rownum > 0) {
-	$message = " Invalid Email Address! Please try again.";
+//	$message = " Invalid Email Address! Please try again.";
 	while ($row = $result->fetch_assoc()) {
 		if ($row['isActive'] == $isActive) {
 			$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 			if ($row['email'] == $email) {
-
+				$message = "success. Your request for reset password has been sent to your iACADEMY email. Kindly check your email to continue.";
+				
 				$query2 = $con->prepare("INSERT INTO password_change_request (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
 				$query2->bind_param("issi", $isNull, $requestID, $userID, $isUsed);
 				$userID = htmlspecialchars($row['ID']);
@@ -36,8 +36,8 @@ if($rownum > 0) {
 				$query2->execute();
 				// email message
 				$title = "link";
-				$link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
-				$msg = "We got a request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
+				$link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrss/pass-new.php?rID=".$requestID;
+				$msg = "We have received your request to change your iAcademy CDRS Account password. \nPlease click this <a href='".$link."'>".$title."</a> to create new password.";
 
 				// $hashedPassword = base64_encode(openssl_encrypt("iacademyCDRS", $method, $key, OPENSSL_RAW_DATA, $iv));
 				//
@@ -54,15 +54,15 @@ if($rownum > 0) {
 
 				// send email
 				require '../../includes/mail.php';
-		 	} //else {
-		// 	$message = "Invalid email address! Please try again.";
-		// }
+		 	} else {
+				$message = "Invalid email address! Please try again.";
+		  }
 	} else {
 		$message = "Email is not active! Please try again.";
 	}
-	 }
+	}
 	} else {
-		$message = "Password Query change failed!";
+		$message = "Error: Password query failed!";
 	}
 
 echo $message;
