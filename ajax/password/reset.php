@@ -20,7 +20,7 @@ $rownum = mysqli_num_rows($result);
 //how to get the ipv4 php
 
 if($rownum > 0) {
-	$message = " Invalid Email Address! Please try again.";
+	$message = "";
 	while ($row = $result->fetch_assoc()) {
 		if ($row['isActive'] == $isActive) {
 			$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
@@ -54,15 +54,16 @@ if($rownum > 0) {
 
 				// send email
 				require '../../includes/mail.php';
-		 	} //else {
-		// 	$message = "Invalid email address! Please try again.";
-		// }
-	} else {
-		$message = "Email is not active! Please try again.";
-	}
+				$message = "Please check your email for the link for new password.";
+			 } else {
+			   $message = " Invalid email address! Please try again.";
+			   }
+	  } else {
+			$message = "Email address is not active! Please try again.";
+		}
 	 }
 	} else {
-		$message = "Password Query change failed!";
+		$message = "That email does not exist";
 	}
 
 echo $message;
