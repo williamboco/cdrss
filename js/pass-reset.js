@@ -16,13 +16,12 @@ $('form').on('submit', function(event) {
 		type: 'POST',
 		url: $form.attr('action'),
 		data: $form.serialize(),
-		dataType: "html",
 		success: function(response) {
-			// $('.alert-success').show();
-			if(response == 'success') {
-				$('.alert-success').show();
-			}else {
+			 // $('.alert-success').show();
+			if(response == "Invalid email address! Please try again.") {
 				$('.alert-danger').html(response).show();
+			}else {
+				$('.alert-success').html(response).show();
 			}
 			$form.find('button[type="submit"]').button('reset');
 			console.log(response);

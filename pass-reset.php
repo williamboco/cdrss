@@ -33,6 +33,7 @@
 						  Please check your email for the link for new password.
 						</div>
 						<div class="alert alert-danger">
+							Invalid Email Address! Please try again
 						</div>
                         <form id="reset" action="ajax/password/reset.php" novalidate>
                             <div class="form-group">
