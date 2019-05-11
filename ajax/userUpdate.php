@@ -18,7 +18,9 @@ $contact = htmlspecialchars($_POST['contact']);
 $userID = htmlspecialchars($_POST['userID']);
 
 
-if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
+if (!ctype_alpha($firstName) || !ctype_alpha($lastName)) {
+	echo "Error: Input must only contain letters.";
+} else if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 	if(mysqli_num_rows($result) > 0 && $userID != $id) {
 		echo "User with that ID number already exists.";
 	} else {

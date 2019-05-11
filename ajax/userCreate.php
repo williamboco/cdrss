@@ -60,7 +60,9 @@ $query1->execute();
 $result = $query1->get_result();
 $rownum = mysqli_num_rows($result);
 
-if ($rownum > 0) {
+if (!ctype_alpha($firstName) || !ctype_alpha($lastName)) {
+	echo "Error: Input must only contain letters.";
+} else if ($rownum > 0) {
 
 	while ($row = $result->fetch_assoc()) {
 		if ($row['ID'] == $id) {
@@ -130,6 +132,7 @@ if ($rownum > 0) {
 			}
 		 }
 	 }
+
 
 
 
