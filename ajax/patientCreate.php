@@ -22,7 +22,7 @@ $isDeleted = 0;
 $cPerson = $_POST['cPerson'];
 $allergy = $_POST['allergy'];
 // $contact = base64_encode(openssl_encrypt($contact, $method, $key, OPENSSL_RAW_DATA, $iv));
-$user = htmlspecialchars($_SESSION['firstName']);
+$user = htmlspecialchars($_SESSION['userID']);
 // $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
 
 if (ctype_space($firstName) || ctype_space($lastName) || ctype_space($cPerson)) {

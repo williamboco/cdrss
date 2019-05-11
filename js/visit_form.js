@@ -380,22 +380,22 @@ $('.guestVisitForm').on('click', function(event){
   event.preventDefault();
   $('.allergy').hide();
   $('#searchDiv').hide();
-  $('#searchDiv').attr('disabled', true);
+  $('#searchDiv .form-control').attr('disabled', true);
 
   $('.guestVisitForm').hide();
   $('#guestDiv').removeClass('hidden');
-  $('#guestDiv').attr('disabled', false);
+  $('#guestDiv .form-control').attr('disabled', false);
 });
 
 $('.patientVisitForm').on('click', function(event){
   event.preventDefault();
   $('.allergy').show();
   $('#searchDiv').show();
-  $('#searchDiv').attr('disabled', false);
+  $('#searchDiv .form-control').attr('disabled', false);
 
   $('.guestVisitForm').show();
   $('#guestDiv').addClass('hidden');
-  $('#guestDiv').attr('disabled', true);
+  $('#guestDiv .form-control').attr('disabled', true);
 });
 
 // Complaint select options
