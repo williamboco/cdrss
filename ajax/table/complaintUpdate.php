@@ -6,8 +6,8 @@
 	$complaintName = htmlspecialchars($_GET['complaintName']);
 	$description = htmlspecialchars($_GET['description']);
 
-	if (ctype_space($complaintName) || ctype_space($description)) {
-		echo "Whitespaces are not allowed. Please enter valid input.";
+	if (!ctype_alpha($complaintName) || !ctype_alpha($description)) {
+		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("UPDATE `complaint` SET complaintName=?, description=? WHERE ID=?");
 		$stmt->bind_param("ssi", $complaintName, $description, $id);

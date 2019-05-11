@@ -6,8 +6,9 @@
 	$allergyName = htmlspecialchars($_GET['allergyName']);
 	$description = htmlspecialchars($_GET['description']);
 
-	if(ctype_space($allergyName) || ctype_space($description)) {
-		echo "Whitespaces are not allowed. Please enter valid input";
+
+	if (!ctype_alpha($allergyName) || !ctype_alpha($description)) {
+		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("UPDATE `allergy` SET allergyName=?, description=? WHERE ID=?");
 		$stmt->bind_param("ssi", $allergyName, $description, $id);

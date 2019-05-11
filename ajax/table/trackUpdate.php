@@ -5,8 +5,8 @@
 	$id = $_GET['id'];
 	$trackName = htmlspecialchars($_GET['trackName']);
 
-	if (ctype_space($trackName)) {
-		echo "Whitespaces are not allowed. Please enter valid input.";
+	if (!ctype_alpha($trackName)) {
+		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("UPDATE `track` SET trackName=? WHERE ID=?");
 		$stmt->bind_param("si", $trackName, $id);

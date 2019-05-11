@@ -4,8 +4,8 @@
 	session_start();
 	$departmentName = htmlspecialchars($_GET['departmentName']);
 
-	if (ctype_space($departmentName)) {
-		echo "Whitespaces are not allowed. Please enter valid input.";
+	if (!ctype_alpha($departmentName)) {
+		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("INSERT INTO `department` (ID, departmentName, isDeleted) VALUES (?,?,?)");
 		$stmt->bind_param("isi", $isNull, $departmentName, $isDeleted);

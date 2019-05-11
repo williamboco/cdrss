@@ -6,8 +6,9 @@
 	$allergyName = htmlspecialchars($_GET['allergyName']);
 	$description = htmlspecialchars($_GET['description']);
 
- if (ctype_space($allergyName) || ctype_space($description)) {
-	 echo "Whitespaces are not allowed. Please enter valid input";
+
+ if (!ctype_alpha($allergyName) || !ctype_alpha($description)) {
+	 echo "Error: Input must only contain letters.";
  } else {
 	 $stmt = $con->prepare("INSERT INTO `allergy` (ID, allergyName, description, isDeleted) VALUES (?, ?, ?, ?)");
  	$stmt->bind_param("issi", $isNull, $allergyName, $description, $isDeleted);

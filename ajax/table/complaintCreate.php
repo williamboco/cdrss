@@ -5,8 +5,8 @@
 	$complaintName = htmlspecialchars($_GET['complaintName']);
 	$description = htmlspecialchars($_GET['description']);
 
-	if (ctype_space($complaintName) || ctype_space($description)) {
-		echo "Whitespaces are not allowed. Please enter valid input";
+	if (!ctype_alpha($complaintName) || !ctype_alpha($description)) {
+		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("INSERT INTO `complaint` (ID, complaintName, description, isDeleted) VALUES (?, ?, ?, ?)");
 		$stmt->bind_param("issi", $isNull, $complaintName, $description, $isDeleted);
