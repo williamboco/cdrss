@@ -256,6 +256,10 @@ if($_SESSION['role'] == 'Admin') {
 										</select><br>
 									</div>
 								</div>
+								<label>THRESHOLD QUANTITY *</label>
+									<input type="number" class="form-control" name="medicineThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" required><br>
+								<label>CRITICAL QUANTITY *</label>
+									<input type="number" class="form-control" name="medicineCriticalQty" placeholder="Critical Quantity" min="1" max="2000" required><br>
 							</div>
 						<div id="supDiv" class="hidden">
 							<br>
@@ -275,6 +279,10 @@ if($_SESSION['role'] == 'Admin') {
 										</select><br>
 									</div>
 								</div>
+								<label>THRESHOLD QUANTITY *</label>
+									<input type="number" class="form-control" name="supplyThresholdQty" placeholder="Threshold Quantity" min="1" max="2000" required><br>
+								<label>CRITICAL QUANTITY *</label>
+									<input type="number" class="form-control" name="supplyCriticalQty" placeholder="Critical Quantity" min="1" max="2000" required><br>
 						</div>
 					</div>
 					<input type="number" name="id" class="hidden">

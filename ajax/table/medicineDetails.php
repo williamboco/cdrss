@@ -18,11 +18,13 @@
 		$content .= '<p class="text-center">Type: <span class="lead">Supply</span></p>';
 		$content .= '<p class="text-center">Unit of Measure: <span class="lead">'.$res['dosageQty'].'   '.$res['dosage'].'</span></p>';
 		$content .= '<p class="text-center">Threshold Quantity: <span class="lead">'.$res['thresholdQty'].'</span></p>';
+		$content .= '<p class="text-center">Critical Quantity: <span class="lead">'.$res['criticalQty'].'</span></p>';
 	}else {
 		$content .= '<p class="text-center">Type: <span class="lead">Drug</span></p>';
 		$content .= '<p class="text-center">Form: <span class="lead">'.$res['type'].'</span></p>';
 		$content .= '<p class="text-center">Unit of Measure: <span class="lead">'.$res['dosageQty'].'   '.$res['dosage'].'</span></p>';
 		$content .= '<p class="text-center">Threshold Quantity: <span class="lead">'.$res['thresholdQty'].'</span></p>';
+		$content .= '<p class="text-center">Critical Quantity: <span class="lead">'.$res['criticalQty'].'</span></p>';
 	}
 
 	if($content == '') {
