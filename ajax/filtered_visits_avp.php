@@ -1,6 +1,7 @@
 <?php
 include('../includes/dbcon.php');
 $patientType = $_GET['patientType'];
+//$sortType = $_GET['sortType'];
 $date1 = $_GET['date1'];
 $date2 = date('Y-m-d H:i:s', strtotime($_GET['date2'] . ' +1 day'));	//http://stackoverflow.com/questions/1394791/adding-one-day-to-a-date
 

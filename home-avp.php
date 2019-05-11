@@ -16,7 +16,9 @@ if($_SESSION['role'] != 'Admin') {
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
 	<link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
-	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="vendor/DataTables/datatables.min.css" rel="stylesheet">
+	<link href="vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="vendor/DataTables/ColReorder-1.5.0/css/colReorder.dataTables.min" rel="stylesheet">
 	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/customSelect.css" rel="stylesheet">
@@ -49,7 +51,7 @@ if($_SESSION['role'] != 'Admin') {
   </div>
 
 	<div class="container">
-		<form class="form-inline card col-lg-12 col-sm-12 wow fadeIn" id="filter" action="ajax/filtered_visits_avp.php">
+		<form class="form-inline card col-lg-12 col-sm-12 wow fadeIn" id="filter" action="ajax/filtered_visits.php">
 			<div class="form-group">
 			<label for="filter" class="col-2 col-form-label"><i class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></i> Filter&nbsp;</label><br>
 			<select class="form-control filters" name="patientType">
@@ -75,26 +77,39 @@ if($_SESSION['role'] != 'Admin') {
 				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   Show Table</button>
 				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  Generate Report</b></button>
 			</div>
-
+			<input type="text" class="form-control hidden" name="role" value="<?php echo $_SESSION['role'];?>">
 		</form>
 	</div>
 
 
 	<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
-		<div class="container">
-			<div class="card col-12">
-				<div class="tabletheme" style="margin-top: 20px;" >
+		<div class="container card">
+		<form class="col-lg-12 col-sm-12" id="sortBy" action="ajax/filtered_visits_avp.php">
+				<div class="tabletheme col-lg-6 col-sm-6" style="margin-top: 20px;" >
 					<h3><span id="filterName">All </span>Patient Visits</h3>
 					<h5 id="date"></h5>
-					<hr><br>
+				</div>
+				<div class="form-group pull-right col-lg-2 col-sm-2" style="margin-top: 25px;">
+				<label for="sortBy" class="col-2 col-form-label pull-right"><i class="fas fa-sort" aria-hidden="true"></i> Sort By&nbsp;</label><br>
+					<select class="form-control sorts" name="sortType">
+						<option value="all" selected>All</option>
+						<option value="sname">Name</option>
+						<option value="sdate">Date</option>
+						<option value="scomp">Complaints</option>
+						<option value="smed">Medicine / Supply</option>
+					</select>
+			</div>
+		</form>
+			<div class="col-lg-12">
+				<hr><br>
 					<div class="table-responsive">
 						<table id="visitTable" class="table display" cellspacing="0">
 						</table>
 				  </div>
 				</div>
 			</div>
+	<!--	</form>-->
 		</div>
-	</div>
 
 	<div class="container hidden" id="graph">
 		<div class="row">
@@ -366,7 +381,8 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
-	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
+	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+	<script src="vendor/DataTables/ColReorder-1.5.0/js/dataTables.colReorder.min.js"></script>
 	<script src="vendor/widgster.js"></script>
 	<script src="vendor/moment.min.js"></script>
 	<script src="js/visit_form.js"></script>

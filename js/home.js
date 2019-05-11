@@ -10,15 +10,19 @@ $(document).ready(function() {
 		} ],
 		"columns": [
 			{title: "#", width: "5%", className: "dt-center"},
-			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%", orderable: false, className: "dt-center"},
+			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%", className: "dt-center"},
 			{title: "ID"},
-			{title: "Name", className: "hover"},
+			{title: "Name"},
 			{title: "Complaint"},
 			{title: "Medicine / Supply Requested"},
 			{title: "Visit Date/Time"},
-			{title: "Action", width: "15%", orderable: false}
+			{title: "Action", width: "15%"}
 		],
-		"order": [[ 0, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+		"order": [[ 0, 'desc' ]],
+		//1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+		colReorder: {
+			enable: true
+		}
 	} );
 
 	t.on( 'order.dt search.dt', function () {
@@ -71,6 +75,62 @@ $('#filter').find('[name="patientType"]').on('change', function() {
 
 });
 
+
+	//var table = $('#sortBy').DataTable( {
+	//colReorder: true
+	//}
+ //);
+
+	$('.sorts').on('change', function() {
+	  var datatable = $('#visitTable').dataTable().api();
+		var $form = $('#sortBy');
+		var sort = $form.find('[name="sortType"]').val();
+	//	console.log(sort);
+		$.ajax({
+			type: "GET",
+			url: $form.attr('action'),
+			data: $form.serialize(),
+			cache: false,
+			success: function(e, data) {
+
+			switch(sort) {
+					case 'all':
+						datatable.colReorder.order([ 0, 1, 2, 3, 4, 5, 6, 7], true).reset();
+					//	datatable.colReorder.enable();
+						break;
+					case 'sname':
+					  datatable.colReorder.order([ 0, 1, 3, 5, 6, 4, 2, 7]);
+					//	dt.colReorder.enable();
+					//	datatable.colReorder.order([ 3, 1, 0, 4, 5, 6, 2, 7]);
+						break;
+					case 'sdate':
+				    datatable.colReorder.order([ 0, 1, 2, 6, 3, 4, 5, 7]).enable();
+					//	dt.colReorder.enable();
+						break;
+					case 'scomp':
+					  datatable.colReorder.order([0, 1, 2, 4, 6, 5, 3, 7 ]).enable();
+					//	datatable.colReorder.enable();
+						break;
+					case 'smed':
+					  datatable.colReorder.order([0, 1, 2, 5, 6, 3, 4, 7 ]).enable();
+					//	datatable.colReorder.enable();
+						break;
+					default:
+			}
+		    var obj = JSON.parse(data);
+		    obj = obj.data;
+
+			  datatable.colReorder.enable();
+				datatable.clear();
+			  datatable.rows.add(obj);
+				datatable.draw();
+	   	}
+		});
+	});
+
+
+
+
 $(".graphBtn").on('click', function() {
 	$(".graphBtn").removeClass('hidden');
 	$(this).addClass('hidden');
@@ -85,7 +145,7 @@ function proceedReport() {
 	$form = $('#filter');
 	console.log($form.serialize());
 
-	window.location="report.php?" + $form.serialize();
+	window.location="report-avp.php?" + $form.serialize();
 
 }
 

@@ -14,6 +14,7 @@ $(document).ready(function() {
 		{title: "Action", orderable: false}
 	],
 	"order": [[ 2, 'asc' ]]
+
 	} );
 
 	$('.checkAll').on('click', function () {

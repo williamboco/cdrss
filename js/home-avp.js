@@ -8,16 +8,16 @@ $(document).ready(function() {
 			"targets": 0
 		} ],
 		"columns": [
-			{title: "#", width: "5%", className: "dt-center"},
-			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%" , orderable: false, className: "dt-center"},
+			{title: "#", width: "5%"},
+			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%"},
 			{title: "ID"},
-			{title: "Name", className: "hover"},
+			{title: "Name"},
 			{title: "Complaint"},
 			{title: "Medicine / Supply Requested"},
 			{title: "Visit Date/Time"},
 			{title: "Action", width: "15%" , orderable: false}
 		],
-		"order": [[ 1, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+		"order": [[ 0, 'desc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );
 
 	t.on( 'order.dt search.dt', function () {

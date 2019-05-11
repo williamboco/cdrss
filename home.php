@@ -3,8 +3,8 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if($_SESSION['role'] == 'Admin') {
-	header("location: home-avp.php");
+if($_SESSION['role'] != 'Admin') {
+	header("location: home.php");
 }
 
 ?>
@@ -16,11 +16,14 @@ if($_SESSION['role'] == 'Admin') {
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
 	<link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
-	<link href="vendor/DataTables-1.10.15/media/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="vendor/DataTables/datatables.min.css" rel="stylesheet">
+	<link href="vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="vendor/DataTables/ColReorder-1.5.0/css/colReorder.dataTables.min" rel="stylesheet">
 	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/customSelect.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
 	<link href="css/customSelect.css" rel="stylesheet">
 	<meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +46,7 @@ if($_SESSION['role'] == 'Admin') {
 <body>
 	<div class="row">
 	<?php
-	  include("includes/navbartest.php");
+	  include("includes/navbar-avp.php");
 	?>
   </div>
 
@@ -72,28 +75,41 @@ if($_SESSION['role'] == 'Admin') {
 				<button type="button" class="btn btn-danger tableBtn" onclick="delrecordCheck()"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
 				<button type="button" class="btn btn-info graphBtn"><i class="glyphicon glyphicon-stats"></i> <b>Show Graph</button>
 				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   Show Table</button>
-				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  Proceed to report</b></button>
+				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  Generate Report</b></button>
 			</div>
-
+			<input type="text" class="form-control hidden" name="role" value="<?php echo $_SESSION['role'];?>">
 		</form>
 	</div>
 
 
 	<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
-		<div class="container">
-			<div class="card col-12">
-				<div class="tabletheme" style="margin-top: 20px;" >
+		<div class="container card">
+		<form class="col-lg-12 col-sm-12" id="sortBy" action="ajax/filtered_visits_avp.php">
+				<div class="tabletheme col-lg-6 col-sm-6" style="margin-top: 20px;" >
 					<h3><span id="filterName">All </span>Patient Visits</h3>
 					<h5 id="date"></h5>
-					<hr><br>
+				</div>
+				<div class="form-group pull-right col-lg-2 col-sm-2" style="margin-top: 25px;">
+				<label for="sortBy" class="col-2 col-form-label pull-right"><i class="fas fa-sort" aria-hidden="true"></i> Sort By&nbsp;</label><br>
+					<select class="form-control sorts" name="sortType">
+						<option value="all" selected>All</option>
+						<option value="sname">Name</option>
+						<option value="sdate">Date</option>
+						<option value="scomp">Complaints</option>
+						<option value="smed">Medicine / Supply</option>
+					</select>
+			</div>
+		</form>
+			<div class="col-lg-12">
+				<hr><br>
 					<div class="table-responsive">
 						<table id="visitTable" class="table display" cellspacing="0">
 						</table>
 				  </div>
 				</div>
 			</div>
+	<!--	</form>-->
 		</div>
-	</div>
 
 	<div class="container hidden" id="graph">
 		<div class="row">
@@ -150,7 +166,7 @@ if($_SESSION['role'] == 'Admin') {
 						<div>
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
-						</div>
+						</div><br>
 					</div>
 
 					<button class="guestVisitForm btn-link"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
@@ -217,7 +233,7 @@ if($_SESSION['role'] == 'Admin') {
 						<label for="med[]">Medicine / Supply Requested</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled required>
-								<option></option>
+							<option></option>
 							</select>
 							<input type="number" min="1" class="quantity formInpt" name="med[]" placeholder="Qty." style="width: 100px;" disabled required>
 							<button class="remove">Remove</button>
@@ -262,7 +278,7 @@ if($_SESSION['role'] == 'Admin') {
 									<b><p>Patient Name</b> <br><i class="glyphicon glyphicon-user"></i>  <span class="fullName h4"></span></p>
 								</div>
 
-							  <div class="contentheight view col-sm-6">
+							  <div class="contentheight view  col-sm-6">
 									<b><p>Complaint</p></b>
 									<ul id="complaint"></ul>
 									<b><p>Medicine/Supply Requested</p></b>
@@ -278,8 +294,7 @@ if($_SESSION['role'] == 'Admin') {
 								<div id="modifyDiv">
 									<p align="right">Modified by <b><span id="modifiedBy"></span></b>		 on <span id="dateModified"></span></p>
 								</div>
-								<br>
-								<hr style="width:100%; margin:0px;">
+								<br><hr style="width:100%; margin:0px;">
 							</div>
 						</div>
 
@@ -294,7 +309,7 @@ if($_SESSION['role'] == 'Admin') {
 								<label for="complaint[]">Complaint/s</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Complaint" class="selComp formInpt" name="complaint[]" disabled required>
-										<option></option>
+									<option></option>
 									</select>
 									<button class="remove">Remove</button>
 								</div>
@@ -304,13 +319,12 @@ if($_SESSION['role'] == 'Admin') {
 								<label for="med[]">Medicine / Supply Requested</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled>
-										<option></option>
+									<option></option>
 									</select>
 									<input type="number" min="1" class="quantity formInpt" name="med[]" placeholder="Qty." style="width: 100px;" disabled>
 									<button class="remove">Remove</button>
 								</div>
 								<a href="#" class="addInput" value="med[]">+ Add</a>
-
 							</div><br>
 
 							<div class="form-group">
@@ -336,8 +350,6 @@ if($_SESSION['role'] == 'Admin') {
 		  </div>
 		</div>
 	</div>
-
-
 
 	<!-- Delete visit modal -->
 	<div class="modal fade" id="delete-visit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel20" aria-hidden="true">
@@ -369,16 +381,17 @@ if($_SESSION['role'] == 'Admin') {
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
-	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
+	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+	<script src="vendor/DataTables/ColReorder-1.5.0/js/dataTables.colReorder.min.js"></script>
 	<script src="vendor/widgster.js"></script>
 	<script src="vendor/moment.min.js"></script>
-	<script src="vendor/moment.js"></script>
 	<script src="js/visit_form.js"></script>
 	<script src="js/home.js"></script>
 	<script src="js/date.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/graph.js"></script>
 	<script src="js/wow.min.js"></script>
+	<script src="vendor/moment.js"></script>
   <script>
   new WOW().init();
   </script>
