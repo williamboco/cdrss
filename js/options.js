@@ -218,7 +218,8 @@ $('[name="isSupply"]').on('change', function() {
 	$this.parent().siblings('button').removeClass('hidden');
 	$this.siblings().addClass('hidden');
 	$this.siblings().find('.form-control').attr('disabled', true);
-	if($this.val() == '0') {		$this.siblings('#medDiv').removeClass('hidden');
+	if($this.val() == '0') {
+    $this.siblings('#medDiv').removeClass('hidden');
 		$this.siblings('#medDiv').find('.form-control').attr('disabled', false);
 
 	}else {

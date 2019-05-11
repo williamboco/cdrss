@@ -16,13 +16,19 @@ $('form').on('submit', function(event) {
 		type: 'POST',
 		url: $form.attr('action'),
 		data: $form.serialize(),
-		dataType: "html",
 		success: function(response) {
+<<<<<<< HEAD
 		//	$('.alert-success').show();
 			if(response.includes('success')) {
 				$('.alert-success').html(response).show();
 			}else {
+=======
+			 // $('.alert-success').show();
+			if(response == "Invalid email address! Please try again.") {
+>>>>>>> 3c32b73344f7e748ffd06e6ca3e9d7a6f63f6ba7
 				$('.alert-danger').html(response).show();
+			}else {
+				$('.alert-success').html(response).show();
 			}
 			$form.find('button[type="submit"]').button('reset');
 			console.log(response);
