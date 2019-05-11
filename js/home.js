@@ -148,15 +148,11 @@ function proceedReport() {
 	console.log($form.serialize());
 	console.log(role);
 
-<<<<<<< HEAD
-	window.location="report-avp.php?" + $form.serialize();
-=======
 	if (role=="Admin"){
 		window.location="report-avp.php?" + $form.serialize();
 	} else{
-		window.location="report.php?" + $form.serialize();		
+		window.location="report.php?" + $form.serialize();
 	}
->>>>>>> 3c32b73344f7e748ffd06e6ca3e9d7a6f63f6ba7
 
 }
 

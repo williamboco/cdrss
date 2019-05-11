@@ -37,16 +37,8 @@ try {
     $mail->Subject = 'CDRS';
     $mail->Body    = $msg;
     $mail->AltBody = 'This is a text';
-
-<<<<<<< HEAD
-    if($mail->send()) {
-      echo 'Message has been sent.';
-    }
-    //echo 'Message has been sent.';
-=======
+    
     $mail->send();
-  //echo 'Message has been sent';
->>>>>>> 3c32b73344f7e748ffd06e6ca3e9d7a6f63f6ba7
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }

@@ -23,24 +23,49 @@ if($rownum > 0) {
     		//$email = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 				// email message
 
-				$query1  = $con->prepare("SELECT brandName, genericName, isSupply from medicine WHERE status=? OR status=?");
-				$query1->bind_param("ii", $threshold, $critical);
+				$query1  = $con->prepare("SELECT * from medicine WHERE isDeleted=? AND status=?");
+				$query1->bind_param("ii", $isDeleted, $threshold);
 				$threshold = 2;
-				$critical = 1;
+				$isDeleted = 0;
 				$query1->execute();
 				$result1 = $query1->get_result();
 				$rownum1 = mysqli_num_rows($result1);
 
+				$msg = '';
 				if ($rownum1 > 0) {
-					$msg = array("These are the medicines that are in Threshold and Critical Level");
+					$msg = "These are the medicines that are in Threshold Level:";
+					$msg .= "<table border=1><tr><th>Medicines/Supplies</th><th>Available Quantity</th></tr>";
 					while ($row1 = $result1->fetch_assoc()) {
 
-						if ($row1['isSupply'] == "1") {
-							array_push($msg, $row1['genericName']);
+						if ($row1['isSupply'] == "0") {
+							$msg .="<tr><td>".$row1['brandName'] . "(".$row1['genericName'].")</td><td>". $row1['currentQty']."</td></tr>";
 						} else {
-							array_push($msg, $row1['brandName'], $row1['genericName']);
+							$msg .= "<tr><td>".$row1['genericName'] . "</td><td> ". $row1['currentQty']."</td></tr>";
 						}
 					}
+					$msg .="</table><br>";
+				}
+
+				$query2  = $con->prepare("SELECT * from medicine WHERE isDeleted=? AND status=?");
+				$query2->bind_param("ii", $isDeleted, $critical);
+				$critical = 1;
+				$isDeleted = 0;
+				$query2->execute();
+				$result2 = $query2->get_result();
+				$rownum2 = mysqli_num_rows($result2);
+
+				if ($rownum2 > 0) {
+					$msg .= "These are the medicines that are in Critical Level:";
+					$msg .= "<table border=1><tr><th>Medicines/Supplies</th><th>Available Quantity</th></tr>";
+					while ($row2 = $result2->fetch_assoc()) {
+
+						if ($row2['isSupply'] == "0") {
+							$msg .="<tr><td>".$row2['brandName'] . "(".$row2['genericName'].")</td><td>". $row2['currentQty']."</td></tr>";
+						} else {
+							$msg .= "<tr><td>".$row2['genericName'] . "</td><td> ". $row2['currentQty']."</td></tr>";
+						}
+					}
+					$msg .="</table>";
 				}
 
 				// To send HTML mail, the Content-type header must be set
