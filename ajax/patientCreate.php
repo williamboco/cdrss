@@ -26,7 +26,7 @@ $user = htmlspecialchars($_SESSION['userID']);
 // $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
 
 if (ctype_space($firstName) || ctype_space($lastName) || ctype_space($cPerson)) {
-	$message = "Whitespaces are not allowed. Please enter valid input";
+	$message = "Error: Whitespaces are not allowed. Please enter valid input";
 } else {
 	if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 		if(mysqli_num_rows($result) > 0) {
