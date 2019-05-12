@@ -13,7 +13,7 @@ $password = htmlspecialchars($_POST['password1']);
 $userID = $_POST['userID'];
 
 if (strlen($password) < 8) {
-	$message = "8 characters is the mininum for password. Please try again.";
+	$message = "Error: 8 characters is the mininum for password. Please try again.";
 } else {
 
 	//generate hash from input password
