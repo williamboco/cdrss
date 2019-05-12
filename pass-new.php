@@ -36,9 +36,11 @@ include_once("includes/dbcon.php");
 							<input class="form-control hidden" name="userID" type="text">
 
                             <div class="form-group">
+                                <label for="newPass">New Password</label><br>
                                 <input class="form-control" type="password" name="password2" placeholder="New Password" pattern=".{8,}"   required title="8 characters minimum">
                             </div>
                             <div class="form-group">
+                                <label for="confirmPass">Confirm New Password</label>
                                 <input class="form-control" type="password" name="password1" placeholder="Confirm New Password" required>
                             </div>
                             <div class="clearfix">
