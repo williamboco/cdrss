@@ -25,8 +25,10 @@ $rownum = mysqli_num_rows($result);
 
 
 
-if($rownum > 0) {
-$message="Password is not updated.";
+if (strlen($newPass) < 8) {
+	$message = "Error: 8 characters is the minimum for password. Please try again.";
+} else if ($rownum > 0) {
+//$message="Password is not updated.";
 
 	while ($row = $result->fetch_assoc()) {
 		$row['password'] = openssl_decrypt(base64_decode($row['password']), $method, $key, OPENSSL_RAW_DATA, $iv);
@@ -53,8 +55,10 @@ $message="Password is not updated.";
 
 	//$message = "Not Updated!";
 
-}else {
+} else {
 	$message = "Please enter your valid password.";
 }
+
+
 echo $message;
 ?>
