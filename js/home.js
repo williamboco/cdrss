@@ -6,12 +6,12 @@ $(document).ready(function() {
 		"columnDefs": [ {
 			"searchable": false,
 			"orderable": false,
-			"targets": 0
+			"targets": '_all'
 		} ],
 		"columns": [
 			{title: "#", width: "5%", className: "dt-center"},
 			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%", className: "dt-center"},
-			{title: "ID"},
+			{title: "IDD"},
 			{title: "Name"},
 			{title: "Complaint"},
 			{title: "Medicine / Supply Requested"},
@@ -23,9 +23,9 @@ $(document).ready(function() {
 		colReorder: {
 			enable: true
 		}
-	} );
+	});
 
-	t.on( 'order.dt search.dt', function () {
+	t.on( 'order.dt search.dt', function (e, settings, details) {
 		t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
 			cell.innerHTML = i+1;
 		} );
@@ -81,7 +81,7 @@ $('#filter').find('[name="patientType"]').on('change', function() {
 	//}
  //);
 
-	$('.sorts').on('change', function() {
+	$('.sorts').on('change', function(e) {
 	  var datatable = $('#visitTable').dataTable().api();
 		var $form = $('#sortBy');
 		var sort = $form.find('[name="sortType"]').val();
@@ -99,7 +99,7 @@ $('#filter').find('[name="patientType"]').on('change', function() {
 					//	datatable.colReorder.enable();
 						break;
 					case 'sname':
-					  datatable.colReorder.order([ 0, 1, 3, 5, 6, 4, 2, 7]);
+					  datatable.colReorder.order([ 0, 1, 3, 5, 6, 4, 2, 7]).enable();
 					//	dt.colReorder.enable();
 					//	datatable.colReorder.order([ 3, 1, 0, 4, 5, 6, 2, 7]);
 						break;
@@ -120,7 +120,7 @@ $('#filter').find('[name="patientType"]').on('change', function() {
 		    var obj = JSON.parse(data);
 		    obj = obj.data;
 
-			  datatable.colReorder.enable();
+			  //datatable.colReorder.enable();
 				datatable.clear();
 			  datatable.rows.add(obj);
 				datatable.draw();
@@ -148,15 +148,11 @@ function proceedReport() {
 	console.log($form.serialize());
 	console.log(role);
 
-<<<<<<< HEAD
-	window.location="report-avp.php?" + $form.serialize();
-=======
 	if (role=="Admin"){
 		window.location="report-avp.php?" + $form.serialize();
 	} else{
-		window.location="report.php?" + $form.serialize();		
+		window.location="report.php?" + $form.serialize();
 	}
->>>>>>> 3c32b73344f7e748ffd06e6ca3e9d7a6f63f6ba7
 
 }
 

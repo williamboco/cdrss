@@ -17,7 +17,8 @@ if($_SESSION['role'] == 'Admin') {
 		<link href="vendor/DataTables/datatables.min.css" rel="stylesheet">
 		<link href="vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 	  <link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
-	  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	  <!--<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
+		<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
 		<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 		<link href="css/animate.css" rel="stylesheet">

@@ -19,6 +19,7 @@ if($_SESSION['role'] != 'Admin') {
 	<link href="vendor/DataTables/datatables.min.css" rel="stylesheet">
 	<link href="vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="vendor/DataTables/ColReorder-1.5.0/css/colReorder.dataTables.min" rel="stylesheet">
+	<link href="vendor/DataTables/FixedColumns-3.2.5/css/fixedColumns.dataTables.min.css" rel="stylesheet">
 	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/customSelect.css" rel="stylesheet">
@@ -85,7 +86,7 @@ if($_SESSION['role'] != 'Admin') {
 	<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
 		<div class="container card">
 		<form class="col-lg-12 col-sm-12" id="sortBy" action="ajax/filtered_visits_avp.php">
-				<div class="tabletheme col-lg-6 col-sm-6" style="margin-top: 20px;" >
+				<div class="col-lg-6 col-sm-6">
 					<h3><span id="filterName">All </span>Patient Visits</h3>
 					<h5 id="date"></h5>
 				</div>
@@ -383,6 +384,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/DataTables/ColReorder-1.5.0/js/dataTables.colReorder.min.js"></script>
+	<script src="vendor/DataTables/FixedColumns-3.2.5/js/fixedColumns.dataTables.min.css"></script>
 	<script src="vendor/widgster.js"></script>
 	<script src="vendor/moment.min.js"></script>
 	<script src="js/visit_form.js"></script>

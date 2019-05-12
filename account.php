@@ -9,7 +9,7 @@ include('includes/session.php');
 	<title>My Account</title>
 	<link rel="shortcut icon" href="favicon.png" />
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
 	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
@@ -59,15 +59,22 @@ include('includes/session.php');
 
 						<div class="editProfile hidden divs">
 							<form id="profileForm" action="ajax/userUpdate.php" method="post" class="col-md-8" >
-								<h4>User Profile</h4><br>
+								<h4><b>Edit Profile</b></h4>
+								<hr>
 								<div class="form-group">
+									<label>User ID</label><br>
 									<input type="text" class="form-control hidden" name="userID" value="<?php echo $_SESSION['userID'];?>">
-									<input type="text" class="form-control" name="idNumber" placeholder="User ID" required><br>
+									<input type="number" class="form-control" name="idNumber" placeholder="User ID" required><br>
+									<label>First Name</label><br>
 									<input type="text" class="form-control" name="firstname" placeholder="Firstname" required><br>
+									<label>Last Name</label><br>
 									<input type="text" class="form-control" name="lastname" placeholder="Lastname" required><br>
+									<label>Email</label><br>
 									<input type="email" class="form-control" name="email" placeholder="Email" required><br>
+									<label>Employment Date</label><br>
 									<input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
-									<input type="number" minlength="1" maxlength="11" pattern="[0-9]{0-9}[0-9]{0-9}" class="form-control" name="contact" placeholder="Contact Number" required><br>
+									<label>Contact Number</label><br>
+									<input type="number"  min="1" maxlength="11" pattern="[0-9]{0-9}[0-9]{0-9}" class="form-control" name="contact" placeholder="Contact Number" required><br>
 									<label>Gender</label><br>
 									<input type="radio" name="gender" value="Male" id="gender1" required>
 									<label for="gender1" style="margin-right: 50px;">Male</label>
@@ -79,19 +86,20 @@ include('includes/session.php');
 								<button type="button" class="btn btn-secondary pull-right marginbtn">Cancel</button>
 							</form>
 						</div>
+						
 						<div class="editPassword hidden divs">
 							<form id="passwordForm" autocomplete="off"  action="ajax/password/change.php" method="post" class="col-md-8" >
-								<h4>Password</h4><br>
+								<h4><b>Change Password</b></h4>
+								<hr>
 								<div class="form-group">
-									<p>Last Password Change: <span id="passChanged" ></span></p><br>
-									<input type="text" class="form-control hidden" name="userID" value="<?php echo $_SESSION['userID'];?>">
-
-									<h5>Current Password</h5>
-									<input type="password" autocomplete="off" class="form-control" name="oldPass" placeholder="Current Password" required>
-									<h5>New Password</h5>
-									<input type="password" autocomplete="off" class="form-control" name="password1" placeholder="New Password" required>
-									<h5>Repeat New Password</h5>
-									<input type="password" autocomplete="off" class="form-control" name="password2" placeholder="Repeat New Password" required>
+									<p>Last Password Change: <span id="passChanged" ></span></p>
+									<input type="text" class="form-control hidden" name="userID" value="<?php echo $_SESSION['userID'];?>"><br/>
+									<label>Current Password</label><br>
+									<input type="password" autocomplete="off"  class="form-control" name="oldPass" placeholder="Current Password" required><br>
+									<label>New Password</label><br>
+									<input type="password" autocomplete="off"  class="form-control" name="password1" placeholder="New Password" required><br>
+									<label>Repeat New Password</label><br>
+									<input type="password" autocomplete="off"  class="form-control" name="password2" placeholder="Repeat New Password" required><br>
 								</div>
 
 								<button type="submit" class="btn btn-primary pull-right marginbtn">Submit</button>
