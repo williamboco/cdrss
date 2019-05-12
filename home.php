@@ -3,8 +3,8 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if($_SESSION['role'] != 'Admin') {
-	header("location: home.php");
+if($_SESSION['role'] == 'Admin') {
+	header("location: home-avp.php");
 }
 
 ?>
@@ -387,7 +387,7 @@ if($_SESSION['role'] != 'Admin') {
 <<<<<<< HEAD
 	<script src="vendor/moment.min.js"></script>
 =======
-	<script src="vendor/moment.min.js"></script>	
+	<script src="vendor/moment.min.js"></script>
 >>>>>>> 834358eef17224f7458712afa0b32ebbbfa6ac63
 	<script src="js/visit_form.js"></script>
 	<script src="js/home.js"></script>
