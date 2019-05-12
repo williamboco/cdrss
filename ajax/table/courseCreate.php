@@ -4,8 +4,8 @@
 	session_start();
 	$courseName = htmlspecialchars($_GET['courseName']);
 
-	if (ctype_space($courseName)) {
-		echo "Whitespaces are not allowed. Please enter valid input.";
+	if (!ctype_alpha($courseName)) {
+		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("INSERT INTO `course` (ID, courseName, isDeleted) VALUES (?,?,?)");
 		$stmt->bind_param("isi", $isNull, $courseName, $isDeleted);

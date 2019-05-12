@@ -8,11 +8,11 @@
 		$brandName = htmlspecialchars($_GET['brandName']);
 		$genericName = htmlspecialchars($_GET['genericName']);
 	} else {
-		$genericName = htmlspecialchars($_GET['supplyName']);
 		$brandName = '';
+		$genericName = htmlspecialchars($_GET['supplyName']);
 	}
 
-	if (ctype_space($brandName) || ctype_space($genericName)) {
+	if (!ctype_alpha($brandName) || !ctype_alpha($genericName)) {
 		echo "Whitespaces are not allowed. Please enter valid input.";
 	} else {
 		if($isSupply == '0') {
@@ -21,8 +21,6 @@
 			$stmt->bind_param("isssiiisiiii", $isNull, $brandName, $genericName, $medicineType, $mStatus, $isSupply, $isDeleted, $dosage, $dosageQty, $currentQty, $thresholdQty, $criticalQty);
 
 			$isNull = NULL;
-			$brandName = htmlspecialchars($_GET['brandName']);
-			$genericName = htmlspecialchars($_GET['genericName']);
 			$medicineType = $_GET['medicineType'];
 			$isDeleted = 0;
 			$dosage = $_GET['medicineDosage'];
@@ -51,8 +49,6 @@
 			$stmt->bind_param("isssiiisiiii", $isNull, $brandName, $genericName, $supplyType, $mStatus, $isSupply, $isDeleted, $dosage, $dosageQty, $currentQty, $thresholdQty, $criticalQty);
 
 			$isNull = NULL;
-			$brandName = '';
-			$genericName = htmlspecialchars($_GET['supplyName']);
 			$supplyType = '';
 			$isDeleted = 0;
 			$dosage = $_GET['supplyDosage'];
@@ -76,7 +72,10 @@
 			$query0 = "SELECT * FROM `medicine` WHERE genericName='$genericName'";
 		}
 
-
+		if ($thresholdQty < $criticalQty){
+			echo "Error: Threshold quantity is less than critical quantity. Please enter valid input";
+			die();
+		}
 
 		if ($result = mysqli_query($con, $query0)) {
 			if (mysqli_num_rows($result) > 0) {

@@ -389,11 +389,15 @@ function editRecord() {
 								$form.find('[name="medicineType"]').val(obj.type).trigger('change');
 								$form.find('input[name="medicineDosageQty"]').val(obj.dosageQty);
 								$form.find('[name="medicineDosage"]').val(obj.dosage).trigger('change');
+                $form.find('input[name="medicineThresholdQty"]').val(obj.thresholdQty);
+                $form.find('input[name="medicineCriticalQty"]').val(obj.criticalQty);
 							}else {
 								$form.find('[name="isSupply"]').val('1').trigger('change');
 								$form.find('input[name="supplyName"]').val(obj.genericName);
 								$form.find('input[name="supplyDosageQty"]').val(obj.dosageQty);
 								$form.find('[name="supplyDosage"]').val(obj.dosage).trigger('change');
+                $form.find('input[name="supplyThresholdQty"]').val(obj.thresholdQty);
+                $form.find('input[name="supplyCriticalQty"]').val(obj.criticalQty);  
 							}
 
 							$form.find('input[name="id"]').val(value);

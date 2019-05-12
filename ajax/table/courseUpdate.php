@@ -5,8 +5,8 @@
 	$id = $_GET['id'];
 	$courseName = htmlspecialchars($_GET['courseName']);
 
-	if (ctype_space($courseName)) {
-		echo "Whitespaces are not allowed. Please enter valid input.";
+	if (!ctype_alpha($courseName)) {
+		echo "Error: Input must only contain letters.";
 	} else {
 
 			$stmt = $con->prepare("UPDATE `course` SET courseName=? WHERE ID=?");

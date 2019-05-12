@@ -34,19 +34,20 @@ try {
 
 
 
-   while ($row = $result->fetch_assoc()) {
-      $row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
+   // while ($row = $result->fetch_assoc()) {
+   //    $row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 
-        $mail->addAddress($row['email']);     // Add a recipient
-        $mail->AddCC("201601045@iacademy.edu.ph");
+      //  $mail->addAddress("clinic@iacademy.edu.ph");     // Add a recipient
+      $mail->addAddress("201603007@iacademy.edu.ph");
+      //  $mail->AddCC();
 
         $mail->setFrom('cdrsiac@gmail.com', 'iACADEMY CDRS');    // Add Set Email
 
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Threshold and Critical Level';
-        $mail->Body = (implode(" - ", $msg));
+        $mail->Body = ($msg);
 
 
 
@@ -54,7 +55,7 @@ try {
         $mail->send();
         $mail->clearAddresses();
 
-    }
+  //  }
 
     echo 'Message has been sent';
 } catch (Exception $e) {

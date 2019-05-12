@@ -5,8 +5,8 @@
 	$id = $_GET['id'];
 	$department = htmlspecialchars($_GET['departmentName']);
 
-	if (ctype_space($department)) {
-		echo "Whitespaces are not allowed. Please enter valid input.";
+	if (!ctype_alpha($department)) {
+		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("UPDATE `department` SET departmentName=? WHERE ID=?");
 		$stmt->bind_param("si", $department, $id);

@@ -30,8 +30,8 @@ $query->bind_param("ssssssis", $id, $firstName, $lastName, $birthDate, $gender, 
 
 $message = array();
 
-if (ctype_space($firstName) || ctype_space($lastName)) {
-	array_push($message, "Whitespaces are not allowed. Please enter valid input");
+if (!ctype_alpha($firstName) || !ctype_alpha($lastName)) {
+	array_push($message, "Error: Whitespaces are not allowed. Please enter valid input");
 } else {
 	if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID=$id")) {
 		if(mysqli_num_rows($result) > 0 && $origID != $id) {

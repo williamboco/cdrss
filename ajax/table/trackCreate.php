@@ -4,8 +4,8 @@
 	session_start();
 	$trackName = htmlspecialchars($_GET['trackName']);
 
-	if (ctype_space($trackName)) {
-		echo "Whitespaces are not allowed. Please enter valid input";
+	if (!ctype_alpha($trackName)) {
+		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("INSERT INTO `track` (ID, trackName, isDeleted) VALUES (?,?,?)");
 		$stmt->bind_param("isi", $isNull, $trackName, $isDeleted);

@@ -21,7 +21,7 @@ $('form').on('submit', function(event) {
 			if(response == "Invalid email address! Please try again.") {
 				$('.alert-danger').html(response).show();
 			}else {
-				$('.alert-success').html(response).show();
+				$('.alert-success').show();
 			}
 			$form.find('button[type="submit"]').button('reset');
 			console.log(response);
