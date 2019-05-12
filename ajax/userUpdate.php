@@ -12,7 +12,6 @@ $firstName = htmlspecialchars($_POST['firstname']);
 $lastName = htmlspecialchars($_POST['lastname']);
 $email = htmlspecialchars($_POST['email']);
 $email = isset($email) ? trim($email) : null;
-//$email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 $employed = htmlspecialchars($_POST['dateEmployed']);
 $gender = htmlspecialchars($_POST['gender']);
 $contact = htmlspecialchars($_POST['contact']);
@@ -38,6 +37,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 					if (ctype_space($firstName) || ctype_space($lastName)) {
 						$message = "Whitespaces are not not allowed. Please enter a valid input";
 					} else {
+						$email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 						$firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
 						$lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
 						$stmt = $con->prepare("UPDATE `user` SET `ID` = ?, `email` = ?, `dateEmployed` = ?, `firstName` = ?, `lastName` = ?, `gender` = ?, `contact` = ? WHERE `user`.`ID` = ?");
