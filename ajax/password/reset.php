@@ -20,19 +20,12 @@ $rownum = mysqli_num_rows($result);
 //how to get the ipv4 php
 
 if($rownum > 0) {
-<<<<<<< HEAD
-	$message = "";
-=======
->>>>>>> 834358eef17224f7458712afa0b32ebbbfa6ac63
+
 	while ($row = $result->fetch_assoc()) {
 		$message = "";
 		if ($row['isActive'] == $isActive) {
 			$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 			if ($row['email'] == $email) {
-<<<<<<< HEAD
-				$message = "success. Your request for reset password has been sent to your iACADEMY email. Kindly check your email to continue.";
-=======
->>>>>>> 834358eef17224f7458712afa0b32ebbbfa6ac63
 
 				$query2 = $con->prepare("INSERT INTO password_change_request (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
 				$query2->bind_param("issi", $isNull, $requestID, $userID, $isUsed);
@@ -71,7 +64,7 @@ if($rownum > 0) {
 				 $eventName = "Successfully reset a password";
 				 $stmt->execute();
 			} else {
-			   $message = "<p class=color:red>Invalid email address! Please try again.</p>";
+			   $message = "Invalid email address! Please try again";
 			    }
 	  } else {
 			$message = "Email address is not active! Please try again.";
