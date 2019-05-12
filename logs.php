@@ -16,7 +16,7 @@ if($_SESSION['role'] != 'Admin') {
 	<link href="vendor/DataTables/datatables.min.css" rel="stylesheet">
 	<link href="vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
 	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<meta charset="utf-8">
@@ -154,7 +154,7 @@ if($_SESSION['role'] != 'Admin') {
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js"></script>
-	<script src="vendor/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
+	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
 	<script src="js/logs.js"></script>

@@ -18,8 +18,8 @@ $("#profileForm").on("submit", function(event) {
 			if(response == 'success') {
 				alertify.alert(response);
 				location.reload();
-				$form[0].reset();
-				location.reload();
+			/*	$form[0].reset();
+				location.reload();*/
 			}else {
 				alertify.alert(response);
 			}
