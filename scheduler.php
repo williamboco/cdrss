@@ -33,7 +33,7 @@ if($rownum > 0) {
 
 				$msg = '';
 				if ($rownum1 > 0) {
-					$msg = "These are the medicines/supplies that are in Threshold Level:";
+					$msg = "These are the medicines/supplies that are in their <strong>Threshold Level:</strong>";
 					$msg .= "<table border=1><tr><th>Medicines/Supplies</th><th>Available Quantity</th></tr>";
 					while ($row1 = $result1->fetch_assoc()) {
 
@@ -55,7 +55,7 @@ if($rownum > 0) {
 				$rownum2 = mysqli_num_rows($result2);
 
 				if ($rownum2 > 0) {
-					$msg .= "These are the medicines/supplies that are in Critical Level:";
+					$msg .= "These are the medicines/supplies that are in their <strong>Critical Level:</strong>";
 					$msg .= "<table border=1><tr><th>Medicines/Supplies</th><th>Available Quantity</th></tr>";
 					while ($row2 = $result2->fetch_assoc()) {
 
