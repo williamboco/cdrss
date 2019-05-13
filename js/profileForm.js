@@ -348,10 +348,10 @@ function viewProfile() {
 
 $( "#patientEditForm" ).on( "submit", function( event ) {
 
-	var $form = $( this );
+	var $form = $(this);
 	// Prevent form submission
 	event.preventDefault();
-	//console.log( $form.serialize() );
+	//console.log($form.serialize());
 
 	// Use Ajax to submit form data
 	$.ajax({
@@ -362,13 +362,14 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 			// ... Process the result ...
 			var response = JSON.parse(response);
 			console.log(response);
+			$('#patientModal').modal('hide');
+			$form[0].reset();
 
-			if(response[0]=='success') {
-				//alert("Patient record updated");
-				//window.location.href = 'http://localhost/cdrs/profile.php?id=' + response[1];
-				location.reload();
+			if(response[0].includes("success")) {
+				alertify.alert(response[0]);
+			location.reload();
 			}else {
-				alertify.alert (response);
+				alertify.alert(response);
 			}
 
 		}

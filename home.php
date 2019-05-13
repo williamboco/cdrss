@@ -58,8 +58,9 @@ if($_SESSION['role'] == 'Admin') {
 				<option value="All" selected>All</option>
 				<option value="coll">College</option>
 				<option value="shs">Senior High School</option>
-				<option value="stud">All Student</	option>
+				<option value="stud">All Student</option>
 				<option value="emp">Employee</option>
+				<option value="guest">Guest</option>
 			</select>
 			</div>
 
@@ -106,10 +107,10 @@ if($_SESSION['role'] == 'Admin') {
 						<table id="visitTable" class="table display" cellspacing="0">
 						</table>
 				  </div>
-				</div>
 			</div>
-	<!--	</form>-->
+
 		</div>
+	</div>
 
 	<div class="container hidden" id="graph">
 		<div class="row">
@@ -384,11 +385,7 @@ if($_SESSION['role'] == 'Admin') {
 	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/DataTables/ColReorder-1.5.0/js/dataTables.colReorder.min.js"></script>
 	<script src="vendor/widgster.js"></script>
-<<<<<<< HEAD
 	<script src="vendor/moment.min.js"></script>
-=======
-	<script src="vendor/moment.min.js"></script>
->>>>>>> 834358eef17224f7458712afa0b32ebbbfa6ac63
 	<script src="js/visit_form.js"></script>
 	<script src="js/home.js"></script>
 	<script src="js/date.js"></script>
