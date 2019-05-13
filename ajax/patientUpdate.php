@@ -28,8 +28,8 @@ $query->bind_param("ssssssis", $id, $firstName, $lastName, $birthDate, $gender, 
 
 $message = array();
 
-if (!ctype_alpha($firstName) || !ctype_alpha($lastName)) {
-	$message = "Error: Whitespaces are not allowed. Please enter valid input";
+if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace(' ', '', $lastName))) {
+	$message = "Error: Input must only contain letters.";
 } else {
 	if ($result=mysqli_query($con,"SELECT * FROM `patient` WHERE ID='$id'")) {
 		if(mysqli_num_rows($result) > 0 && $origID != $id) {

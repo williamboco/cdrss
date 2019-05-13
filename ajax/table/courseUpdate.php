@@ -5,7 +5,7 @@
 	$id = $_GET['id'];
 	$courseName = htmlspecialchars($_GET['courseName']);
 
-	if (!ctype_alpha($courseName)) {
+	if (!ctype_alpha(str_replace(' ', '', $courseName))) {
 		echo "Error: Input must only contain letters.";
 	} else {
 

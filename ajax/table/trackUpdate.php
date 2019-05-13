@@ -5,7 +5,7 @@
 	$id = $_GET['id'];
 	$trackName = htmlspecialchars($_GET['trackName']);
 
-	if (!ctype_alpha($trackName)) {
+	if (!ctype_alpha(str_replace(' ', '', $trackName))) {
 		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("UPDATE `track` SET trackName=? WHERE ID=?");

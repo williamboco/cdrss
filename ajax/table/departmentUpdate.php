@@ -5,7 +5,7 @@
 	$id = $_GET['id'];
 	$department = htmlspecialchars($_GET['departmentName']);
 
-	if (!ctype_alpha($department)) {
+	if (!ctype_alpha(str_replace(' ', '', $department))) {
 		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("UPDATE `department` SET departmentName=? WHERE ID=?");

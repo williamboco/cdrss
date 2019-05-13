@@ -12,8 +12,8 @@
 		$genericName = htmlspecialchars($_GET['supplyName']);
 	}
 
-	if (!ctype_alpha($brandName) || !ctype_alpha($genericName)) {
-		echo "Whitespaces are not allowed. Please enter valid input.";
+	if (!ctype_alpha(str_replace(' ', '', $brandName)) || !ctype_alpha(str_replace(' ', '', $genericName))) {
+		echo "Error: Input must only contain letters.";
 	} else {
 		if($isSupply == '0') {
 

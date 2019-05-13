@@ -7,7 +7,7 @@
 	$description = htmlspecialchars($_GET['description']);
 
 
- if (!ctype_alpha($allergyName) || !ctype_alpha($description)) {
+ if (!ctype_alpha(str_replace(' ', '', $allergyName)) || !ctype_alpha(str_replace(' ', '', $description))) {
 	 echo "Error: Input must only contain letters.";
  } else {
 	 $stmt = $con->prepare("INSERT INTO `allergy` (ID, allergyName, description, isDeleted) VALUES (?, ?, ?, ?)");

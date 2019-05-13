@@ -6,7 +6,7 @@
 	$complaintName = htmlspecialchars($_GET['complaintName']);
 	$description = htmlspecialchars($_GET['description']);
 
-	if (!ctype_alpha($complaintName) || !ctype_alpha($description)) {
+	if (!ctype_alpha(str_replace(' ', '', $complaintName)) || !ctype_alpha(str_replace(' ', '', $description))) {
 		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("UPDATE `complaint` SET complaintName=?, description=? WHERE ID=?");

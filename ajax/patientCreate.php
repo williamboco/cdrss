@@ -25,7 +25,7 @@ $allergy = $_POST['allergy'];
 $user = htmlspecialchars($_SESSION['userID']);
 // $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-if (!ctype_alpha($firstName) || !ctype_alpha($lastName)) {
+if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace(' ', '', $lastName))) {
 	$message = "Error: Input must only contain letters.";
 } else {
 	if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {

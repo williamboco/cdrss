@@ -4,7 +4,7 @@
 	session_start();
 	$departmentName = htmlspecialchars($_GET['departmentName']);
 
-	if (!ctype_alpha($departmentName)) {
+	if (!ctype_alpha(str_replace(' ', '', $departmentName))) {
 		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("INSERT INTO `department` (ID, departmentName, isDeleted) VALUES (?,?,?)");

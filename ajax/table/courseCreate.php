@@ -3,63 +3,63 @@
 
 	session_start();
 	$courseName = htmlspecialchars($_GET['courseName']);
-
-	if (!ctype_alpha($courseName)) {
+	if (!ctype_alpha(str_replace(' ', '' ,$courseName))) {
 		echo "Error: Input must only contain letters.";
 	} else {
-		$stmt = $con->prepare("INSERT INTO `course` (ID, courseName, isDeleted) VALUES (?,?,?)");
-		$stmt->bind_param("isi", $isNull, $courseName, $isDeleted);
 
-		$isNull = NULL;
-		$isDeleted = 0;
+			$stmt = $con->prepare("INSERT INTO `course` (ID, courseName, isDeleted) VALUES (?,?,?)");
+			$stmt->bind_param("isi", $isNull, $courseName, $isDeleted);
 
-		$query0 = "SELECT * FROM `course` WHERE courseName='$courseName'";
+			$isNull = NULL;
+			$isDeleted = 0;
+
+			$query0 = "SELECT * FROM `course` WHERE courseName='$courseName'";
 
 
-		if ($result=mysqli_query($con, $query0)) {
-			if(mysqli_num_rows($result) > 0) {
-				$row = mysqli_fetch_array($result);
-				$isDeleted = $row['isDeleted'];
+			if ($result=mysqli_query($con, $query0)) {
+				if(mysqli_num_rows($result) > 0) {
+					$row = mysqli_fetch_array($result);
+					$isDeleted = $row['isDeleted'];
 
-				if($isDeleted) {
-					$stmt = $con->prepare("UPDATE `course` SET isDeleted=? WHERE ID=?");
-					$stmt->bind_param("ii", $isDeleted, $id);
+					if($isDeleted) {
+						$stmt = $con->prepare("UPDATE `course` SET isDeleted=? WHERE ID=?");
+						$stmt->bind_param("ii", $isDeleted, $id);
 
-					$isDeleted = 0;
-					$id = $row['ID'];
+						$isDeleted = 0;
+						$id = $row['ID'];
+						$stmt->execute();
+
+							if(mysqli_query($con, $query0)) {
+								echo "Record successfully added";
+							}else {
+								echo "Error: Record was not added";
+							}
+					}else {
+						echo "There is already an existing record!";
+					}
+
+				} else {
 					$stmt->execute();
 
-						if(mysqli_query($con, $query0)) {
-							echo "Record successfully added";
-						}else {
-							echo "Error: Record was not added";
-						}
-				}else {
-					echo "There is already an existing record!";
+					if(mysqli_query($con, $query0)) {
+						echo "Record successfully added";
+					}else {
+						echo "Error: Record was not added";
+					}
 				}
-
-			} else {
-				$stmt->execute();
-
-				if(mysqli_query($con, $query0)) {
-					echo "Record successfully added";
-				}else {
-					echo "Error: Record was not added";
-				}
+			}else {
+				echo "Error: Query Failed";
 			}
-		}else {
-			echo "Error: Query Failed";
+
+			$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+			$stmt->bind_param("isi", $eventID, $eventName, $userID);
+			$eventID = NULL;
+			$userID = $_SESSION['userID'];
+			$eventName = "Created course.";
+			$stmt->execute();
+
+			$stmt->close();
 		}
-
-		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
-		$stmt->bind_param("isi", $eventID, $eventName, $userID);
-		$eventID = NULL;
-		$userID = $_SESSION['userID'];
-		$eventName = "Created course.";
-		$stmt->execute();
-
-		$stmt->close();
-	}
 
 
 ?>

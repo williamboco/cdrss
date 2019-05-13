@@ -28,7 +28,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 	if (! in_array($domain, $allowed)) {
 		echo "The email must end in iacademy.edu.ph";
-	} else 	if (!ctype_alpha($firstName) || !ctype_alpha($lastName)) {
+	} else 	if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace(' ', '', $lastName))) {
 			echo "Error: Input must only contain letters.";
 		} else if ($result=mysqli_query($con,"SELECT ID FROM user WHERE ID=$id")) {
 			if(mysqli_num_rows($result) > 0 && $userID != $id) {
