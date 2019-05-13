@@ -58,8 +58,9 @@ if($_SESSION['role'] == 'Admin') {
 				<option value="All" selected>All</option>
 				<option value="coll">College</option>
 				<option value="shs">Senior High School</option>
-				<option value="stud">All Student</	option>
+				<option value="stud">All Student</option>
 				<option value="emp">Employee</option>
+				<option value="guest">Guest</option>
 			</select>
 			</div>
 
@@ -106,10 +107,10 @@ if($_SESSION['role'] == 'Admin') {
 						<table id="visitTable" class="table display" cellspacing="0">
 						</table>
 				  </div>
-				</div>
 			</div>
-	<!--	</form>-->
+
 		</div>
+	</div>
 
 	<div class="container hidden" id="graph">
 		<div class="row">
