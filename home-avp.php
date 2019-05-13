@@ -18,7 +18,7 @@ if($_SESSION['role'] != 'Admin') {
 	<link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
 	<link href="vendor/DataTables/datatables.min.css" rel="stylesheet">
 	<link href="vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-	<link href="vendor/DataTables/ColReorder-1.5.0/css/colReorder.dataTables.min" rel="stylesheet">
+	<link href="vendor/DataTables/ColReorder-1.5.0/css/colReorder.dataTables.min.css" rel="stylesheet" type="text/css">
 	<link href="vendor/DataTables/FixedColumns-3.2.5/css/fixedColumns.dataTables.min.css" rel="stylesheet">
 	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
@@ -95,16 +95,16 @@ if($_SESSION['role'] != 'Admin') {
 					<select class="form-control sorts" name="sortType">
 						<option value="all" selected>All</option>
 						<option value="sname">Name</option>
-						<option value="sdate">Date</option>
 						<option value="scomp">Complaints</option>
 						<option value="smed">Medicine / Supply</option>
+						<option value="sdate">Date</option>
 					</select>
 			</div>
 		</form>
 			<div class="col-lg-12">
 				<hr><br>
-					<div class="table-responsive">
-						<table id="visitTable" class="table display" cellspacing="0">
+					<div class="table">
+						<table id="visitTable" class="display nowrap" cellspacing="0">
 						</table>
 				  </div>
 				</div>
@@ -383,8 +383,8 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
-	<script src="vendor/DataTables/ColReorder-1.5.0/js/dataTables.colReorder.min.js"></script>
-	<script src="vendor/DataTables/FixedColumns-3.2.5/js/fixedColumns.dataTables.min.css"></script>
+	<script src="vendor/DataTables/ColReorder-1.5.0/js/dataTables.colReorder.js"></script>
+	<!--<script src="vendor/DataTables/FixedColumns-3.2.5/js/fixedColumns.dataTables.min.css"></script>-->
 	<script src="vendor/widgster.js"></script>
 	<script src="vendor/moment.min.js"></script>
 	<script src="js/visit_form.js"></script>
