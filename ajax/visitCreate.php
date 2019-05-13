@@ -103,21 +103,21 @@ if (isset($_POST['idNumber'])){
 						$query = $con->prepare("UPDATE `medicine` SET status=?, currentQty=?, updateQty=? WHERE ID=?");
 						$query->bind_param("iiii", $mStatus, $newQty, $mQty, $mId);
 
-						if ($mQty <= $currentQty){
-							$newQty = $currentQty - $mQty;
-							if ($newQty > 0){
-								if ($newQty > $thresholdQty)
-								$mStatus = 3;
-								else if ($newQty > $criticalQty)
-								$mStatus = 2;
-								else
-								$mStatus = 1;
+							if ($mQty <= $currentQty){
+								$newQty = $currentQty - $mQty;
+								if ($newQty > 0){
+									if ($newQty > $thresholdQty)
+									$mStatus = 3;
+									else if ($newQty > $criticalQty)
+									$mStatus = 2;
+									else
+									$mStatus = 1;
+								}
+								$query->execute();
+							} else{
+								$message = "Error: Insufficient stock of medicine/supply \r\n";
+								die();
 							}
-							$query->execute();
-						} else{
-							$message = "Error: Insufficient stock of medicine/supply \r\n";
-							die();
-						}
 
 					}
 

@@ -64,8 +64,7 @@ if ($query->execute()){
 			$mId = $med[$i];
 			$mQty = $med[$i+1];
 
-			if($query->execute())
-			{
+			if($query->execute())	{
 				// array_push($message, "Medicine".$mId.":(".$mQty."));
 			}
 		}
