@@ -25,7 +25,7 @@ $allergy = $_POST['allergy'];
 $user = htmlspecialchars($_SESSION['userID']);
 // $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-if (!ctype_alpha($firstName) || !ctype_alpha($lastName) || !ctype_alpha($cPerson)) {
+if (!ctype_alpha($firstName) || !ctype_alpha($lastName)) {
 	$message = "Error: Input must only contain letters.";
 } else {
 	if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
@@ -155,7 +155,7 @@ if (!ctype_alpha($firstName) || !ctype_alpha($lastName) || !ctype_alpha($cPerson
 
 
 				if (ctype_space($cPerson)) {
-					$message = "Whitespaces are not allowed. Please enter valid input";
+					$message = "Error: Whitespaces are not allowed. Please enter valid input";
 				} else {
 					//Insert contact person
 					$len = count($cPerson);
@@ -185,7 +185,7 @@ if (!ctype_alpha($firstName) || !ctype_alpha($lastName) || !ctype_alpha($cPerson
 
 
 			} else {
-				$message = "Error: Patient profile not created";
+				$message = "Error: Unable to create patient profile";
 			}
 		}
 
@@ -197,7 +197,7 @@ if (!ctype_alpha($firstName) || !ctype_alpha($lastName) || !ctype_alpha($cPerson
 		$stmt->execute();
 
 	} else {
-		$message = "Error: Query Failed";
+		$message = "Error: Query failed";
 	}
 }
 
