@@ -46,7 +46,7 @@ if($_SESSION['role'] == 'Admin') {
 <body>
 	<div class="row">
 	<?php
-	  include("includes/navbar-avp.php");
+	  include("includes/navbartest.php");
 	?>
   </div>
 
