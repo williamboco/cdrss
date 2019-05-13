@@ -6,11 +6,14 @@ $(document).ready(function() {
 		"columnDefs": [ {
 			"searchable": false,
 			"orderable": false,
-			"targets": 0
+			targets: 0,
+			orderable: true,
+			className: 'reorder'
+
 		} ],
 		"columns": [
 			{title: "#", width: "5%", className: "dt-center"},
-			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%", orderable: false, className: "dt-center"},
+			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%", className: "dt-center"},
 			{title: "ID"},
 			{title: "Name", className: "hover"},
 			{title: "Complaint"},
@@ -18,7 +21,7 @@ $(document).ready(function() {
 			{title: "Visit Date/Time"},
 			{title: "Action", width: "15%"}
 		],
-		"order": [[ 0, 'desc' ]],
+		"order": [[ 2, 'asc' ]],
 		//1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 		colReorder: {
 			enable: true,
@@ -111,28 +114,33 @@ $('#filter').find('[name="patientType"]').on('change', function() {
 			switch(sort) {
 					case 'all':
 						datatable.colReorder.order([ 0, 1, 2, 3, 4, 5, 6, 7], true);
+						//datatable.colReorder.reset();
 					//	datatable.colReorder.enable();
 						break;
 					case 'sname':
-					  datatable.colReorder.order([ 0, 1, 3, 4, 5, 6, 2, 7]);
+					  datatable.colReorder.order([0, 1, 3, 4, 5, 6, 2, 7], true);
+					//	datatable.colReorder.reset();
 						break;
 					case 'scomp':
-						datatable.colReorder.order([0, 1, 4, 5, 6, 2, 3, 7 ]);
+						datatable.colReorder.order([0, 1, 4, 5, 6, 2, 3, 7 ], true);
+					//	datatable.colReorder.reset();
 						break;
 					case 'smed':
-						datatable.colReorder.order([0, 1, 5, 6, 2, 3, 4, 7 ]);
+						datatable.colReorder.order([0, 1, 5, 6, 2, 3, 4, 7 ], true);
+					//	datatable.colReorder.reset();
 						break;
 					case 'sdate':
-				    datatable.colReorder.order([ 0, 1, 6, 2, 3, 4, 5, 7]);
+				    datatable.colReorder.order([ 0, 1, 6, 2, 3, 4, 5, 7], true);
+					//	datatable.colReorder.reset();
 						break;
 					default:
 			}
-		    var obj = JSON.parse(data);
-		    obj = obj.data;
+				var obj = JSON.parse(JSON.stringify(data));
+			  obj = obj.data;
 
-			  //datatable.colReorder.enable();
+			  datatable.colReorder.enable();
 				datatable.clear();
-			  datatable.rows.add(obj);
+			//  datatable.rows.add(obj);
 				datatable.draw();
 	   	}
 		});
