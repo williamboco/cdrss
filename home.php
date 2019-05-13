@@ -384,11 +384,7 @@ if($_SESSION['role'] == 'Admin') {
 	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/DataTables/ColReorder-1.5.0/js/dataTables.colReorder.min.js"></script>
 	<script src="vendor/widgster.js"></script>
-<<<<<<< HEAD
 	<script src="vendor/moment.min.js"></script>
-=======
-	<script src="vendor/moment.min.js"></script>
->>>>>>> 834358eef17224f7458712afa0b32ebbbfa6ac63
 	<script src="js/visit_form.js"></script>
 	<script src="js/home.js"></script>
 	<script src="js/date.js"></script>
