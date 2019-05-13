@@ -64,7 +64,8 @@ $(document).ready(function() {
             $(this).closest('.tbContainer').remove();
         });
 
-
+        $('#guestDiv').find('input').attr('disabled', true);
+        $('#guestDiv').find('input').attr('required',false);
 });
 
 $('.form').on('change keyup', function() {
@@ -376,26 +377,28 @@ $("#patientID").select2({
     templateSelection: formatRepoSelection
 });
 
-$('.guestVisitForm').on('click', function(event){
-  event.preventDefault();
+$('.guestVisitForm').on('click', function(){
   $('.allergy').hide();
   $('#searchDiv').hide();
-  $('#searchDiv .form-control').attr('disabled', true);
+  $('#searchDiv').find('select').attr('disabled', true);
+  $('#searchDiv').find('select').attr('required',false);
 
   $('.guestVisitForm').hide();
   $('#guestDiv').removeClass('hidden');
-  $('#guestDiv .form-control').attr('disabled', false);
+  $('#guestDiv').find('input').attr('disabled', false);
+  $('#guestDiv').find('input').attr('required',true);
 });
 
-$('.patientVisitForm').on('click', function(event){
-  event.preventDefault();
+$('.patientVisitForm').on('click', function(){
   $('.allergy').show();
   $('#searchDiv').show();
-  $('#searchDiv .form-control').attr('disabled', false);
+  $('#searchDiv').find('select').attr('disabled', false);
+  $('#searchDiv').find('select').attr('required',true);
 
   $('.guestVisitForm').show();
   $('#guestDiv').addClass('hidden');
-  $('#guestDiv .form-control').attr('disabled', true);
+  $('#guestDiv').find('input').attr('disabled', true);
+  $('#guestDiv').find('input').attr('required',false);
 });
 
 // Complaint select options
@@ -470,7 +473,7 @@ $("#addVisitForm").on("submit", function(event) {
       $("#addVisitModal").modal('hide');
       $form[0].reset();
       refresh();
-        if(response=='success'){
+        if(response.includes("success")){
           console.log(response);
           alertify.alert(response);
         } else{

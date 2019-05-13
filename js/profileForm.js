@@ -367,7 +367,7 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 
 			if(response[0].includes("success")) {
 				alertify.alert(response[0]);
-			location.reload();
+			  location.reload();
 			}else {
 				alertify.alert(response);
 			}

@@ -33,8 +33,10 @@
 			$type = "Senior High School Student";
 		}elseif(mysqli_num_rows($college)>0) {
 			$type = "College Student";
-		}else {
+		}elseif(mysqli_num_rows($employee)>0) {
 			$type = "Employee";
+		}else {
+			$type = "Guest";
 		}
 
 		//get age
