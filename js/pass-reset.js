@@ -18,10 +18,10 @@ $('form').on('submit', function(event) {
 		data: $form.serialize(),
 		success: function(response) {
 			 // $('.alert-success').show();
-			if(response == "Invalid email address! Please try again.") {
+			if(response == "Error: Invalid email address. Please try again.") {
 				$('.alert-danger').html(response).show();
 			}else {
-				$('.alert-success').show();
+				$('.alert-success').html(response).show();
 			}
 			$form.find('button[type="submit"]').button('reset');
 			console.log(response);
