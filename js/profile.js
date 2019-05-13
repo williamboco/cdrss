@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	viewProfile();
 	var t = $('#visitTable').DataTable( {
 		"ajax": "ajax/profile_visit.php" + location.search,
@@ -24,27 +24,25 @@ $(document).ready(function() {
 			cell.innerHTML = i+1;
 		} );
 	} ).draw();
-	
+
 });
 
 function refresh() {
 	var $form = $('#filter');
-		console.log($form.serialize());
-		
-		
-		var datatable = $('#visitTable').dataTable().api();
+	var datatable = $('#visitTable').dataTable().api();
+	console.log($form.serialize());
+
 		$.ajax({
 			type: "GET",
 			url: "ajax/profile_visit.php",
 			data: {id:getParameterByName("id")},
 			cache: false,
 			success: function(data) {
-				
 				var obj = JSON.parse(data);
-				obj = obj.data;
-				datatable.clear();
-				datatable.rows.add(obj);
-				datatable.draw();
+					obj = obj.data;
+					datatable.clear();
+					datatable.rows.add(obj);
+					datatable.draw();
 			}
 		});
 }
