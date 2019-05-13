@@ -79,6 +79,9 @@ $('#filter').find('[name="patientType"]').on('change', function() {
 		case 'emp':
 			text = "Employee ";
 			break;
+		case 'guest':
+			text = "Guest ";
+			break;
 		default:
 	}
 

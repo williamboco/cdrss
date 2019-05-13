@@ -40,6 +40,7 @@ if($_SESSION['role'] == 'Admin') {
 	               <option value="shs">Senior High School</option>
 	               <option value="stud">All Student</option>
 	               <option value="emp">Employee</option>
+								 <option value="guest">Guest</option>
 	            </select>
 	         </div>
 	         <!-- Patient modal triggers -->
