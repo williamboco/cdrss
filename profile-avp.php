@@ -303,10 +303,8 @@ if($_SESSION['role'] != 'Admin') {
                         <label class="col-sm-4 control-label">Gender</label>
                         <div class="col-sm-8">
                            <div class="radio">
-                              <input type="radio" name="gender" value="Male" id="gender1" required>
-							  								<label for="gender1">Male</label>
-                              <input type="radio" name="gender" value="Female" id="gender2" required>
-							  								<label for="gender2">Female</label>
+														 <label for="gender1"><input type="radio" name="gender" value="Male" id="gender1" checked required>Male </label>
+														 <label for="gender2"><input type="radio" name="gender" value="Female" id="gender2" required>Female </label>
                            </div>
                         </div>
                      </div>
