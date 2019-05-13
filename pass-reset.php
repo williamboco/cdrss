@@ -26,11 +26,11 @@
                 <section class="widget widget-login animated fadeInUp">
                     <header>
                         <h3>Reset Your Password</h3><br>
-						<p>Fear not. We’ll email you instructions to reset your password.</p>
+						<p>Fear not we have sent you an email to reset your password.</p>
                     </header>
                     <div class="widget-body">
 						<div class="alert alert-success">
-						  Please check your email for the link for new password.
+								Kindly check your email for the link to reset your password.
 						</div>
 						<div class="alert alert-danger">
 							Invalid Email Address! Please try again
