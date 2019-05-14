@@ -4,7 +4,7 @@ $(document).ready(function() {
 
         e.preventDefault();
         var $this = $(this);
-        var limit = $this.parent().attr("value");
+        var limit = $this.parent().prop("value");
         var ctr = $this.parent().children().find('.select2-hidden-accessible').size();
 
         if (ctr != limit) {
@@ -35,7 +35,7 @@ $(document).ready(function() {
     			$clone.css("display", "");
     			$clone.find('select').css("width", "60%");
     			$clone.find('.formInpt').each(function() {
-    				$(this).attr("disabled", false);
+    				$(this).prop("disabled", false);
     			});
 
     			if($clone.find('select').hasClass('selComp')) {
@@ -48,7 +48,7 @@ $(document).ready(function() {
     			$tempVals.forEach(function(v) {
     				$clone.find('select').find('option').each(function() {
     					if(this.value == v) {
-    						$(this).attr("disabled", true);
+    						$(this).prop("disabled", true);
     					}
     				});
     			});
@@ -64,8 +64,8 @@ $(document).ready(function() {
             $(this).closest('.tbContainer').remove();
         });
 
-        $('#guestDiv').find('input').attr('disabled', true);
-        $('#guestDiv').find('input').attr('required',false);
+        $('#guestDiv').find('input').prop('disabled', true);
+        $('#guestDiv').find('input').prop('required',false);
 });
 
 $('.form').on('change keyup', function() {
@@ -113,9 +113,7 @@ function viewVisit(id) {
     $.ajax({
         type: "GET",
         url: "ajax/visitRead.php",
-        data: {
-            visitID: id
-        },
+        data: {visitID: id},
         cache: false,
         success: function(data) {
             var obj = JSON.parse(data);
@@ -163,26 +161,33 @@ function viewVisit(id) {
             }, 100);
 
       			setTimeout(function() {
+              $('.medicineDiv .selMed').prop('disabled', 'disabled');
+              $('.medicineDiv .quantity').prop('readonly', 'readonly');
+              $('.medicineDiv').find('button').addClass('hidden');
+              $('.medicineDiv').find('a').addClass('hidden');
+
                 $form.find(".medicineDiv").find('.select2-hidden-accessible').each(function(i) {
                   var sel = $(this);
             			sel.select2().val(obj.Medicine[i].id).trigger('change');
             			sel.select2({tags:true});
                 });
+
                 $form.find(".medicineDiv").find('input[name="med[]"]').each(function(i) {
                     var input = $(this);
-            			if(this.hasAttribute('disabled')) {
+                    if (this.hasAttribute("disabled")){
 
-            			}else{
-            				input.val(obj.Medicine[i-1].quantity);
-            			}
+                    } else{
+                      input.val(obj.Medicine[i-1].quantity);
+                    }
                 });
+
 
             }, 100);
 
       			document.getElementById('remarksEdit').value = obj.Visit.remarks;
         }
     });
-    $('#btnEdit').attr("value", id);
+    $('#btnEdit').prop("value", id);
     $('#viewModal').modal('show');
 }
 
@@ -201,7 +206,7 @@ function delpatientVisit() {
     var data = [];
     $("#visitTable tr").each(function() {
         if ($(this).hasClass("selected")) {
-            data.push($(this).find("#ID").attr("value"));
+            data.push($(this).find("#ID").prop("value"));
         }
     });
 
@@ -226,7 +231,7 @@ function delrecordCheck() {
     var data = [];
     $("#visitTable tr").each(function() {
         if ($(this).hasClass("selected")) {
-            data.push($(this).find("#ID").attr("value"));
+            data.push($(this).find("#ID").prop("value"));
         }
     });
 
@@ -243,7 +248,7 @@ function delvisitCheck() {
     var data = [];
     $("#visitTable tr").each(function() {
         if ($(this).hasClass("selected")) {
-            data.push($(this).find("#ID").attr("value"));
+            data.push($(this).find("#ID").prop("value"));
         }
     });
 
@@ -380,25 +385,25 @@ $("#patientID").select2({
 $('.guestVisitForm').on('click', function(){
   $('.allergy').hide();
   $('#searchDiv').hide();
-  $('#searchDiv').find('select').attr('disabled', true);
-  $('#searchDiv').find('select').attr('required',false);
+  $('#searchDiv').find('select').prop('disabled', true);
+  $('#searchDiv').find('select').prop('required',false);
 
   $('.guestVisitForm').hide();
   $('#guestDiv').removeClass('hidden');
-  $('#guestDiv').find('input').attr('disabled', false);
-  $('#guestDiv').find('input').attr('required',true);
+  $('#guestDiv').find('input').prop('disabled', false);
+  $('#guestDiv').find('input').prop('required',true);
 });
 
 $('.patientVisitForm').on('click', function(){
   $('.allergy').show();
   $('#searchDiv').show();
-  $('#searchDiv').find('select').attr('disabled', false);
-  $('#searchDiv').find('select').attr('required',true);
+  $('#searchDiv').find('select').prop('disabled', false);
+  $('#searchDiv').find('select').prop('required',true);
 
   $('.guestVisitForm').show();
   $('#guestDiv').addClass('hidden');
-  $('#guestDiv').find('input').attr('disabled', true);
-  $('#guestDiv').find('input').attr('required',false);
+  $('#guestDiv').find('input').prop('disabled', true);
+  $('#guestDiv').find('input').prop('required',false);
 });
 
 // Complaint select options

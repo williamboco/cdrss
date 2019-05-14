@@ -20,9 +20,9 @@ if ($query->execute()){
 	$query->bind_param("i", $vId);
 	$query->execute();
 
-	$query = $con->prepare("DELETE FROM `visit_medicine` WHERE visitID=?");
-	$query->bind_param("i", $vId);
-	$query->execute();
+	// $query = $con->prepare("DELETE FROM `visit_medicine` WHERE visitID=?");
+	// $query->bind_param("i", $vId);
+	// $query->execute();
 
 
 	foreach($comp as $i => $item) {
@@ -53,7 +53,7 @@ if ($query->execute()){
 
 	}
 
-	$len = count($med);
+	/*$len = count($med);
 	for ($i=0; $i< $len; $i++) {
 
 		//if medicine name is not blank
@@ -70,7 +70,7 @@ if ($query->execute()){
 		}
 
 		++$i;
-	}
+	}*/
 
 	$stmt = $con->prepare("INSERT INTO `logs` (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
 	$stmt->bind_param("isi", $eventID, $eventName, $userID);

@@ -89,7 +89,7 @@ if (isset($_POST['idNumber'])){
 				$mQty = $med[$i+1];
 
 				if($query->execute())	{
-
+					//adjust the stock from inventory
 					$query = $con->prepare("SELECT * FROM `medicine` WHERE ID=?");
 					$query->bind_param("i", $mId);
 
