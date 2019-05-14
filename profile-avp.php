@@ -255,7 +255,7 @@ if($_SESSION['role'] != 'Admin') {
                </div>
                <div class="modal-body">
                   <form class="form-horizontal" id="patientEditForm" action="ajax/patientUpdate.php">
-										<input type="number" name="origID" value="<?php echo $_GET['id'];?>" class="hidden">
+										<input type="text" name="origID" value="<?php echo $_GET['id'];?>" class="hidden">
 										<input type="number" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden">
 
                     <div class="form-group">
