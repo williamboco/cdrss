@@ -42,6 +42,7 @@ $others = array();
 $shs = mysqli_query($con, "SELECT track.trackName FROM `shs` INNER JOIN `track` ON shs.trackID=track.ID WHERE shs.ID='$id'");
 $college = mysqli_query($con, "SELECT course.courseName FROM `college` INNER JOIN `course` ON college.courseID=course.ID WHERE college.ID='$id'");
 $employee = mysqli_query($con, "SELECT department.departmentName, employee.type FROM `employee` INNER JOIN `department` ON employee.departmentID=department.ID WHERE employee.ID='$id'");
+$guest = mysqli_query($con, "SELECT * FROM `guest` WHERE ID='$id'");
 
 if(mysqli_num_rows($shs)>0){
 
@@ -68,6 +69,14 @@ if(mysqli_num_rows($shs)>0){
 		"type"   => "Employee",
 		"department"    => $res['departmentName'],
 		"employmentType" => $res['type']
+	);
+	array_push($others, $x);
+
+}elseif(mysqli_num_rows($guest)>0) {
+
+	$res = mysqli_fetch_array($guest);
+	$x = (object) array(
+		"type"   => "Guest"
 	);
 	array_push($others, $x);
 
