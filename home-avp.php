@@ -83,8 +83,8 @@ if($_SESSION['role'] != 'Admin') {
 		</form>
 	</div>
 
-
-	<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
+  <!--Sort filters-->
+	<!--<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
 		<div class="container card">
 		<form class="col-lg-12 col-sm-12" id="sortBy" action="ajax/filtered_visits_avp.php">
 				<div class="col-lg-6 col-sm-6">
@@ -105,13 +105,29 @@ if($_SESSION['role'] != 'Admin') {
 			<div class="col-lg-12">
 				<hr><br>
 					<div class="table">
-						<table id="visitTable" class="display nowrap" cellspacing="0">
+						<table id="visitTable" class="table display" cellspacing="0">
 						</table>
 				  </div>
 				</div>
 			</div>
-	<!--	</form>-->
+		</div>-->
+
+	<div class="container" id="table">
+		<div class="card col-12">
+			<div class="tabletheme" style="margin: 0 20px 20px 20px">
+				<div class="row">
+					<h3><span id="filterName">All </span>Patient Visits</h3>
+					<h5 id="date"></h5>
+					<hr>
+				<div class="table-responsive">
+					<table id="visitTable" class="table display" cellspacing="0" width="100%">
+					</table>
+				</div>
+			</div>
 		</div>
+	</div>
+</div>
+
 
 	<div class="container hidden" id="graph">
 		<div class="row">

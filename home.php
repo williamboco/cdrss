@@ -83,10 +83,10 @@ if($_SESSION['role'] == 'Admin') {
 	</div>
 
 
-	<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
+	<!--<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
 		<div class="container card">
-		<form class="col-lg-12 col-sm-12" id="sortBy" action="ajax/filtered_visits_avp.php">
-				<div class="tabletheme col-lg-6 col-sm-6" style="margin-top: 20px;" >
+		<form class="col-lg-12 col-sm-12" id="sortBy" action="ajax/filtered_visits.php">
+				<div class="col-lg-6 col-sm-6">
 					<h3><span id="filterName">All </span>Patient Visits</h3>
 					<h5 id="date"></h5>
 				</div>
@@ -95,20 +95,32 @@ if($_SESSION['role'] == 'Admin') {
 					<select class="form-control sorts" name="sortType">
 						<option value="all" selected>All</option>
 						<option value="sname">Name</option>
-						<option value="sdate">Date</option>
 						<option value="scomp">Complaints</option>
 						<option value="smed">Medicine / Supply</option>
+						<option value="sdate">Date</option>
 					</select>
 			</div>
 		</form>
 			<div class="col-lg-12">
 				<hr><br>
-					<div class="table-responsive">
+					<div class="table">
 						<table id="visitTable" class="table display" cellspacing="0">
 						</table>
 				  </div>
+				</div>
 			</div>
+		</form>
+</div>-->
 
+		<div class="container card" id="table">
+		<div class="row">
+			<h3><span id="filterName">All </span>Patient Visits</h3><br>
+			<h5 id="date"></h5>
+			<hr>
+			<div class="table-responsive">
+			<table id="visitTable" class="table display" cellspacing="0" width="100%">
+			</table>
+			</div>
 		</div>
 	</div>
 
