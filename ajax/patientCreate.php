@@ -25,9 +25,6 @@ $allergy = $_POST['allergy'];
 $user = htmlspecialchars($_SESSION['userID']);
 // $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace(' ', '', $lastName))) {
-	$message = "Error: Input must only contain letters.";
-} else {
 	if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 		if(mysqli_num_rows($result) > 0) {
 			$message = "Patient with that ID number already exists.";
@@ -154,9 +151,6 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 				}
 
 
-				if (ctype_space($cPerson)) {
-					$message = "Error: Whitespaces are not allowed. Please enter valid input";
-				} else {
 					//Insert contact person
 					$len = count($cPerson);
 					// We could have used count($arr) instead of $len. But, it will lead to multiple calls to count() function causing code run slowly.
@@ -181,7 +175,6 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 
 						++$i;
 					}
-				}
 
 
 			} else {
@@ -199,7 +192,6 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 	} else {
 		$message = "Error: Query failed";
 	}
-}
 
 //Message
 echo $message;
