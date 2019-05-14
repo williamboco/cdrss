@@ -45,8 +45,8 @@ if($_SESSION['role'] != 'Admin') {
 				</div>
 				<div class="card col-lg-3 col-sm-6 reportcard yellow" align="center">
 					<p>Total Number of  Visits:<b><h3 id="totalV"></h3></b></p>
-
 				</div>
+
 				<div class="col-lg-12 card table-responsive">
 					<h4>Complaints Report</h4>
 					<hr>
@@ -57,6 +57,7 @@ if($_SESSION['role'] != 'Admin') {
 						<h4 id="totalComp"></h4>
 					</span>
 				</div>
+				
 				<div class="col-lg-12 card table-responsive">
 					<h4>Medicine Dispense Report</h4>
 					<hr>

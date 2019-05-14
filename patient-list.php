@@ -17,7 +17,6 @@ if($_SESSION['role'] == 'Admin') {
 		<link href="vendor/DataTables/datatables.min.css" rel="stylesheet">
 		<link href="vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 	  <link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
-	  <!--<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
 		<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
 		<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
@@ -92,7 +91,7 @@ if($_SESSION['role'] == 'Admin') {
                      <div class="form-group">
                         <label class="col-sm-4 control-label">ID Number</label>
                         <div class="col-sm-8">
-                           <input type="number" min="1" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
+                           <input type="text" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
                         </div>
                      </div>
                      <div class="form-group">

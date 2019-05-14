@@ -65,6 +65,28 @@ if($rownum > 0) {
 							$msg .= "<tr><td>".$row2['genericName'] . "</td><td> ". $row2['currentQty']."</td></tr>";
 						}
 					}
+					$msg .="</table><br>";
+				}
+
+				$query3  = $con->prepare("SELECT * from medicine WHERE isDeleted=? AND status=?");
+				$query3->bind_param("ii", $isDeleted, $unavailable);
+				$unavailable = 0;
+				$isDeleted = 0;
+				$query3->execute();
+				$result3 = $query3->get_result();
+				$rownum3 = mysqli_num_rows($result3);
+
+				if ($rownum3 > 0) {
+					$msg .= "These are the medicines/supplies that are <strong>Unavailable:</strong>";
+					$msg .= "<table border=1><tr><th>Medicines/Supplies</th><th>Available Quantity</th></tr>";
+					while ($row3 = $result3->fetch_assoc()) {
+
+						if ($row3['isSupply'] == "0") {
+							$msg .="<tr><td>".$row3['brandName'] . "(".$row3['genericName'].")</td><td>". $row3['currentQty']."</td></tr>";
+						} else {
+							$msg .= "<tr><td>".$row3['genericName'] . "</td><td> ". $row3['currentQty']."</td></tr>";
+						}
+					}
 					$msg .="</table>";
 				}
 

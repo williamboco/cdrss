@@ -183,6 +183,7 @@ if($_SESSION['role'] != 'Admin') {
 						<label for="patientID"><i class="glyphicon glyphicon-user"></i>  Select Patient</label>
 						<div>
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
+								<button type="button" name="button" class="btn btn-primary">Add Patient Profile</button>
 							</select>
 						</div>
 							<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>

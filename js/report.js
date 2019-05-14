@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	var date1 = getParameterByName('date1');
 	var date2 = getParameterByName('date2');
 	var months = diff(moment(date1).format('MMMM YYYY'), moment(date2).format('MMMM YYYY'));
@@ -15,36 +15,39 @@ $(document).ready(function() {
 	$('#date').html(date1 + " - " + date2);
 
 
-	var compData = columnData("Health Complaints", "Complaints", months);
-	var medData = columnData("Medicine / Supply", "Total Medicine Dispensed", months);
+	var compData = columnData("#", "Health Complaints", "Complaints", months);
+	var medData = columnData("#", "Medicine / Supply", "Total Medicine Dispensed", months);
 	//console.log();
 	var t = $('#complaintTable').DataTable( {
 		 "paging":   false,
-        "ordering": false,
-        "info":     false,
-		"bFilter": false,
-		"columnDefs": [ {
-			"searchable": false,
-			"orderable": false,
-			"targets": 0
-		} ],
+    	"ordering": false,
+      "info":     false,
+			"bFilter": false,
+
+			"columnDefs": [ {
+				"searchable": false,
+				"orderable": false,
+				"targets": 1
+			} ],
+
 		"columns": compData,
-		"order": [[ 0, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
-	} );
+		"order": [[ 1, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+} );
 
 	var t2 = $('#medicineTable').DataTable( {
 		 "paging":   false,
-        "ordering": false,
-        "info":     false,
-		"bFilter": false,
+      "ordering": false,
+      "info":     false,
+			"bFilter": false,
 		//"ajax": "ajax/filtered_visits.php?" + $('#filter').serialize() ,
 		"columnDefs": [ {
 			"searchable": false,
 			"orderable": false,
-			"targets": 0
+			"targets": 1
 		} ],
+
 		"columns": medData,
-		"order": [[ 0, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
+		"order": [[ 1, 'asc' ]] //1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 	} );
 
 	refresh(filters);
@@ -87,9 +90,10 @@ function diff(from, to, m, y) {
     return arr;
 }
 
-function columnData(hl, hr, months) {
+function columnData(ctr, hl, hr, months) {
 	var columns = new Array();
 
+	columns.push({title: ctr});
 	columns.push({title: hl});
 	for(var i = 0; i < months.length; i++) {
 		columns.push({title: months[i]});
@@ -115,7 +119,7 @@ function refresh(filters) {
 			datatable.rows.add(obj.data);
 			datatable.draw();
 
-			$('#totalComp').html(obj.gTotal);
+			$('#totalComp').html(obj.mTotal); //should be the frequency of total number of complaints
 			var arr = obj.pTotal;
 			var vTotal = obj.vTotal;
 			var vIDs = {};
@@ -124,7 +128,7 @@ function refresh(filters) {
 			for (var i = 0; i < arr.length; i++) {
 				counts[arr[i]] = 1 + (counts[arr[i]] || 0);
 			}
-			
+
 			for (var i = 0; i < vTotal.length; i++) {
 				vIDs[vTotal[i]] = 1 + (vIDs[vTotal[i]] || 0);
 			}
@@ -132,7 +136,7 @@ function refresh(filters) {
 			//console.log(Object.keys(counts));
 			$('#totalP').html(Object.keys(counts).length);
 			$('#totalV').html(Object.keys(vIDs).length);
-			
+
 			var ids = Object.keys(counts);
 			console.log(ids);
 			$.ajax({
@@ -145,7 +149,7 @@ function refresh(filters) {
 					//alert(data);
 				}
 			});
-			
+
 		}
 	});
 
@@ -164,7 +168,7 @@ function refresh(filters) {
 			datatable2.rows.add(obj.data);
 			datatable2.draw();
 
-			$('#totalMed').html(obj.gTotal);
+			$('#totalMed').html(obj.mTotal);
 		}
 	});
 
@@ -188,8 +192,11 @@ function reportLabel() {
 		case 'emp':
 			text = "Employee ";
 			break;
+		case 'guest':
+			text = "Guest";
+			break;
 		default:
 	}
-	
+
 	$('#pType').html(text);
 }

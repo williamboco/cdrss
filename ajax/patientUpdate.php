@@ -54,14 +54,14 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 					if($_POST['studenttype'] == 'college') {
 
 						$courseName = $_POST['course'];
-						$query = $con->prepare("INSERT INTO `course` (courseName) SELECT * FROM (SELECT '$courseName') AS tmp WHERE NOT EXISTS ( SELECT courseName FROM `course` WHERE courseName=?)");
+						$query = $con->prepare("INSERT INTO course (courseName) SELECT * FROM (SELECT '$courseName') AS tmp WHERE NOT EXISTS ( SELECT courseName FROM `course` WHERE courseName=?)");
 						$query->bind_param("s", $courseName);
 						$query->execute();
 
 						//get autoIncrement ID from recent query
 						$ref = mysqli_insert_id($con);
 						if($ref==0) {
-							$query = $con->prepare("SELECT ID FROM `course` WHERE courseName=?");
+							$query = $con->prepare("SELECT ID FROM course WHERE courseName=?");
 							$query->bind_param("s", $courseName);
 							$query->execute();
 							$result = $query->get_result();
@@ -69,8 +69,8 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 							$ref = $res['ID'];
 						}
 
-						$query = $con->prepare("INSERT INTO `college` (ID, courseID) VALUES (?,?)");
-						$query->bind_param("ii", $id, $ref);
+						$query = $con->prepare("INSERT INTO college (ID, courseID) VALUES (?,?)");
+						$query->bind_param("si", $id, $ref);
 
 						if($query->execute())	{
 						//$message .= "\nCollege table: record inserted";
@@ -78,14 +78,14 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 
 					}else {
 						$trackName = $_POST['trackname'];
-						$query = $con->prepare("INSERT INTO `track` (trackName) SELECT * FROM (SELECT '$trackName') AS tmp WHERE NOT EXISTS ( SELECT trackName FROM track WHERE trackName=?)");
+						$query = $con->prepare("INSERT INTO track (trackName) SELECT * FROM (SELECT '$trackName') AS tmp WHERE NOT EXISTS ( SELECT trackName FROM track WHERE trackName=?)");
 						$query->bind_param("s", $trackName);
 						$query->execute();
 
 						//get autoIncrement ID from recent query
 						$ref = mysqli_insert_id($con);
 						if($ref==0) {
-							$query = $con->prepare("SELECT ID FROM `track` WHERE trackName=?");
+							$query = $con->prepare("SELECT ID FROM track WHERE trackName=?");
 							$query->bind_param("s", $trackName);
 							$query->execute();
 							$result = $query->get_result();
@@ -93,8 +93,8 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 							$ref = $res['ID'];
 						}
 
-						$query = $con->prepare("INSERT INTO `shs` (ID, trackID) VALUES (?,?)");
-						$query->bind_param("ii", $id, $ref);
+						$query = $con->prepare("INSERT INTO shs (ID, trackID) VALUES (?,?)");
+						$query->bind_param("si", $id, $ref);
 
 						if($query->execute())	{
 						//$message .= "\nSHS table: record inserted";
@@ -107,14 +107,14 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 					$departmentName = $_POST['depart'];
 					$employeeType = $_POST['employeeType'];
 
-					$query = $con->prepare("INSERT INTO `department` (departmentName) SELECT * FROM (SELECT '$departmentName') AS tmp WHERE NOT EXISTS ( SELECT departmentName FROM department WHERE departmentName=?)");
+					$query = $con->prepare("INSERT INTO department (departmentName) SELECT * FROM (SELECT '$departmentName') AS tmp WHERE NOT EXISTS ( SELECT departmentName FROM department WHERE departmentName=?)");
 					$query->bind_param("s", $departmentName);
 					$query->execute();
 
 					//get autoIncrement ID from recent query
 					$ref = mysqli_insert_id($con);
 					if($ref==0) {
-						$query = $con->prepare("SELECT ID FROM `department` WHERE departmentName=?");
+						$query = $con->prepare("SELECT ID FROM department WHERE departmentName=?");
 						$query->bind_param("s", $departmentName);
 						$query->execute();
 						$result = $query->get_result();
@@ -122,8 +122,8 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 						$ref = $res['ID'];
 					}
 
-					$query = $con->prepare("INSERT INTO `employee` (ID, departmentID, type) VALUES (?,?,?)");
-					$query->bind_param("iis", $id, $ref, $employeeType);
+					$query = $con->prepare("INSERT INTO employee (ID, departmentID, type) VALUES (?,?,?)");
+					$query->bind_param("sis", $id, $ref, $employeeType);
 
 					if($query->execute())	{
 					//array_push($message, "\nEmployee table: record inserted");
@@ -136,7 +136,7 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 				foreach($allergy as $i => $item) {
 
 					if($item!='') {
-						$query = $con->prepare("INSERT INTO `allergy` (allergyName) SELECT * FROM (SELECT '$item') AS tmp WHERE NOT EXISTS ( SELECT allergyName FROM allergy WHERE allergyName=?)");
+						$query = $con->prepare("INSERT INTO allergy (allergyName) SELECT * FROM (SELECT '$item') AS tmp WHERE NOT EXISTS ( SELECT allergyName FROM allergy WHERE allergyName=?)");
 						$query->bind_param("s", $allergy);
 						$query->execute();
 
@@ -145,15 +145,15 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 						if($ref>0) {
 
 						}else {
-							$query = $con->prepare("SELECT ID FROM `allergy` WHERE allergyName=?");
+							$query = $con->prepare("SELECT ID FROM allergy WHERE allergyName=?");
 							$query->bind_param("s", $item);
 							$result = $query->get_result();
 							$res = $result->fetch_assoc();
 							$ref = $res['ID'];
 						}
 
-						$query = $con->prepare("INSERT INTO `patient_allergy` (ID, patientID, allergyID) VALUES (?,?,?)");
-						$query->bind_param("iii", $isNull, $id, $ref);
+						$query = $con->prepare("INSERT INTO patient_allergy (ID, patientID, allergyID) VALUES (?,?,?)");
+						$query->bind_param("isi", $isNull, $id, $ref);
 						$isNull = NULL;
 
 						if($query->execute())	{
@@ -164,8 +164,8 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 				}
 
 
-				if (ctype_space($cPerson)) {
-					array_push($message, "Error: Whitespaces are not allowed. Please enter valid input.");
+				if (!ctype_alpha($cPerson)) {
+					array_push($message, "Error: Input must only be letters.");
 				} else {
 					//Insert contact person
 					$i=0;
