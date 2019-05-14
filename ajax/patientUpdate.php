@@ -123,7 +123,7 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 					}
 
 					$query = $con->prepare("INSERT INTO `employee` (ID, departmentID, type) VALUES (?,?,?)");
-					$query->bind_param("iii", $id, $ref, $employeeType);
+					$query->bind_param("iis", $id, $ref, $employeeType);
 
 					if($query->execute())	{
 					//array_push($message, "\nEmployee table: record inserted");
