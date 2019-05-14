@@ -56,6 +56,7 @@ if($_SESSION['role'] == 'Admin') {
 						<h4 id="totalComp"></h4>
 					</span>
 				</div>
+
 				<div class="col-lg-12 card table-responsive">
 					<h4>Medicine Dispense Report</h4>
 					<hr>
@@ -76,13 +77,11 @@ if($_SESSION['role'] == 'Admin') {
                                     <i class="fa fa-arrow-left text-danger"></i>
                                 </span>
                             </button>
-							<button id="print" class="btn btn-inverse" onclick="window.print()">
-                                <i class="fa fa-print"></i>
-                                &nbsp;&nbsp;
-                                Print
+														<button id="print" class="btn btn-inverse" onclick="window.print()">
+                                <i class="fa fa-print"></i> &nbsp;&nbsp; Print
                             </button>
-                        </div>
-            </div>
+        </div>
+      </div>
 
 		</div>
 	</div>

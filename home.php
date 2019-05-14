@@ -178,6 +178,7 @@ if($_SESSION['role'] == 'Admin') {
 						<label for="patientID"><i class="glyphicon glyphicon-user"></i>  Select Patient</label>
 						<div>
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
+								<button type="button" name="button" class="btn btn-primary">Add Patient Profile</button>
 							</select>
 						</div><br>
 					</div>
@@ -294,7 +295,7 @@ if($_SESSION['role'] == 'Admin') {
 							  <div class="contentheight col-sm-6">
 									<div class="view">
 										<b><p>Complaint</p></b>
-										<ul id="complaint"></ul>										
+										<ul id="complaint"></ul>
 									</div>
 									<b><p>Medicine/Supply Requested</p></b>
 									<ul id="medicine"></ul>
