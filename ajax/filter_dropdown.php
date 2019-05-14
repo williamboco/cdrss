@@ -1,6 +1,6 @@
 <?php
 
-include('../php/dbcon.php');
+include('../includes/dbcon.php');
 
 $filter = $_GET['filter'];
 //echo $filter;$
