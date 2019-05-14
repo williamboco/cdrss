@@ -300,7 +300,7 @@ if($_SESSION['role'] != 'Admin') {
 							 <div class="form-group">
 									<label class="col-sm-4 control-label">ID Number</label>
 									<div class="col-sm-8">
-										 <input type="number" min="1" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
+										 <input type="text" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
 									</div>
 							 </div>
 							 <div class="form-group">
