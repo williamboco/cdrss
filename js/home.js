@@ -4,13 +4,10 @@ $(document).ready(function() {
 	var t = $('#visitTable').DataTable( {
 		"ajax": "ajax/filtered_visits_avp.php?" + $('#filter').serialize() ,
 		"columnDefs": [ {
-			"processing": true,
-			"serverSide": true,
-			order: [],
 			"searchable": false,
-			"orderable": false,
+			"ordering": false,
 			targets: 0,
-			className: 'reorder',
+			//className: 'reorder',
 		//	 "autoWidth": false
 		} ],
 		"columns": [
@@ -21,7 +18,7 @@ $(document).ready(function() {
 			{title: "Complaint"},
 			{title: "Medicine / Supply Requested"},
 			{title: "Visit Date/Time"},
-			{title: "Action", width: "5%"}
+			{title: "Action", width: "5%", orderable: false},
 		],
 		"order": [[ 0, 'desc' ]],
 		//1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
@@ -38,12 +35,12 @@ $(document).ready(function() {
 		} );
 	} ).draw();
 
-	t.on( 'column-reorder', function (e, settings, details) {
+/*	t.on( 'column-reorder', function (e, settings, details) {
 		var order = t.order();
 		console.log(details);
 
 		console.log(order);
-	});
+	});*/
 
 	$('#date1').on('change', function() {
 		//alert("Changed");
@@ -236,4 +233,5 @@ function visitDate() {
 
 	$('#date').html(date1 + " - " + date2);
 	console.log(date1 + date2)
+
 }

@@ -91,7 +91,7 @@ $(".visitDate").on('change', function() {
 
 });
 
-/*$('#addVisitForm').find('[name="visitDate"]').on('change', function() {
+$('#addVisitForm').find('[name="visitDate"]').on('change', function() {
 
 	var $this = $(this);
 	var d1 = new Date($this.val());
@@ -101,7 +101,7 @@ $(".visitDate").on('change', function() {
 	}
 
 
-});*/
+});
 
 
 function viewVisit(id) {
@@ -184,6 +184,14 @@ function viewVisit(id) {
     $('#viewModal').modal('show');
 }
 
+function addProfile(el) {
+	$('#addVisitModal').modal('hide');
+	$('#patientModal').modal('show');
+}
+function addProfileHide() {
+	$('#patientModal').modal('hide');
+	$('#addVisitModal').modal('show');
+}
 
 function editVisit(el) {
 
@@ -373,7 +381,12 @@ $("#patientID").select2({
     minimumInputLength: 1,
     templateResult: formatRepo,
     templateSelection: formatRepoSelection
+  /*  formatNoMatches: function(ap) {
+      return '<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>'
+    }*/
+
 });
+
 
 $('.guestVisitForm').on('click', function(){
   $('.allergy').hide();
@@ -398,6 +411,8 @@ $('.patientVisitForm').on('click', function(){
   $('#guestDiv').find('input').prop('disabled', true);
   $('#guestDiv').find('input').prop('required',false);
 });
+
+
 
 // Complaint select options
 function complaintOptions() {

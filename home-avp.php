@@ -111,17 +111,18 @@ if($_SESSION['role'] != 'Admin') {
 				</div>
 			</div>
 		</div>-->
-
-	<div class="container" id="table">
-		<div class="card col-12">
-			<div class="tabletheme" style="margin: 0 20px 20px 20px">
-				<div class="row">
-					<h3><span id="filterName">All </span>Patient Visits</h3>
-					<h5 id="date"></h5>
-					<hr>
-				<div class="table-responsive">
-					<table id="visitTable" class="table display" cellspacing="0" width="100%">
-					</table>
+	<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
+		<div class="container">
+			<div class="card col-12">
+				<div class="tabletheme" style="margin: 0 20px 20px 20px">
+					<div class="row">
+						<h3><span id="filterName">All </span>Patient Visits</h3>
+						<h5 id="date"></h5>
+						<hr>
+					<div class="table-responsive">
+						<table id="visitTable" class="table display" cellspacing="0" width="100%">
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -184,10 +185,11 @@ if($_SESSION['role'] != 'Admin') {
 						<div>
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
-						</div><br>
+						</div>
+							<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
 					</div>
 
-					<button class="guestVisitForm btn-link"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
+					<button class="guestVisitForm btn-link" style="margin-top:-25px;"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
 
 					<div class="allergy row">
 					</div>
@@ -270,10 +272,156 @@ if($_SESSION['role'] != 'Admin') {
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 				<button type="submit" class="btn btn-primary pull-right" form="addVisitForm">Add Visit</button>
 			</div>
+		</div>
 
 		</div>
-		</div>
 	</div>
+
+<!-- Add  Patient Modal -->
+<div class="modal fade" id="patientModal" data-backdrop="static" data-keyboard="false" role="dialog">
+	 <div class="modal-dialog" role="document">
+			<div class="modal-content">
+				 <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">Create New Patient Profile</h4>
+				 </div>
+				 <div class="modal-body">
+						<form class="form-horizontal" id="patientAddForm" action="ajax/patientCreate.php" method="post">
+						 <div class="form-group">
+								<label class="col-sm-4 control-label">Patient type</label>
+								<div class="col-sm-8">
+									 <div class="radio">
+											<label><input type="radio" name="ptype" value="student" required>Student</label>
+											<label><input type="radio" name="ptype" value="employee" required>Employee</label>
+									 </div>
+								</div>
+						 </div>
+						 <div id="profileInfoDiv" class="hidden">
+							 <div class="form-group">
+									<label class="col-sm-4 control-label">ID Number</label>
+									<div class="col-sm-8">
+										 <input type="number" min="1" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
+									</div>
+							 </div>
+							 <div class="form-group">
+									<label class="col-sm-4 control-label">First Name</label>
+									<div class="col-sm-8">
+										 <input type="text" class="form-control" name="firstname" placeholder="First name" required>
+									</div>
+							 </div>
+							 <div class="form-group">
+									<label class="col-sm-4 control-label">Last Name</label>
+									<div class="col-sm-8">
+										 <input type="text" class="form-control" name="lastname" placeholder="Last name" required>
+									</div>
+							 </div>
+							 <div class="form-group">
+									<label class="col-sm-4 control-label">Birth Date</label>
+									<div class="col-sm-8">
+										 <input type="date" required class="form-control" name="birthdate" required>
+									</div>
+							 </div>
+							 <div class="form-group">
+									<label class="col-sm-4 control-label">Contact Number</label>
+									<div class="col-sm-8">
+										 <input type="number" min="0" class="form-control" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
+									</div>
+							 </div>
+
+							 <div class="form-group">
+									<label class="col-sm-4 control-label">Gender</label>
+									<div class="col-sm-8">
+										 <div class="radio">
+												<label for="gender1"><input type="radio" name="gender" value="Male" id="gender1" checked required>Male </label>
+												<label for="gender2"><input type="radio" name="gender" value="Female" id="gender2" required>Female </label>
+										 </div>
+									</div>
+							 </div>
+
+							 <div class="studDiv hidden">
+									<div class="form-group">
+										 <label class="col-sm-4 control-label">Student Type</label>
+										 <div class="col-sm-8">
+												<select id="selStudType" name="studenttype" data-width="100%" data-placeholder="Select student type" required>
+													<option></option>
+													<option value="college">College</option>
+													<option value="shs">Senior High School</option>
+												</select>
+										 </div>
+									</div>
+									<div class="form-group hidden" id="courseDiv">
+										 <label class="col-sm-4 control-label">Course</label>
+										 <div class="col-sm-8">
+											 <select data-width="100%" data-placeholder="Select course" id="selCourse" class="select2 form-control inputStud" name="course" required>
+													<option></option>
+											 </select>
+										 </div>
+									</div>
+
+									<div class="form-group hidden" id="trackDiv">
+										 <label class="col-sm-4 control-label">Track</label>
+										 <div class="col-sm-8">
+											 <select data-width="100%" data-placeholder="Select track" id="selTrack" class="select2 form-control inputStud" name="trackname" required>
+													<option></option>
+											 </select>
+										 </div>
+									</div>
+							 </div>
+
+								<div class="empDiv hidden">
+									<div class="form-group" id="department_dropdown">
+										 <label class="col-sm-4 control-label">Department Name</label>
+											 <div class="col-sm-8">
+												 <select data-width="100%" data-placeholder="Select department" id="selDep" class="select2 form-control" name="depart" required>
+														<option></option>
+												 </select>
+											 </div>
+									</div>
+									<div class="form-group" id="empType_dropdown">
+										 <label class="col-sm-4 control-label">Employment Type</label>
+											 <div class="col-sm-8">
+												 <select data-width="100%" data-placeholder="Select employment type" id="selType" class="select2 form-control" name="employeeType" style="width: 75%" required>
+														<option></option>
+												 </select>
+											 </div>
+									</div>
+							 </div>
+
+								<div class="form-group">
+								 <label class="col-sm-4 control-label" for="cPerson[]">Contact Person/s</label>
+									 <div class="fieldsGroup col-sm-8" id="pDiv" value="3">
+										<div class="tbContainer" style="display: none !important;margin-bottom: 10px;">
+											<input type="text" class="form-control" placeholder="Full name"><br>
+											<input type="number" min="0" class="form-control" maxlength="11" pattern=".{0,11}" title="0 to 11 characters" onkeypress="return event.charCode >= 48 &amp;&amp; event.charCode <= 57" placeholder="Mobile number/ Landline">
+											<button class="remove">Remove</button>
+										</div>
+										<a href="#" class="addInputCP" value="cPerson[]">+ Add</a>
+										</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label" for="allergy[]">Allergy/s</label>
+									<div class="fieldsGroup col-sm-8" id="allergyDiv" value="6">
+										<div class="tbContainer" style="display: none !important;margin-bottom: 10px;">
+											<select class="form-control" data-placeholder="Medicine, Food, Etc." id="selAll">
+												<option></option>
+											</select>
+											<button class="remove">Remove</button>
+										</div>
+										<a href="#" class="addInputAll" value="allergy[]">+ Add</a>
+									</div>
+								</div>
+								<input type="number" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden">
+						 </div>
+						</form>
+				</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" onclick ="addProfileHide()">Cancel</button>
+				<button type="submit" class="btn btn-primary pull-right hidden" form="patientAddForm">Add Patient Profile</button>
+			</div>
+		</div>
+ </div>
+</div>
 
 
 	<!-- View visit Modal -->
@@ -356,7 +504,7 @@ if($_SESSION['role'] != 'Admin') {
 				  <div class="modal-footer" class="col-sm-12">
 						<div class="view">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" onclick="editVisit(this)" id="btnEdit">Edit  <i class="glyphicon glyphicon-pencil"></i> </button>
+							<button type="button" class="btn btn-primary" onclick="editVisit(this)" id="btnEdit">Edit <i class="glyphicon glyphicon-pencil"></i></button>
 						</div>
 
 						<div class="edit hidden">
@@ -407,6 +555,9 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/moment.min.js"></script>
 	<script src="js/visit_form.js"></script>
 	<script src="js/home.js"></script>
+  <script src="js/patient-list.js"></script>
+	<script src="js/profileForm.js"></script>
+	  <script src="js/dynamic_input.js"></script>
 	<script src="js/date.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/graph.js"></script>
