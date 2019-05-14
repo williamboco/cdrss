@@ -20,7 +20,7 @@ $(document).ready(function() {
 			{title: "Visit Date/Time"},
 			{title: "Action", width: "5%", orderable: false},
 		],
-		"order": [[ 1, 'desc' ]],
+		"order": [[ 0, 'desc' ]],
 		//1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 		colReorder: {
 			enable: true,
@@ -42,21 +42,21 @@ $(document).ready(function() {
 		console.log(order);
 	});*/
 
-	/*$('#date1').on('change', function() {
+	$('#date1').on('change', function() {
 		//alert("Changed");
 		var $date1 = $("#date1");
 		var $date2 = $("#date2");
 
 		$date2.attr("min", $date1.val());
-	});*/
+	});
 
 	$('.filters').on('change', function() {
-		//refresh();
-		//visitDate()
+		refresh();
+		visitDate()
 	});
 
 
-	//visitDate();
+	visitDate();
 } );
 
 $(function(){

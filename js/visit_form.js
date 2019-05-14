@@ -381,8 +381,8 @@ $("#patientID").select2({
     minimumInputLength: 1,
     templateResult: formatRepo,
     templateSelection: formatRepoSelection
-    /*formatNoMatches: function(data) {
-      return '<button type="submit" class="btn btn-danger pull-right" id="patientID" form="addVisitForm" style="margin-top:15px;">Add Patient Profile</button>''
+  /*  formatNoMatches: function(ap) {
+      return '<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>'
     }*/
 
 });

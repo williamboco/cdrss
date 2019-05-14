@@ -443,7 +443,7 @@ if($_SESSION['role'] != 'Admin') {
 									<b><p>Patient Name</b> <br><i class="glyphicon glyphicon-user"></i>  <span class="fullName h4"></span></p>
 								</div>
 
-							  <div class="contentheight col-sm-6">
+							  <div class="contentheight view  col-sm-6">
 									<div class="view">
 										<b><p>Complaint</p></b>
 										<ul id="complaint"></ul>
@@ -549,8 +549,6 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/DataTables/ColReorder-1.5.0/js/dataTables.colReorder.js"></script>
-	<!--<script src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>-->
 	<!--<script src="vendor/DataTables/FixedColumns-3.2.5/js/fixedColumns.dataTables.min.css"></script>-->
 	<script src="vendor/widgster.js"></script>
 	<script src="vendor/moment.min.js"></script>
@@ -558,7 +556,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="js/home.js"></script>
   <script src="js/patient-list.js"></script>
 	<script src="js/profileForm.js"></script>
-	<script src="js/dynamic_input.js"></script>
+	  <script src="js/dynamic_input.js"></script>
 	<script src="js/date.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/graph.js"></script>
