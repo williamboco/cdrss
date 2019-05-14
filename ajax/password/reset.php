@@ -45,9 +45,10 @@ if($rownum > 0) {
 				// use wordwrap() if lines are longer than 70 characters
 				$msg = wordwrap($msg,70);
 
+				$message = "Kindly check your email for the link to reset your password.";
+
 				// send email
 				require '../../includes/mail.php';
-				$message = "Kindly check your email for the link to reset your password.";
 
 				$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,  userID) VALUES (?, NOW(), ?, ?)");
 				 $stmt->bind_param("isi", $eventID, $eventName, $userID);
@@ -59,11 +60,11 @@ if($rownum > 0) {
 			   $message = "Error: Invalid email address. Please try again.";
 		  }
 	  } else {
-			$message = "Email address is not active! Please try again.";
+			$message = "Error: Email address is not active! Please try again.";
 		}
 	 }
 	} else {
-		$message = "That email does not exist";
+		$message = "Error: That email does not exist";
 	}
 
 echo $message;
