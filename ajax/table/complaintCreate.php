@@ -5,7 +5,7 @@
 	$complaintName = htmlspecialchars($_GET['complaintName']);
 	$description = htmlspecialchars($_GET['description']);
 
-	if (!ctype_alpha(str_replace(' ', '', $complaintName)) || !ctype_alpha(str_replace(' ', '', $description))) {
+	if (!ctype_alpha(str_replace(' ', '', $complaintName))) {
 		echo "Error: Input must only contain letters.";
 	} else {
 		$stmt = $con->prepare("INSERT INTO `complaint` (ID, complaintName, description, isDeleted) VALUES (?, ?, ?, ?)");
