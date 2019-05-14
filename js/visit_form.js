@@ -184,6 +184,14 @@ function viewVisit(id) {
     $('#viewModal').modal('show');
 }
 
+function addProfile(el) {
+	$('#addVisitModal').modal('hide');
+	$('#patientModal').modal('show');
+}
+function addProfileHide() {
+	$('#patientModal').modal('hide');
+	$('#addVisitModal').modal('show');
+}
 
 function editVisit(el) {
 
@@ -372,8 +380,13 @@ $("#patientID").select2({
     }, // let our custom formatter work
     minimumInputLength: 1,
     templateResult: formatRepo,
-    templateSelection: formatRepoSelection
+    templateSelection: formatRepoSelection,
+    /*formatNoMatches: function(data) {
+      return '<button type="submit" class="btn btn-danger pull-right" id="patientID" form="addVisitForm" style="margin-top:15px;">Add Patient Profile</button>''
+    }*/
+
 });
+
 
 $('.guestVisitForm').on('click', function(){
   $('.allergy').hide();
@@ -398,6 +411,8 @@ $('.patientVisitForm').on('click', function(){
   $('#guestDiv').find('input').prop('disabled', true);
   $('#guestDiv').find('input').prop('required',false);
 });
+
+
 
 // Complaint select options
 function complaintOptions() {

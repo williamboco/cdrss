@@ -54,7 +54,7 @@ while($patient = mysqli_fetch_array($result)) {
 			}
 			$medicine = rtrim($medicine,", ");
 
-			//$date = date_create($vis['visitDate']);
+		//	$date = date_create($vis['visitDate']);
 			//$date = date_format($date, 'd/m/y');
 
 			// $patient['firstName'] = openssl_decrypt(base64_decode($patient['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
