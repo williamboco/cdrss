@@ -81,9 +81,7 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 
 			 if (! in_array($domain, $allowed)) {
 				 echo "The email must end in iacademy.edu.ph";
-			 } else if (ctype_space($firstName) || ctype_space($lastName) || ctype_space($email)) {
-						echo "Whitespaces are not allowed. Please enter a valid input";
-				} else {
+			 } else {
 
 				 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 				 $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));

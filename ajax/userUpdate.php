@@ -34,9 +34,6 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			if(mysqli_num_rows($result) > 0 && $userID != $id) {
 				echo "User with that ID number already exists.";
 			} else {
-					if (ctype_space($firstName) || ctype_space($lastName)) {
-						$message = "Whitespaces are not not allowed. Please enter a valid input";
-					} else {
 						$email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 						$firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
 						$lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
@@ -56,7 +53,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 					 	$userID = $_SESSION['userID'];
 					 	$eventName = "Updated user profile.";
 					 	$stmt->execute();
-					}
+
 			}
 		}else {
 
