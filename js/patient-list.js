@@ -7,11 +7,11 @@ $(document).ready(function() {
 	} ],
 	"columns": [
 		{title: "#", width: "5%", className: "dt-center"},
-		{title: '<input type="checkbox" class="checkAll" name="checkAll" />', orderable: false, className: "dt-center"},
-		{title: 'ID'},
+		{title: '<input type="checkbox" class="checkAll" name="checkAll" />', orderable: false, width: "10%", className: "dt-center"},
+		{width: "20%", title: 'ID'},
 		{title: "Firstname"},
 		{title: "Lastname"},
-		{title: "Action", orderable: false}
+		{title: "Action", width: "15%", className: "dt-center",orderable: false}
 	],
 	"order": [[ 2, 'asc' ]]
 

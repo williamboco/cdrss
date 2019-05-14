@@ -2,26 +2,28 @@ $(document).ready(function() {
 	setDateRange();
 
 	var t = $('#visitTable').DataTable( {
-		"ajax": "ajax/filtered_visits.php?" + $('#filter').serialize() ,
+		"ajax": "ajax/filtered_visits_avp.php?" + $('#filter').serialize() ,
 		"columnDefs": [ {
+			"processing": true,
+			"serverSide": true,
+			order: [],
 			"searchable": false,
 			"orderable": false,
 			targets: 0,
-			orderable: true,
-			className: 'reorder'
-
+			className: 'reorder',
+		//	 "autoWidth": false
 		} ],
 		"columns": [
 			{title: "#", width: "5%", className: "dt-center"},
 			{title: '<input type="checkbox" class="checkAll" name="checkAll" />', width: "5%", className: "dt-center"},
 			{title: "ID"},
-			{title: "Name", className: "hover"},
+			{title: "Name"},
 			{title: "Complaint"},
 			{title: "Medicine / Supply Requested"},
 			{title: "Visit Date/Time"},
-			{title: "Action", width: "15%"}
+			{title: "Action", width: "5%"}
 		],
-		"order": [[ 2, 'asc' ]],
+		"order": [[ 0, 'desc' ]],
 		//1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
 		colReorder: {
 			enable: true,
@@ -98,7 +100,7 @@ $('#filter').find('[name="patientType"]').on('change', function() {
 	//}
  //);
 
-	$('.sorts').on('change', function() {
+	/*$('.sorts').on('change', function() {
 	  var datatable = $('#visitTable').dataTable().api();
 		var $form = $('#sortBy');
 		var order = datatable.order();
@@ -146,7 +148,7 @@ $('#filter').find('[name="patientType"]').on('change', function() {
 		});
 		refresh();
 	//	$('#visitTable').order(datatable);
-	});
+});*/
 
 
 $(".graphBtn").on('click', function() {
