@@ -278,7 +278,7 @@ if($_SESSION['role'] != 'Admin') {
 	</div>
 
 <!-- Add  Patient Modal -->
-<div class="modal fade" id="patientModal" data-backdrop="static" data-keyboard="false" role="dialog">
+<div class="modal fade" id="patientModal" role="dialog" style="max-height:100%;overflow-y:auto;">
 	 <div class="modal-dialog" role="document">
 			<div class="modal-content">
 				 <div class="modal-header">
