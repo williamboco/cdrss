@@ -286,7 +286,7 @@ if($_SESSION['role'] == 'Admin') {
 		<h4 class="modal-title" id="myModalLabel">Create New Patient Profile</h4>
 				 </div>
 				 <div class="modal-body">
-						<form class="form-horizontal" id="patientAddForm" action="ajax/patientCreate.php" method="post">
+						<form class="form-horizontal" id="addPatientForm" action="ajax/patientCreate.php" method="post">
 						 <div class="form-group">
 								<label class="col-sm-4 control-label">Patient type</label>
 								<div class="col-sm-8">
@@ -417,7 +417,7 @@ if($_SESSION['role'] == 'Admin') {
 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" onclick ="addProfileHide()">Cancel</button>
-				<button type="submit" class="btn btn-primary pull-right hidden" form="patientAddForm">Add Patient Profile</button>
+				<button type="submit" class="btn btn-primary pull-right hidden" form="addPatientForm">Add Patient Profile</button>
 			</div>
 		</div>
  </div>

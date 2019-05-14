@@ -184,6 +184,34 @@ function viewVisit(id) {
     $('#viewModal').modal('show');
 }
 
+function viewVisitForm() {
+
+	/*var $form = $('#addPatientForm');
+    $.ajax({
+        type: "GET",
+        url: "ajax/patientRead.php",
+        data: {patientID: id},
+        cache: false,
+        success: function(data) {
+            var obj = JSON.parse(data);
+            console.log(obj);
+  */
+            $('#addVisitModal').modal('show');
+
+  /*         setTimeout(function() {
+                $form.find("#searchDiv").find('#patientID').each(function() {
+                    var sel = $(this);
+                    sel.select2().val(obj.Complaint[i]).trigger('change');
+      		          sel.select2({tags:true});
+                });
+            }, 100);
+
+
+        }
+    });
+  */
+}
+
 function addProfile(el) {
 	$('#addVisitModal').modal('hide');
 	$('#patientModal').modal('show');
@@ -497,6 +525,33 @@ $("#addVisitForm").on("submit", function(event) {
 		}
 	});
 
+});
+
+$("#addPatientForm").on("submit", function(event) {
+	var $form = $(this);
+	event.preventDefault();
+
+	// Use Ajax to submit form data
+	$.ajax({
+		type: 'POST',
+		url: $form.attr('action'),
+		data: $form.serialize(),
+		success: function(data) {
+			// ... Process the result ...
+			var result = JSON.parse(JSON.stringify(data));
+      addProfileHide();
+      $form[0].reset();
+
+  			if(result.includes("success")) {
+          alertify.alert(result);
+          viewVisitForm();
+          refresh();
+  			}else {
+  				alertify.alert(result);
+          refresh();
+  			}
+		}
+	});
 });
 
 $("#editVisitForm").on("submit", function(event) {
