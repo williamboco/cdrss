@@ -203,15 +203,28 @@ function viewProfile() {
 					console.log(obj);
 
 					$profile = $("#profileDiv");
-					$profile.find("#idNumber").append("<p class='h4'>" + obj.Patient.ID + "</p>");
-					$profile.find("#fullName").append("<p class='h4'>" + obj.Patient.firstName + " " + obj.Patient.lastName + "</p>");
-					$profile.find("#birthDate").append("<p class='h4'>" + obj.Patient.birthDate + "</p>");
-					$profile.find("#gender").append("<p class='h4'>" + obj.Patient.gender + "</p>");
-					$profile.find("#contact").append("<p class='h4'>" + obj.Patient.contact + "</p>");
 
-					obj.ContactPerson.forEach(function(item) {
-						$profile.find("#cPerson").append("<p class='h4'>" + item.name + "-" + item.contact + "</p>");
-					});
+					if (obj.Others[0].type=="Guest"){
+						$profile.find("#idNumber").append("<p class='h4'>" + obj.Patient.ID + "</p>");
+						$profile.find("#fullName").append("<p class='h4'>" + obj.Patient.firstName + " " + obj.Patient.lastName + "</p>");
+						$profile.find("#gender").append("<p class='h4'>" + obj.Patient.gender + "</p>");
+						$profile.find("#contact").append("<p class='h4'>" + obj.Patient.contact + "</p>");
+						$profile.find("#allergy").hide();
+						$profile.find("#birthDate").hide();
+						$profile.find("#cPerson").hide();
+						$profile.find("#otherInfo").hide();
+					} else {
+						$profile.find("#idNumber").append("<p class='h4'>" + obj.Patient.ID + "</p>");
+						$profile.find("#fullName").append("<p class='h4'>" + obj.Patient.firstName + " " + obj.Patient.lastName + "</p>");
+						$profile.find("#birthDate").append("<p class='h4'>" + obj.Patient.birthDate + "</p>");
+						$profile.find("#gender").append("<p class='h4'>" + obj.Patient.gender + "</p>");
+						$profile.find("#contact").append("<p class='h4'>" + obj.Patient.contact + "</p>");
+
+						obj.ContactPerson.forEach(function(item) {
+							$profile.find("#cPerson").append("<p class='h4'>" + item.name + "-" + item.contact + "</p>");
+						});
+					}
+
 
 					var allergy = '';
 					obj.Allergy.forEach(function(item) {
