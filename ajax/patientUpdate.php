@@ -164,8 +164,8 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 				}
 
 
-				if (ctype_space($cPerson)) {
-					array_push($message, "Error: Whitespaces are not allowed. Please enter valid input.");
+				if (!ctype_alpha($cPerson)) {
+					array_push($message, "Error: Input must only be letters.");
 				} else {
 					//Insert contact person
 					$i=0;
