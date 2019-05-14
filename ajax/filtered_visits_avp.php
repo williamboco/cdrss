@@ -2,7 +2,7 @@
 include('../includes/dbcon.php');
 $patientType = $_GET['patientType'];
 $date1 = $_GET['date1'];
-$date2 = date('Y-m-d H:i:s', strtotime($_GET['date2'] . ' +1 day'));	//http://stackoverflow.com/questions/1394791/adding-one-day-to-a-date
+$date2 = date('Y-m-d h:i:s', strtotime($_GET['date2'] . ' +1 day'));	//http://stackoverflow.com/questions/1394791/adding-one-day-to-a-date
 
 // $method = 'aes-256-cbc';
 // $password = '3sc3RLrpd17';
@@ -55,7 +55,7 @@ while($patient = mysqli_fetch_array($result)) {
 			$medicine = rtrim($medicine,", ");
 
 		//	$date = date_create($vis['visitDate']);
-			//$date = date_format($date, 'd/m/y');
+		//	$date = date_format($date, 'd/m/y');
 
 			// $patient['firstName'] = openssl_decrypt(base64_decode($patient['firstName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 			// $patient['lastName'] = openssl_decrypt(base64_decode(  $patient['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);

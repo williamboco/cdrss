@@ -91,7 +91,7 @@ $(".visitDate").on('change', function() {
 
 });
 
-/*$('#addVisitForm').find('[name="visitDate"]').on('change', function() {
+$('#addVisitForm').find('[name="visitDate"]').on('change', function() {
 
 	var $this = $(this);
 	var d1 = new Date($this.val());
@@ -101,7 +101,7 @@ $(".visitDate").on('change', function() {
 	}
 
 
-});*/
+});
 
 
 function viewVisit(id) {
@@ -380,7 +380,7 @@ $("#patientID").select2({
     }, // let our custom formatter work
     minimumInputLength: 1,
     templateResult: formatRepo,
-    templateSelection: formatRepoSelection,
+    templateSelection: formatRepoSelection
     /*formatNoMatches: function(data) {
       return '<button type="submit" class="btn btn-danger pull-right" id="patientID" form="addVisitForm" style="margin-top:15px;">Add Patient Profile</button>''
     }*/
