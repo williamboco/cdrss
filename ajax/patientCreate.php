@@ -25,7 +25,7 @@ $allergy = $_POST['allergy'];
 $user = htmlspecialchars($_SESSION['userID']);
 // $user = base64_encode(openssl_encrypt($user, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-	if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
+	if ($result=mysqli_query($con,"SELECT * FROM `patient` WHERE ID='$id'")) {
 		if(mysqli_num_rows($result) > 0) {
 			$message = "Patient with that ID number already exists.";
 		} else {
