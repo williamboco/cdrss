@@ -5,7 +5,7 @@ session_start();
 $user = $_POST['userID'];
 $vId = $_POST['visitID'];
 $comp = $_POST["complaint"];
-$med = $_POST["med"];
+// $med = $_POST["med"];
 $remarks = htmlspecialchars(trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $_POST["remarks"]))));
 $isNull = NULL;
 

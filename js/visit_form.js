@@ -131,15 +131,15 @@ function viewVisit(id) {
             $("#medicine").empty();
               $.each(obj.Medicine, function(i) {
                 $("#medicine").append('<li class="h4">' + obj.Medicine[i].quantity + " " + obj.Medicine[i].unit + " " + obj.Medicine[i].name + '</li>');
-    				    $form.find(".medicineDiv").children('a').click();
+    				    // $form.find(".medicineDiv").children('a').click();
               });
 
       			var a = obj.Visit.visitDate;
       			var str = [a.slice(0, 10), "T", a.slice(10)].join('');
       			    str = str.replace(/\s/g, '');
-      			var datetime = str.substring(0, str.length - 3);
+      			// var datetime = str.substring(0, str.length - 3);
 
-      			$form.find('[name="visitDate"]').val(datetime);
+      			// $form.find('[name="visitDate"]').val(datetime);
 
       			$("#remarks").html(obj.Visit.remarks);
               $("#createdBy").html(obj.createdBy);
@@ -160,12 +160,7 @@ function viewVisit(id) {
                 });
             }, 100);
 
-      			setTimeout(function() {
-              $('.medicineDiv .selMed').prop('disabled', 'disabled');
-              $('.medicineDiv .quantity').prop('readonly', 'readonly');
-              $('.medicineDiv').find('button').addClass('hidden');
-              $('.medicineDiv').find('a').addClass('hidden');
-
+      			/*setTimeout(function() {
                 $form.find(".medicineDiv").find('.select2-hidden-accessible').each(function(i) {
                   var sel = $(this);
             			sel.select2().val(obj.Medicine[i].id).trigger('change');
@@ -180,9 +175,7 @@ function viewVisit(id) {
                       input.val(obj.Medicine[i-1].quantity);
                     }
                 });
-
-
-            }, 100);
+            }, 100);*/
 
       			document.getElementById('remarksEdit').value = obj.Visit.remarks;
         }

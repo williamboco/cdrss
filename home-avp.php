@@ -281,8 +281,10 @@ if($_SESSION['role'] != 'Admin') {
 								</div>
 
 							  <div class="contentheight view  col-sm-6">
-									<b><p>Complaint</p></b>
-									<ul id="complaint"></ul>
+									<div class="view">
+										<b><p>Complaint</p></b>
+										<ul id="complaint"></ul>
+									</div>
 									<b><p>Medicine/Supply Requested</p></b>
 									<ul id="medicine"></ul>
 								</div>
@@ -303,10 +305,9 @@ if($_SESSION['role'] != 'Admin') {
 						<form id="editVisitForm" class="edit hidden" style="width:80%; margin: 0 auto;">
 							<input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden">
 							<input type="number" name="visitID" class="hidden">
-							<label for="visitDate"><i class="glyphicon glyphicon-calendar"></i> VISIT DATE & TIME</label>
-							<br>
+							<!-- <label for="visitDate"><i class="glyphicon glyphicon-calendar"></i> VISIT DATE & TIME</label><br>
 							<input type="datetime-local" name="visitDate" class="visitDate" required>
-							<br><br>
+							<br><br> -->
 							<div class="fieldsGroup complaintDiv" value="10">
 								<label for="complaint[]">Complaint/s</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
@@ -317,7 +318,7 @@ if($_SESSION['role'] != 'Admin') {
 								</div>
 								<a href="#" class="addInput" value="complaint[]">+ Add</a>
 							</div><br>
-							<div class="fieldsGroup medicineDiv" value="10">
+							<!-- <div class="fieldsGroup medicineDiv" value="10">
 								<label for="med[]">Medicine / Supply Requested</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled>
@@ -327,7 +328,7 @@ if($_SESSION['role'] != 'Admin') {
 									<button class="remove">Remove</button>
 								</div>
 								<a href="#" class="addInput" value="med[]">+ Add</a>
-							</div><br>
+							</div><br> -->
 
 							<div class="form-group">
 								<label>Remarks</label>
