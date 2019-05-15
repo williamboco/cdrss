@@ -70,7 +70,7 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 			$form[0].reset();
 			$('.filters').trigger('change');
 
-				if(result=='success') {
+				if(result.includes('success')) {
 					alertify.alert(result);
 					window.location.reload(true);
 				}else {

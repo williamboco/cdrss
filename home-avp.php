@@ -168,7 +168,7 @@ if($_SESSION['role'] != 'Admin') {
 
 
 	<!-- Add visit modal -->
-	<div class="modal fade" id="addVisitModal" role="dialog" aria-hidden="true">
+	<div class="modal fade" id="addVisitModal" role="dialog" aria-hidden="true" style="max-height:100%;overflow-y:auto;">
 		<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -186,7 +186,11 @@ if($_SESSION['role'] != 'Admin') {
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
 						</div>
+<<<<<<< HEAD
 						<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
+=======
+							<button type="button" class="btn btn-danger pull-right" onclick="addProfile()" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
+>>>>>>> 35ed3fc50b31ac1b2040c25eb70158028affea4c
 					</div>
 
 					<button class="guestVisitForm btn-link" style="margin-top:-25px;"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
@@ -278,7 +282,7 @@ if($_SESSION['role'] != 'Admin') {
 	</div>
 
 <!-- Add  Patient Modal -->
-<div class="modal fade" id="patientModal" data-backdrop="static" data-keyboard="false" role="dialog">
+<div class="modal fade" id="patientModal" role="dialog" style="max-height:100%;overflow-y:auto;">
 	 <div class="modal-dialog" role="document">
 			<div class="modal-content">
 				 <div class="modal-header">
@@ -286,7 +290,7 @@ if($_SESSION['role'] != 'Admin') {
 		<h4 class="modal-title" id="myModalLabel">Create New Patient Profile</h4>
 				 </div>
 				 <div class="modal-body">
-						<form class="form-horizontal" id="patientAddForm" action="ajax/patientCreate.php" method="post">
+						<form class="form-horizontal" id="addPatientForm" action="ajax/patientCreate.php" method="post">
 						 <div class="form-group">
 								<label class="col-sm-4 control-label">Patient type</label>
 								<div class="col-sm-8">
@@ -300,7 +304,7 @@ if($_SESSION['role'] != 'Admin') {
 							 <div class="form-group">
 									<label class="col-sm-4 control-label">ID Number</label>
 									<div class="col-sm-8">
-										 <input type="number" min="1" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
+										 <input type="text" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
 									</div>
 							 </div>
 							 <div class="form-group">
@@ -417,7 +421,7 @@ if($_SESSION['role'] != 'Admin') {
 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" onclick ="addProfileHide()">Cancel</button>
-				<button type="submit" class="btn btn-primary pull-right hidden" form="patientAddForm">Add Patient Profile</button>
+				<button type="submit" class="btn btn-primary pull-right hidden" form="addPatientForm">Add Patient Profile</button>
 			</div>
 		</div>
  </div>
@@ -532,7 +536,7 @@ if($_SESSION['role'] != 'Admin') {
 
 				<div class="modal-footer no-border">
 					<button data-dismiss="modal" class="btn btn-default">Cancel</button>
-					<button data-dismiss="modal" id="create-event" class="btn btn-primary" name="update" onclick="delpatientVisit();">Confirm Delete</button>
+					<button data-dismiss="modal" id="create-event" class="btn btn-primary" name="update" onclick="delpatientVisit()">Confirm Delete</button>
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 <?php
 include('../includes/dbcon.php');
+
 $patientType = $_GET['patientType'];
 $months = $_GET['months'];
 $years = $_GET['years'];
@@ -7,9 +8,9 @@ $years = $_GET['years'];
 include('switch_case.php');
 
 $i = 0;
+$uN = array();
 $mTotal = 0;
 $med = array();
-$uN = array();
 $mData = array();
 
 foreach ($months as $m) {
@@ -25,11 +26,11 @@ foreach ($months as $m) {
 		$n = $row['brandName'] ?: $row['genericName'];
 		$q = $row['quantity'];
 
-		$x = (object) array(
+		$obj = (object) array(
 			"n"   => $n,
 			"q"    => $q
 		);
-		array_push($med, $x);
+		array_push($med, $obj);
 		array_push($uN, $n);
 
 	}
@@ -52,9 +53,9 @@ foreach($mData as $month) {
 			if($n == $item->n) {
 				$t = $t + $item->q;
 			}
+			$d[$n]=$t;
 		}
-		$d[$n]=$t;
-		$mTotal = $mTotal + $t;
+
 		//array_push($m, $d);
 	}
 
@@ -73,17 +74,20 @@ foreach ($uN as $key => $value) {
 	array_push($row, $value);
 
 	foreach ($aData as $m) {
+
 		if(array_key_exists($value, $m)) {
 			$t = $t + $m->$value;
-			array_push($row, $m->$value);
-		}else
+			array_push($row, $m->$value);		
+		}else {
 			array_push($row, 0);
+		}
 	}
 
 	array_push($row, $t);
 	$x = (object) $row;
-	array_push($tData, $x);
 
+	array_push($tData, $x);
+	$mTotal = $mTotal + $t;
 	++$index;
 }
 
