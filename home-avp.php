@@ -74,7 +74,7 @@ if($_SESSION['role'] != 'Admin') {
 
 			<div class="form-group pull-right visitfunction" style="margin-top: 25px;">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addVisitModal"><i class="glyphicon glyphicon-plus"></i> <b>Add Visit</b></button>
-				<button type="button" class="btn btn-danger tableBtn" onclick="deleteRecordCheck()"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
+				<button type="button" class="btn btn-danger tableBtn" onclick="delrecordCheck()"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
 				<button type="button" class="btn btn-info graphBtn"><i class="glyphicon glyphicon-stats"></i> <b>Show Graph</button>
 				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   Show Table</button>
 				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  Generate Report</b></button>
@@ -186,11 +186,8 @@ if($_SESSION['role'] != 'Admin') {
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
 						</div>
-<<<<<<< HEAD
+
 						<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
-=======
-							<button type="button" class="btn btn-danger pull-right" onclick="addProfile()" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
->>>>>>> 35ed3fc50b31ac1b2040c25eb70158028affea4c
 					</div>
 
 					<button class="guestVisitForm btn-link" style="margin-top:-25px;"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
