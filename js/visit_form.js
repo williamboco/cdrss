@@ -212,7 +212,7 @@ function viewVisitForm() {
   */
 }
 
-function addProfile(el) {
+function addProfile() {
 	$('#addVisitModal').modal('hide');
 	$('#patientModal').modal('show');
 }

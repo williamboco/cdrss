@@ -186,7 +186,7 @@ if($_SESSION['role'] != 'Admin') {
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
 						</div>
-							<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
+							<button type="button" class="btn btn-danger pull-right" onclick="addProfile()" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
 					</div>
 
 					<button class="guestVisitForm btn-link" style="margin-top:-25px;"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
