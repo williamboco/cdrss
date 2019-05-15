@@ -70,22 +70,24 @@
 				$query1->bind_param("ii", $mStatus, $rowId);
 
 			if(mysqli_num_rows($result) > 0 && $rowId != $id) {
-				echo "Error: Unable to update record";
+				echo "Error: There is already an exisiting record.";
 			} else {
 					$stmt->execute();
 					$query1->execute();
 					echo "Record successfully updated";
+
+					$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
+					$stmt->bind_param("isi", $eventID, $eventName, $userID);
+					$eventID = NULL;
+					$userID = $_SESSION['userID'];
+					$eventName = "Updated medicine.";
+					$stmt->execute();
 			}
 		}else {
 			echo "Error:" . mysqli_error($con);
 		}
 
-		$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName, userID) VALUES (?, NOW(), ?, ?)");
-		$stmt->bind_param("isi", $eventID, $eventName, $userID);
-		$eventID = NULL;
-		$userID = $_SESSION['userID'];
-		$eventName = "Updated medicine.";
-		$stmt->execute();
+
 
 		$stmt->close();
 	}
