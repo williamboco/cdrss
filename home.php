@@ -47,7 +47,7 @@ if($_SESSION['role'] == 'Admin') {
 <body>
 	<div class="row">
 	<?php
-	  include("includes/navbar-avp.php");
+	  include("includes/navbartest.php");
 	?>
   </div>
 
@@ -168,7 +168,7 @@ if($_SESSION['role'] == 'Admin') {
 
 
 	<!-- Add visit modal -->
-	<div class="modal fade" id="addVisitModal" role="dialog" aria-hidden="true">
+	<div class="modal fade" id="addVisitModal" role="dialog" aria-hidden="true" style="max-height:100%;overflow-y:auto;">
 		<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -532,7 +532,7 @@ if($_SESSION['role'] == 'Admin') {
 
 				<div class="modal-footer no-border">
 					<button data-dismiss="modal" class="btn btn-default">Cancel</button>
-					<button data-dismiss="modal" id="create-event" class="btn btn-primary" name="update" onclick="delpatientVisit();">Confirm Delete</button>
+					<button data-dismiss="modal" id="create-event" class="btn btn-primary" name="update" onclick="delpatientVisit()">Confirm Delete</button>
 				</div>
 			</div>
 		</div>
