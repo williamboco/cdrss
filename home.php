@@ -4,7 +4,7 @@ include('includes/dbcon.php');
 include('includes/session.php');
 
 if($_SESSION['role'] == 'Admin') {
-	header("location: options-avp.php");
+	header("location: home-avp.php");
 }
 
 ?>
