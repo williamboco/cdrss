@@ -255,7 +255,7 @@ function delpatientVisit() {
     });
 }
 
-function delrecordCheck() {
+function deleteRecordCheck() {
 
     var data = [];
     $("#visitTable tr").each(function() {
@@ -272,7 +272,7 @@ function delrecordCheck() {
     }
 }
 
-function delvisitCheck() {
+function deleteVisitCheck() {
 
     var data = [];
     $("#visitTable tr").each(function() {
@@ -534,7 +534,7 @@ $("#addPatientForm").on("submit", function(event) {
 	// Use Ajax to submit form data
 	$.ajax({
 		type: 'POST',
-		url: $form.attr('action'),
+		url: $form.prop('action'),
 		data: $form.serialize(),
 		success: function(data) {
 			// ... Process the result ...
