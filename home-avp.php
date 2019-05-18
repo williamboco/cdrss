@@ -181,7 +181,7 @@ if($_SESSION['role'] != 'Admin') {
 					<input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden" required>
 
 					<div id="searchDiv" class="row">
-						<label for="patientID"><i class="glyphicon glyphicon-user"></i>  Select Patient</label>
+						<label for="patientID"><i class="glyphicon glyphicon-user"></i>  Select Patient *</label>
 						<div>
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
@@ -204,13 +204,13 @@ if($_SESSION['role'] != 'Admin') {
 								</div>
 							</div>
 							<div class="form-group">
-								 <label class="col-sm-4 control-label">First Name</label>
+								 <label class="col-sm-4 control-label">First Name *</label>
 								 <div class="col-sm-8">
 										<input type="text" class="form-control" name="firstname" placeholder="First name" required>
 								 </div>
 							</div>
 							<div class="form-group">
-								 <label class="col-sm-4 control-label">Last Name</label>
+								 <label class="col-sm-4 control-label">Last Name *</label>
 								 <div class="col-sm-8">
 										<input type="text" class="form-control" name="lastname" placeholder="Last name" required>
 								 </div>
@@ -222,7 +222,7 @@ if($_SESSION['role'] != 'Admin') {
 								 </div>
 							</div>
 							<div class="form-group">
-								 <label class="col-sm-4 control-label">Gender</label>
+								 <label class="col-sm-4 control-label">Gender *</label>
 								 <div class="col-sm-8">
 										<div class="radio">
 											 <label for="gender1"><input type="radio" name="gender" value="Male" id="gender1" checked required>Male </label>
@@ -233,13 +233,13 @@ if($_SESSION['role'] != 'Admin') {
 					</div><br>
 
 					<div class="row">
-						<label for="visitDate" class="col-lg-12 pull-left" style="margin-left:-15px;"><i class="glyphicon glyphicon-calendar"></i>  Set Visit Date</label>
+						<label for="visitDate" class="col-lg-12 pull-left" style="margin-left:-15px;"><i class="glyphicon glyphicon-calendar"></i>  Set Visit Date *</label>
 						<input type="datetime-local" name="visitDate" class="visitDate" required>
 					</div>
 					<br><br>
 
 					<div class="fieldsGroup complaintDiv row" value="10">
-						<label for="complaint[]">Complaint/s</label>
+						<label for="complaint[]">Complaint/s *</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Complaint" class="selComp formInpt col-sm-8" name="complaint[]" disabled required>
 							<option></option>
@@ -251,7 +251,7 @@ if($_SESSION['role'] != 'Admin') {
 					<br>
 
 					<div class="fieldsGroup medicineDiv row" value="10">
-						<label for="med[]">Medicine / Supply Requested</label>
+						<label for="med[]">Medicine / Supply Requested *</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled required>
 							<option></option>
@@ -289,7 +289,7 @@ if($_SESSION['role'] != 'Admin') {
 				 <div class="modal-body">
 						<form class="form-horizontal" id="addPatientForm" action="ajax/patientCreate.php" method="post">
 						 <div class="form-group">
-								<label class="col-sm-4 control-label">Patient type</label>
+								<label class="col-sm-4 control-label">Patient type *</label>
 								<div class="col-sm-8">
 									 <div class="radio">
 											<label><input type="radio" name="ptype" value="student" required>Student</label>
@@ -299,25 +299,25 @@ if($_SESSION['role'] != 'Admin') {
 						 </div>
 						 <div id="profileInfoDiv" class="hidden">
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">ID Number</label>
+									<label class="col-sm-4 control-label">ID Number *</label>
 									<div class="col-sm-8">
 										 <input type="text" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
 									</div>
 							 </div>
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">First Name</label>
+									<label class="col-sm-4 control-label">First Name *</label>
 									<div class="col-sm-8">
 										 <input type="text" class="form-control" name="firstname" placeholder="First name" required>
 									</div>
 							 </div>
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">Last Name</label>
+									<label class="col-sm-4 control-label">Last Name *</label>
 									<div class="col-sm-8">
 										 <input type="text" class="form-control" name="lastname" placeholder="Last name" required>
 									</div>
 							 </div>
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">Birth Date</label>
+									<label class="col-sm-4 control-label">Birth Date *</label>
 									<div class="col-sm-8">
 										 <input type="date" required class="form-control" name="birthdate" required>
 									</div>
@@ -330,7 +330,7 @@ if($_SESSION['role'] != 'Admin') {
 							 </div>
 
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">Gender</label>
+									<label class="col-sm-4 control-label">Gender *</label>
 									<div class="col-sm-8">
 										 <div class="radio">
 												<label for="gender1"><input type="radio" name="gender" value="Male" id="gender1" checked required>Male </label>
@@ -341,7 +341,7 @@ if($_SESSION['role'] != 'Admin') {
 
 							 <div class="studDiv hidden">
 									<div class="form-group">
-										 <label class="col-sm-4 control-label">Student Type</label>
+										 <label class="col-sm-4 control-label">Student Type *</label>
 										 <div class="col-sm-8">
 												<select id="selStudType" name="studenttype" data-width="100%" data-placeholder="Select student type" required>
 													<option></option>
@@ -351,7 +351,7 @@ if($_SESSION['role'] != 'Admin') {
 										 </div>
 									</div>
 									<div class="form-group hidden" id="courseDiv">
-										 <label class="col-sm-4 control-label">Course</label>
+										 <label class="col-sm-4 control-label">Course *</label>
 										 <div class="col-sm-8">
 											 <select data-width="100%" data-placeholder="Select course" id="selCourse" class="select2 form-control inputStud" name="course" required>
 													<option></option>
@@ -360,7 +360,7 @@ if($_SESSION['role'] != 'Admin') {
 									</div>
 
 									<div class="form-group hidden" id="trackDiv">
-										 <label class="col-sm-4 control-label">Track</label>
+										 <label class="col-sm-4 control-label">Track *</label>
 										 <div class="col-sm-8">
 											 <select data-width="100%" data-placeholder="Select track" id="selTrack" class="select2 form-control inputStud" name="trackname" required>
 													<option></option>
@@ -371,7 +371,7 @@ if($_SESSION['role'] != 'Admin') {
 
 								<div class="empDiv hidden">
 									<div class="form-group" id="department_dropdown">
-										 <label class="col-sm-4 control-label">Department Name</label>
+										 <label class="col-sm-4 control-label">Department Name *</label>
 											 <div class="col-sm-8">
 												 <select data-width="100%" data-placeholder="Select department" id="selDep" class="select2 form-control" name="depart" required>
 														<option></option>
@@ -379,7 +379,7 @@ if($_SESSION['role'] != 'Admin') {
 											 </div>
 									</div>
 									<div class="form-group" id="empType_dropdown">
-										 <label class="col-sm-4 control-label">Employment Type</label>
+										 <label class="col-sm-4 control-label">Employment Type *</label>
 											 <div class="col-sm-8">
 												 <select data-width="100%" data-placeholder="Select employment type" id="selType" class="select2 form-control" name="employeeType" style="width: 75%" required>
 														<option></option>
@@ -526,11 +526,12 @@ if($_SESSION['role'] != 'Admin') {
 				<div class="modal-header no-border">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title fw-bold mt" id="myModalLabel20">Are you sure you want to delete this visit?</h4>
-					<p class="fs-mini text-muted mt-sm">
-						Press "Confirm Delete" if you are sure to delete the visit from the system. If not, press "Cancel".
+				</div>
+				<div class="modal-body">
+					<p class="fs-mini mt-sm">
+						Press <strong>Confirm Delete</strong> if you are sure to delete the visit from the system. <br/> If not, press <strong>Cancel</strong>.
 					</p>
 				</div>
-
 				<div class="modal-footer no-border">
 					<button data-dismiss="modal" class="btn btn-default">Cancel</button>
 					<button data-dismiss="modal" id="create-event" class="btn btn-primary" name="update" onclick="delpatientVisit()">Confirm Delete</button>

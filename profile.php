@@ -108,13 +108,13 @@ if($_SESSION['role'] == 'Admin') {
 					<input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden">
 					<input type="text" name="idNumber" value="<?php echo $_GET['id'];?>" class="hidden">
 					<div class="row">
-						<label for="visitDate"><i class="glyphicon glyphicon-calendar"></i><b>  Visit Date & Time</b></label>
+						<label for="visitDate"><i class="glyphicon glyphicon-calendar"></i><b>  Visit Date & Time *</b></label>
 						<br>
 						<input type="datetime-local" name="visitDate" class="visitDate" required>
 					</div><br>
 
 					<div class="fieldsGroup complaintDiv" value="5">
-						<label for="complaint[]">Complaint/s</label>
+						<label for="complaint[]">Complaint/s *</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Complaint" class="selComp formInpt" name="complaint[]" disabled>
 							<option></option>
@@ -125,7 +125,7 @@ if($_SESSION['role'] == 'Admin') {
 					</div><br>
 
 					<div class="fieldsGroup medicineDiv" value="5">
-						<label for="med[]">Medicine requested</label>
+						<label for="med[]">Medicine requested *</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled>
 							<option></option>
@@ -196,11 +196,11 @@ if($_SESSION['role'] == 'Admin') {
 							<input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden">
 							<input type="number" name="visitID" class="hidden">
 
-							<label for="visitDate"><i class="glyphicon glyphicon-calendar"></i> VISIT DATE & TIME</label><br>
+							<label for="visitDate"><i class="glyphicon glyphicon-calendar"></i> VISIT DATE & TIME *</label><br>
 								<input type="datetime-local" name="visitDate" class="visitDate" required><br><br>
 
 							<div class="fieldsGroup complaintDiv" value="10">
-								<label for="complaint[]">Complaint/s</label>
+								<label for="complaint[]">Complaint/s *</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Complaint" class="selComp formInpt" name="complaint[]" disabled>
 									<option></option>
@@ -211,7 +211,7 @@ if($_SESSION['role'] == 'Admin') {
 							</div><br>
 
 							<div class="fieldsGroup medicineDiv" value="10">
-								<label for="med[]">Medicine requested</label>
+								<label for="med[]">Medicine requested *</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled>
 									<option></option>
@@ -260,7 +260,7 @@ if($_SESSION['role'] == 'Admin') {
 										<input type="number" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden">
 
                      <div class="form-group">
-                        <label class="col-sm-4 control-label">Patient type</label>
+                        <label class="col-sm-4 control-label">Patient type *</label>
                         <div class="col-sm-8">
                            <div class="radio">
                               <label><input type="radio" name="ptype" value="student" required>Student</label>
@@ -270,37 +270,37 @@ if($_SESSION['role'] == 'Admin') {
                      </div>
 					 				 	 <div id="profileInfoDiv" class="hidden">
 	                     <div class="form-group">
-	                        <label class="col-sm-4 control-label">ID Number</label>
+	                        <label class="col-sm-4 control-label">ID Number *</label>
 	                        <div class="col-sm-8">
 	                           <input type="text"  class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
 	                        </div>
 	                     </div>
 	                     <div class="form-group">
-	                        <label class="col-sm-4 control-label">First Name</label>
+	                        <label class="col-sm-4 control-label">First Name *</label>
 	                        <div class="col-sm-8">
 	                           <input type="text" class="form-control" name="firstname" placeholder="First name" required>
 	                        </div>
 	                     </div>
 	                     <div class="form-group">
-	                        <label class="col-sm-4 control-label">Last Name</label>
+	                        <label class="col-sm-4 control-label">Last Name *</label>
 	                        <div class="col-sm-8">
 	                           <input type="text" class="form-control" name="lastname" placeholder="Last name" required>
 	                        </div>
 	                     </div>
 	                     <div class="form-group">
-	                        <label class="col-sm-4 control-label">Birth Date</label>
+	                        <label class="col-sm-4 control-label">Birth Date *</label>
 	                        <div class="col-sm-8">
 	                           <input type="date" required class="form-control" name="birthdate" required>
 	                        </div>
 	                     </div>
 	                     <div class="form-group">
-	                        <label class="col-sm-4 control-label">Contact Number</label>
+	                        <label class="col-sm-4 control-label">Contact Number </label>
 	                        <div class="col-sm-8">
 	                           <input type="number" min="0" class="form-control" name="contactnumber" pattern=".{0,11}" title="0 to 11 characters" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Mobile number/ Landline">
 	                        </div>
 	                     </div>
 	                     <div class="form-group">
-	                        <label class="col-sm-4 control-label">Gender</label>
+	                        <label class="col-sm-4 control-label">Gender *</label>
 	                        <div class="col-sm-8">
 														<div class="radio">
 															 <label for="gender1"><input type="radio" name="gender" value="Male" id="gender1" checked required>Male </label>
@@ -311,7 +311,7 @@ if($_SESSION['role'] == 'Admin') {
 
 										 		<div class="studDiv hidden">
                         	<div class="form-group">
-                           <label class="col-sm-4 control-label">Student Type</label>
+                           <label class="col-sm-4 control-label">Student Type *</label>
 						   				 			<div class="col-sm-8">
 							   							<select id="selStudType" name="studenttype" data-width="100%" data-placeholder="Select student type" required>
 	                              <option></option>
@@ -321,7 +321,7 @@ if($_SESSION['role'] == 'Admin') {
 						   							</div>
                         	</div>
                         	<div class="form-group hidden" id="courseDiv">
-                           <label class="col-sm-4 control-label">Course</label>
+                           <label class="col-sm-4 control-label">Course *</label>
 						   				 			<div class="col-sm-8">
                            		<select data-width="100%" data-placeholder="Select course" id="selCourse" class="select2 form-control inputStud" name="course" required>
                               <option></option>
@@ -329,7 +329,7 @@ if($_SESSION['role'] == 'Admin') {
 						   			 				</div>
                         	</div>
                         	<div class="form-group hidden" id="trackDiv">
-                           <label class="col-sm-4 control-label">Track</label>
+                           <label class="col-sm-4 control-label">Track *</label>
 						   				 			<div class="col-sm-8">
 		                           <select data-width="100%" data-placeholder="Select track" id="selTrack" class="select2 form-control inputStud" name="trackname" required>
 		                              <option></option>
@@ -340,7 +340,7 @@ if($_SESSION['role'] == 'Admin') {
 
 										 		<div class="empDiv hidden">
                         	<div class="form-group" id="department_dropdown">
-                           <label class="col-sm-4 control-label">Department Name</label>
+                           <label class="col-sm-4 control-label">Department Name *</label>
 						   				 			<div class="col-sm-8">
 		                           <select data-width="100%" data-placeholder="Select department" id="selDep" class="select2 form-control" name="depart" required>
 		                              <option></option>
@@ -348,7 +348,7 @@ if($_SESSION['role'] == 'Admin') {
 						   					 		</div>
                         	</div>
                         	<div class="form-group" id="empType_dropdown">
-                           <label class="col-sm-4 control-label">Employment Type</label>
+                           <label class="col-sm-4 control-label">Employment Type *</label>
 						   				 			<div class="col-sm-8">
 		                           <select data-width="100%" data-placeholder="Select employment type" id="selType" class="select2 form-control" name="employeeType" style="width: 75%" required>
 		                              <option></option>
@@ -400,8 +400,10 @@ if($_SESSION['role'] == 'Admin') {
 					<div class="modal-header no-border">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title fw-bold mt" id="myModalLabel20">Are you sure you want to delete this patient?</h4>
-						<p class="fs-mini text-muted mt-sm">
-							Press "Confirm Delete" if you are sure to delete the patient from the system. If not, press "Cancel".
+					</div>
+					<div class="modal-body">
+						<p class="fs-mini mt-sm">
+							Press <strong>Confirm Delete</strong> if you are sure to delete the patient from the system. If not, press <strong>Cancel</strong>.
 						</p>
 					</div>
 
@@ -420,8 +422,8 @@ if($_SESSION['role'] == 'Admin') {
 				<div class="modal-header no-border">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title fw-bold mt" id="myModalLabel20">Are you sure you want to delete this visit?</h4>
-					<p class="fs-mini text-muted mt-sm">
-						Press "Confirm Delete" if you are sure to delete the visit from the system. If not, press "Cancel".
+					<p class="fs-mini mt-sm">
+						Press <strong>Confirm Delete</strong> if you are sure to delete the visit from the system.<br/> If not, press <strong>Cancel</strong>.
 					</p>
 				</div>
 
