@@ -173,9 +173,11 @@ if($_SESSION['role'] == 'Admin') {
 									<b><p>Patient Name</b> <br><i class="glyphicon glyphicon-user"></i>  <span class="fullName h4"></span></p>
 								</div>
 
-							  <div class="contentheight view  col-sm-6">
-									<b><p>Complaint</p></b>
-									<ul id="complaint"></ul>
+							  <div class="contentheight col-sm-6">
+									<div class="view">
+										<b><p>Complaint</p></b>
+										<ul id="complaint"></ul>										
+									</div>
 									<b><p>Medicine Requested</p></b>
 									<ul id="medicine"></ul>
 								</div>
@@ -196,8 +198,8 @@ if($_SESSION['role'] == 'Admin') {
 							<input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden">
 							<input type="number" name="visitID" class="hidden">
 
-							<label for="visitDate"><i class="glyphicon glyphicon-calendar"></i> VISIT DATE & TIME *</label><br>
-								<input type="datetime-local" name="visitDate" class="visitDate" required><br><br>
+							<!-- <label for="visitDate"><i class="glyphicon glyphicon-calendar"></i> VISIT DATE & TIME *</label><br>
+								<input type="datetime-local" name="visitDate" class="visitDate" required><br><br> -->
 
 							<div class="fieldsGroup complaintDiv" value="10">
 								<label for="complaint[]">Complaint/s *</label>
@@ -210,7 +212,7 @@ if($_SESSION['role'] == 'Admin') {
 								<a href="#" class="addInput">+ Add</a>
 							</div><br>
 
-							<div class="fieldsGroup medicineDiv" value="10">
+							<!-- <div class="fieldsGroup medicineDiv" value="10">
 								<label for="med[]">Medicine requested *</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled>
@@ -220,7 +222,7 @@ if($_SESSION['role'] == 'Admin') {
 									<button class="remove">Remove</button>
 								</div>
 								<a href="#" class="addInput">+ Add</a>
-							</div><br>
+							</div><br> -->
 
 							<div class="form-group">
 								<label>Remarks</label>

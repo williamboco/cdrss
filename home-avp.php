@@ -445,7 +445,7 @@ if($_SESSION['role'] != 'Admin') {
 									<b><p>Patient Name</b> <br><i class="glyphicon glyphicon-user"></i>  <span class="fullName h4"></span></p>
 								</div>
 
-							  <div class="contentheight view  col-sm-6">
+							  <div class="contentheight col-sm-6">
 									<div class="view">
 										<b><p>Complaint</p></b>
 										<ul id="complaint"></ul>
