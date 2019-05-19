@@ -213,6 +213,7 @@ function viewProfile() {
 						$profile.find("#birthDate").hide();
 						$profile.find("#cPerson").hide();
 						$profile.find("#otherInfo").hide();
+						$profile.parent().find(".profile").hide();
 					} else {
 						$profile.find("#idNumber").append("<p class='h4'>" + obj.Patient.ID + "</p>");
 						$profile.find("#fullName").append("<p class='h4'>" + obj.Patient.firstName + " " + obj.Patient.lastName + "</p>");
@@ -275,7 +276,7 @@ function viewProfile() {
 				$("#selStudType").val("college").trigger('change');
 				$("#selCourse").val(obj.Others[0].course).trigger('change');
 			}
-			$form.find('input[name="idNumber"]').val(obj.Patient.ID);
+			$form.find('#profileInfoDiv-idNumber').append("<p class='h4'>" + obj.Patient.ID + "</p>");
 			$form.find('input[name="firstname"]').val(obj.Patient.firstName);
 			$form.find('input[name="lastname"]').val(obj.Patient.lastName);
 			$form.find('input[name="contactnumber"]').val(obj.Patient.contact);

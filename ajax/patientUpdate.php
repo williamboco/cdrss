@@ -8,7 +8,7 @@ $password = '3sc3RLrpd17';
 $key = substr(hash('sha256', $password, true), 0, 32);
 $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
-$origID = htmlspecialchars($_POST['origID']);
+// $origID = htmlspecialchars($_POST['origID']);
 $user = htmlspecialchars($_POST['userID']);
 $id = htmlspecialchars($_POST['idNumber']);
 $firstName = htmlspecialchars($_POST['firstname']);
@@ -24,7 +24,7 @@ $contact = htmlspecialchars($_POST['contactnumber']);
 
 
 $query = $con->prepare("UPDATE `patient` SET ID=?, firstName=?, lastName=?, birthDate=?, gender=?, contact=?, modifiedBy=?, dateModified=NOW() WHERE `patient`.`ID`=?");
-$query->bind_param("ssssssis", $id, $firstName, $lastName, $birthDate, $gender, $contact, $user, $origID);
+$query->bind_param("ssssssis", $id, $firstName, $lastName, $birthDate, $gender, $contact, $user, $id);
 
 $message = array();
 
@@ -32,7 +32,7 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 	$message = "Error: Input must only contain letters.";
 } else {
 	if ($result=mysqli_query($con,"SELECT * FROM `patient` WHERE ID='$id'")) {
-		if(mysqli_num_rows($result) > 0 && $origID != $id) {
+		if(mysqli_num_rows($result) > 0) {
 			$message = "Patient with that ID number already exists.";
 		} else {
 

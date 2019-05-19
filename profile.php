@@ -34,10 +34,10 @@ if($_SESSION['role'] == 'Admin') {
 			<div class="col-lg-4 col-sm-12 card wow slideInLeft">
 				<h3>Personal Information</h3>
 				<hr>
-				<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#patientModal" onclick="editProfile()">
+				<button type="button" class="btn btn-primary profile" data-toggle="modal"  data-target="#patientModal" onclick="editProfile()">
 				<span> <div class="glyphicon glyphicon-pencil"> </div> Edit Profile </span>
 				</button>
-				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">
+				<button type="button" class="btn btn-danger profile" data-toggle="modal" data-target="#delete-modal">
 				<span> <div  class="glyphicon glyphicon-remove"> </div> Delete Patient </span>
 				</button>
 				<br><br><br>
@@ -176,7 +176,7 @@ if($_SESSION['role'] == 'Admin') {
 							  <div class="contentheight col-sm-6">
 									<div class="view">
 										<b><p>Complaint</p></b>
-										<ul id="complaint"></ul>										
+										<ul id="complaint"></ul>
 									</div>
 									<b><p>Medicine Requested</p></b>
 									<ul id="medicine"></ul>
@@ -258,7 +258,7 @@ if($_SESSION['role'] == 'Admin') {
                </div>
                <div class="modal-body">
                   <form class="form-horizontal" id="patientEditForm" action="ajax/patientUpdate.php">
-										<input type="number" name="origID" value="<?php echo $_GET['id'];?>" class="hidden">
+										<input type="number" name="idNumber" value="<?php echo $_GET['id'];?>" class="hidden">
 										<input type="number" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden">
 
                      <div class="form-group">
@@ -272,9 +272,9 @@ if($_SESSION['role'] == 'Admin') {
                      </div>
 					 				 	 <div id="profileInfoDiv" class="hidden">
 	                     <div class="form-group">
-	                        <label class="col-sm-4 control-label">ID Number *</label>
-	                        <div class="col-sm-8">
-	                           <input type="text"  class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
+	                        <label class="col-sm-4 control-label">ID Number </label>
+	                        <div id="profileInfoDiv-idNumber" class="col-sm-8">
+	                           <!-- <input type="text"  class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required> -->
 	                        </div>
 	                     </div>
 	                     <div class="form-group">
@@ -424,6 +424,8 @@ if($_SESSION['role'] == 'Admin') {
 				<div class="modal-header no-border">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title fw-bold mt" id="myModalLabel20">Are you sure you want to delete this visit?</h4>
+				</div>
+				<div class="modal-body">
 					<p class="fs-mini mt-sm">
 						Press <strong>Confirm Delete</strong> if you are sure to delete the visit from the system.<br/> If not, press <strong>Cancel</strong>.
 					</p>
