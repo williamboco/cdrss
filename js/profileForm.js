@@ -213,7 +213,7 @@ function viewProfile() {
 						$profile.find("#birthDate").hide();
 						$profile.find("#cPerson").hide();
 						$profile.find("#otherInfo").hide();
-						$profile.parent().find(".profile").hide();
+						// $profile.parent().find(".profile").hide();
 					} else {
 						$profile.find("#idNumber").append("<p class='h4'>" + obj.Patient.ID + "</p>");
 						$profile.find("#fullName").append("<p class='h4'>" + obj.Patient.firstName + " " + obj.Patient.lastName + "</p>");
@@ -262,66 +262,69 @@ function viewProfile() {
 			var obj = JSON.parse(obj);
 			//alert(obj.Others[0].type);
 			//console.log(obj);
-			if(obj.Others[0].type=="Employee") {
-				$form.find('input[value="employee"]').click().trigger('change');
-				$("#selDep").val(obj.Others[0].department).trigger('change');
-				$("#selType").val(obj.Others[0].employmentType).trigger('change');
-			}else if(obj.Others[0].type=="SHS") {
-				$form.find('input[value="student"]').click().trigger('change');
-				$("#selStudType").val("shs").trigger('change');
-				$("#selTrack").val(obj.Others[0].track).trigger('change');
-			}else {
-				$form.find('input[value="student"]').click().trigger('change');
-				$('#studRd').click().trigger('change');
-				$("#selStudType").val("college").trigger('change');
-				$("#selCourse").val(obj.Others[0].course).trigger('change');
+
+			if (obj.Others[0].type=="Guest"){
+				$form.find('#profileInfoDiv-idNumber').append("<p class='h4'>" + obj.Patient.ID + "</p>");
+				$form.find('input[name="firstname"]').val(obj.Patient.firstName);
+				$form.find('input[name="lastname"]').val(obj.Patient.lastName);
+				$form.find('input[name="contactnumber"]').val(obj.Patient.contact);
+				$form.find('input[name="birthdate"]').val(obj.Patient.birthDate);
+			} else{
+				if(obj.Others[0].type=="Employee") {
+					$form.find('input[value="employee"]').click().trigger('change');
+					$("#selDep").val(obj.Others[0].department).trigger('change');
+					$("#selType").val(obj.Others[0].employmentType).trigger('change');
+				}else if(obj.Others[0].type=="SHS") {
+					$form.find('input[value="student"]').click().trigger('change');
+					$("#selStudType").val("shs").trigger('change');
+					$("#selTrack").val(obj.Others[0].track).trigger('change');
+				}else {
+					$form.find('input[value="student"]').click().trigger('change');
+					$('#studRd').click().trigger('change');
+					$("#selStudType").val("college").trigger('change');
+					$("#selCourse").val(obj.Others[0].course).trigger('change');
+				}
+				$form.find('#profileInfoDiv-idNumber').append("<p class='h4'>" + obj.Patient.ID + "</p>");
+				$form.find('input[name="firstname"]').val(obj.Patient.firstName);
+				$form.find('input[name="lastname"]').val(obj.Patient.lastName);
+				$form.find('input[name="contactnumber"]').val(obj.Patient.contact);
+				$form.find('input[name="birthdate"]').val(obj.Patient.birthDate);
+
+
+				obj.Allergy.forEach(function(val, i) {
+					if(i>0) {
+						$("#selAll").parent().siblings('a').click();
+					}
+				});
+				setTimeout(function() {
+					$("#allergyDiv").find('.dInput').each(function(i) {
+						var sel = $(this);
+						sel.select2().val(obj.Allergy[i]).trigger('change');
+					});
+				}, 1000);
+
+
+				var cperson = new Array();
+				obj.ContactPerson.forEach(function(val, i) {
+					if(i>0) {
+						$(".addInputCP").click();
+					}
+					cperson.push(obj.ContactPerson[i].name);
+					cperson.push(obj.ContactPerson[i].contact);
+				});
+				setTimeout(function() {
+					$("#pDiv").find('.dInput').each(function(i) {
+						var input = $(this);
+						input.val(cperson[i]);
+					});
+				}, 1000);
 			}
-<<<<<<< HEAD
-			$form.find('#profileInfoDiv-idNumber').append("<p class='h4'>" + obj.Patient.ID + "</p>");
-=======
-			 $form.find('input[name="idNumber"]').val(obj.Patient.ID);
-			$form.find('input[name="idNumber"]').prop("readOnly", true);
->>>>>>> 52446e83179fed3bb528a6c6581c2c2a13ce5357
-			$form.find('input[name="firstname"]').val(obj.Patient.firstName);
-			$form.find('input[name="lastname"]').val(obj.Patient.lastName);
-			$form.find('input[name="contactnumber"]').val(obj.Patient.contact);
-			$form.find('input[name="birthdate"]').val(obj.Patient.birthDate);
 
 			if(obj.Patient.gender == "Male") {
 				$('#gender1').attr("checked", true);
 			} else {
 				$('#gender2').attr("checked", true);
 			}
-
-
-			obj.Allergy.forEach(function(val, i) {
-				if(i>0) {
-				  $("#selAll").parent().siblings('a').click();
-				}
-			});
-			setTimeout(function() {
-				$("#allergyDiv").find('.dInput').each(function(i) {
-					var sel = $(this);
-					sel.select2().val(obj.Allergy[i]).trigger('change');
-				});
-			}, 1000);
-
-
-			var cperson = new Array();
-			obj.ContactPerson.forEach(function(val, i) {
-				if(i>0) {
-				  $(".addInputCP").click();
-				}
-				cperson.push(obj.ContactPerson[i].name);
-				cperson.push(obj.ContactPerson[i].contact);
-			});
-			setTimeout(function() {
-				$("#pDiv").find('.dInput').each(function(i) {
-					var input = $(this);
-					input.val(cperson[i]);
-				});
-			}, 1000);
-
 
 		}
 	 });
@@ -355,11 +358,14 @@ function viewProfile() {
 		url: "ajax/patientDelete.php",
 		data: {data : data},
 		cache: false,
-
 		success: function(response){
-			//alert(response);
-			alertify.alert(response);
-			dropdownFilter();
+			if (response.includes("success")){
+				alertify.alert(response).set('onok', function(closeEvent){
+					window.location.reload(true);
+				});
+			} else{
+				alertify.alert("Error: Unable to delete record/s");
+			}
 		}
 	});
 	}
@@ -385,8 +391,9 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 			$form[0].reset();
 
 			if(response[0].includes("success")) {
-  location.reload();
-				alertify.alert(response[0]);
+				alertify.alert(response[0]).set('onok', function(closeEvent){
+					window.location.reload(true);
+				});
 			}else {
 				alertify.alert(response);
 			}
@@ -395,7 +402,7 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 	});
 });
 
-function delpatientProfile() {
+/*function delpatientProfile() {
 	var data = [getParameterByName("id")];
 	$.ajax({
 		type: "GET",
@@ -403,12 +410,17 @@ function delpatientProfile() {
 		data: {data: data},
 		cache: false,
 		success: function(response){
-		alertify.alert (response);
-			window.location.href="patient-list.php";
+
+			if (response.includes('success')){
+				alertify.alert(response);
+				window.location.reload(true);
+			} else{
+				alertify.alert('Error: Unable to delete record/s');
+			}
 		}
 	});
 
-}
+}*/
 
 
 function getParameterByName(name, url) {

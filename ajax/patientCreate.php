@@ -118,9 +118,7 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 
 					//get autoIncrement ID from recent query
 					$ref = mysqli_insert_id($con);
-					if($ref>0) {
-
-					}else {
+					if($ref==0) {
 						$query = $con->prepare("SELECT ID FROM allergy WHERE allergyName=?");
 						$query->bind_param("s", $item);
 						$query->execute();

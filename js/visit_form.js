@@ -186,8 +186,8 @@ function viewVisit(id) {
 
 function viewVisitForm() {
 
-	/*var $form = $('#addPatientForm');
-    $.ajax({
+	var $form = $('#addPatientForm');
+  /*  $.ajax({
         type: "GET",
         url: "ajax/patientRead.php",
         data: {patientID: id},
@@ -513,10 +513,12 @@ $("#addVisitForm").on("submit", function(event) {
 			// ... Process the result ...
       $("#addVisitModal").modal('hide');
       $form[0].reset();
-      refresh();
         if(response.includes("success")){
           console.log(response);
-          alertify.alert(response);
+          alertify.alert(response).set("onok",
+            function(closeEvent){
+              refresh();
+          });
         } else{
           alertify.alert(response);
         }
@@ -538,17 +540,17 @@ $("#addPatientForm").on("submit", function(event) {
 		data: $form.serialize(),
 		success: function(data) {
 			// ... Process the result ...
-			var result = JSON.parse(JSON.stringify(data));
-      addProfileHide();
+			var result = JSON.parse(data);
       $form[0].reset();
 
   			if(result.includes("success")) {
-          alertify.alert(result);
-          viewVisitForm();
-          refresh();
+          alertify.alert(result).set('onok', function(closeEvent){
+            $('#patientModal').modal('hide');
+            $('#addVisitForm').reset();
+            viewVisitForm();
+  				});
   			}else {
   				alertify.alert(result);
-          refresh();
   			}
 		}
 	});

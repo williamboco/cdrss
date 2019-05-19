@@ -67,12 +67,13 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 		data: $form.serialize(),
 		success: function(result) {
 			$("#patientModal").modal('hide');
-			$form[0].reset();
 			$('.filters').trigger('change');
+			$form[0].reset();
 
 				if(result.includes('success')) {
-					alertify.alert(result);
-					window.location.reload(true);
+					alertify.alert(result);.set('onok', function(closeEvent){
+						window.location.reload(true);
+					});
 				}else {
 					alertify.alert(result);
 				}
