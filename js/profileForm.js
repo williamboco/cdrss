@@ -276,7 +276,12 @@ function viewProfile() {
 				$("#selStudType").val("college").trigger('change');
 				$("#selCourse").val(obj.Others[0].course).trigger('change');
 			}
+<<<<<<< HEAD
 			$form.find('#profileInfoDiv-idNumber').append("<p class='h4'>" + obj.Patient.ID + "</p>");
+=======
+			 $form.find('input[name="idNumber"]').val(obj.Patient.ID);
+			$form.find('input[name="idNumber"]').prop("readOnly", true);
+>>>>>>> 52446e83179fed3bb528a6c6581c2c2a13ce5357
 			$form.find('input[name="firstname"]').val(obj.Patient.firstName);
 			$form.find('input[name="lastname"]').val(obj.Patient.lastName);
 			$form.find('input[name="contactnumber"]').val(obj.Patient.contact);
