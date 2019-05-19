@@ -275,7 +275,8 @@ function viewProfile() {
 				$("#selStudType").val("college").trigger('change');
 				$("#selCourse").val(obj.Others[0].course).trigger('change');
 			}
-			$form.find('input[name="idNumber"]').val(obj.Patient.ID);
+			 $form.find('input[name="idNumber"]').val(obj.Patient.ID);
+			$form.find('input[name="idNumber"]').prop("readOnly", true);
 			$form.find('input[name="firstname"]').val(obj.Patient.firstName);
 			$form.find('input[name="lastname"]').val(obj.Patient.lastName);
 			$form.find('input[name="contactnumber"]').val(obj.Patient.contact);

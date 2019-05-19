@@ -1,14 +1,14 @@
 $(document).ready(function() {
 	$('.alert').hide();
-	
+
 });
 
 $('form').on('submit', function(event) {
 	$form = $(this);
-	
+
 	event.preventDefault();
 	console.log($form.serialize());
-	
+
 	$.ajax({
 		type: 'POST',
 		url: $form.attr('action'),
@@ -23,7 +23,7 @@ $('form').on('submit', function(event) {
 				}else {
 					window.location.replace("home.php");
 				}
-				
+
 			}else {
 				$('.alert-danger').html(response).show();
 			}
