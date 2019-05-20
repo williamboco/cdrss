@@ -71,7 +71,7 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 			$form[0].reset();
 
 				if(result.includes('success')) {
-					alertify.alert(result);.set('onok', function(closeEvent){
+					alertify.alert(result).set('onok', function(closeEvent){
 						window.location.reload(true);
 					});
 				}else {
