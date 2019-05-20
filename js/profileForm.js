@@ -392,7 +392,7 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 
 			if(response[0].includes("success")) {
 				alertify.alert(response[0]).set('onok', function(closeEvent){
-					window.history.back();
+					window.location.reload(true);
 				});
 			}else {
 				alertify.alert(response);
@@ -412,7 +412,7 @@ function delpatientProfile() {
 		success: function(response){
 			if (response.includes('success')){
 				alertify.alert(response).set('onok', function(closeEvent){
-					window.location.href="patient-list.php";
+					window.history.back();
 				});
 			} else{
 				alertify.alert('Error: Unable to delete record/s');
