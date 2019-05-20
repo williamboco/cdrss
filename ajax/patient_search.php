@@ -10,7 +10,7 @@
 	$q .= '%';
 
 
-	$query = "SELECT * FROM `patient` WHERE ID LIKE '$q' OR firstName LIKE '$q' OR lastName LIKE '$q'";
+	$query = "SELECT * FROM `patient` WHERE isDeleted=0 AND (ID LIKE '$q' OR firstName LIKE '$q' OR lastName LIKE '$q')";
 	$result = mysqli_query($con, $query);
 
 
