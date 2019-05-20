@@ -392,7 +392,7 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 
 			if(response[0].includes("success")) {
 				alertify.alert(response[0]).set('onok', function(closeEvent){
-					window.location.reload(true);
+					window.history.back();
 				});
 			}else {
 				alertify.alert(response);
