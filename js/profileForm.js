@@ -213,7 +213,7 @@ function viewProfile() {
 						$profile.find("#birthDate").hide();
 						$profile.find("#cPerson").hide();
 						$profile.find("#otherInfo").hide();
-						// $profile.parent().find(".profile").hide();
+						$profile.parent().find(".profile").hide();
 					} else {
 						$profile.find("#idNumber").append("<p class='h4'>" + obj.Patient.ID + "</p>");
 						$profile.find("#fullName").append("<p class='h4'>" + obj.Patient.firstName + " " + obj.Patient.lastName + "</p>");
@@ -402,7 +402,7 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 	});
 });
 
-/*function delpatientProfile() {
+function delpatientProfile() {
 	var data = [getParameterByName("id")];
 	$.ajax({
 		type: "GET",
@@ -410,17 +410,17 @@ $( "#patientEditForm" ).on( "submit", function( event ) {
 		data: {data: data},
 		cache: false,
 		success: function(response){
-
 			if (response.includes('success')){
-				alertify.alert(response);
-				window.location.reload(true);
+				alertify.alert(response).set('onok', function(closeEvent){
+					window.location.href="patient-list.php";
+				});
 			} else{
 				alertify.alert('Error: Unable to delete record/s');
 			}
 		}
 	});
 
-}*/
+}
 
 
 function getParameterByName(name, url) {

@@ -413,7 +413,7 @@ if($_SESSION['role'] != 'Admin') {
 
 					<div class="modal-footer no-border">
 						<button data-dismiss="modal" class="btn btn-default">Cancel</button>
-						<button data-dismiss="modal" id="create-event" class="btn btn-primary" name="update" onclick="delpatientProfile();">Confirm Delete</button>
+						<button data-dismiss="modal" id="create-event" class="btn btn-primary" name="update" onclick="delpatientProfile()">Confirm Delete</button>
 					</div>
 				</div>
 			</div>

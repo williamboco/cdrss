@@ -561,7 +561,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 	<script src="js/home.js"></script>
   <script src="js/patient-list.js"></script>
 	<script src="js/profileForm.js"></script>
-	  <script src="js/dynamic_input.js"></script>
+	<script src="js/dynamic_input.js"></script>
 	<script src="js/date.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/graph.js"></script>
