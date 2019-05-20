@@ -3,7 +3,9 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if($_SESSION['role'] != 'Admin') {
+if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille'){
+	header("location: home-avp-mscam.php");
+} else if ($_SESSION['role'] != 'Admin') {
 	header("location: home.php");
 }
 
@@ -74,7 +76,7 @@ if($_SESSION['role'] != 'Admin') {
 
 			<div class="form-group pull-right visitfunction" style="margin-top: 25px;">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addVisitModal"><i class="glyphicon glyphicon-plus"></i> <b>Add Visit</b></button>
-				<button type="button" class="btn btn-danger tableBtn" onclick="delrecordCheck()"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
+				<button type="button" class="btn btn-danger tableBtn" onclick="deleteRecordCheck()"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
 				<button type="button" class="btn btn-info graphBtn"><i class="glyphicon glyphicon-stats"></i> <b>Show Graph</button>
 				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   Show Table</button>
 				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  Generate Report</b></button>
