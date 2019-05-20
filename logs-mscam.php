@@ -5,21 +5,18 @@ include('includes/session.php');
 
 if($_SESSION['role'] != 'Admin') {
 	header("location: home.php");
-} else if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
-	header("location: user-list-mscam.php");
 }
 
 ?>
 <html>
 <head>
-	<title>Manage Users - Admin</title>
+	<title>Audit Log</title>
 	<link rel="shortcut icon" href="favicon.png" />
 	<link href="vendor/bootstrap-sass-3.3.7/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/DataTables/datatables.min.css" rel="stylesheet">
 	<link href="vendor/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="vendor/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet">
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="vendor/font-awesome/css/all.min.css" rel="stylesheet">
 	<link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<meta charset="utf-8">
@@ -28,20 +25,20 @@ if($_SESSION['role'] != 'Admin') {
 </head>
 <body>
 	<?php
-		include("includes/navbar-avp.php");
+		include("includes/navbar-avp-mscam.php");
 	?>
 	<div class="row">
 		<div class="container card" style="margin-top: 30px;">
 			<div class="col-lg-12">
-				<h3 class="col-lg-6 col-sm-6">Manage Users</h3>
+				<h3 class="col-lg-6 col-sm-6">Audit Log Viewer</h3>
 				<div class="col-lg-6 col-sm-6" style="margin-top: 15px;">
-					<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i>  Add User</button>
+					<button type="button" class="btn btn-info pull-right" data-toggle="modal" onClick="window.location.reload()"><i class="fas fa-redo-alt"></i>  Refresh</button>
 				</div>
 			</div>
 		</div>
 		<div class="container card" style="margin-top: 10px;">
 			<div class="table-responsive">
-				<table id="userTable" class="display" cellspacing="0" width="100%">
+				<table id="logsTable" class="display" cellspacing="0" width="100%">
 				</table>
 			</div>
 		</div>
@@ -64,7 +61,7 @@ if($_SESSION['role'] != 'Admin') {
 					<div class="form-group">
 						<label for ="avpID">User ID</label>
 						<input type="text" class="form-control hidden" name="avpID" value="<?php echo $_SESSION['userID'];?>">
-						<input type="number" class="form-control" name="idNumber" placeholder="User ID" minlength="6" required><br>
+						<input type="text" class="form-control" name="idNumber" placeholder="User ID" minlength="6" required><br>
 						<select class="form-control" name="role" required>
 						  <option value="" disabled selected>User role</option>
 						  <option value="Admin">Admin</option>
@@ -81,9 +78,9 @@ if($_SESSION['role'] != 'Admin') {
 						<label for ="dateEmployed">Employment Date</label>
 						<input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
 						<label for ="contact">Contact Number</label>
-						<input type="number" class="form-control" min="1" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters"placeholder="Contact Number" required><br>
+						<input type="text" class="form-control" name="contact" placeholder="Contact Number" required><br>
 						<label>Gender</label><br>
-						<input type="radio" name="gender" value="Male" id="gender1" checked required>
+						<input type="radio" name="gender" value="Male" id="gender1" required>
 					  <label for="gender1" style="margin-right: 50px;">Male</label>
 					  <input type="radio" name="gender" value="Female" id="gender2" required>
 					  <label for="gender2">Female</label>
@@ -102,8 +99,8 @@ if($_SESSION['role'] != 'Admin') {
 </div>
 
 	<!-- View Modal -->
-<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
 				<div class="modal-content row">
 				  <div class="modal-header col-sm-12">
 						<h4 class="modal-title" style="display: inline;">Edit User Status</h4>
@@ -121,29 +118,36 @@ if($_SESSION['role'] != 'Admin') {
 							<p style="font-size: 16px;"><b>Contact</b><br/><span id="contact"></span></p>
 							<p style="font-size: 16px;"><b>Date Employed</b><br/><span id="dateEmployed"></span></p>
 							<br/><br/>
-						</div>
 
-						<form>
-							<div class="card-body col-sm-12">
-								<p style="font-size: 16px;"><i class="fas fa-power-off"></i></i><b> User Status</b><br/></p>
-								<br/>
-		  						<div class="form-row">
-										<div class="col-sm-6">
-												 <label><input type="radio" name="statusType" value="1" checked="checked" required> Active</label>
-										</div>
-										<div class="col-sm-6">
-											 <label><input type="radio" name="statusType" value="0" checked="checked" required> Inactive</label>
-										</div>
-								</div>
+						<div class="card-body col-sm-12">
+							<p style="font-size: 16px;"><i class="fas fa-power-off"></i></i><b> User Status</b><br/></p>
+							<br/>
+				  	<form>
+	  						<div class="form-row">
+									<div class="col-sm-6">
+											 <label><input type="radio" name="statusType" value="1" checked="checked" required> Active</label>
+									</div>
+									<div class="col-sm-6">
+										 <label><input type="radio" name="statusType" value="0" checked="checked" required> Inactive</label>
+									</div>
 							</div>
-						  <div class="modal-footer col-sm-12">
-								<div class="viewProfile">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-info" id="deleteBtn" name="submit" onclick="deleteUser(this.value)"> Update</button> <!--//update(submit) button-->
-								</div>
-					  	</div>
-						</form>
-				  </div>
+						</div>
+					</div>
+				<!--	<div class="confirmDelete hidden">
+						<p style="font-size: 20px;"><b>Are you sure you want to deactivate this user?</b></p>
+					</div>-->
+				</div>
+			  <div class="modal-footer col-sm-12">
+				<!--	<div class="confirmDelete hidden">
+						<button type="button" class="btn btn-primary" onclick="cancelDelete()">Cancel</button>
+						<button type="button" class="btn btn-danger" id="deleteBtn" onclick="deleteUser(this.value)">Deactivate</button>
+					</div>-->
+					<div class="viewProfile">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-info" id="deleteBtn" name="submit" onclick="deleteUser(this.value)"> Update</button> <!--//update(submit) button-->
+					</div>
+		  	</div>
+			</form>
 			</div>
 	 </div>
 </div>
@@ -153,7 +157,8 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/user-list.js"></script>
+	<script src="js/logs.js"></script>
+
 
 </body>
 </html>

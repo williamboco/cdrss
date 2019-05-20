@@ -25,7 +25,7 @@ if($_SESSION['role'] != 'Admin') {
 </head>
 <body>
 	<?php
-	  include("includes/navbar-avp.php");
+	  include("includes/navbar-avp-mscam.php");
 	?>
 
 	<div class="container" style="padding-bottom: 20px !important;">
