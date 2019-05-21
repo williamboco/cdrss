@@ -73,7 +73,6 @@ $('.form').on('change keyup', function() {
   var sanitized = $(this).val().replace(/[^0-9]/g, '');
   // Update value
   $(this).val(sanitized);
-  alert();
 });
 
 $('.quantity').on('change', function() {
@@ -102,7 +101,6 @@ $('#addVisitForm').find('[name="visitDate"]').on('change', function() {
 
 
 });
-
 
 function viewVisit(id) {
 	complaintOptions();
@@ -351,7 +349,7 @@ function formatRepoSelection(repo) {
 $("#patientID").on('change', function() {
     var $form = $('#addVisitForm');
     var id = $(this).val();
-    $form.find('.allergy').removeClass('hidden');
+    $form.find('.allergy').toggleClass('hidden');
 
     $.ajax({
         type: "GET",
@@ -418,7 +416,7 @@ $("#patientID").select2({
 
 
 $('.guestVisitForm').on('click', function(){
-  $('.allergy').removeClass('hidden');
+  $('.allergy').hide();
   $('#searchDiv').hide();
   $('#searchDiv').find('select').prop('disabled', true);
   $('#searchDiv').find('select').prop('required',false);
@@ -429,7 +427,7 @@ $('.guestVisitForm').on('click', function(){
 });
 
 $('.patientVisitForm').on('click', function(){
-  $('.allergy').addClass('hidden');
+  $('.allergy').show();
   $('#searchDiv').show();
   $('#searchDiv').find('select').prop('disabled', false);
   $('#searchDiv').find('select').prop('required',true);
@@ -512,6 +510,8 @@ $("#addVisitForm").on("submit", function(event) {
 			// ... Process the result ...
       $("#addVisitModal").modal('hide');
       $form[0].reset();
+      $form.find('.allergy').hide();
+
         if(response.includes("success")){
           console.log(response);
           alertify.alert(response).set("onok",

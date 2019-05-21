@@ -20,13 +20,8 @@ $(document).ready(function() {
 			{title: "Visit Date/Time"},
 			{title: "Action", width: "5%", orderable: false},
 		],
-		"order": [[ 0, 'desc' ]],
+		"order": [[ 6, 'desc' ]],
 		//1 changed to 2 to hide sort arrow https://datatables.net/forums/discussion/21164/disable-sorting-of-one-column
-		colReorder: {
-			enable: true,
-			realtime: false,
-			order: [0, 1, 2, 3, 4, 5, 6, 7]
-		}
 	});
 
 	t.on( 'order.dt search.dt', function () {
