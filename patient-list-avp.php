@@ -202,6 +202,7 @@ if($_SESSION['role'] != 'Admin') {
 												</div>
 											</div>
 										  <input type="number" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden">
+											<input type="text" name="role" value="<?php echo $_SESSION['role'];?>" class="hidden">
 		               </div>
 									</form>
 							</div>

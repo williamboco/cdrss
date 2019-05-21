@@ -1,6 +1,8 @@
 <?php
 include("../includes/dbcon.php");
+
 session_start();
+
 $id = htmlspecialchars($_POST['idNumber']);
 $firstName = htmlspecialchars($_POST['firstname']);
 $lastName = htmlspecialchars($_POST['lastname']);
@@ -10,6 +12,7 @@ $allergy = $_POST['allergy'];
 $cPerson = $_POST['cPerson'];
 $contact = htmlspecialchars($_POST['contact']);
 $user = htmlspecialchars($_POST['userID']);
+$role = htmlspecialchars($_POST['role']);
 
 $query = $con->prepare("INSERT INTO patient (ID, firstName, lastName, birthDate, gender, contact, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
 $query->bind_param("ssssssiss", $id, $firstName, $lastName, $birthDate, $gender, $contact, $isDeleted, $user, $user);
@@ -162,6 +165,12 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 				++$i;
 			}
 
+			if ($role == "Admin"){
+				$url = "profile-avp.php?id=$id";
+			} else{
+				$url = "profile.php?id=$id";
+			}
+
 		} else {
 			$message = "Error: Unable to create patient profile.";
 		}
@@ -179,7 +188,11 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 }
 
 //Message
-echo $message;
+$data = array(
+  "message" => $message,
+	"url" => $url
+  );
+echo json_encode($data);
 
-//header('location:../profile.php?id='.$id);
+
 ?>

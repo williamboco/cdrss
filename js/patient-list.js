@@ -57,6 +57,7 @@ $('.filters').on('change', function() {
 });
 
 $( "#patientAddForm" ).on( "submit", function( event ) {
+	var datatable = $('#patientTable').dataTable().api();
 	var $form = $(this);
 
 	event.preventDefault();
@@ -69,13 +70,14 @@ $( "#patientAddForm" ).on( "submit", function( event ) {
 			$("#patientModal").modal('hide');
 			$('.filters').trigger('change');
 			$form[0].reset();
+			var obj = JSON.parse(result);
 
-				if(result.includes('success')) {
-					alertify.alert(result).set('onok', function(closeEvent){
-						window.location.reload(true);
+				if(obj.message.includes('success')) {
+					alertify.alert(obj.message).set('onok', function(closeEvent){
+					window.location.href=obj.url;
 					});
 				}else {
-					alertify.alert(result);
+					alertify.alert(obj.message);
 				}
 			}
 	});
