@@ -45,19 +45,22 @@ if($_SESSION['role'] != 'Admin') {
 						<button type="button" class="btn btn-info" onclick="editRecord()" id="editBtn"><i class="glyphicon glyphicon-pencil"></i>  Update</button>
 						<button type="button" class="btn btn-primary" id="addBtn" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i>  Add</button>
 					</div>
-					<div class="btn-group btn-group-justified hidden" role="group" id="medicineBtnGrp">
-						<div class="btn-group"><button type="button" class="btn btn-lg btn-info medicine-filter" value="medicine">All</button></div>
-						<div class="btn-group"><button type="button" class="btn btn-lg btn-success filters" value="3">Optimum</button></div>
-						<div class="btn-group"><button type="button" class="btn btn-lg btn-warning filters" value="2">Threshold</button></div>
-						<div class="btn-group"><button type="button" class="btn btn-lg btn-danger filters" value="1">Critical</button></div>
-						<div class="btn-group"><button type="button" class="btn btn-lg btn-secondary filters" value="0">Unavailable</button></div>
-					</div>
 					<div class="card">
 						<div class="table-responsive">
 							<table id="table" class="display hover" cellspacing="0" width="100%">
 							</table>
 						</div>
 						<div class="medicine-responsive hidden">
+							<label>View inventory by stock level</label>
+							<div class="container-fluid">
+								<div class="btn-group btn-group-justified" role="group">
+									<div class="btn-group"><button type="button" class="btn btn-lg btn-info medicine-filter" value="medicine">All</button></div>
+									<div class="btn-group"><button type="button" class="btn btn-lg btn-success filters" value="3">Optimum</button></div>
+									<div class="btn-group"><button type="button" class="btn btn-lg btn-warning filters" value="2">Threshold</button></div>
+									<div class="btn-group"><button type="button" class="btn btn-lg btn-danger filters" value="1">Critical</button></div>
+									<div class="btn-group"><button type="button" class="btn btn-lg btn-secondary filters" value="0">Unavailable</button></div>
+								</div><br/><br/>
+							</div>
 							<table id="medicineTable" class="display hover" cellspacing="0" width="100%">
 							</table>
 						</div>
