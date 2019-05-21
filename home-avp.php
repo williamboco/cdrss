@@ -188,13 +188,15 @@ if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille'){
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
 						</div>
+						<div class="btn-group pull-right" role="group" style="margin-top:10px;">
+							<div class="btn-group"><button type="button" class="guestVisitForm btn btn-info"><i class="fas fa-user-friends fa-lg"></i>&nbsp;&nbsp;Add Guest</button>
+							</div>
+							<div class="btn-group"><button type="button" class="btn btn-danger" onclick="addProfile()"><i class="fas fa-file-medical fa-lg"></i>&nbsp;&nbsp;Add Patient Profile</button>
+							</div>
+						</div><br>
+					</div><br>
 
-						<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
-					</div>
-
-					<button class="guestVisitForm btn-link" style="margin-top:-25px;"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
-
-					<div class="allergy row">
+					<div class="allergy row hidden">
 					</div>
 
 					<!-- Guest Patient Info-->
@@ -237,8 +239,7 @@ if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille'){
 					<div class="row">
 						<label for="visitDate" class="col-lg-12 pull-left" style="margin-left:-15px;"><i class="glyphicon glyphicon-calendar"></i>  Set Visit Date *</label>
 						<input type="datetime-local" name="visitDate" class="visitDate" required>
-					</div>
-					<br><br>
+					</div><br>
 
 					<div class="fieldsGroup complaintDiv row" value="10">
 						<label for="complaint[]">Complaint/s *</label>
@@ -249,8 +250,7 @@ if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille'){
 							<button class="remove btn btn-warning	"><i class="glyphicon glyphicon-remove"></i></button>
 						</div>
 						<a href="#" class="addInput" value="complaint[]"><i class="glyphicon glyphicon-plus"></i>	 Add</a>
-					</div>
-					<br>
+					</div><br>
 
 					<div class="fieldsGroup medicineDiv row" value="10">
 						<label for="med[]">Medicine / Supply Requested *</label>

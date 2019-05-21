@@ -351,6 +351,7 @@ function formatRepoSelection(repo) {
 $("#patientID").on('change', function() {
     var $form = $('#addVisitForm');
     var id = $(this).val();
+    $form.find('.allergy').removeClass('hidden');
 
     $.ajax({
         type: "GET",
@@ -417,24 +418,22 @@ $("#patientID").select2({
 
 
 $('.guestVisitForm').on('click', function(){
-  $('.allergy').hide();
+  $('.allergy').removeClass('hidden');
   $('#searchDiv').hide();
   $('#searchDiv').find('select').prop('disabled', true);
   $('#searchDiv').find('select').prop('required',false);
 
-  $('.guestVisitForm').hide();
   $('#guestDiv').removeClass('hidden');
   $('#guestDiv').find('input').prop('disabled', false);
   $('#guestDiv').find('input').prop('required',true);
 });
 
 $('.patientVisitForm').on('click', function(){
-  $('.allergy').show();
+  $('.allergy').addClass('hidden');
   $('#searchDiv').show();
   $('#searchDiv').find('select').prop('disabled', false);
   $('#searchDiv').find('select').prop('required',true);
 
-  $('.guestVisitForm').show();
   $('#guestDiv').addClass('hidden');
   $('#guestDiv').find('input').prop('disabled', true);
   $('#guestDiv').find('input').prop('required',false);
