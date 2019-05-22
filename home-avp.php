@@ -272,7 +272,7 @@ if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille'){
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Cancel">Cancel</button>
+				<button type="button" class="patientVisitForm btn btn-secondary" data-dismiss="modal" aria-label="Cancel">Cancel</button>
 				<button type="submit" class="btn btn-primary pull-right" form="addVisitForm">Add Visit</button>
 			</div>
 		</div>
