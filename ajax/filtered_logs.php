@@ -21,14 +21,16 @@ while($row = mysqli_fetch_array($result)) {
 	$row['lastName'] = openssl_decrypt(base64_decode($row['lastName']), $method, $key, OPENSSL_RAW_DATA, $iv);
 	$row['role'] = openssl_decrypt(base64_decode($row['role']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
-	$x = (object) array(
-		0 => $row['eventID'],
-		1 => $row['eventDate'],
-		2 => $row['eventName'],
-		3 => $row['firstName'].' '.$row['lastName'],
-		4 => $row['role']
-	);
-	array_push($users, $x);
+	if($row['role'] != 'IT') {
+		$x = (object) array(
+			0 => $row['eventID'],
+			1 => $row['eventDate'],
+			2 => $row['eventName'],
+			3 => $row['firstName'].' '.$row['lastName'],
+			4 => $row['role']
+		);
+		array_push($users, $x);
+	}
 }
 
 $data = array(

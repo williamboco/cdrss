@@ -16,16 +16,17 @@
          <div class="row">
             <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
                 <div class="error-container">
+                  <img src="assets/IACADEMY_Logo_2015.png">
                     <h1 class="error-code">404</h1>
                     <p class="error-info">
-                        Opps, it seems that this page does not exist.
+                        Oops, it seems that this page does not exist.
                     </p>
                 </div>
             </div>
         </div>
     </main>
     <footer class="page-footer">
-        Clinic Dispense Reporting System.
+        <b>Clinic Dispense Reporting System.</b>
     </footer>
 
 <!-- common libraries. required for every page-->
