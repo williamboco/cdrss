@@ -17,7 +17,7 @@ switch($patientType) {
 		$join = "employee ON patient.ID=employee.ID INNER JOIN visit ON employee.ID";
 		break;
 	case 'guest':
-		$join = "guest ON ID";
+		$join = "guest ON patient.ID=guest.ID INNER JOIN visit ON guest.ID";
 		break;
 	default:
 		//fallback
