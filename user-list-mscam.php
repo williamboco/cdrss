@@ -5,9 +5,7 @@ include('includes/session.php');
 
 if($_SESSION['role'] != 'Admin') {
 	header("location: home.php");
-} else if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
-	header("location: user-list-mscam.php");
-}
+} 
 
 ?>
 <html>
@@ -28,7 +26,7 @@ if($_SESSION['role'] != 'Admin') {
 </head>
 <body>
 	<?php
-		include("includes/navbar-avp.php");
+		include("includes/navbar-avp-mscam.php");
 	?>
 	<div class="row">
 		<div class="container card" style="margin-top: 30px;">

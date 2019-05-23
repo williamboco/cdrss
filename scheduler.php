@@ -78,13 +78,13 @@ if($rownum > 0) {
 
 				if ($rownum3 > 0) {
 					$msg .= "These are the medicines/supplies that are <strong>Unavailable:</strong>";
-					$msg .= "<table border=1><tr><th>Medicines/Supplies</th><th>Available Quantity</th></tr>";
+					$msg .= "<table border=1><tr><th>Medicines/Supplies</th></tr>";
 					while ($row3 = $result3->fetch_assoc()) {
 
 						if ($row3['isSupply'] == "0") {
-							$msg .="<tr><td>".$row3['brandName'] . "(".$row3['genericName'].")</td><td>". $row3['currentQty']."</td></tr>";
+							$msg .="<tr><td>".$row3['brandName'] . "(".$row3['genericName'].")</td></tr>";
 						} else {
-							$msg .= "<tr><td>".$row3['genericName'] . "</td><td> ". $row3['currentQty']."</td></tr>";
+							$msg .= "<tr><td>".$row3['genericName'] . "</td>></tr>";
 						}
 					}
 					$msg .="</table>";

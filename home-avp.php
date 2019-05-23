@@ -3,7 +3,9 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if($_SESSION['role'] != 'Admin') {
+if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille'){
+	header("location: home-avp-mscam.php");
+} else if ($_SESSION['role'] != 'Admin') {
 	header("location: home.php");
 }
 
@@ -74,10 +76,10 @@ if($_SESSION['role'] != 'Admin') {
 
 			<div class="form-group pull-right visitfunction" style="margin-top: 25px;">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addVisitModal"><i class="glyphicon glyphicon-plus"></i> <b>Add Visit</b></button>
-				<button type="button" class="btn btn-danger tableBtn" onclick="delrecordCheck()"><i class="glyphicon glyphicon-remove"></i>  Delete</button>
-				<button type="button" class="btn btn-info graphBtn"><i class="glyphicon glyphicon-stats"></i> <b>Show Graph</button>
-				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   Show Table</button>
-				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  Generate Report</b></button>
+				<button type="button" class="btn btn-danger tableBtn" onclick="deleteRecordCheck()"><i class="glyphicon glyphicon-remove"></i>  <b>Delete</b></button>
+				<button type="button" class="btn btn-info graphBtn"><i class="glyphicon glyphicon-stats"></i> <b>Show Graph</b></button>
+				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   <b>Show Table</b></button>
+				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i> <b> Generate Report</b></button>
 			</div>
 			<input type="text" class="form-control hidden" name="role" value="<?php echo $_SESSION['role'];?>">
 		</form>
@@ -135,7 +137,7 @@ if($_SESSION['role'] != 'Admin') {
 			<div class="col-md-6">
 				<section class="widget">
 					<header>
-						<h4>Medicine / Supply requested</h4>
+						<h4>Medicine / Supply Requested</h4>
 						<div class="widget-controls">
 							<a data-widgster="fullscreen" href="#">Fullscreen</a>
 							<a data-widgster="restore" href="#">Back</a>
@@ -180,37 +182,39 @@ if($_SESSION['role'] != 'Admin') {
 				<form id="addVisitForm">
 					<input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden" required>
 
-					<div id="searchDiv" class="row">
-						<label for="patientID"><i class="glyphicon glyphicon-user"></i>  Select Patient</label>
+					<div id="searchDiv" class="row" style="margin-bottom:20px;">
+						<label for="patientID"><i class="glyphicon glyphicon-user"></i>  Select Patient *</label>
 						<div>
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
 						</div>
-
-						<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
+						<div class="btn-group pull-right" role="group" style="margin-top:10px;">
+							<div class="btn-group"><button type="button" class="guestVisitForm btn btn-info"><i class="fas fa-user-friends fa-lg"></i>&nbsp;&nbsp;Add Guest</button>
+							</div>
+							<div class="btn-group"><button type="button" class="btn btn-danger" onclick="addProfile()"><i class="fas fa-file-medical fa-lg"></i>&nbsp;&nbsp;Add Patient Profile</button>
+							</div>
+						</div>
 					</div>
 
-					<button class="guestVisitForm btn-link" style="margin-top:-25px;"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
-
-					<div class="allergy row">
+					<div class="allergy row hidden">
 					</div>
 
 					<!-- Guest Patient Info-->
-					<div id="guestDiv" class="row form-horizontal hidden">
+					<div id="guestDiv" class="row form-horizontal hidden" style="margin-bottom:20px;">
 							<div class="form-group">
 								<label class="col-sm-4"><i class="glyphicon glyphicon-user"></i> Guest Details</label>
 								<div class="col-sm-8 float-right">
-									Not a guest? <button class="patientVisitForm btn-link"><i class="fas fa-angle-left float-left"></i> Go back to Patient Visit Form</button>
+									Not a guest? <button class="patientVisitForm btn-link" aria-label="Cancel"><i class="fas fa-angle-left float-left"></i> Go back to Patient Visit Form</button>
 								</div>
 							</div>
 							<div class="form-group">
-								 <label class="col-sm-4 control-label">First Name</label>
+								 <label class="col-sm-4 control-label">First Name *</label>
 								 <div class="col-sm-8">
 										<input type="text" class="form-control" name="firstname" placeholder="First name" required>
 								 </div>
 							</div>
 							<div class="form-group">
-								 <label class="col-sm-4 control-label">Last Name</label>
+								 <label class="col-sm-4 control-label">Last Name *</label>
 								 <div class="col-sm-8">
 										<input type="text" class="form-control" name="lastname" placeholder="Last name" required>
 								 </div>
@@ -222,7 +226,7 @@ if($_SESSION['role'] != 'Admin') {
 								 </div>
 							</div>
 							<div class="form-group">
-								 <label class="col-sm-4 control-label">Gender</label>
+								 <label class="col-sm-4 control-label">Gender *</label>
 								 <div class="col-sm-8">
 										<div class="radio">
 											 <label for="gender1"><input type="radio" name="gender" value="Male" id="gender1" checked required>Male </label>
@@ -230,16 +234,15 @@ if($_SESSION['role'] != 'Admin') {
 										</div>
 								 </div>
 							</div>
-					</div><br>
+					</div>
 
-					<div class="row">
-						<label for="visitDate" class="col-lg-12 pull-left" style="margin-left:-15px;"><i class="glyphicon glyphicon-calendar"></i>  Set Visit Date</label>
+					<div class="row" style="margin-bottom:20px;">
+						<label for="visitDate" class="col-lg-12 pull-left" style="margin-left:-15px;"><i class="glyphicon glyphicon-calendar"></i>  Set Visit Date *</label>
 						<input type="datetime-local" name="visitDate" class="visitDate" required>
 					</div>
-					<br><br>
 
-					<div class="fieldsGroup complaintDiv row" value="10">
-						<label for="complaint[]">Complaint/s</label>
+					<div class="fieldsGroup complaintDiv row" value="10" style="margin-bottom:20px;">
+						<label for="complaint[]">Complaint/s *</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Complaint" class="selComp formInpt col-sm-8" name="complaint[]" disabled required>
 							<option></option>
@@ -248,10 +251,9 @@ if($_SESSION['role'] != 'Admin') {
 						</div>
 						<a href="#" class="addInput" value="complaint[]"><i class="glyphicon glyphicon-plus"></i>	 Add</a>
 					</div>
-					<br>
 
-					<div class="fieldsGroup medicineDiv row" value="10">
-						<label for="med[]">Medicine / Supply Requested</label>
+					<div class="fieldsGroup medicineDiv row" value="10" style="margin-bottom:20px;">
+						<label for="med[]">Medicine / Supply Requested *</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled required>
 							<option></option>
@@ -260,9 +262,9 @@ if($_SESSION['role'] != 'Admin') {
 							<button class="remove">Remove</button>
 						</div>
 						<a href="#" class="addInput" value="med[]"><i class="glyphicon glyphicon-plus"></i> Add</a>
-					</div><br>
+					</div>
 
-					<div class="form-group row">
+					<div class="form-group row" style="margin-bottom:20px;">
 						<label>Remarks</label>
 						<textarea rows="4" class="form-control" name="remarks" placeholder="Remarks"></textarea>
 					</div>
@@ -270,7 +272,7 @@ if($_SESSION['role'] != 'Admin') {
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="button" class="patientVisitForm btn btn-secondary" data-dismiss="modal" aria-label="Cancel">Cancel</button>
 				<button type="submit" class="btn btn-primary pull-right" form="addVisitForm">Add Visit</button>
 			</div>
 		</div>
@@ -289,7 +291,7 @@ if($_SESSION['role'] != 'Admin') {
 				 <div class="modal-body">
 						<form class="form-horizontal" id="addPatientForm" action="ajax/patientCreate.php" method="post">
 						 <div class="form-group">
-								<label class="col-sm-4 control-label">Patient type</label>
+								<label class="col-sm-4 control-label">Patient type *</label>
 								<div class="col-sm-8">
 									 <div class="radio">
 											<label><input type="radio" name="ptype" value="student" required>Student</label>
@@ -299,25 +301,25 @@ if($_SESSION['role'] != 'Admin') {
 						 </div>
 						 <div id="profileInfoDiv" class="hidden">
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">ID Number</label>
+									<label class="col-sm-4 control-label">ID Number *</label>
 									<div class="col-sm-8">
 										 <input type="text" class="form-control" name="idNumber" pattern=".{5,20}" title="5 to 20 characters" placeholder="Patient ID" required>
 									</div>
 							 </div>
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">First Name</label>
+									<label class="col-sm-4 control-label">First Name *</label>
 									<div class="col-sm-8">
 										 <input type="text" class="form-control" name="firstname" placeholder="First name" required>
 									</div>
 							 </div>
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">Last Name</label>
+									<label class="col-sm-4 control-label">Last Name *</label>
 									<div class="col-sm-8">
 										 <input type="text" class="form-control" name="lastname" placeholder="Last name" required>
 									</div>
 							 </div>
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">Birth Date</label>
+									<label class="col-sm-4 control-label">Birth Date *</label>
 									<div class="col-sm-8">
 										 <input type="date" required class="form-control" name="birthdate" required>
 									</div>
@@ -330,7 +332,7 @@ if($_SESSION['role'] != 'Admin') {
 							 </div>
 
 							 <div class="form-group">
-									<label class="col-sm-4 control-label">Gender</label>
+									<label class="col-sm-4 control-label">Gender *</label>
 									<div class="col-sm-8">
 										 <div class="radio">
 												<label for="gender1"><input type="radio" name="gender" value="Male" id="gender1" checked required>Male </label>
@@ -341,7 +343,7 @@ if($_SESSION['role'] != 'Admin') {
 
 							 <div class="studDiv hidden">
 									<div class="form-group">
-										 <label class="col-sm-4 control-label">Student Type</label>
+										 <label class="col-sm-4 control-label">Student Type *</label>
 										 <div class="col-sm-8">
 												<select id="selStudType" name="studenttype" data-width="100%" data-placeholder="Select student type" required>
 													<option></option>
@@ -351,7 +353,7 @@ if($_SESSION['role'] != 'Admin') {
 										 </div>
 									</div>
 									<div class="form-group hidden" id="courseDiv">
-										 <label class="col-sm-4 control-label">Course</label>
+										 <label class="col-sm-4 control-label">Course *</label>
 										 <div class="col-sm-8">
 											 <select data-width="100%" data-placeholder="Select course" id="selCourse" class="select2 form-control inputStud" name="course" required>
 													<option></option>
@@ -360,7 +362,7 @@ if($_SESSION['role'] != 'Admin') {
 									</div>
 
 									<div class="form-group hidden" id="trackDiv">
-										 <label class="col-sm-4 control-label">Track</label>
+										 <label class="col-sm-4 control-label">Track *</label>
 										 <div class="col-sm-8">
 											 <select data-width="100%" data-placeholder="Select track" id="selTrack" class="select2 form-control inputStud" name="trackname" required>
 													<option></option>
@@ -371,7 +373,7 @@ if($_SESSION['role'] != 'Admin') {
 
 								<div class="empDiv hidden">
 									<div class="form-group" id="department_dropdown">
-										 <label class="col-sm-4 control-label">Department Name</label>
+										 <label class="col-sm-4 control-label">Department Name *</label>
 											 <div class="col-sm-8">
 												 <select data-width="100%" data-placeholder="Select department" id="selDep" class="select2 form-control" name="depart" required>
 														<option></option>
@@ -379,7 +381,7 @@ if($_SESSION['role'] != 'Admin') {
 											 </div>
 									</div>
 									<div class="form-group" id="empType_dropdown">
-										 <label class="col-sm-4 control-label">Employment Type</label>
+										 <label class="col-sm-4 control-label">Employment Type *</label>
 											 <div class="col-sm-8">
 												 <select data-width="100%" data-placeholder="Select employment type" id="selType" class="select2 form-control" name="employeeType" style="width: 75%" required>
 														<option></option>
@@ -417,7 +419,7 @@ if($_SESSION['role'] != 'Admin') {
 				</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" onclick ="addProfileHide()">Cancel</button>
+				<button type="button" class="btn btn-secondary" onclick ="addProfileHide()" aria-label="Cancel">Cancel</button>
 				<button type="submit" class="btn btn-primary pull-right hidden" form="addPatientForm">Add Patient Profile</button>
 			</div>
 		</div>
@@ -445,7 +447,7 @@ if($_SESSION['role'] != 'Admin') {
 									<b><p>Patient Name</b> <br><i class="glyphicon glyphicon-user"></i>  <span class="fullName h4"></span></p>
 								</div>
 
-							  <div class="contentheight view  col-sm-6">
+							  <div class="contentheight col-sm-6">
 									<div class="view">
 										<b><p>Complaint</p></b>
 										<ul id="complaint"></ul>
@@ -457,13 +459,12 @@ if($_SESSION['role'] != 'Admin') {
 
 							<div class="view col-sm-12">
 								<p>Remarks</p>
-								<p id="remarks" class="h4" style="margin-left: 30px;"></p>
-								<br>
+								<p id="remarks" class="h4" style="margin-left: 30px;"></p><br>
 								<p align="right">Created by <b><span id="createdBy"></span></b> on <span id="dateCreated"></span></p>
 								<div id="modifyDiv">
 									<p align="right">Modified by <b><span id="modifiedBy"></span></b>		 on <span id="dateModified"></span></p>
-								</div>
-								<br><hr style="width:100%; margin:0px;">
+								</div><br>
+								<hr style="width:100%; margin:0px;">
 							</div>
 						</div>
 
@@ -509,7 +510,7 @@ if($_SESSION['role'] != 'Admin') {
 						</div>
 
 						<div class="edit hidden">
-							<button type="button" class="btn btn-secondary" onclick="editFormHide()">Cancel</button>
+							<button type="button" class="btn btn-secondary" onclick="editFormHide()" aria-label="Cancel">Cancel</button>
 							<button type="submit" class="btn btn-primary pull-right" form="editVisitForm">Update Visit</button>
 						</div>
 				  </div>
@@ -526,11 +527,12 @@ if($_SESSION['role'] != 'Admin') {
 				<div class="modal-header no-border">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title fw-bold mt" id="myModalLabel20">Are you sure you want to delete this visit?</h4>
-					<p class="fs-mini text-muted mt-sm">
-						Press "Confirm Delete" if you are sure to delete the visit from the system. If not, press "Cancel".
+				</div>
+				<div class="modal-body">
+					<p class="fs-mini mt-sm">
+						Press <strong>Confirm Delete</strong> if you are sure to delete the visit from the system. <br/> If not, press <strong>Cancel</strong>.
 					</p>
 				</div>
-
 				<div class="modal-footer no-border">
 					<button data-dismiss="modal" class="btn btn-default">Cancel</button>
 					<button data-dismiss="modal" id="create-event" class="btn btn-primary" name="update" onclick="delpatientVisit()">Confirm Delete</button>

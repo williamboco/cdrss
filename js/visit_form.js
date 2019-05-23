@@ -73,7 +73,6 @@ $('.form').on('change keyup', function() {
   var sanitized = $(this).val().replace(/[^0-9]/g, '');
   // Update value
   $(this).val(sanitized);
-  alert();
 });
 
 $('.quantity').on('change', function() {
@@ -102,7 +101,6 @@ $('#addVisitForm').find('[name="visitDate"]').on('change', function() {
 
 
 });
-
 
 function viewVisit(id) {
 	complaintOptions();
@@ -186,8 +184,8 @@ function viewVisit(id) {
 
 function viewVisitForm() {
 
-	/*var $form = $('#addPatientForm');
-    $.ajax({
+	var $form = $('#addPatientForm');
+  /*  $.ajax({
         type: "GET",
         url: "ajax/patientRead.php",
         data: {patientID: id},
@@ -242,15 +240,11 @@ function delpatientVisit() {
     $.ajax({
         type: "GET",
         url: "ajax/visitDelete.php",
-        data: {
-            data: data
-        },
+        data: {data: data},
         cache: false,
         success: function(response) {
-
             alertify.alert(response);
             refresh();
-
         }
     });
 }
@@ -351,6 +345,7 @@ function formatRepoSelection(repo) {
 $("#patientID").on('change', function() {
     var $form = $('#addVisitForm');
     var id = $(this).val();
+    $form.find('.allergy').removeClass('hidden');
 
     $.ajax({
         type: "GET",
@@ -422,19 +417,16 @@ $('.guestVisitForm').on('click', function(){
   $('#searchDiv').find('select').prop('disabled', true);
   $('#searchDiv').find('select').prop('required',false);
 
-  $('.guestVisitForm').hide();
   $('#guestDiv').removeClass('hidden');
   $('#guestDiv').find('input').prop('disabled', false);
   $('#guestDiv').find('input').prop('required',true);
 });
 
 $('.patientVisitForm').on('click', function(){
-  $('.allergy').show();
   $('#searchDiv').show();
   $('#searchDiv').find('select').prop('disabled', false);
   $('#searchDiv').find('select').prop('required',true);
 
-  $('.guestVisitForm').show();
   $('#guestDiv').addClass('hidden');
   $('#guestDiv').find('input').prop('disabled', true);
   $('#guestDiv').find('input').prop('required',false);
@@ -513,10 +505,14 @@ $("#addVisitForm").on("submit", function(event) {
 			// ... Process the result ...
       $("#addVisitModal").modal('hide');
       $form[0].reset();
-      refresh();
+      $form.find('.allergy').hide();
+
         if(response.includes("success")){
           console.log(response);
-          alertify.alert(response);
+          alertify.alert(response).set("onok",
+            function(closeEvent){
+              refresh();
+          });
         } else{
           alertify.alert(response);
         }
@@ -538,17 +534,17 @@ $("#addPatientForm").on("submit", function(event) {
 		data: $form.serialize(),
 		success: function(data) {
 			// ... Process the result ...
-			var result = JSON.parse(JSON.stringify(data));
-      addProfileHide();
+			var result = JSON.parse(data);
       $form[0].reset();
 
-  			if(result.includes("success")) {
-          alertify.alert(result);
-          viewVisitForm();
-          refresh();
+  			if(result.message.includes("success")) {
+          alertify.alert(result.message).set('onok', function(closeEvent){
+            $('#patientModal').modal('hide');
+            $('#addVisitForm').reset();
+            viewVisitForm();
+  				});
   			}else {
-  				alertify.alert(result);
-          refresh();
+  				alertify.alert(result.message);
   			}
 		}
 	});

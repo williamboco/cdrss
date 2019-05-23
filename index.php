@@ -31,6 +31,7 @@ if (isset($_SESSION['userID'])) {
 <body class="login-page" style="max-height: 100% !important;">
 <div class="container">
     <main id="content" class="widget-login-container" role="main">
+<<<<<<< HEAD
         <div class="row"><br/>
             <div class="col-lg-4 col-sm-6 col-xs-12 col-lg-offset-4 col-sm-offset-3">
               <img src = "assets/iacademy-web-logo-white.png" class="logo-responsive">
@@ -129,6 +130,48 @@ if (isset($_SESSION['userID'])) {
                 </section>
               </div>
             </div>
+=======
+        <div class="row">
+          <div class="col-lg-4 col-sm-6 col-xs-12 col-lg-offset-4 col-sm-offset-3">
+      			<h4 class="widget-login-logo animated fadeInUp">
+      					<b>Clinic Drug-dispense Reporting System</b>
+      			</h4>
+            <section class="widget widget-login animated fadeInUp">
+            <header>
+						  <img src="assets/LogoColored.png" style="height:100px; display:block; margin:0 auto;"><br>
+              <h3 align="center">Login to your account</h3>
+            </header>
+            <div class="widget-body">
+  						<div class="alert alert-danger">
+  						</div>
+                <form action="ajax/log_in.php">
+                  <div class="form-group input-group">
+								    <span class="input-group-addon login-addon">
+								      <div class="glyphicon glyphicon-envelope"></div>
+                    </span>
+                    <input type="email" class="form-control " name="email" placeholder="Email" required>
+                  </div>
+                  <div class="form-group input-group">
+                    <span class="input-group-addon login-addon">
+                      <div class="glyphicon glyphicon-asterisk"></div>
+                    </span>
+                    <input class="form-control" type="password" name="password" placeholder="Password" required>
+                  </div>
+                  <div class="clearfix">
+                    <div class="btn-toolbar">
+                      <button type="submit" class="btn btn-primary btn-md btn-block">Login</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6 col-sm-push-6">
+                      <a class="mr-n-lg" href="pass-reset.php">Forgot Password?</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </section>
+          </div>
+>>>>>>> 779ba8843e160bbed502ecf00a223d26feca5842
         </div>
       </div>
     </main>

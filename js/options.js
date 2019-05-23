@@ -70,7 +70,6 @@
 
 		$('.table-responsive').show();
 		$('.medicine-responsive').addClass('hidden');
-		$('#medicineBtnGrp').addClass('hidden');
 	});
 
 	$('.medicine-filter').on('click', function() {
@@ -82,7 +81,6 @@
 
 		$('.table-responsive').hide();
 		$('.medicine-responsive').removeClass('hidden');
-		$('#medicineBtnGrp').removeClass('hidden');
 	});
 
   $('.filters').on('click', function() {
@@ -397,7 +395,7 @@ function editRecord() {
 								$form.find('input[name="supplyDosageQty"]').val(obj.dosageQty);
 								$form.find('[name="supplyDosage"]').val(obj.dosage).trigger('change');
                 $form.find('input[name="supplyThresholdQty"]').val(obj.thresholdQty);
-                $form.find('input[name="supplyCriticalQty"]').val(obj.criticalQty);  
+                $form.find('input[name="supplyCriticalQty"]').val(obj.criticalQty);
 							}
 
 							$form.find('input[name="id"]').val(value);
