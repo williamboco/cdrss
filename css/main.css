@@ -95,9 +95,14 @@ body{
   text-transform:uppercase;
   font-style:'PT Sans Caption';
   margin:25px;
+  color: #ffffff;
   padding-bottom:10px;
   bottom:0px;
 
+}
+
+.indent {
+  padding-left: 16px;
 }
 
 .navbar-default {
@@ -212,6 +217,11 @@ hr.profile{
   transition: 0.25s;
   float:left;
 }
+
+.logo-responsive {
+  max-width: 350px;
+  height: 90px;
+}
 .table-responsive table{
   padding:0px !important;
   margin:0px;
@@ -262,8 +272,8 @@ hr.profile{
   color:white;
 }
 .btn-block:hover{
-  box-shadow:rgba(14, 87, 109,0.8) 0px 5px 0px;
-  background:rgba(30, 121, 148,0.8);
+  /*box-shadow:rgba(14, 87, 109,0.8) 0px 5px 0px;
+  background:rgba(30, 121, 148,0.8);*/
 }
 
 span.select2.select2-container.select2-container--default{
@@ -404,11 +414,19 @@ button.remove:active{
 }
 
 .login-page{
-	background:lightblue !important;
+	background:#0F2D73 !important;
 }
 
 .widget-login{
 	background:rgba(255,255,255,1);
+}
+
+.titlecolor {
+  color: #ffffff;
+}
+
+.page-footer {
+  color: #ffffff;
 }
 .input-group-addon{
 	background:lightgrey;
@@ -464,7 +482,7 @@ input[type=number]{
 .input-group-addon:first-child{
   border-radius:0px;
   border:none;
-  background: transparent;
+  background:#e0e0e0;
 }
 
 
@@ -543,10 +561,18 @@ hr{
 }
 .card{
   height: auto;
-  padding:25px;
+  padding: 25px;
   margin-bottom:2em;
   background:rgba(254,254,254,1);
   box-shadow: 0 10px 6px -6px #777;
+  overflow:hidden !important;
+}
+
+.card-reg{
+  height: auto;
+  padding-left:25px;
+  padding-right:25px;
+  margin-bottom:2em;
   overflow:hidden !important;
 }
 .visithistory{
@@ -602,6 +628,12 @@ input.parsley-error
   border: 1px solid red;
 }
 
+.error-code {
+  color: #ffffff;
+}
+.error-info {
+  color: #ffffff;
+}
 /*---------------MEDIA QUERIES---------------*/
 
 @media only screen and (max-width:768px){
