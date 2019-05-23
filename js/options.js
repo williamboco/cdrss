@@ -169,13 +169,17 @@
 			url: $form.attr('action'),
 			data: $form.serialize(),
 			success: function(response) {
-        $form[0].reset();
         $addModal.modal('hide');
         if (response.includes("success")){
-          alertify.alert(response);
+          alertify.alert(response).set('onok', function(){
+            $addModal.modal('hide');
+            $form[0].reset();
+          });
           selectUrl(table);
         } else{
-          alertify.alert(response);
+          alertify.alert(response).set('onok', function(){
+            $addModal.modal('show');
+          });
         }
 			}
 		});
