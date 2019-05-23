@@ -32,7 +32,6 @@ $('#logInForm').on('submit', function(event) {
 		}
 	});
 });
-<<<<<<< HEAD
 
 $( "#addForm" ).on( "submit", function( event ) {
 	var $form = $(this);
@@ -63,5 +62,3 @@ function regFormHide() {
 	$('.viewLogin').removeClass('hidden');
 	$('.viewRegForm').addClass('hidden');
 }
-=======
->>>>>>> 779ba8843e160bbed502ecf00a223d26feca5842
