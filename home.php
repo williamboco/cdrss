@@ -170,7 +170,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 
 
 	<!-- Add visit modal -->
-	<div class="modal fade" id="addVisitModal" role="dialog" aria-hidden="true" style="max-height:100%;overflow-y:auto;">
+	<div class="modal fade" id="addVisitModal" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -475,7 +475,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 							<input type="datetime-local" name="visitDate" class="visitDate" required>
 							<br><br> -->
 							<div class="fieldsGroup complaintDiv" value="10">
-								<label for="complaint[]">Complaint/s</label>
+								<label for="complaint[]">Complaint/s *</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Complaint" class="selComp formInpt" name="complaint[]" disabled required>
 									<option></option>
@@ -497,7 +497,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 							</div><br> -->
 
 							<div class="form-group">
-								<label>Remarks</label>
+								<label>Remarks *</label>
 								<textarea rows="4" class="form-control" name="remarks" id="remarksEdit" placeholder="Remarks" required></textarea>
 							</div>
 						</form>

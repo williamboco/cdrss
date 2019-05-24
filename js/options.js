@@ -173,8 +173,8 @@
         if (response.includes("success")){
           alertify.alert(response).set('onok', function(){
             $addModal.modal('hide');
-            $form[0].reset();
           });
+          $form[0].reset();
           selectUrl(table);
         } else{
           alertify.alert(response).set('onok', function(){
