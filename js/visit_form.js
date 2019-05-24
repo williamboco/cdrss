@@ -567,10 +567,11 @@ $("#editVisitForm").on("submit", function(event) {
 			var obj = JSON.parse(data);
 
   			if(obj.Message.includes("success")) {
-          alertify.alert(obj.Message);
-          editFormHide();
-          $('.select2-hidden-accessible').parent(".tbContainer").remove();
-          viewVisit(obj.vId);
+          alertify.alert(obj.Message).set('onok', function(event){
+            editFormHide();
+            viewVisit(obj.vId);
+            $('.select2-hidden-accessible').parent(".tbContainer").remove();
+          });
           refresh();
   			}else {
   				alertify.alert(obj.Message);
