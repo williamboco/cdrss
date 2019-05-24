@@ -15,6 +15,7 @@
       <ul class="nav navbar-nav">
         <li><a href="home-avp-mscam.php">Home</a></li>
         <li><a href="logs-mscam.php">Logs</a></li>
+        <li><a href="manuals/avp.pdf" download="Admin's Manual">Admin's Manual</a> </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
