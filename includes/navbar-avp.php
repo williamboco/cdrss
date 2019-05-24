@@ -17,6 +17,7 @@
         <li><a href="patient-list-avp.php">Patient Profiles</a></li>
         <li><a href="options-avp.php">Data Management</a></li>
         <li><a href="logs.php">Logs</a></li>
+        <li><a href="manuals/physician.pdf" download="Physician's Manual">Physician's Manual</a> </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
