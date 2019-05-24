@@ -86,7 +86,7 @@ include('includes/session.php');
 								<button type="button" class="btn btn-secondary pull-right marginbtn">Cancel</button>
 							</form>
 						</div>
-						
+
 						<div class="editPassword hidden divs">
 							<form id="passwordForm" autocomplete="off"  action="ajax/password/change.php" method="post" class="col-md-8" >
 								<h4><b>Change Password</b></h4>

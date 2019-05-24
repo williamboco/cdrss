@@ -41,9 +41,9 @@ if (isset($_SESSION['userID'])) {
                     <header>
 						<img src="assets/LogoColored.png" class="viewLogin" style="height:100px; display:block; margin:0 auto;">
 						<br>
-                  <!--  <div class="widget-body">-->
-					<!--	<div class="alert alert-danger">
-          </div>-->
+               <div class="widget-body">
+					        <div class="alert alert-danger">
+                  </div>
                     <h3 align="center" class="viewLogin"><b>Sign in</b></h3>
                 </header><br/>
                         <form id="logInForm" action="ajax/log_in.php" method="post">

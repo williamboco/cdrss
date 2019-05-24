@@ -27,7 +27,7 @@ $('#logInForm').on('submit', function(event) {
 				}
 
 			}else {
-				$('.alert-danger').html(response).show();
+					$('.alert-danger').html(response).show();
 			}
 		}
 	});
