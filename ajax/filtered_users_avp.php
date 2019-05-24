@@ -25,16 +25,18 @@ while($row = $result->fetch_assoc()) {
 		$status = "Inactive";
  	}
 
-	$x = (object) array(
-		0 => '',
-		1 => $row['ID'],
-		2 => $row['firstName'].' '.$row['lastName'],
-		3 => $row['email'],
-		4 => $row['role'],
-		5 => $status,
-		6 => '<button id="ID" class="btn btn-primary pull-right" onclick="viewUser(this.value)" value="'.$row['ID'].'"> <i class="glyphicon glyphicon-edit"></i> Update Status</button>'
-	);
-	array_push($users, $x);
+	if($row['role'] != 'IT') {
+		$x = (object) array(
+			0 => '',
+			1 => $row['ID'],
+			2 => $row['firstName'].' '.$row['lastName'],
+			3 => $row['email'],
+			4 => $row['role'],
+			5 => $status,
+			6 => '<button id="ID" class="btn btn-primary pull-right" onclick="viewUser(this.value)" value="'.$row['ID'].'"> <i class="glyphicon glyphicon-edit"></i> Update Status</button>'
+		);
+		array_push($users, $x);
+	}
 }
 $data = array(
   "data" => $users
