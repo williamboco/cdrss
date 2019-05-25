@@ -80,6 +80,10 @@ if (isset($_SESSION['userID'])) {
                   <div class="viewRegForm hidden">
                     <div class="col-lg-6 col-sm-6 col-xs-12 col-lg-offset-3 col-sm-offset-4">
                         <section class="widget widget-login animated fadeInUp">
+                          <div class="alert alert-success">
+                          </div>
+                          <div class="alert alert-danger">
+                          </div>
                       <h3 align="center"><b>Register</b></h3><br/>
                         <form id="addForm" action="ajax/userRegister.php" method="post">
                   				<div class="addUser card-reg row">

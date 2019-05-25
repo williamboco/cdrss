@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var t = $('#logsTable').DataTable( {
 		"ajax": "ajax/filtered_logs.php?",
 		"columnDefs": [ {
-			"searchable": false,
+			"searchable": true,
 			"orderable": false,
 			"targets": 0
 		} ],

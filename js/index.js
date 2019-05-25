@@ -43,12 +43,12 @@ $( "#addForm" ).on( "submit", function( event ) {
 		url: $form.attr('action'),
 		data: $form.serialize(),
 		success: function(result) {
+		//	var result =  JSON.parse(result);
 			$form[0].reset();
-      var result =  JSON.parse(result);
 				if(result.includes('success')) {
-					alertify.alert(result);
+					$('.alert-success').html(result).show();
 				}else {
-					alertify.alert(result);
+					$('.alert-danger').html(result).show();
 				}
 			}
 	});
@@ -61,4 +61,5 @@ function regForm(el) {
 function regFormHide() {
 	$('.viewLogin').removeClass('hidden');
 	$('.viewRegForm').addClass('hidden');
+	$('.alert').hide();
 }
