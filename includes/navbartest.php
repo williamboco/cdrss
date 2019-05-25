@@ -16,7 +16,6 @@
         <li><a href="home.php">Home</a></li>
         <li><a href="patient-list.php">Patient Profiles</a></li>
         <li><a href="options.php">Data Management</a></li>
-        <li><a href="manuals/user.pdf" download="User's Manual">User Manual</a> </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -28,6 +27,8 @@
           </a>
           <ul class="dropdown-menu">
               <li><a href="account.php"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
+              <li class="divider"></li>
+              <li><a href="manuals/user.pdf" download="User's Manual">User Manual</a> </li>
               <li class="divider"></li>
               <li><a href="includes/logout.php"><i class="fa fa-sign-out"></i> &nbsp; Log Out</a></li>
           </ul>

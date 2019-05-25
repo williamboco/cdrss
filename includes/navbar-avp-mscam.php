@@ -15,7 +15,6 @@
       <ul class="nav navbar-nav">
         <li><a href="home-avp-mscam.php">Home</a></li>
         <li><a href="logs-mscam.php">Logs</a></li>
-        <li><a href="manuals/avp.pdf" download="Admin's Manual">Admin's Manual</a> </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -29,6 +28,7 @@
               <li><a href="account-avp.php"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
               <li class="divider"></li>
               <li><a href="user-list.php"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Manage Users</a></li>
+              <li><a href="manuals/avp.pdf" download="Admin's Manual"><i class="fas fa-download"></i>Admin's Manual</a> </li>
               <li class="divider"></li>
               <li><a href="includes/logout.php"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</a></li>
           </ul>

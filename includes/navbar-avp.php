@@ -17,7 +17,6 @@
         <li><a href="patient-list-avp.php">Patient Profiles</a></li>
         <li><a href="options-avp.php">Data Management</a></li>
         <li><a href="logs.php">Logs</a></li>
-        <li><a href="manuals/physician.pdf" download="Physician's Manual">Physician's Manual</a> </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -31,6 +30,8 @@
               <li><a href="account-avp.php"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
               <li class="divider"></li>
               <li><a href="user-list.php"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Manage Users</a></li>
+              <li class="divider"></li>
+              <li><a href="manuals/physician.pdf" download="Physician's Manual"><i class="fas fa-download"></i> Physician's Manual</a> </li>
               <li class="divider"></li>
               <li><a href="includes/logout.php"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</a></li>
           </ul>
