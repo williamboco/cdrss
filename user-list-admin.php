@@ -26,7 +26,7 @@ if($_SESSION['role'] != 'Admin') {
 </head>
 <body>
 	<?php
-		include("includes/navbar-avp-admin.php");
+		include("includes/navbar-admin.php");
 	?>
 	<div class="row">
 		<div class="container card" style="margin-top: 30px;">
