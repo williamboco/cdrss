@@ -32,9 +32,26 @@ if($_SESSION['role'] != 'Admin') {
 
 		<div class="row">
 			<div class="col-md-12">
-				<img src="assets/LogoColored.png" style="display:block;height:40px;float:left;">
-				<h4>Clinic Drug-dispense Reporting System</h4>
-				<h4 id="date">Date</h4>
+				<div class="row">
+					<div class="col-sm-9">
+						<img src="assets/LogoColored.png" style="display:block;height:40px;float:left;">
+						<h4>Clinic Drug-dispense Reporting System</h4>
+						<h4 id="date">Date</h4>
+					</div>
+					<div class="col-sm-3">
+						<div>
+							<h4 class="text-right">Staff -- &nbsp;&nbsp; <i class="glyphicon glyphicon-user"></i>&nbsp;<b><?php echo $_SESSION['role']." ".$_SESSION['firstName']?></b></h4>
+							<button class="btn btn-md btn-danger col-sm-6" onclick="window.history.go(-1)">
+								<span class="circle bg-white"><i class="fa fa-arrow-left text-danger"></i></span> Back &nbsp;
+							</button>
+							<button id="print" class="btn btn-md btn-secondary col-sm-6" onclick="window.print()">
+								<i class="fa fa-print"></i> &nbsp;&nbsp; Print
+							</button>
+						</div>
+						<h4>Staff -- &nbsp;&nbsp; <i class="glyphicon glyphicon-user"></i>&nbsp;<b><?php echo $_SESSION['role']." ".$_SESSION['firstName']?></b></h4>
+					</div>
+				</div><br/>
+
 				<div class="card col-lg-6 col-sm-12 reportcard blue white-text" align="center">
 					Filter Type:
 					<b><h3 id="pType" align="center"></h3></b>
@@ -69,24 +86,7 @@ if($_SESSION['role'] != 'Admin') {
 					</span>
 				</div>
 
-				<p>Staff</p>
-				<p><?php echo $_SESSION['role']." ".$_SESSION['firstName']?></p>
-				<div class="btn-toolbar mt-lg text-align-right hidden-print">
-					                  <button class="btn btn-danger" onclick="window.history.go(-1)">
-					                      Back
-					                      &nbsp;
-					                      <span class="circle bg-white">
-					                          <i class="fa fa-arrow-left text-danger"></i>
-					                      </span>
-					                  </button>
-							<button id="print" class="btn btn-inverse" onclick="window.print()">
-					                      <i class="fa fa-print"></i>
-					                      &nbsp;&nbsp;
-					                      Print
-					                  </button>
-					              </div>
-					  </div>
-
+			</div>
 		</div>
 	</div>
 

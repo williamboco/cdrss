@@ -16,10 +16,10 @@ if (isset($_SESSION['userID'])) {
 <html>
 <head>
     <title>CDRS - Login</title>
-	<link rel="shortcut icon" href="favicon.png" />
-    <link href="css/application.css" rel="stylesheet">
-	  <link href="css/main.css" rel="stylesheet">
     <link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
+    <link href="css/application.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+	  <link rel="shortcut icon" href="favicon.png" />
     <link rel="shortcut icon" href="img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8">

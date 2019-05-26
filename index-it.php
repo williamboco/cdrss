@@ -18,10 +18,10 @@ if (isset($_SESSION['userID'])) {
 <html>
 <head>
     <title>CDRS - IT</title>
-	<link rel="shortcut icon" href="favicon.png" />
+    <link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
     <link href="css/application.css" rel="stylesheet">
 	  <link href="css/main.css" rel="stylesheet">
-    <link href="vendor/alertify.js-master/dist/css/alertify.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.png" />
     <link rel="shortcut icon" href="img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -98,36 +98,69 @@ if (isset($_SESSION['userID'])) {
                         <input class="form-control" type="password" name="password" placeholder="Password" required>
                       </div><br/>
 
-                      <label for ="avpID">User ID*</label>
-                        <input type="text" class="form-control hidden" name="avpID" value="<?php echo $_SESSION['userID'];?>">
-                        <input type="number" class="form-control" name="idNumber" placeholder="User ID" minlength="6" required><br>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="avpID">User ID *</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control hidden" name="avpID" value="<?php echo $_SESSION['userID'];?>">
+                          <input type="number" class="form-control" name="idNumber" placeholder="User ID" minlength="6" required><br>
+                        </div>
+                      </div>
 
-                      <label for ="role">User Role*</label>
-                        <select class="form-control" name="role" required>
-                          <option value="" disabled selected>User Role</option>
-                    			<option value="Admin">Admin</option>
-                          <option value="IT">I.T</option>
-                        </select><br>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="role">User Role *</label>
+                        <div class="col-sm-8">
+                          <select class="form-control" name="role" required>
+                            <option value="" disabled selected>User Role</option>
+                            <option value="Admin">Admin</option>
+                            <option value="IT">I.T</option>
+                          </select><br>
+                        </div>
+                      </div>
 
-                      <label for ="firstname">First Name*</label>
-                        <input type="text" class="form-control" name="firstname" placeholder="Firstname" required><br>
-                      <label for ="lastname">Last Name*</label>
-                        <input type="text" class="form-control" name="lastname" placeholder="Lastname" required><br>
-                      <label for ="dateEmployed">Employment Date*</label>
-                        <input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
-                      <label for ="contact">Contact Number*</label>
-                        <input type="number" class="form-control" min="1" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters"placeholder="Contact Number" required><br>
-                      <label>Gender*</label><br>
-                        <input type="radio" name="gender" value="Male" id="gender1" checked required>
-                      <label for="gender1" style="margin-right: 50px;">Male</label>
-                        <input type="radio" name="gender" value="Female" id="gender2" required>
-                      <label for="gender2">Female</label>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="firstname">First Name *</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" name="firstname" placeholder="Firstname" required><br>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label"for="lastname">Last Name *</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" name="lastname" placeholder="Lastname" required><br>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">Gender *</label><br>
+                        <div class="col-sm-8">
+                          <input type="radio" name="gender" value="Male" id="gender1" checked required>
+                          <label for="gender1" style="margin-right: 50px;" checked>Male</label>
+                          <input type="radio" name="gender" value="Female" id="gender2" required>
+                          <label for="gender2">Female</label><br/><br/>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="dateEmployed">Employment Date *</label>
+                        <div class="col-sm-8">
+                          <input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="contact">Contact Number</label>
+                        <div class="col-sm-8">
+                          <input type="number" class="form-control" min="1" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters"placeholder="Contact Number"><br>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </form>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary btn-md btn-block" form="addForm">Submit</button>
-                  <button type="button" class="btn btn-secondary btn-md btn-block" onclick="regFormHide()">Cancel</button>
+                  <button type="button" class="btn btn-secondary btn-md" onclick="regFormHide()">Cancel</button>
+                  <button type="submit" class="btn btn-primary btn-md" form="addForm">Submit</button>
                 </div>
               </div>
             </section>
