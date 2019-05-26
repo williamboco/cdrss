@@ -3,10 +3,8 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
-	header("location: home-avp-admin.php");
-} else if ($_SESSION['role'] == 'Admin') {
-	header("location: home-avp.php");
+if($_SESSION['role'] != 'Admin') {
+	header("location: home.php");
 }
 
 ?>
@@ -49,7 +47,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 <body>
 	<div class="row">
 	<?php
-	  include("includes/navbartest.php");
+	  include("includes/navbar-admin.php");
 	?>
   </div>
 
@@ -75,25 +73,26 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 			</div>
 
 			<div class="form-group pull-right visitfunction" style="margin-top: 25px;">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addVisitModal"><i class="glyphicon glyphicon-plus"></i> <b>Add Visit</b></button>
-				<button type="button" class="btn btn-danger tableBtn" onclick="deleteRecordCheck()"><i class="glyphicon glyphicon-remove"></i>  <b>Delete</b></button>
-				<button type="button" class="btn btn-info graphBtn"><i class="glyphicon glyphicon-stats"></i> <b>Show Graph</b></button>
-				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   <b>Show Table</b></button>
-				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  <b>Generate Report</b></button>
+				<button type="button" class="btn btn-info graphBtn"><i class="glyphicon glyphicon-stats"></i> <b>Show Graph</button>
+				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   Show Table</button>
+				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  Generate Report</b></button>
 			</div>
 			<input type="text" class="form-control hidden" name="role" value="<?php echo $_SESSION['role'];?>">
+			<input type="text" class="form-control hidden" name="firstName" value="<?php echo $_SESSION['firstName'];?>">
+
 		</form>
 	</div>
 
-  <!--Sort filters-->
-	<!--<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
+
+	<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
 		<div class="container card">
 		<form class="col-lg-12 col-sm-12" id="sortBy" action="ajax/filtered_visits_avp.php">
 				<div class="col-lg-6 col-sm-6">
 					<h3><span id="filterName">All </span>Patient Visits</h3>
 					<h5 id="date"></h5>
 				</div>
-				<div class="form-group pull-right col-lg-2 col-sm-2" style="margin-top: 25px;">
+				  <!--Sort filters-->
+				<!-- <div class="form-group pull-right col-lg-2 col-sm-2" style="margin-top: 25px;">
 				<label for="sortBy" class="col-2 col-form-label pull-right"><i class="fas fa-sort" aria-hidden="true"></i> Sort By&nbsp;</label><br>
 					<select class="form-control sorts" name="sortType">
 						<option value="all" selected>All</option>
@@ -102,34 +101,17 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 						<option value="smed">Medicine / Supply</option>
 						<option value="sdate">Date</option>
 					</select>
-			</div>
+			</div> -->
 		</form>
 			<div class="col-lg-12">
 				<hr><br>
 					<div class="table">
-						<table id="visitTable" class="table display" cellspacing="0">
+						<table id="visTable" class="table display" cellspacing="0">
 						</table>
 				  </div>
 				</div>
 			</div>
-		</div>-->
-	<div class="row wow fadeIn" data-wow-delay=".4s" id="table">
-		<div class="container">
-			<div class="card col-12">
-				<div class="tabletheme" style="margin: 0 20px 20px 20px">
-					<div class="row">
-						<h3><span id="filterName">All </span>Patient Visits</h3>
-						<h5 id="date"></h5>
-						<hr>
-					<div class="table-responsive">
-						<table id="visitTable" class="table display" cellspacing="0" width="100%">
-						</table>
-					</div>
-				</div>
-			</div>
 		</div>
-	</div>
-</div>
 
 
 	<div class="container hidden" id="graph">
@@ -137,7 +119,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 			<div class="col-md-6">
 				<section class="widget">
 					<header>
-						<h4>Medicine / Supply Requested</h4>
+						<h4>Medicine / Supply requested</h4>
 						<div class="widget-controls">
 							<a data-widgster="fullscreen" href="#">Fullscreen</a>
 							<a data-widgster="restore" href="#">Back</a>
@@ -170,7 +152,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 
 
 	<!-- Add visit modal -->
-	<div class="modal fade" id="addVisitModal" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+	<div class="modal fade" id="addVisitModal" role="dialog" aria-hidden="true" style="max-height:100%;overflow-y:auto;">
 		<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -182,29 +164,27 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 				<form id="addVisitForm">
 					<input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" class="hidden" required>
 
-					<div id="searchDiv" class="row" style="margin-bottom:20px;">
+					<div id="searchDiv" class="row">
 						<label for="patientID"><i class="glyphicon glyphicon-user"></i>  Select Patient *</label>
 						<div>
 							<select class="form-control" id="patientID" name="idNumber" style="width: 100%;" required>
 							</select>
 						</div>
-						<div class="btn-group pull-right" role="group" style="margin-top:10px;">
-							<div class="btn-group"><button type="button" class="guestVisitForm btn btn-info"><i class="fas fa-user-friends fa-lg"></i>&nbsp;&nbsp;Add Guest</button>
-							</div>
-							<div class="btn-group"><button type="button" class="btn btn-danger" onclick="addProfile()"><i class="fas fa-file-medical fa-lg"></i>&nbsp;&nbsp;Add Patient Profile</button>
-							</div>
-						</div>
+
+						<button type="button" class="btn btn-danger pull-right" onclick="addProfile(this)" style="margin:15px 15px 0px 0px;"><i class="glyphicon glyphicon-pencil"></i> Add Patient Profile</button>
 					</div>
 
-					<div class="allergy row hidden">
+					<button class="guestVisitForm btn-link" style="margin-top:-25px;"><i class="fas fa-user-friends fa-lg float-left"></i> Go to Guest Patient Visit Form</button>
+
+					<div class="allergy row">
 					</div>
 
 					<!-- Guest Patient Info-->
-					<div id="guestDiv" class="row form-horizontal hidden" style="margin-bottom:20px;">
+					<div id="guestDiv" class="row form-horizontal hidden">
 							<div class="form-group">
 								<label class="col-sm-4"><i class="glyphicon glyphicon-user"></i> Guest Details</label>
 								<div class="col-sm-8 float-right">
-									Not a guest? <button class="patientVisitForm btn-link" aria-label="Cancel"><i class="fas fa-angle-left float-left"></i> Go back to Patient Visit Form</button>
+									Not a guest? <button class="patientVisitForm btn-link"><i class="fas fa-angle-left float-left"></i> Go back to Patient Visit Form</button>
 								</div>
 							</div>
 							<div class="form-group">
@@ -234,14 +214,15 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 										</div>
 								 </div>
 							</div>
-					</div>
+					</div><br>
 
-					<div class="row" style="margin-bottom:20px;">
+					<div class="row">
 						<label for="visitDate" class="col-lg-12 pull-left" style="margin-left:-15px;"><i class="glyphicon glyphicon-calendar"></i>  Set Visit Date *</label>
 						<input type="datetime-local" name="visitDate" class="visitDate" required>
 					</div>
+					<br><br>
 
-					<div class="fieldsGroup complaintDiv row" value="10" style="margin-bottom:20px;">
+					<div class="fieldsGroup complaintDiv row" value="10">
 						<label for="complaint[]">Complaint/s *</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Complaint" class="selComp formInpt col-sm-8" name="complaint[]" disabled required>
@@ -251,8 +232,9 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 						</div>
 						<a href="#" class="addInput" value="complaint[]"><i class="glyphicon glyphicon-plus"></i>	 Add</a>
 					</div>
+					<br>
 
-					<div class="fieldsGroup medicineDiv row" value="10" style="margin-bottom:20px;">
+					<div class="fieldsGroup medicineDiv row" value="10">
 						<label for="med[]">Medicine / Supply Requested *</label>
 						<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 							<select data-placeholder="Medicine" class="selMed formInpt" name="med[]" disabled required>
@@ -262,9 +244,9 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 							<button class="remove">Remove</button>
 						</div>
 						<a href="#" class="addInput" value="med[]"><i class="glyphicon glyphicon-plus"></i> Add</a>
-					</div>
+					</div><br>
 
-					<div class="form-group row" style="margin-bottom:20px;">
+					<div class="form-group row">
 						<label>Remarks</label>
 						<textarea rows="4" class="form-control" name="remarks" placeholder="Remarks"></textarea>
 					</div>
@@ -272,7 +254,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="patientVisitForm btn btn-secondary" data-dismiss="modal" aria-label="Cancel">Cancel</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 				<button type="submit" class="btn btn-primary pull-right" form="addVisitForm">Add Visit</button>
 			</div>
 		</div>
@@ -419,7 +401,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 				</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" onclick ="addProfileHide()" aria-label="Cancel">Cancel</button>
+				<button type="button" class="btn btn-secondary" onclick ="addProfileHide()">Cancel</button>
 				<button type="submit" class="btn btn-primary pull-right hidden" form="addPatientForm">Add Patient Profile</button>
 			</div>
 		</div>
@@ -459,12 +441,13 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 
 							<div class="view col-sm-12">
 								<p>Remarks</p>
-								<p id="remarks" class="h4" style="margin-left: 30px;"></p><br>
+								<p id="remarks" class="h4" style="margin-left: 30px;"></p>
+								<br>
 								<p align="right">Created by <b><span id="createdBy"></span></b> on <span id="dateCreated"></span></p>
 								<div id="modifyDiv">
 									<p align="right">Modified by <b><span id="modifiedBy"></span></b>		 on <span id="dateModified"></span></p>
-								</div><br>
-								<hr style="width:100%; margin:0px;">
+								</div>
+								<br><hr style="width:100%; margin:0px;">
 							</div>
 						</div>
 
@@ -475,7 +458,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 							<input type="datetime-local" name="visitDate" class="visitDate" required>
 							<br><br> -->
 							<div class="fieldsGroup complaintDiv" value="10">
-								<label for="complaint[]">Complaint/s *</label>
+								<label for="complaint[]">Complaint/s</label>
 								<div class="tbContainer" style="display: none;margin-bottom: 10px;">
 									<select data-placeholder="Complaint" class="selComp formInpt" name="complaint[]" disabled required>
 									<option></option>
@@ -497,7 +480,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 							</div><br> -->
 
 							<div class="form-group">
-								<label>Remarks *</label>
+								<label>Remarks</label>
 								<textarea rows="4" class="form-control" name="remarks" id="remarksEdit" placeholder="Remarks" required></textarea>
 							</div>
 						</form>
@@ -510,7 +493,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 						</div>
 
 						<div class="edit hidden">
-							<button type="button" class="btn btn-secondary" onclick="editFormHide()" aria-label="Cancel">Cancel</button>
+							<button type="button" class="btn btn-secondary" onclick="editFormHide()">Cancel</button>
 							<button type="submit" class="btn btn-primary pull-right" form="editVisitForm">Update Visit</button>
 						</div>
 				  </div>
@@ -530,8 +513,7 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 				</div>
 				<div class="modal-body">
 					<p class="fs-mini mt-sm">
-						Press <strong>Confirm Delete</strong> if you are sure to delete the visit from the system. <br/>
-						If not, press <strong>Cancel</strong>.
+						Press <strong>Confirm Delete</strong> if you are sure to delete the visit from the system. <br/> If not, press <strong>Cancel</strong>.
 					</p>
 				</div>
 				<div class="modal-footer no-border">
@@ -558,10 +540,10 @@ if($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
 	<script src="vendor/widgster.js"></script>
 	<script src="vendor/moment.min.js"></script>
 	<script src="js/visit_form.js"></script>
-	<script src="js/home.js"></script>
+	<script src="js/admin-home.js"></script>
   <script src="js/patient-list.js"></script>
 	<script src="js/profileForm.js"></script>
-	<script src="js/dynamic_input.js"></script>
+	  <script src="js/dynamic_input.js"></script>
 	<script src="js/date.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/graph.js"></script>

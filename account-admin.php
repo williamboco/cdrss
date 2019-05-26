@@ -1,13 +1,7 @@
-	<?php
+<?php
 session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
-
-if ($_SESSION['role'] != 'Admin') {
-	header ("location: home.php");
-} else if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
-	header ("location: account-admin.php");
-}
 
 ?>
 <html>
@@ -26,7 +20,7 @@ if ($_SESSION['role'] != 'Admin') {
 </head>
 <body>
 	<?php
-		include("includes/navbar-avp.php");
+		include("includes/navbar-admin.php");
 	?>
 
 	<div class="container">

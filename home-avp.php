@@ -4,7 +4,7 @@ include('includes/dbcon.php');
 include('includes/session.php');
 
 if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille'){
-	header("location: home-avp-mscam.php");
+	header("location: home-admin.php");
 } else if ($_SESSION['role'] != 'Admin') {
 	header("location: home.php");
 }
