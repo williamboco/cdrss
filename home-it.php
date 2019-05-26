@@ -66,9 +66,7 @@ if($_SESSION['role'] == 'Admin') {
 						<select class="form-control" name="role" required>
 						  <option value="" disabled selected>User role</option>
 						  <option value="Admin">Admin</option>
-						  <option value="Physician">Physician</option>
-						  <option value="Nurse">Nurse</option>
-						  <option value="Dentist">Dentist</option>
+						  <option value="IT">I.T</option>
 						</select><br>
 						<label for ="firstname">First Name</label>
 						<input type="text" class="form-control" name="firstname" placeholder="Firstname" required><br>

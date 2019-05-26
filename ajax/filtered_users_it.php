@@ -26,7 +26,7 @@ while($row = $result->fetch_assoc()) {
 		$status = "Inactive";
  	}
 
-	if($row['role'] != 'Nurse') {
+	if($row['role'] != 'Nurse' && $row['role'] != 'Physician') {
 		$x = (object) array(
 		0 => '',
 		1 => $row['ID'],
