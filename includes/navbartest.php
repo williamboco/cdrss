@@ -28,9 +28,9 @@
           <ul class="dropdown-menu">
               <li><a href="account.php"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
               <li class="divider"></li>
-              <li><a href="manuals/user.pdf" download="User's Manual">User Manual</a> </li>
+              <li><a href="manuals/user.pdf" download="User's Manual"><i class="fas fa-download"></i> &nbsp; User Manual</a> </li>
               <li class="divider"></li>
-              <li><a href="includes/logout.php"><i class="fa fa-sign-out"></i> &nbsp; Log Out</a></li>
+              <li><a href="includes/logout.php"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</a></li>
           </ul>
         </li>
       </ul>
