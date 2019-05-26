@@ -6,7 +6,7 @@ include('includes/session.php');
 if($_SESSION['role'] != 'Admin') {
 	header("location: home.php");
 } else if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
-	header("location: user-list-mscam.php");
+	header("location: user-list-admin.php");
 }
 
 ?>
