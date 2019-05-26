@@ -34,112 +34,108 @@ if (isset($_SESSION['userID'])) {
         <div class="row"><br/>
             <div class="col-lg-4 col-sm-6 col-xs-12 col-lg-offset-4 col-sm-offset-3">
               <img src = "assets/iacademy-web-logo-white.png" class="logo-responsive">
-				<h4 class="widget-login-logo titlecolor animated fadeInUp">
-						<b>Clinic Drug-Dispense Reporting System</b>
-				</h4>
-                <section class="widget widget-login animated fadeInUp viewLogin">
-                    <header>
-						<img src="assets/LogoColored.png" class="viewLogin" style="height:100px; display:block; margin:0 auto;">
-						<br>
-               <div class="widget-body">
+      				<h4 class="widget-login-logo titlecolor animated fadeInUp">
+      						<b>Clinic Drug-Dispense Reporting System</b>
+      				</h4>
+              <section class="widget widget-login animated fadeInUp viewLogin">
+              <header>
+                <img src="assets/LogoColored.png" class="viewLogin" style="height:100px; display:block; margin:0 auto;"><br>
+                <div class="widget-body">
 					        <div class="alert alert-danger">
                   </div>
-                    <h3 align="center" class="viewLogin"><b>Sign in</b></h3>
-                </header><br/>
-                        <form id="logInForm" action="ajax/log_in.php" method="post">
-                            <div class="form-group input-group viewLogin">
-								<span class="input-group-addon login-addon">
-								<div class="glyphicon glyphicon-envelope"></div>
-								</span>
-                                <input type="email" class="form-control" name="email" placeholder="Email" required>
-                            </div>
-                            <div class="form-group input-group viewLogin">
-								<span class="input-group-addon login-addon">
-								<div class="glyphicon glyphicon-asterisk"></div>
-								</span>
-                                <input class="form-control" type="password" name="password" placeholder="Password" required>
-                            </div>
-                            <div class="clearfix viewLogin">
-                                <div class="btn-toolbar">
-                                    <button type="submit" class="btn btn-primary btn-md btn-block">Login</button>
-                                </div>
-                            </div>
-                            <div class="row indent viewLogin"><br/><br/>
-                                    <a href="pass-reset.php">Forgot Password?</a>
-                            </div>
-
-                        </form>
-                        <div class="viewLogin">
-                          New user?<button class="btn-link" onclick="regForm(this)" style="margin-top:-25px;"><i class="fas fa-user-friends fa-lg float-left"></i> Register here</button>
-                        </div>
-                      </section>
-                      </div>
-
-
-                  <!--Register Form-->
-                  <div class="viewRegForm hidden">
-                    <div class="col-lg-6 col-sm-6 col-xs-12 col-lg-offset-3 col-sm-offset-4">
-                        <section class="widget widget-login animated fadeInUp">
-                          <div class="alert alert-success">
-                          </div>
-                          <div class="alert alert-danger">
-                          </div>
-                      <h3 align="center"><b>Register</b></h3><br/>
-                        <form id="addForm" action="ajax/userRegister.php" method="post">
-                  				<div class="addUser card-reg row">
-                  					<div class="form-group">
-                              <div class="form-group input-group">
-                                <span class="input-group-addon login-addon">
-                                  <div class="glyphicon glyphicon-envelope"></div>
-                                </span>
-                                  <input type="email" class="form-control" name="email" placeholder="Email" required>
-                              </div>
-                              <div class="form-group input-group">
-                                <span class="input-group-addon login-addon">
-                                  <div class="glyphicon glyphicon-asterisk"></div>
-                                </span>
-                                  <input class="form-control" type="password" name="password" placeholder="Password" required>
-                              </div><br/>
-                  						<label for ="avpID">User ID*</label>
-                  						<input type="text" class="form-control hidden" name="avpID" value="<?php echo $_SESSION['userID'];?>">
-                  						<input type="number" class="form-control" name="idNumber" placeholder="User ID" minlength="6" required><br>
-                              <label for ="role">User Role*</label>
-                  						<select class="form-control" name="role" required>
-                  						  <option value="" disabled selected>User Role</option>
-                  						  <option value="Admin">Admin</option>
-                  						  <option value="IT">I.T</option>
-                  						</select><br>
-                  						<label for ="firstname">First Name*</label>
-                  						<input type="text" class="form-control" name="firstname" placeholder="Firstname" required><br>
-                  						<label for ="lastname">Last Name*</label>
-                  						<input type="text" class="form-control" name="lastname" placeholder="Lastname" required><br>
-                  						<label for ="dateEmployed">Employment Date*</label>
-                  						<input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
-                  						<label for ="contact">Contact Number*</label>
-                  						<input type="number" class="form-control" min="1" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters"placeholder="Contact Number" required><br>
-                  						<label>Gender*</label><br>
-                  						<input type="radio" name="gender" value="Male" id="gender1" checked required>
-                  					  <label for="gender1" style="margin-right: 50px;">Male</label>
-                  					  <input type="radio" name="gender" value="Female" id="gender2" required>
-                  					  <label for="gender2">Female</label>
-                  					</div>
-                  			</div>
-                      </form>
-                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-md btn-block" form="addForm">Submit</button>
-                        <button type="button" class="btn btn-secondary btn-md btn-block" onclick="regFormHide()">Cancel</button>
-                      </div>
-                    </div>
-                </section>
+                  <h3 align="center" class="viewLogin"><b>Sign in</b></h3>
+              </header><br/>
+              <form id="logInForm" action="ajax/log_in.php" method="post">
+                <div class="form-group input-group viewLogin">
+                  <span class="input-group-addon login-addon">
+                    <div class="glyphicon glyphicon-envelope"></div>
+                  </span>
+                  <input type="email" class="form-control" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group input-group viewLogin">
+                  <span class="input-group-addon login-addon">
+                    <div class="glyphicon glyphicon-asterisk"></div>
+                  </span>
+                  <input class="form-control" type="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="clearfix viewLogin">
+                  <div class="btn-toolbar">
+                    <button type="submit" class="btn btn-primary btn-md btn-block">Login</button>
+                  </div>
+                </div>
+                <div class="row indent viewLogin"><br/><br/>
+                  <a href="pass-reset.php">Forgot Password?</a>
+                </div>
+              </form>
+              <div class="viewLogin">
+                New user?<button class="btn-link" onclick="regForm(this)" style="margin-top:-25px;"><i class="fas fa-user-friends fa-lg float-left"></i> Register here</button>
               </div>
-            </div>
+            </section>
+          </div>
+
+          <!--Register Form-->
+          <div class="viewRegForm hidden">
+            <div class="col-lg-6 col-sm-6 col-xs-12 col-lg-offset-3 col-sm-offset-4">
+              <section class="widget widget-login animated fadeInUp">
+                <div class="alert alert-success"></div>
+                <div class="alert alert-danger"></div>
+                <h3 align="center"><b>Register</b></h3><br/>
+                <form id="addForm" action="ajax/userRegister.php" method="post">
+                  <div class="addUser card-reg row">
+                    <div class="form-group">
+
+                      <div class="form-group input-group">
+                        <span class="input-group-addon login-addon">
+                          <div class="glyphicon glyphicon-envelope"></div>
+                        </span>
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                      </div>
+
+                      <div class="form-group input-group">
+                        <span class="input-group-addon login-addon">
+                          <div class="glyphicon glyphicon-asterisk"></div>
+                        </span>
+                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                      </div><br/>
+
+                      <label for ="avpID">User ID*</label>
+                        <input type="text" class="form-control hidden" name="avpID" value="<?php echo $_SESSION['userID'];?>">
+                        <input type="number" class="form-control" name="idNumber" placeholder="User ID" minlength="6" required><br>
+
+                      <label for ="role">User Role*</label>
+                        <select class="form-control" name="role" required>
+                          <option value="" disabled selected>User Role</option>
+                    			<option value="Admin">Admin</option>
+                          <option value="IT">I.T</option>
+                        </select><br>
+
+                      <label for ="firstname">First Name*</label>
+                        <input type="text" class="form-control" name="firstname" placeholder="Firstname" required><br>
+                      <label for ="lastname">Last Name*</label>
+                        <input type="text" class="form-control" name="lastname" placeholder="Lastname" required><br>
+                      <label for ="dateEmployed">Employment Date*</label>
+                        <input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
+                      <label for ="contact">Contact Number*</label>
+                        <input type="number" class="form-control" min="1" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters"placeholder="Contact Number" required><br>
+                      <label>Gender*</label><br>
+                        <input type="radio" name="gender" value="Male" id="gender1" checked required>
+                      <label for="gender1" style="margin-right: 50px;">Male</label>
+                        <input type="radio" name="gender" value="Female" id="gender2" required>
+                      <label for="gender2">Female</label>
+                    </div>
+                  </div>
+                </form>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary btn-md btn-block" form="addForm">Submit</button>
+                  <button type="button" class="btn btn-secondary btn-md btn-block" onclick="regFormHide()">Cancel</button>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
-    </main>
-    <footer class="page-footer viewLogin">
-        <b>Clinic Drug-dispense Reporting System v2.</b>
-    </footer>
-
+    </div>
+  </main>
 <!-- common libraries. required for every page-->
 <script src="vendor/common.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
