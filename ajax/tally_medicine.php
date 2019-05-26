@@ -9,18 +9,18 @@ include('switch_case.php');
 
 $i = 0;
 $uN = array();
-$mTotal = 0;
-$med = array();
 $mData = array();
+$mTotal = 0;
 
 foreach ($months as $m) {
 
-	$c = array();
+	// $c = array();
 	//array_push($c, $m);
-	$query = "SELECT medicine.brandName, medicine.genericName, visit_medicine.quantity FROM patient LEFT JOIN ".$join."=visit.patientID JOIN visit_medicine on visit.ID=visit_medicine.visitID JOIN medicine ON medicine.ID=visit_medicine.medicineID WHERE MONTH(visit.visitDate) = ".$m." AND YEAR(visit.visitDate) = ".$years[$i]." AND visit.isDeleted=0 AND patient.isDeleted='0'";
+	$query = "SELECT medicine.brandName, medicine.genericName, visit_medicine.quantity FROM patient LEFT JOIN ".$join."=visit.patientID JOIN visit_medicine on visit.ID=visit_medicine.visitID JOIN medicine ON medicine.ID=visit_medicine.medicineID WHERE MONTH(visit.visitDate) = ".$m." AND YEAR(visit.visitDate) = ".$years[$i]." AND visit.isDeleted='0' AND patient.isDeleted='0'";
 	$result = mysqli_query($con, $query);
 
 
+	$med = array();
 	while($row = mysqli_fetch_array($result)) {
 
 		$n = $row['brandName'] ?: $row['genericName'];
@@ -28,7 +28,7 @@ foreach ($months as $m) {
 
 		$obj = (object) array(
 			"n"   => $n,
-			"q"    => $q
+			"q"   => $q
 		);
 		array_push($med, $obj);
 		array_push($uN, $n);
@@ -64,7 +64,7 @@ foreach($mData as $month) {
 }
 
 $tData = array();
-$index = 1;
+$index = 1; //Initialize index count for displaying row data
 
 foreach ($uN as $key => $value) {
 	$t = 0;
@@ -77,7 +77,7 @@ foreach ($uN as $key => $value) {
 
 		if(array_key_exists($value, $m)) {
 			$t = $t + $m->$value;
-			array_push($row, $m->$value);		
+			array_push($row, $m->$value);
 		}else {
 			array_push($row, 0);
 		}
