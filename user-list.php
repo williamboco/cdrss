@@ -62,31 +62,31 @@ if($_SESSION['role'] != 'Physician') {
 				<div class="modal-body col-sm-12">
 				<div class="addUser card row">
 					<div class="form-group">
-						<label for ="avpID">User ID</label>
+						<label for ="avpID">User ID *</label>
 						<input type="text" class="form-control hidden" name="avpID" value="<?php echo $_SESSION['userID'];?>">
 						<input type="number" class="form-control" name="idNumber" placeholder="User ID" minlength="6" required><br>
 						<select class="form-control" name="role" required>
-						  <option value="" disabled selected>User role</option>
+						  <option value="" disabled selected>User Role *</option>
 						  <option value="Admin">Admin</option>
 						  <option value="Physician">Physician</option>
 						  <option value="Nurse">Nurse</option>
 						  <option value="Dentist">Dentist</option>
 						</select><br>
-						<label for ="firstname">First Name</label>
+						<label for ="firstname">First Name *</label>
 						<input type="text" class="form-control" name="firstname" placeholder="Firstname" required><br>
-						<label for ="lastname">Last Name</label>
+						<label for ="lastname">Last Name *</label>
 						<input type="text" class="form-control" name="lastname" placeholder="Lastname" required><br>
-						<label for ="email">Email Address</label>
+						<label>Gender *</label><br>
+						<input type="radio" name="gender" value="Male" id="gender1" checked required>
+						<label for="gender1" style="margin-right: 50px;">Male</label>
+						<input type="radio" name="gender" value="Female" id="gender2" required>
+						<label for="gender2">Female</label><br><br>
+						<label for ="email">Email Address *</label>
 						<input type="email" class="form-control" name="email" placeholder="Email" required><br>
-						<label for ="dateEmployed">Employment Date</label>
+						<label for ="dateEmployed">Employment Date *</label>
 						<input type="date" class="form-control" name="dateEmployed" placeholder="Date of employment" required><br>
 						<label for ="contact">Contact Number</label>
-						<input type="number" class="form-control" min="1" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters"placeholder="Contact Number" required><br>
-						<label>Gender</label><br>
-						<input type="radio" name="gender" value="Male" id="gender1" checked required>
-					  <label for="gender1" style="margin-right: 50px;">Male</label>
-					  <input type="radio" name="gender" value="Female" id="gender2" required>
-					  <label for="gender2">Female</label>
+						<input type="number" class="form-control" min="1" name="contact" maxlength="11" pattern=".{0,11}" title="0 to 11 characters"placeholder="Contact Number"><br>
 					</div>
 				</form>
 			</div>
