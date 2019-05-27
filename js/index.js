@@ -18,7 +18,7 @@ $('#logInForm').on('submit', function(event) {
 			console.log(response);
 			if(response[0] == 'success') {
 				console.log(response[1]);
-				if(response[1] == 'Avp') {
+				if(response[1] == 'Physician') {
 					window.location.replace("home-avp.php");
 				}else if(response[1] == 'IT') {
 					window.location.replace("home-it.php");
