@@ -37,14 +37,14 @@ while($patient = mysqli_fetch_array($result)) {
 
 				if($type == 'Capsule'  || $type == 'Tablet') {
 					if($q > 1)
-						$unit = 'pcs.';
+						$unit = ' pcs.';
 					else
-						$unit = 'pc.';
+						$unit = ' pc.';
 				}else {
 					if($q > 1)
-						$unit = 'uses';
+						$unit = ' uses';
 					else
-						$unit = 'use';
+						$unit = ' use';
 				}
 
 				$medicine .= $name." (".$q.$unit."), ";

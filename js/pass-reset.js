@@ -18,7 +18,7 @@ $('form').on('submit', function(event) {
 		data: $form.serialize(),
 		success: function(response) {
 				//$('.alert-success').show();
-			if(response == "Error: Invalid email address. Please try again.") {
+			if(response.includes("Error")) {
 				$('.alert-danger').html(response).show();
 			}else {
 				$('.alert-success').html(response).show();

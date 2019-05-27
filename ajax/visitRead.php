@@ -42,14 +42,14 @@ $medicine = array();
 
 		if($type == 'Capsule'  || $type == 'Tablet') {
 			if($qtty > 1)
-				$unit = 'pcs.';
+				$unit = ' pcs.';
 			else
-				$unit = 'pc.';
+				$unit = ' pc.';
 		}else {
 			if($qtty > 1)
-				$unit = 'uses';
+				$unit = ' uses';
 			else
-				$unit = 'use';
+				$unit = ' use';
 		}
 
 		$x = (object) array(
