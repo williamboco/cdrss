@@ -46,9 +46,7 @@ if($_SESSION['role'] != 'Admin') {
 </head>
 <body>
 	<div class="row">
-	<?php
-	  include("includes/navbar-admin.php");
-	?>
+	<?php include("includes/navbar-admin.php"); ?>
   </div>
 
 	<div class="container">
@@ -73,9 +71,9 @@ if($_SESSION['role'] != 'Admin') {
 			</div>
 
 			<div class="form-group pull-right visitfunction" style="margin-top: 25px;">
-				<button type="button" class="btn btn-info graphBtn"><i class="glyphicon glyphicon-stats"></i> <b>Show Graph</button>
-				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   Show Table</button>
-				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  Generate Report</b></button>
+				<button type="button" class="btn btn-info graphBtn"><i class="glyphicon glyphicon-stats"></i> <b>Show Graph</b></button>
+				<button type="button" class="btn btn-info graphBtn hidden"><i class="glyphicon glyphicon-list-alt"></i>   <b>Show Table</b></button>
+				<button type="button" class="btn btn-secondary" onclick="proceedReport()"><i class="glyphicon glyphicon-file"></i>  <b>Generate Report</b></button>
 			</div>
 			<input type="text" class="form-control hidden" name="role" value="<?php echo $_SESSION['role'];?>">
 			<input type="text" class="form-control hidden" name="firstName" value="<?php echo $_SESSION['firstName'];?>">
@@ -539,11 +537,11 @@ if($_SESSION['role'] != 'Admin') {
 	<!--<script src="vendor/DataTables/FixedColumns-3.2.5/js/fixedColumns.dataTables.min.css"></script>-->
 	<script src="vendor/widgster.js"></script>
 	<script src="vendor/moment.min.js"></script>
-	<script src="js/visit_form.js"></script>
 	<script src="js/admin-home.js"></script>
+	<script src="js/visit_form.js"></script>
   <script src="js/patient-list.js"></script>
 	<script src="js/profileForm.js"></script>
-	  <script src="js/dynamic_input.js"></script>
+	<script src="js/dynamic_input.js"></script>
 	<script src="js/date.js"></script>
 	<script src="js/checkbox.js"></script>
 	<script src="js/graph.js"></script>

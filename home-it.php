@@ -9,7 +9,11 @@ if (isset($_SESSION['role'])) {
 			header("location: home-it.php");
 			break;
 		case 'Admin':
-		header("location: home-admin.php");
+			header("location: home-admin.php");
+			break;
+		case 'Physician':
+			header("location: home-avp.php");
+			break;
 		default:
 		header("location: home.php");
 			break;

@@ -3,10 +3,21 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if($_SESSION['role'] == 'Admin'/* && $_SESSION['firstName'] == 'Camille'*/) {
-	header("location: home-admin.php");
-} else if ($_SESSION['role'] == 'Physician') {
-	header("location: home-avp.php");
+if(isset($_SESSION['role'])) {
+	switch ($_SESSION['role']) {
+		case 'IT':
+			header("location: home-it.php");
+			break;
+		case 'Admin':
+			header("location: home-admin.php");
+			break;
+		case 'Physician':
+			header("location: home-avp.php");
+			break;
+		default:
+		header("location: home.php");
+			break;
+	}
 }
 
 ?>

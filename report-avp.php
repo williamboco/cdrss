@@ -47,8 +47,7 @@ if($_SESSION['role'] != 'Physician') {
 							<button id="print" class="btn btn-md btn-secondary col-sm-6" onclick="window.print()">
 								<i class="fa fa-print"></i> &nbsp;&nbsp; Print
 							</button>
-						</div>
-						<h4>Staff -- &nbsp;&nbsp; <i class="glyphicon glyphicon-user"></i>&nbsp;<b><?php echo $_SESSION['role']." ".$_SESSION['firstName']?></b></h4>
+						</div>						
 					</div>
 				</div><br/>
 

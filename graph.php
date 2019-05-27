@@ -3,6 +3,22 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
+if(isset($_SESSION['role'])) {
+	switch ($_SESSION['role']) {
+		case 'IT':
+			header("location: home-it.php");
+			break;
+		case 'Admin':
+			header("location: home-admin.php");
+			break;
+		case 'Physician':
+			header("location: home-avp.php");
+			break;
+		default:
+		header("location: home.php");
+			break;
+	}
+}
 ?>
 
 <html>

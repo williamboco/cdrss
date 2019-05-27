@@ -162,11 +162,9 @@ function proceedReport() {
 	console.log($form.serialize());
 	console.log(role);
 
-	if (role == "Admin" && firstName == 'Camille') {
+	if (role == "Admin") {
 		window.location = "report-admin.php?" + $form.serialize();
-	} else	if (role=="Admin"){
-		window.location="report-avp.php?" + $form.serialize();
-	}  	else {
+	} else {
 		window.location="report.php?" + $form.serialize();
 	}
 
