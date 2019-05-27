@@ -4,7 +4,7 @@ session_start();
 include('includes/dbcon.php');
 
 if (isset($_SESSION['userID'])) {
-    if($_SESSION['role'] == 'Admin') {
+    if($_SESSION['role'] == 'Physician') {
       header("location: home-avp.php");
     } else if($_SESSION['role'] == 'IT') {
 		  header("location: home-it.php");

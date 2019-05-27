@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost","root","","cdrs");
+$con = mysqli_connect("localhost","root","","cdrss");
 
 // Check connection
 if (mysqli_connect_errno())

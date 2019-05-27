@@ -25,6 +25,8 @@
           <ul class="dropdown-menu">
               <li><a href="account.php"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
               <li class="divider"></li>
+              <li><a href="manuals/deploy.pdf" download="Deploment Manual"><i class="fas fa-download"></i> &nbsp; Deployment Manual</a> </li>
+              <li class="divider"></li>
               <li><a href="includes/logout.php"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</a></li>
           </ul>
         </li>

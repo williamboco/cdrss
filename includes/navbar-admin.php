@@ -28,7 +28,8 @@
               <li><a href="account-avp.php"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
               <li class="divider"></li>
               <li><a href="user-list-admin.php"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Manage Users</a></li>
-              <li><a href="manuals/avp.pdf" download="Admin's Manual"><i class="fas fa-download"></i>Admin's Manual</a> </li>
+              <li class="divider"></li>
+              <li><a href="manuals/avp.pdf" download="Admin's Manual"><i class="fas fa-download"></i> &nbsp; Admin's Manual</a> </li>
               <li class="divider"></li>
               <li><a href="includes/logout.php"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</a></li>
           </ul>

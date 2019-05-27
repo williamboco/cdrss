@@ -3,9 +3,9 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if ($_SESSION['role'] != 'Admin') {
+if ($_SESSION['role'] != 'Physician') {
 	header ("location: home.php");
-} else if ($_SESSION['role'] == 'Admin' && $_SESSION['firstName'] == 'Camille') {
+} else if ($_SESSION['role'] == 'Admin'/* && $_SESSION['firstName'] == 'Camille'*/) {
 	header ("location: account-admin.php");
 }
 
