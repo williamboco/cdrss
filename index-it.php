@@ -110,8 +110,7 @@ if (isset($_SESSION['userID'])) {
                         <label class="col-sm-4 control-label" for="role">User Role *</label>
                         <div class="col-sm-8">
                           <select class="form-control" name="role" required>
-                            <option value="" disabled selected>User Role</option>
-                            <option value="Admin">Admin</option>
+                            <option value="" disabled selected>User Role</option>                            
                             <option value="IT">I.T</option>
                           </select><br>
                         </div>
