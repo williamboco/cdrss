@@ -8,9 +8,8 @@ if($_SESSION['role'] == 'Admin'/* && $_SESSION['firstName'] == 'Camille'*/) {
 } else if ($_SESSION['role'] == 'Physician') {
 	header("location: home-avp.php");
 } else if ($_SESSION['role'] == 'IT') {
-	header("location: home-it.php");
+header("location: home-it.php");
 }
-
 ?>
 
 <html>
