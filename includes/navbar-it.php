@@ -5,7 +5,7 @@
          <span class="sr-only">Toggle navigation</span>
          <b><i class="glyphicon glyphicon-th" style="color:white;font-size:20px;"></i></b>
        </button>
-       <a class="navbar-brand" href="manage_it.php">
+       <a class="navbar-brand" href="home-it.php">
         <div class="brandLogo">
    				<p><b>CDRS</b><p>
    			</div>
