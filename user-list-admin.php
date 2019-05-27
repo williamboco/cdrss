@@ -3,7 +3,7 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if($_SESSION['role'] != 'Physician') {
+if($_SESSION['role'] != 'Admin') {
 	header("location: home.php");
 }
 

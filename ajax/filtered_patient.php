@@ -10,7 +10,7 @@ include('filter_patients.php');
 // $key = substr(hash('sha256', $password, true), 0, 32);
 // $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
 
-if ($_SESSION['role'] == 'Admin'){
+if ($_SESSION['role'] == 'Physician'){
 	$url = "profile-avp.php";
 } else {
 	$url = "profile.php";

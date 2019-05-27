@@ -62,77 +62,81 @@ $rownum = mysqli_num_rows($result);
 
 if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace(' ', '', $lastName))) {
 	echo "Error: Input must only contain letters.";
-} else if ($rownum > 0) {
-
-	while ($row = $result->fetch_assoc()) {
-		if ($row['ID'] == $id) {
-			echo "User ID already exists." . "<br>";
-		}
-
-		if ($row['email'] == $email) {
-			echo "Email Address already exists. ";
-		}
-
-	}
 } else {
-	  if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			 $parts = explode('@', $email);
-			 $domain = array_pop($parts);
 
-			 if (! in_array($domain, $allowed)) {
-				 echo "The email must end in iacademy.edu.ph";
-			 } else {
+	if ($rownum > 0) {
+		while ($row = $result->fetch_assoc()) {
+			$row['email'] = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-				 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
-				 $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
-				 $lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
-				 $createdBy = htmlspecialchars($_SESSION['firstName']);
-				 $createdBy = base64_encode(openssl_encrypt($createdBy, $method, $key, OPENSSL_RAW_DATA, $iv));
-				 $modifiedBy =  htmlspecialchars($_SESSION['firstName']);
-				 $modifiedBy = base64_encode(openssl_encrypt($modifiedBy, $method, $key, OPENSSL_RAW_DATA, $iv));
+			if ($row['ID'] == $id) {
+				echo "User ID already exists.";
+			}
+			if ($row['email'] == $email) {
+				echo "Email Address already exists. ";
+			}
+		}
+
+	} else {
+		  if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				 $parts = explode('@', $email);
+				 $domain = array_pop($parts);
+
+				 if (!in_array($domain, $allowed)) {
+					 echo "The email must end in iacademy.edu.ph";
+					 die();
+				 } else {
+
+					 $email = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
+					 $firstName = base64_encode(openssl_encrypt($firstName, $method, $key, OPENSSL_RAW_DATA, $iv));
+					 $lastName = base64_encode(openssl_encrypt($lastName, $method, $key, OPENSSL_RAW_DATA, $iv));
+					 $createdBy = htmlspecialchars($_SESSION['firstName']);
+					 $createdBy = base64_encode(openssl_encrypt($createdBy, $method, $key, OPENSSL_RAW_DATA, $iv));
+					 $modifiedBy =  htmlspecialchars($_SESSION['firstName']);
+					 $modifiedBy = base64_encode(openssl_encrypt($modifiedBy, $method, $key, OPENSSL_RAW_DATA, $iv));
 
 
-				 $stmt->execute();
+					 if ($stmt->execute()){
+						 echo "Successfully created a user";
+					 }
 
-				 $query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
-				 $query2->bind_param("issi", $isNull, $requestID, $id, $isUsed);
-				 $isNull = NULL;
-				 $requestID = randomPassword();
-				 $id = htmlspecialchars($_POST['idNumber']);
-				 $isUsed = 0;
+					 $query2 = $con->prepare("INSERT INTO `password_change_request` (ID, requestID, userID, requestDate, isUsed) VALUES (?,?,?,NOW(),?)");
+					 $query2->bind_param("issi", $isNull, $requestID, $id, $isUsed);
+					 $isNull = NULL;
+					 $requestID = randomPassword();
+					 $id = htmlspecialchars($_POST['idNumber']);
+					 $isUsed = 0;
 
-				 $query2->execute();
+					 $query2->execute();
 
-				 $email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
+					 $email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
 
-				 // email message
-				 $title = "link";
-				 $link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
-				 $msg = "An account has been created for you. To complete setting up your account, \nplease click this <a href='".$link."'>".$title."</a> to set your own password.";
+					 // email message
+					 $title = "link";
+					 $link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/pass-new.php?rID=".$requestID;
+					 $msg = "An account has been created for you. To complete setting up your account, \nplease click this <a href='".$link."'>".$title."</a> to set your own password.";
 
-				 // To send HTML mail, the Content-type header must be set
-				 $headers  = 'MIME-Version: 1.0' . "\r\n";
-				 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					 // To send HTML mail, the Content-type header must be set
+					 $headers  = 'MIME-Version: 1.0' . "\r\n";
+					 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
-				 // use wordwrap() if lines are longer than 70 characters
-				 $msg = wordwrap($msg,70);
+					 // use wordwrap() if lines are longer than 70 characters
+					 $msg = wordwrap($msg,70);
 
-				 echo "Successfully created a user" . "<br>";
-				 // send email
-				 require_once __DIR__ . '../../includes/mail.php';
+					 // send email
+					 require_once __DIR__ . '../../includes/mail.php';
 
-				 $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
-				 $stmt->bind_param("isi", $eventID, $eventName, $userID);
-				 $eventID = NULL;
-				 $userID = $_SESSION['userID'];
-				 $eventName = "Created a new user.";
-				 $stmt->execute();
+					 $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+					 $stmt->bind_param("isi", $eventID, $eventName, $userID);
+					 $eventID = NULL;
+					 $userID = $_SESSION['userID'];
+					 $eventName = "Created a new user.";
+					 $stmt->execute();
 
+				}
+			} else{
+				echo "Please enter a valid email address.";
 			}
 		 }
-	 }
-
-
-
+}
 
 ?>

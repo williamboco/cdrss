@@ -163,8 +163,10 @@ function proceedReport() {
 	console.log(role);
 
 	if (role == "Admin") {
-		window.location = "report-admin.php?" + $form.serialize();
-	} else {
+		window.location="report-admin.php?" + $form.serialize();
+	} else	if (role == "Physician") {
+		window.location="report-avp.php?" + $form.serialize();
+	} else{
 		window.location="report.php?" + $form.serialize();
 	}
 
