@@ -3,8 +3,8 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if ($_SESSION['role'] == 'IT') {
-	header("location: account-it.php");
+if ($_SESSION['role'] != 'IT') {
+	header("location: account.php");
 }
 
 ?>
@@ -24,7 +24,7 @@ if ($_SESSION['role'] == 'IT') {
 </head>
 <body>
 	<?php
-		include("includes/navbartest.php");
+		include("includes/navbar-it.php");
 	?>
 
 	<div class="container">
