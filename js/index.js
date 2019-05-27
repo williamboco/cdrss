@@ -22,6 +22,8 @@ $('#logInForm').on('submit', function(event) {
 					window.location.replace("home-avp.php");
 				}else if(response[1] == 'IT') {
 					window.location.replace("home-it.php");
+				}else if(response[1] == 'Admin') {
+					window.location.replace("home-admin.php");
 				} else {
 					window.location.replace("home.php");
 				}
