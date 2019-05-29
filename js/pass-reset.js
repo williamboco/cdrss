@@ -8,20 +8,17 @@ $('form').on('submit', function(event) {
 
 	event.preventDefault();
 	console.log($form.serialize());
-
 	$('.alert').hide();
-
 	$form.find('button[type="submit"]').button('loading');
 	$.ajax({
 		type: 'POST',
 		url: $form.attr('action'),
 		data: $form.serialize(),
 		success: function(response) {
-				//$('.alert-success').show();
-			if(response.includes("Error")) {
-				$('.alert-danger').html(response).show();
-			}else {
+			if(response.includes('reset')) {
 				$('.alert-success').html(response).show();
+			}else {
+				$('.alert-danger').html(response).show();
 			}
 			$form.find('button[type="submit"]').button('reset');
 			console.log(response);

@@ -30,10 +30,8 @@
                     </header>
                     <div class="widget-body">
 						<div class="alert alert-success">
-								Kindly check your email for the link to reset your password.
 						</div>
 						<div class="alert alert-danger">
-								Error: Invalid email address. Please try again.
 						</div>
                         <form id="reset" action="ajax/password/reset.php" method="post">
                             <div class="form-group">
