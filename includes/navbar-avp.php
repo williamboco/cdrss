@@ -31,7 +31,7 @@
               <li class="divider"></li>
               <li><a href="user-list-avp.php"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Manage Users</a></li>
               <li class="divider"></li>
-              <li><a href="manuals/physician.pdf" download="Physician's Manual"><i class="fas fa-download"></i> Physician's Manual</a> </li>
+              <li><a href="manuals/physician.pdf" download="Physician Manual"><i class="fas fa-download"></i> Physician Manual</a> </li>
               <li class="divider"></li>
               <li><a href="includes/logout.php"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</a></li>
           </ul>

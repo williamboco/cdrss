@@ -5,9 +5,7 @@ include('../includes/password.php');
 session_start();
 
 
-$allowed = [
-	'iacademy.edu.ph'
-];
+$allowed = ['iacademy.edu.ph'];
 $method = 'aes-256-cbc';
 $password = '3sc3RLrpd17';
 
@@ -59,16 +57,16 @@ $query1 = $con->prepare("SELECT * FROM user WHERE ID=?");
 $query1->bind_param("s", $id);
 $query1->execute();
 $result = $query1->get_result();
-$rownum = mysqli_num_rows($result);
 
 //$message = array();
 
 if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace(' ', '', $lastName))) {
 		echo "Error: Input must only contain letters.";
 } else {
-		if ($rownum > 0) {
+		if ($result->num_rows > 0) {
 			while ($row = $result->fetch_assoc()) {
-				$row['email'] = base64_encode(openssl_encrypt($email, $method, $key, OPENSSL_RAW_DATA, $iv));
+				$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
+
 
 				if ($row['ID'] == $id) {
 					echo "User ID already exists.";
@@ -108,7 +106,7 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 
 							 // email message
 							 $title = "link";
-							 $link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/index.php";
+							 $link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/index-it.php";
 							 $msg = "You have successfully registered a CDRS account, \nplease click this <a href='".$link."'>".$title."</a> to verify your account.";
 
 							 // To send HTML mail, the Content-type header must be set

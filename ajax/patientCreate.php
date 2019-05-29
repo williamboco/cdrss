@@ -12,7 +12,7 @@ $allergy = $_POST['allergy'];
 $cPerson = $_POST['cPerson'];
 $contact = htmlspecialchars($_POST['contact']);
 $user = htmlspecialchars($_POST['userID']);
-$role = htmlspecialchars($_POST['role']);
+$role = (isset($_POST['role']) ? $_POST['role'] : '');
 
 $query = $con->prepare("INSERT INTO patient (ID, firstName, lastName, birthDate, gender, contact, isDeleted, createdBy, modifiedBy, dateCreated, dateModified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
 $query->bind_param("ssssssiss", $id, $firstName, $lastName, $birthDate, $gender, $contact, $isDeleted, $user, $user);
@@ -166,9 +166,9 @@ if ($result=mysqli_query($con,"SELECT * FROM patient WHERE ID='$id'")) {
 			}
 
 			if ($role == "Admin"){
-				$url = "profile-avp.php?id=$id";
+				$url = "profile-avp.php?id=".$id;
 			} else{
-				$url = "profile.php?id=$id";
+				$url = "profile.php?id=".$id;
 			}
 
 		} else {
