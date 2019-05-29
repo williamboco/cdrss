@@ -47,7 +47,7 @@ $( "#addForm" ).on( "submit", function( event ) {
 		success: function(result) {
 		//var result =  JSON.parse(result);
 			$form[0].reset();
-			$form.scrollTop(0);
+			$(document).scrollTop(0);
 				if(result.includes('success')) {
 					$('.alert-success').html(result).show();
 				}else {
