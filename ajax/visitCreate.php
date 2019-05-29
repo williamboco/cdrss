@@ -115,8 +115,8 @@ if (isset($_POST['idNumber'])){
 								}
 								$query->execute();
 							} else{
-								$message = "Error: Insufficient stock of medicine/supply \r\n";
-								die();
+								$message = "Error: Insufficient stock of medicine/supply";
+								break;
 							}
 
 					}
