@@ -37,20 +37,16 @@ $("#addForm").on("submit", function(event) {
 		data: $form.serialize(),
 		success: function(response) {
 			console.log(response);
-
 			$('#addModal').modal('hide');
-				alertify.alert(response);
-				$form[0].reset();
-				refreshUTable();
-			/*if(response == 'success') {
-				$('#addModal').modal('hide');
-				alertify.alert(response);
-				$form[0].reset();
-				refreshUTable();
+			$form[0].reset();
 
+			if(response.includes('success')) {
+				alertify.alert(response).set('onok', function(){
+					refreshUTable();
+				});
 			}else {
 				alertify.alert(response);
-			}*/
+			}
 		}
 	});
 
