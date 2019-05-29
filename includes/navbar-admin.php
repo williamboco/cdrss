@@ -29,7 +29,7 @@
               <li class="divider"></li>
               <li><a href="user-list-admin.php"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Manage Users</a></li>
               <li class="divider"></li>
-              <li><a href="manuals/avp.pdf" download="Admin's Manual"><i class="fas fa-download"></i> &nbsp; Admin's Manual</a> </li>
+              <li><a href="manuals/avp.pdf" download="Admin Manual"><i class="fas fa-download"></i> &nbsp; Admin Manual</a> </li>
               <li class="divider"></li>
               <li><a href="includes/logout.php"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</a></li>
           </ul>

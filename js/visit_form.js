@@ -540,7 +540,6 @@ $("#addPatientForm").on("submit", function(event) {
   			if(result.message.includes("success")) {
           alertify.alert(result.message).set('onok', function(closeEvent){
             $('#patientModal').modal('hide');
-            $('#addVisitForm').reset();
             viewVisitForm();
   				});
   			}else {
