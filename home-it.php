@@ -52,7 +52,7 @@ if($_SESSION['role'] != 'IT') {
 		</div>
 		<div class="container card" style="margin-top: 10px;">
 			<div class="table-responsive">
-				<table id="userTable" class="display" cellspacing="0" width="100%">
+				<table id="useTable" class="display" cellspacing="0" width="100%">
 				</table>
 			</div>
 		</div>

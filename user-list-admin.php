@@ -80,7 +80,7 @@ if($_SESSION['role'] != 'Admin') {
 								<select class="form-control" name="role" required>
 									<option value="" disabled selected>Select a user role</option>
 									<option value="Admin">Admin</option>
-									<option value="IT">I.T</option>
+									<option value="Physician">Physician</option>
 								</select><br>
 							</div>
 						</div>
