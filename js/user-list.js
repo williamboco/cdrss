@@ -45,7 +45,7 @@ $("#addForm").on("submit", function(event) {
 				refreshUTable();
 			}else {
 				alertify.alert(response).set('onok', function(){
-					$('#addModal').modal('show');					
+					$('#addModal').modal('show');
 				});
 			}
 		}
@@ -92,6 +92,11 @@ function viewUser(id) {
 			$("#dateEmployed").html(obj.dateEmployed);
 			$("#deleteBtn").val(obj.ID);
 
+			if(obj.isActive == 1) {
+				$('#status1').attr("checked", true);
+			} else {
+				$('#status2').attr("checked", true);
+			}
 		}
 	});
 
@@ -113,8 +118,9 @@ function deleteUser(id) {
         cache: false,
         success: function(response) {
             //console.log(response);
-			alertify.alert(response);
-			refreshUTable();
+						alertify.alert(response).set('onok', function(){
+							refreshUTable();
+						});
 		}
 	});
 

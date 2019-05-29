@@ -163,10 +163,10 @@ if($_SESSION['role'] != 'Admin') {
 								<br/>
 		  						<div class="form-row">
 										<div class="col-sm-6">
-												 <label><input type="radio" name="statusType" value="1" checked="checked" required> Active</label>
+												 <label><input type="radio"  id="status1" name="statusType" value="1" required> Active</label>
 										</div>
 										<div class="col-sm-6">
-											 <label><input type="radio" name="statusType" value="0" checked="checked" required> Inactive</label>
+											 <label><input type="radio"  id="status2" name="statusType" value="0" required> Inactive</label>
 										</div>
 								</div>
 							</div>
