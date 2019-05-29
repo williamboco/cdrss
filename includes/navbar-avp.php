@@ -29,7 +29,7 @@
           <ul class="dropdown-menu">
               <li><a href="account-avp.php"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
               <li class="divider"></li>
-              <li><a href="user-list.php"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Manage Users</a></li>
+              <li><a href="user-list-avp.php"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Manage Users</a></li>
               <li class="divider"></li>
               <li><a href="manuals/physician.pdf" download="Physician's Manual"><i class="fas fa-download"></i> Physician's Manual</a> </li>
               <li class="divider"></li>
