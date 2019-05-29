@@ -47,14 +47,9 @@ if($_SESSION['role'] != 'Physician') {
 							<button id="print" class="btn btn-md btn-secondary col-sm-6" onclick="window.print()">
 								<i class="fa fa-print"></i> &nbsp;&nbsp; Print
 							</button>
-<<<<<<< HEAD
-						</div>						
-=======
 						</div>
-						<!-- <h4>Staff -- &nbsp;&nbsp; <i class="glyphicon glyphicon-user"></i>&nbsp;<b><?php echo $_SESSION['role']." ".$_SESSION['firstName']?></b></h4> -->
->>>>>>> 5dddebadd5594e1bb6c8dc697f157066d0ef60fa
-					</div>
-				</div><br/>
+						</div>
+					</div><br/>
 
 				<div class="card col-lg-6 col-sm-12 reportcard blue white-text" align="center">
 					Filter Type:
