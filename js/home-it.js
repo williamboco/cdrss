@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var t = $('#userTable').DataTable( {
+	var t = $('#useTable').DataTable( {
 		"ajax": "ajax/filtered_users_it.php?",
 		"columnDefs": [ {
 			"searchable": false,
