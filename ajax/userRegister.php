@@ -98,32 +98,33 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 
 							 if ($stmt->execute()) {
 								echo "You have successfully registered an account. Please check your email to complete your registration.";
+
+								$email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
+
+								// email message
+								$title = "link";
+								$link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/index-it.php";
+								$msg = "You have successfully registered a CDRS account, \nplease click this <a href='".$link."'>".$title."</a> to verify your account.";
+
+								// To send HTML mail, the Content-type header must be set
+								$headers  = 'MIME-Version: 1.0' . "\r\n";
+								$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+								// use wordwrap() if lines are longer than 70 characters
+								$msg = wordwrap($msg,70);
+
+								// send email
+								require_once __DIR__ . '../../includes/mail.php';
+
+								$stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
+								$stmt->bind_param("isi", $eventID, $eventName, $userID);
+								$eventID = NULL;
+								$userID = $id;
+								$eventName = "Created a new user.";
+								$stmt->execute();
 							 }
 
 
-							 $email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
-
-							 // email message
-							 $title = "link";
-							 $link = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/cdrs/index-it.php";
-							 $msg = "You have successfully registered a CDRS account, \nplease click this <a href='".$link."'>".$title."</a> to verify your account.";
-
-							 // To send HTML mail, the Content-type header must be set
-							 $headers  = 'MIME-Version: 1.0' . "\r\n";
-							 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-							 // use wordwrap() if lines are longer than 70 characters
-							 $msg = wordwrap($msg,70);
-
-							 // send email
-							 require_once __DIR__ . '../../includes/mail.php';
-
-							 $stmt = $con->prepare("INSERT INTO logs (eventID, eventDate, eventName,   userID) VALUES (?, NOW(), ?, ?)");
-							 $stmt->bind_param("isi", $eventID, $eventName, $userID);
-							 $eventID = NULL;
-							 $userID = $id;
-							 $eventName = "Created a new user.";
-							 $stmt->execute();
 					}
 				} else {
 					echo "Please enter a valid email address.";
