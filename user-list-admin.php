@@ -39,7 +39,7 @@ if($_SESSION['role'] != 'Admin') {
 		</div>
 		<div class="container card" style="margin-top: 10px;">
 			<div class="table-responsive">
-				<table id="userTable" class="display" cellspacing="0" width="100%">
+				<table id="userAdminTable" class="display" cellspacing="0" width="100%">
 				</table>
 			</div>
 		</div>
@@ -187,7 +187,7 @@ if($_SESSION['role'] != 'Admin') {
 	<script src="vendor/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 	<script src="vendor/select2-4.0.3/dist/js/select2.min.js"></script>
 	<script src="vendor/alertify.js-master/dist/js/alertify.js"></script>
-	<script src="js/user-list.js"></script>
+	<script src="js/user-list-admin.js"></script>
 
 </body>
 </html>

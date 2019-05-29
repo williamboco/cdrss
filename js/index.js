@@ -45,7 +45,7 @@ $( "#addForm" ).on( "submit", function( event ) {
 		url: $form.attr('action'),
 		data: $form.serialize(),
 		success: function(result) {
-		//	var result =  JSON.parse(result);
+		//var result =  JSON.parse(result);
 			$form[0].reset();
 			$form.scrollTop(0);
 				if(result.includes('success')) {

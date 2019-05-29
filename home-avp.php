@@ -3,7 +3,10 @@ session_start();
 include('includes/dbcon.php');
 include('includes/session.php');
 
-if(isset($_SESSION['role'])) {
+if($_SESSION['role'] != 'Physician') {
+	header("location: home.php");
+}
+/*if(isset($_SESSION['role'])) {
 	switch ($_SESSION['role']) {
 		case 'IT':
 			header("location: home-it.php");
@@ -18,7 +21,7 @@ if(isset($_SESSION['role'])) {
 		header("location: home.php");
 			break;
 	}
-}
+}*/
 
 ?>
 
