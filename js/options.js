@@ -463,17 +463,16 @@ function adjustRecord() {
 							data: {id: ids[0], isAdd: isAdd, updateQty: updateQty},
 							cache: false,
 							success: function(response){
-								alertify.alert(response);
-								selectUrl(table);
+								alertify.alert(response).set('onok', function(){
+                  $(tr).css('color', 'blue');
+                  $(tr).css('font-weight', 'bold');
+                  setTimeout(function() {
+                    selectUrl(table);
+                  }, 700);
+                });
 							}
 						});
 
-						$(tr).css('color', 'blue');
-						$(tr).css('font-weight', 'bold');
-						setTimeout(function() {
-							$(tr).css('color', '');
-							$(tr).css('font-weight', '');
-						}, 3000);
 
 					}
 
