@@ -66,16 +66,16 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 			while ($row = $result->fetch_assoc()) {
 				$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
-
 				if ($row['ID'] == $id) {
 					echo "User ID already exists.";
+					die();
 				}
 
 				if ($row['email'] == $email) {
 					echo "Email address already exists. ";
+					die();
 				}
 			}
-		} else {
 
 				if (strlen($_POST['password']) < 8) {
 					echo "Error: 8 characters is the minimum for password. Please try again.";
@@ -100,6 +100,7 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 								echo "You have successfully registered an account. Please check your email to complete your registration.";
 
 								$email = openssl_decrypt(base64_decode($email), $method, $key, OPENSSL_RAW_DATA, $iv);
+
 
 								// email message
 								$title = "link";

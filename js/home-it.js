@@ -45,7 +45,9 @@ $("#addForm").on("submit", function(event) {
 					refreshUTable();
 				});
 			}else {
-				alertify.alert(response);
+				alertify.alert(response).set('onok', function(){
+					$('#addModal').modal('show');					
+				});
 			}
 		}
 	});

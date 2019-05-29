@@ -92,19 +92,25 @@ if (isset($_SESSION['userID'])) {
                   <div class="addUser card-reg row">
                     <div class="form-group">
 
-                      <div class="form-group input-group">
-                        <span class="input-group-addon login-addon">
-                          <div class="glyphicon glyphicon-envelope"></div>
-                        </span>
-                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label" for="email">Email Address *</label>
+                        <div class="form-group input-group">
+                          <span class="input-group-addon login-addon">
+                            <div class="glyphicon glyphicon-envelope"></div>
+                          </span>
+                          <input type="email" class="form-control" name="email" placeholder="youremail@iacademy.edu.ph" required>
+                        </div>
                       </div>
 
-                      <div class="form-group input-group">
-                        <span class="input-group-addon login-addon">
-                          <div class="glyphicon glyphicon-asterisk"></div>
-                        </span>
-                        <input class="form-control" type="password" name="password" placeholder="Password" required>
-                      </div><br/>
+                      <div class="form-group">
+                        <label class="col-sm-4" for="password">Password *</label>
+                        <div class="form-group input-group">
+                          <span class="input-group-addon login-addon">
+                            <div class="glyphicon glyphicon-asterisk"></div>
+                          </span>
+                          <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        </div><br/>
+                      </div>
 
                       <div class="form-group">
                         <label class="col-sm-4 control-label" for="avpID">User ID *</label>

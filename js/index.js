@@ -16,7 +16,7 @@ $('#logInForm').on('submit', function(event) {
 		success: function(response) {
 			var	response = JSON.parse(response);
 			console.log(response);
-			if(response[0] == 'success') {
+			if(response[0].includes('success')) {
 				console.log(response[1]);
 				if(response[1] == 'Physician') {
 					window.location.replace("home-avp.php");
@@ -37,7 +37,7 @@ $('#logInForm').on('submit', function(event) {
 
 $( "#addForm" ).on( "submit", function( event ) {
 	var $form = $(this);
-
+	$('.alert').hide();
 	event.preventDefault();
 	// Use Ajax to submit form data
 	$.ajax({
@@ -48,6 +48,7 @@ $( "#addForm" ).on( "submit", function( event ) {
 		//var result =  JSON.parse(result);
 			$form[0].reset();
 			$(document).scrollTop(0);
+			console.log(result);
 				if(result.includes('success')) {
 					$('.alert-success').html(result).show();
 				}else {

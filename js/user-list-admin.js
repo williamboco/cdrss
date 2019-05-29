@@ -37,20 +37,17 @@ $("#addForm").on("submit", function(event) {
 		data: $form.serialize(),
 		success: function(response) {
 			console.log(response);
-
+			$form[0].reset();
 			$('#addModal').modal('hide');
-				alertify.alert(response);
-				$form[0].reset();
-				refreshUTable();
-			/*if(response == 'success') {
-				$('#addModal').modal('hide');
-				alertify.alert(response);
-				$form[0].reset();
-				refreshUTable();
 
-			}else {
+			if(response.includes('success')) {
 				alertify.alert(response);
-			}*/
+				refreshUTable();
+			}else {
+				alertify.alert(response).set('onok', function(){
+					$('#addModal').modal('show');
+				});
+			}
 		}
 	});
 
