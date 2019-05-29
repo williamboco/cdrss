@@ -124,7 +124,7 @@ function refreshUTable() {
 	var datatable = $('#userTable').dataTable().api();
 	$.ajax({
 		type: "GET",
-		url: "ajax/filtered_users_avp.php?",
+		url: "ajax/filtered_users_it.php?",
 		cache: false,
 		success: function(data) {
 			var obj = JSON.parse(data);
