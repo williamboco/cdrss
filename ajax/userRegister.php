@@ -53,7 +53,7 @@ $isActive = 1;
 $password = htmlspecialchars($_POST['password']);
 $password = base64_encode(openssl_encrypt($password, $method, $key, OPENSSL_RAW_DATA, $iv));
 
-$query1 = $con->prepare("SELECT * FROM user WHERE ID=?");
+$query1 = $con->prepare("SELECT * FROM `user`");
 $query1->execute();
 $result = $query1->get_result();
 
@@ -72,7 +72,7 @@ if (!ctype_alpha(str_replace(' ', '', $firstName)) || !ctype_alpha(str_replace('
 				}
 
 				if ($row['email'] == $email) {
-					echo "Email Address already exists. ";
+					echo "Email address already exists. ";
 				}
 			}
 		} else {
