@@ -21,7 +21,6 @@ $rownum = mysqli_num_rows($result);
 
 if($rownum > 0) {
 	while ($row = $result->fetch_assoc()) {
-		if ($row['isActive'] == $isActive) {
 			$row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 			if ($row['email'] == $email) {
 
@@ -58,10 +57,8 @@ if($rownum > 0) {
 				 $stmt->execute();
 			} else {
 			   $message = "Error: Invalid email address. Please try again.";
+				 	$message = "Kindly check your email for the link to reset your password.";
 		  }
-	  } else {
-			$message = "Error: Email address is not active! Please try again.";
-		}
 	 }
 	} else {
 		$message = "Error: That email does not exist";
