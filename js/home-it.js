@@ -121,7 +121,7 @@ function deleteUser(id) {
 }
 
 function refreshUTable() {
-	var datatable = $('#userTable').dataTable().api();
+	var datatable = $('#useTable').dataTable().api();
 	$.ajax({
 		type: "GET",
 		url: "ajax/filtered_users_it.php?",
