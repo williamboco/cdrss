@@ -34,16 +34,9 @@ try {
 
 
 
-   // while ($row = $result->fetch_assoc()) {
-   //    $row['email'] = openssl_decrypt(base64_decode($row['email']), $method, $key, OPENSSL_RAW_DATA, $iv);
 
+       $mail->addAddress("clinic@iacademy.edu.ph");     // Add a recipient
 
-      //  $mail->addAddress("clinic@iacademy.edu.ph");     // Add a recipient
-      $mail->addAddress("201603007@iacademy.edu.ph");
-      $mail->addAddress("201601048@iacademy.edu.ph");
-      $mail->addAddress("201601045@iacademy.edu.ph");
-      $mail->addAddress("201601062@iacademy.edu.ph");
-      //  $mail->AddCC();
 
         $mail->setFrom('cdrsiac@gmail.com', 'iACADEMY CDRS');    // Add Set Email
 
@@ -57,9 +50,7 @@ try {
 
         $mail->send();
         $mail->clearAddresses();
-
-  //  }
-
+        
     echo 'Message has been sent';
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
